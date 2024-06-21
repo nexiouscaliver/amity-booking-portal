@@ -4,7 +4,7 @@ import sqlite3
 #conn.commit()
 #conn.close()
 
-def cmd(s):
+def cmd(s):       #idle-de-bugging
     conn = sqlite3.connect("test1.db")
     c = conn.cursor()
     a=c.execute(s)
@@ -15,7 +15,7 @@ def cmd(s):
     conn.commit()
     conn.close()
 
-def see(table):
+def see(table):       #idle-de-bugging
     conn = sqlite3.connect("test1.db")
     c = conn.cursor()
     a=c.execute(f'select * from {table};')
@@ -58,6 +58,9 @@ def init():  #server
     conn.commit()
     conn.close()
 
+
+#user flow -> check_hall:request_hall | reject / check_request
+#admin flow -> check_pending:confirm_hall:reject_hall
 
 def request_hall(hallid:int , school:str , date:str , stime:int , etime:int , event:str , username:str):  #user
     conn = sqlite3.connect("test1.db")
@@ -124,6 +127,19 @@ def check_hall(hallid:int , date:str , stime:int , etime:int):   #user
     conn.commit()
     conn.close()
 
+
+def check_pending():    #admin
+    conn = sqlite3.connect("test1.db")
+    c = conn.cursor()
+    sql='select * from book;'
+    a = c.execute(sql)
+    o = a.fetchall()
+    conn.commit()
+    conn.close()
+    return o
+
+
+
 def confirm_hall(bookid:int):   #admin
     conn = sqlite3.connect("test1.db")
     c = conn.cursor()
@@ -167,7 +183,3 @@ def reject_hall(bookid:int):      #admin
     c.execute(sql)
     conn.commit()
     conn.close()
-
-
-
-
