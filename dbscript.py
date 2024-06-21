@@ -4,8 +4,10 @@ import sqlite3
 #conn.commit()
 #conn.close()
 
+dbname = "data.db"
+
 def cmd(s):       #idle-de-bugging
-    conn = sqlite3.connect("test1.db")
+    conn = sqlite3.connect(dbname)
     c = conn.cursor()
     a=c.execute(s)
     b=a.fetchall()
@@ -16,7 +18,7 @@ def cmd(s):       #idle-de-bugging
     conn.close()
 
 def see(table):       #idle-de-bugging
-    conn = sqlite3.connect("test1.db")
+    conn = sqlite3.connect(dbname)
     c = conn.cursor()
     a=c.execute(f'select * from {table};')
     b=a.fetchall()
@@ -29,7 +31,7 @@ def see(table):       #idle-de-bugging
 
 
 def init():  #server
-    conn = sqlite3.connect("test1.db")
+    conn = sqlite3.connect(dbname)
     c = conn.cursor()
     sql = "create table if not exists halls(hallid integer primary key autoincrement,hallname varchar(35));"
     c.execute(sql)
@@ -63,7 +65,7 @@ def init():  #server
 #admin flow -> check_pending:confirm_hall:reject_hall
 
 def request_hall(hallid:int , school:str , date:str , stime:int , etime:int , event:str , username:str):  #user
-    conn = sqlite3.connect("test1.db")
+    conn = sqlite3.connect(dbname)
     c = conn.cursor()
     sql=f'insert into book(hallid,school,date,stime,etime,event) values({hallid},"{school}","{date}",{stime},{etime},"{event}");'
     c.execute(sql)
@@ -81,7 +83,7 @@ def request_hall(hallid:int , school:str , date:str , stime:int , etime:int , ev
     return bid
 
 def check_request(username:str):   #user
-    conn = sqlite3.connect("test1.db")
+    conn = sqlite3.connect(dbname)
     c = conn.cursor()    
     sql=f'select * from userreq where username="{username}"'
     a = c.execute(sql)
@@ -100,7 +102,7 @@ def check_request(username:str):   #user
     conn.close()
 
 def check_hall(hallid:int , date:str , stime:int , etime:int):   #user
-    conn = sqlite3.connect("test1.db")
+    conn = sqlite3.connect(dbname)
     c = conn.cursor()
     final=[]
     flag=True
@@ -129,7 +131,7 @@ def check_hall(hallid:int , date:str , stime:int , etime:int):   #user
 
 
 def check_pending():    #admin
-    conn = sqlite3.connect("test1.db")
+    conn = sqlite3.connect(dbname)
     c = conn.cursor()
     sql='select * from book;'
     a = c.execute(sql)
@@ -141,7 +143,7 @@ def check_pending():    #admin
 
 
 def confirm_hall(bookid:int):   #admin
-    conn = sqlite3.connect("test1.db")
+    conn = sqlite3.connect(dbname)
     c = conn.cursor()
     sql=f'select * from book where bookid={bookid};'
     a = c.execute(sql)
@@ -163,7 +165,7 @@ def confirm_hall(bookid:int):   #admin
     conn.close()
     
 def reject_hall(bookid:int):      #admin
-    conn = sqlite3.connect("test1.db")
+    conn = sqlite3.connect(dbname)
     c = conn.cursor()
     sql=f'select * from book where bookid={bookid};'
     a = c.execute(sql)
@@ -183,3 +185,7 @@ def reject_hall(bookid:int):      #admin
     c.execute(sql)
     conn.commit()
     conn.close()
+
+
+
+
