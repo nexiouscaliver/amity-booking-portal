@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AmiVenueHub - Booking Status</title>
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static',filename='apple-touch-icon.png') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static',filename='favicon-32x32.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static',filename='favicon-16x16.png') }}">
+    <link rel="manifest" href="{{ url_for('static',filename='site.webmanifest') }}">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+  <style> 
+    body {
+      background-color: aliceblue;
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    :root {
+      --primary-color: #04172b;
+      --secondary-color: #061b31;
+      --white: #ffffff;
+      --gray: #6c757d;
+    }
+
+    .navbar {
+      background-color: var(--primary-color);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 20px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .navbar .logo {
+      display: flex;
+      align-items: center;
+    }
+
+    .navbar .logo img {
+      width: fit-content;
+      height: 40px;
+      margin-right: 10px;
+    }
+
+    .navbar .logo a {
+      color: var(--white);
+      font-size: 24px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .navbar .menu {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+    }
+
+    .navbar .menu a {
+      color: var(--white);
+      text-decoration: none;
+      padding: 10px 15px;
+      border-radius: 5px;
+      transition: background-color 0.3s, box-shadow 0.3s;
+      font-weight: bold;
+    }
+
+    .navbar .menu a:hover {
+      background-color: var(--secondary-color);
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .navbar .icon {
+      font-size: 20px;
+      color: var(--white);
+      padding: 10px;
+      cursor: pointer;
+      font-weight: bold;
+      position: relative;
+    }
+
+    .navbar .icon:hover .dropdown {
+      display: block;
+    }
+
+    .dropdown {
+      display: none;
+      position: absolute;
+      top: 40px;
+      right: 0;
+      background-color: var(--primary-color);
+      box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+      z-index: 1;
+      border-radius: 5px;
+      min-width: 150px;
+      overflow: hidden;
+    }
+
+    .dropdown a {
+      color: var(--white);
+      padding: 10px 15px;
+      text-decoration: none;
+      display: block;
+      transition: background-color 0.3s;
+    }
+
+    .dropdown a:hover {
+      background-color: var(--secondary-color);
+    }
+
+    .dropdown a:last-child {
+      border-bottom: none;
+    }
+
+    /* Main Content */
+    .main-content {
+      padding: 50px 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .main-content h1 {
+      margin-bottom: 20px;
+      font-size: 28px;
+    }
+
+    .booking-list {
+      width: 80%;
+      background-color: #fff;
+      border-radius: 5px;
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+
+        .booking-list table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .booking-list th,
+    .booking-list td {
+      padding: 10px;
+      border: 1px solid #ddd;
+      text-align: left;
+    }
+
+    .booking-list th {
+      background-color: #04172b;
+      color: var(--white);
+      font-weight: bold;
+    }
+
+    .booking-list tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <nav class="navbar">
+      <div class="logo">
+        <img src="Amity-logo.png" alt="Logo">
+        <img src="name.2.png" alt="Logo">
+       
+      </div>
+      <div class="menu">
+        <a href="{{url_for('index')}}">Home</a>
+        <a href="#">Bookings</a>
+        <a href="#">About</a>
+        <div class="icon">
+          <i class="fas fa-bars"></i> <div class="dropdown">
+            <a href="#">Profile</a>
+            <a href="{{url_for('userlogin')}}">Logout</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </header>
+  <script>
+    function changeSelectColor(select,status) {
+            if (status === 'ACCEPT') {
+              select.style.backgroundColor = 'var(--light-green)';
+              select.style.color = 'var(--primary-color)';
+            } else if (status === 'REJECT') {
+              select.style.backgroundColor = 'var(--light-red)';
+              select.style.color = 'var(--primary-color)';
+            } else {
+              select.style.backgroundColor = '';
+              select.style.color = '';
+            }
+          }
+  </script>
+  <main>
+    <div class="main-content">
+      <h1>Booking Status</h1>
+
+      <div class="booking-list">
+        <table>
+          <tr>
+            <th>Booking ID</th>
+            <th>Hall Name</th>
+            <th>Date</th>
+            <th>School</th>
+            <th>Event Name</th>
+            <th>Status</th>
+          </tr>
+          
+          <!-- <tr>
+            <td>12345</td>
+            <td>Auditorium</td>
+            <td>10-02-2024</td>
+            <td>10:00 AM</td>
+             <td>12:00 AM</td> 
+            <td>Confirmed</td> -->
+          <!-- </tr> -->
+          <!-- {%for i in output%}
+          <p>{{(i)}}</p>
+          {%endfor%} -->
+          {%for i in output%}
+          <tr>
+            <td>{{i[0]}}</td>
+            <td>{{[0,"Auditorium Hall","Seminar Hall","Room No. 105, A2 Building","CRC Conference Room"][i[1]]}}</td>
+            <td>{{i[3]}}</td>
+            <td>{{i[2]}}</td>
+            <td>{{i[4]}}</td>
+            <td>{{i[6]}}</td>
+            
+          </tr>
+          {%endfor%}
+          </table>
+      </div>
+    </div>
+  </main>
+
+</body>
+
+</html>
+

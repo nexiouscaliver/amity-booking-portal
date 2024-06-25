@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AmitEventHub - User Signup</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static',filename='apple-touch-icon.png') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static',filename='favicon-32x32.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static',filename='favicon-16x16.png') }}">
+    <link rel="manifest" href="{{ url_for('static',filename='site.webmanifest') }}">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+  <style>
+    @keyframes fadeIn {
+      0% { opacity: 0; }
+      100% { opacity: 1; }
+    }
+
+    body {
+      font-family: 'Roboto', sans-serif;
+      background-color: aliceblue; /* Light blue background */
+      display: flex;
+      justify-content: center; /* Center the container horizontally */
+      align-items: center; /* Center the container vertically */
+      height: 100vh; /* Full height */
+      margin: 0; /* Remove default margin */
+      animation: fadeIn 1s ease-in-out; /* Apply fade-in animation */
+    }
+
+    .container {
+      background: #fff; /* White background */
+      border: 1px solid #ddd; /* Light gray border */
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.2); /* Increased shadow for depth */
+      display: flex; /* Make container a flexbox */
+      flex-direction: column; /* Stack elements vertically */
+      width: 80%; /* Set container width to 80% */
+      max-width: 500px; /* Max width for large screens */
+      padding: 20px;
+      animation: fadeIn 1s ease-in-out; /* Apply fade-in animation */
+      overflow: hidden; /* Ensure no overflow */
+    }
+
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      background-color: #04172b; /* Dark blue background */
+      color: white;
+      font-size: 1.5em;
+    }
+
+    .header img {
+      height: 50px;
+      margin-right: 20px;
+    }
+
+    .signup-form {
+      width: 100%;
+      margin-top: 20px;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+      width: 100%; /* Full width for form group */
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+      color: #04172b; /* Dark blue for labels */
+      text-align: left; /* Align labels to the left */
+      width: 100%; /* Full width for labels */
+    }
+
+    input, button {
+      width: 100%;
+      padding: 15px;
+      border: 1px solid #ccc; /* Light gray border */
+      border-radius: 5px; /* Rounded corners */
+      transition: 0.4s ease; /* Smoother transitions */
+    }
+
+    input:focus, button:focus {
+      outline: none; /* Remove default focus outline */
+      border-color: #243a73; /* Darker blue border on focus */
+    }
+
+    button {
+      background-image: linear-gradient(to right, #04172b 0%, #243a73 100%);
+      color: white;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-image: linear-gradient(to right, #243a73 0%, #3f51b5 100%);
+    }
+
+    .form-actions {
+      display: flex; /* Arrange buttons and link horizontally */
+      justify-content: space-between; /* Distribute elements evenly */
+      align-items: center; /* Center align items vertically */
+      margin-top: 15px;
+      width: 100%; /* Full width for form actions */
+    }
+
+    #login-link {
+        color: #04172b; /* Dark blue for links */
+        text-decoration: none; /* Remove underline */
+        transition: 0.3s ease; /* Smoother hover effect */
+      }
+  
+      #login-link:hover {
+        color: #243a73; /* Slightly lighter blue on link hover */
+      }
+  
+      .login-container {
+        display: flex;
+        justify-content: center; /* Center align the text in the login link */
+        width: 100%;
+        margin-top: 15px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <img src="logo.png" alt="Logo"> 
+        <img src="name.2.png" alt="Logo">
+      </div>
+      <div class="signup-form">
+        <h2>User Email Verification</h2>
+        <!-- <form id="userSignupForm" onsubmit="return sendVerificationCode()"> -->
+        {% if error %}
+        <!-- <p><strong>Error </strong> : {{error}}</p> -->
+        <script>
+          alert("{{error}}")
+        </script>
+        {% endif %}
+          <!-- <form id="userSignupForm" method="post">
+          <div class="form-group">
+            <label for="user-username">Username:</label>
+            <input type="text" id="user-username" name="user-username" required>
+          </div>
+          <div class="form-group">
+            <label for="user-email">Email:</label>
+            <input type="email" id="user-email" name="user-email" required>
+          </div>
+          <div class="form-group">
+            <label for="user-password">Password:</label>
+            <input type="password" id="user-password" name="user-password" required>
+          </div>
+          <div class="form-actions">
+            <button type="submit">Sign Up</button>
+            <a id="login-link" href="{{url_for('userlogin')}}">Already have an account?</a>
+          </div>
+        </form> -->
+        <!-- <form id="verificationForm" style="display:none;" onsubmit="return verifyCode()"> -->
+        <form id="verificationForm" style="display:block;" method="post">
+          <div class="form-group">
+            <label for="verification-code">Verification Code:</label>
+            <input type="text" id="verification-code" name="verification-code" required>
+          </div>
+          <div class="form-actions">
+            <button type="submit">Verify</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <script>
+      function sendVerificationCode() {
+        var email = document.getElementById('user-email').value.trim();
+        if (email.endsWith('@mum.amity.edu')) 
+        {
+          // Simulate sending verification code to email
+          alert('Verification code sent to ' + email);
+          document.getElementById('userSignupForm').style.display = 'none';
+          document.getElementById('verificationForm').style.display = 'block';
+          return false; // Prevent form submission
+        } else {
+          alert('Please use a valid @mum.amity.edu email address for signup.');
+          return false;
+        }
+      }
+
+      function verifyCode() {
+        // Simulate verification code check
+        var code = document.getElementById('verification-code').value.trim();
+        if (code === '123456') { // Example verification code
+          alert('Email verified successfully!');
+          return true; // Proceed with form submission or further actions
+        } else {
+          alert('Invalid verification code.');
+          return false;
+        }
+      }
+    </script>
+  </body>
+</html>

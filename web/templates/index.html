@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hall Management System</title>
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static',filename='apple-touch-icon.png') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static',filename='favicon-32x32.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static',filename='favicon-16x16.png') }}">
+    <link rel="manifest" href="{{ url_for('static',filename='site.webmanifest') }}">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+  <style>
+    body {
+      background-color: aliceblue;
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+    
+    :root {
+      --primary-color: #04172b;
+      --secondary-color: #061b31;
+      --white: #ffffff;
+      --gray: #6c757d;
+    }
+    
+    .navbar {
+      background-color: var(--primary-color);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 20px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    
+    .navbar .logo {
+      display: flex;
+      align-items: center;
+    }
+    
+    .navbar .logo img {
+      width: fit-content;
+      height: 40px;
+      margin-right: 10px;
+    }
+    
+    .navbar .logo a {
+      color: var(--white);
+      font-size: 24px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    
+    .navbar .menu {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+    }
+    
+    .navbar .menu a {
+      color: var(--white);
+      text-decoration: none;
+      padding: 10px 15px;
+      border-radius: 5px;
+      transition: background-color 0.3s, box-shadow 0.3s;
+      font-weight: bold;
+    }
+    
+    .navbar .menu a:hover {
+      background-color: var(--secondary-color);
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    
+    .navbar .icon {
+      font-size: 20px;
+      color: var(--white);
+      padding: 10px;
+      cursor: pointer;
+      font-weight: bold;
+      position: relative;
+    }
+    
+    .navbar .icon:hover .dropdown {
+      display: block;
+    }
+    
+    .dropdown {
+      display: none;
+      position: absolute;
+      top: 40px;
+      right: 0;
+      background-color: var(--primary-color);
+      box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+      z-index: 1;
+      border-radius: 5px;
+      min-width: 150px;
+      overflow: hidden;
+    }
+    
+    .dropdown a {
+      color: var(--white);
+      padding: 10px 15px;
+      text-decoration: none;
+      display: block;
+      transition: background-color 0.3s;
+    }
+    
+    .dropdown a:hover {
+      background-color: var(--secondary-color);
+    }
+    
+    .dropdown a:last-child {
+      border-bottom: none;
+    }
+    /* Hero Section */
+    .hero {
+      background: url('hero.audi.jpg') no-repeat center center / cover;
+      color: white;
+      text-align: center;
+      padding: 100px 0;
+    }
+
+    .hero h1 {
+      font-size: 50px;
+      margin: 0;
+    }
+
+    .hero p {
+      font-size: 20px;
+    }
+
+    /* Halls Section */
+    .halls {
+      padding: 50px 0;
+      background-color:aliceblue;
+    }
+ 
+    .halls h2 {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .hall {
+      background: #f9f9f9;
+      padding: 20px;
+      margin-bottom: 20px;
+      border-radius: 5px;
+      text-align: center;
+    }
+
+    .hall img {
+      max-width: 100%;
+      height:200px;
+      border-radius: 5px;
+    }
+
+    .hall:hover {
+      transform: scale(1.05); /* Slightly increase the size */
+      box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15); /* Enhance the shadow */
+    }
+    .hall h3 {
+      margin-top: 15px;
+    }
+
+    .hall p {
+      font-size: 16px;
+      color: #666;
+    }
+
+    .hall .btn {
+      margin-top: 10px;
+      background-color: #04172b;
+    }
+
+    /* Modal Styles */
+    .modal-header {
+      background-color: #04172b;
+      color: white;
+    }
+
+    .modal-header .close {
+      color: white;
+    }
+
+    .modal-body .form-group {
+      margin-bottom: 20px;
+    }
+   .modal-body .btn-primary{
+    background-color: #04172b;
+   }
+    /* Footer Styles */
+    footer {
+      background-color: #333;
+      color: white;
+      padding: 20px 0;
+      text-align: center;
+    }
+
+    footer a {
+      color: #337ab7;
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="navbar">
+      <div class="logo">
+        <img src="Amity-logo.png" alt="Logo">
+        <img src="name.2.png" alt="Logo">
+       
+      </div>
+      <div class="menu">
+        <a href="#aboutus">About Us</a>
+        <span class="icon">&#128276;</span>
+        <div class="icon">&#9881;
+          <div class="dropdown">
+            <a href="#profile">Profile</a>
+            <a href="{{url_for('status')}}">Status</a>
+            <a href="{{url_for('userlogin')}}">Logout</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <h1>Book Your Hall Today</h1>
+        <p>Reserve the perfect space for your event.</p>
+      </div>
+    </section>
+
+    <section class="halls">
+      <div class="container">
+        <h2>Available Halls</h2>
+        {% if error %}
+        <p><strong>Update </strong> : {{error}}</p>
+        <script>
+          alert("{{error}}");
+        </script>
+        {% endif %}
+        <div class="row">
+          <div class="col-md-4">
+            <div class="hall">
+              <img src="audi.front.png" alt="Auditorium Hall">
+              <h3>Auditorium Hall</h3>
+              <p>Large venue with seating capacity of 500+. Ideal for conferences, lectures, and performances.</p>
+              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#auditoriumModal">Select</button>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="hall">
+              <img src="seminar.hall1.png" alt="Seminar Hall">
+              <h3>Seminar Hall</h3>
+              <p>Medium-sized hall with seating capacity of 100+. Suitable for meetings, workshops, and presentations.</p>
+              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#seminarModal">Select</button>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="hall">
+              <img src="room105.jpg" alt="Room No. 105, A2 Building">
+              <h3>Room No. 105, A2 Building</h3>
+              <p>Smaller meeting room with seating capacity of 20+. Perfect for small group discussions and interviews.</p>
+              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#room105Modal">Select</button>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="hall">
+              <img src="conference.jpg" alt="CRC Conference Room">
+              <h3>CRC Conference Room</h3>
+              <p>Modern conference room equipped with audio-visual technology. Accommodates up to 50 people.</p>
+              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#crcModal">Select</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Auditorium Hall Modal -->
+    <div class="modal fade" id="auditoriumModal" tabindex="-1" role="dialog" aria-labelledby="auditoriumModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="auditoriumModalLabel">Auditorium Hall Booking</h4>
+          </div>
+          <div class="modal-body">
+            <form method="post" id="auditoriumForm" novalidate>
+              <div class="form-group">
+                <label for="auditoriumSchoolName">School Name:</label>
+                <input type="text" class="form-control" id="auditoriumSchoolName" name="auditoriumSchoolName" placeholder="Enter your school name" required>
+              </div>
+              <div class="form-group">
+                <label for="auditoriumFacultyName">Faculty Name:</label>
+                <input type="text" class="form-control" id="auditoriumFacultyName" name="auditoriumFacultyName" placeholder="Enter your name" required>
+              </div>
+              <div class="form-group">
+                <label for="auditoriumHodName">HOD/HOI/Director Name:</label>
+                <input type="text" class="form-control" id="auditoriumHodName" name="auditoriumHodName" placeholder="Enter HOD/HOI/Director name" required>
+              </div>
+              <div class="form-group">
+                <label for="auditoriumEventName">Event Name:</label>
+                <input type="text" class="form-control" id="auditoriumEventName" name="auditoriumEventName" placeholder="Enter event name" required>
+              </div>
+              <div class="form-group">
+                <label for="auditoriumDate">Date:</label>
+                <input type="date" class="form-control" id="auditoriumDate" name="auditoriumDate" required>
+              </div>
+              <div class="form-group">
+                <label for="auditoriumTime">Start Time:</label>
+                <input type="time" class="form-control" id="sauditoriumTime" name="auditoriumsTime" required>
+              </div>
+              <div class="form-group">
+                <label for="auditoriumTime">End Time:</label>
+                <input type="time" class="form-control" id="eauditoriumTime" name="auditoriumeTime" required>
+              </div>
+              <div class="form-group">
+                <label for="auditoriumResourcePersonName">Resource Person Name:</label>
+                <input type="text" class="form-control" id="auditoriumResourcePersonName" name="auditoriumResourcePersonName" placeholder="Enter resource person name" required>
+              </div>
+              <div class="form-group">
+                <label for="auditoriumResourcePersonDetail">Resource Person Detail:</label>
+                <textarea class="form-control" id="auditoriumResourcePersonDetail" name="auditoriumResourcePersonDetail" placeholder="Enter resource person details" required></textarea>
+              </div>
+              <div class="form-group">
+                <label for="auditoriumEmail">Email:</label>
+                <input type="email" class="form-control" id="auditoriumEmail" name="auditoriumEmail" placeholder="Enter your email" required>
+              </div>
+              <div class="form-group">
+                <label for="auditoriumPhone">Phone Number:</label>
+                <input type="tel" class="form-control" id="auditoriumPhone" name="auditoriumPhone" placeholder="Enter your phone number" required>
+              </div>
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Seminar Hall Modal -->
+    <div class="modal fade" id="seminarModal" tabindex="-1" role="dialog" aria-labelledby="seminarModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="seminarModalLabel">Seminar Hall Booking</h4>
+          </div>
+          <div class="modal-body">
+            <form method="post" id="seminarForm" novalidate>
+              <div class="form-group">
+                <label for="seminarSchoolName">School Name:</label>
+                <input type="text" class="form-control" id="seminarSchoolName" name="seminarSchoolName" placeholder="Enter your school name" required>
+              </div>
+              <div class="form-group">
+                <label for="seminarFacultyName">Faculty Name:</label>
+                <input type="text" class="form-control" id="seminarFacultyName" name="seminarFacultyName" placeholder="Enter your name" required>
+              </div>
+              <div class="form-group">
+                <label for="seminarHodName">HOD/HOI/Director Name:</label>
+                <input type="text" class="form-control" id="seminarHodName" name="seminarHodName" placeholder="Enter HOD/HOI/Director name" required>
+              </div>
+              <div class="form-group">
+                <label for="seminarEventName">Event Name:</label>
+                <input type="text" class="form-control" id="seminarEventName" name="seminarEventName" placeholder="Enter event name" required>
+              </div>
+              <div class="form-group">
+                <label for="seminarDate">Date:</label>
+                <input type="date" class="form-control" id="seminarDate" name="seminarDate" required>
+              </div>
+              <div class="form-group">
+                <label for="seminarTime">Start Time:</label>
+                <input type="time" class="form-control" id="seminarsTime" name="seminarsTime" required>
+              </div>
+              <div class="form-group">
+                <label for="seminarTime">End Time:</label>
+                <input type="time" class="form-control" id="seminareTime" name="seminareTime" required>
+              </div>
+              <div class="form-group">
+                <label for="seminarResourcePersonName">Resource Person Name:</label>
+                <input type="text" class="form-control" id="seminarResourcePersonName" name="seminarResourcePersonName" placeholder="Enter resource person name" required>
+              </div>
+              <div class="form-group">
+                <label for="seminarResourcePersonDetail">Resource Person Detail:</label>
+                <textarea class="form-control" id="seminarResourcePersonDetail" name="seminarResourcePersonDetail" placeholder="Enter resource person details " required></textarea>
+              </div>
+              <div class="form-group">
+                <label for="seminarEmail">Email:</label>
+                <input type="email" class="form-control" id="seminarEmail" name="seminarEmail" placeholder="Enter your email" required>
+              </div>
+              <div class="form-group">
+                <label for="seminarPhone">Phone Number:</label>
+                <input type="tel" class="form-control" id="seminarPhone" name="seminarPhone" placeholder="Enter your phone number" required>
+              </div>
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Room No. 105 Modal -->
+    <div class="modal fade" id="room105Modal" tabindex="-1" role="dialog" aria-labelledby="room105ModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="room105ModalLabel">Room No. 105 Booking</h4>
+          </div>
+          <div class="modal-body">
+            <form method="post" id="room105Form" novalidate>
+              <div class="form-group">
+                <label for="room105SchoolName">School Name:</label>
+                <input type="text" class="form-control" id="room105SchoolName" name="room105SchoolName" placeholder="Enter your school name" required>
+              </div>
+              <div class="form-group">
+                <label for="room105FacultyName">Faculty Name:</label>
+                <input type="text" class="form-control" id="room105FacultyName" name="room105FacultyName" placeholder="Enter your name" required>
+              </div>
+              <div class="form-group">
+                <label for="room105HodName">HOD/HOI/Director Name:</label>
+                <input type="text" class="form-control" id="room105HodName" name="room105HodName" placeholder="Enter HOD/HOI/Director name" required>
+              </div>
+              <div class="form-group">
+                <label for="room105EventName">Event Name:</label>
+                <input type="text" class="form-control" id="room105EventName" name="room105EventName" placeholder="Enter event name" required>
+              </div>
+              <div class="form-group">
+                <label for="room105ResourcePersonName">Resource Person Name:</label>
+                <input type="text" class="form-control" id="room105ResourcePersonName" name="room105ResourcePersonName" placeholder="Enter resource person name" required>
+              </div>
+              <div class="form-group">
+                <label for="room105ResourcePersonDetail">Resource Person Detail:</label>
+                <textarea class="form-control" id="room105ResourcePersonDetail" name="room105ResourcePersonDetail" placeholder="Enter resource person details " required></textarea>
+              </div>
+              <div class="form-group">
+                <label for="room105Date">Date:</label>
+                <input type="date" class="form-control" id="room105Date" name="room105Date" required>
+              </div>
+              <div class="form-group">
+                <label for="room105Time">Start Time:</label>
+                <input type="time" class="form-control" id="room105sTime" name="room105sTime" required>
+              </div>
+              <div class="form-group">
+                <label for="room105Time">End Time:</label>
+                <input type="time" class="form-control" id="room105eTime" name="room105eTime" required>
+              </div>
+              <div class="form-group">
+                <label for="room105Email">Email:</label>
+                <input type="email" class="form-control" id="room105Email" name="room105Email" placeholder="Enter your email" required>
+              </div>
+              <div class="form-group">
+                <label for="room105Phone">Phone Number:</label>
+                <input type="tel" class="form-control" id="room105Phone" name="room105Phone" placeholder="Enter your phone number" required>
+              </div>
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- CRC Conference Room Modal -->
+    <div class="modal fade" id="crcModal" tabindex="-1" role="dialog" aria-labelledby="crcModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="crcModalLabel">CRC Conference Room Booking</h4>
+          </div>
+          <div class="modal-body">
+            <form method="post" id="crcForm" novalidate>
+              <div class="form-group">
+                <label for="crcSchoolName">School Name:</label>
+                <input type="text" class="form-control" id="crcSchoolName" name="crcSchoolName" placeholder="Enter your school name" required>
+              </div>
+              <div class="form-group">
+                <label for="crcFacultyName">Faculty Name:</label>
+                <input type="text" class="form-control" id="crcFacultyName" name="crcFacultyName" placeholder="Enter your name" required>
+              </div>
+              <div class="form-group">
+                <label for="crcHodName">HOD/HOI/Director Name:</label>
+                <input type="text" class="form-control" id="crcHodName" name="crcHodName" placeholder="Enter HOD/HOI/Director name" required>
+              </div>
+              <div class="form-group">
+                <label for="crcEventName">Event Name:</label>
+                <input type="text" class="form-control" id="crcEventName" name="crcEventName" placeholder="Enter event name" required>
+              </div>
+              <div class="form-group">
+                <label for="crcResourcePersonName">Resource Person Name:</label>
+                <input type="text" class="form-control" id="crcResourcePersonName" name="crcResourcePersonName" placeholder="Enter resource person name" required>
+              </div>
+              <div class="form-group">
+                <label for="crcResourcePersonDetail">Resource Person Detail:</label>
+                <textarea class="form-control" id="crcResourcePersonDetail" name="crcResourcePersonDetail" placeholder="Enter resource person details " required></textarea>
+              </div>
+              <div class="form-group">
+                <label for="crcDate">Date:</label>
+                <input type="date" class="form-control" id="crcDate" name="crcDate" required>
+              </div>
+              <div class="form-group">
+                <label for="crcTime">Start Time:</label>
+                <input type="time" class="form-control" id="crcsTime" name="crcsTime" required>
+              </div>
+              <div class="form-group">
+                <label for="crcTime">End Time:</label>
+                <input type="time" class="form-control" id="crceTime" name="crceTime" required>
+              </div>
+              <div class="form-group">
+                <label for="crcEmail">Email:</label>
+                <input type="email" class="form-control" id="crcEmail" name="crcEmail" placeholder="Enter your email" required>
+              </div>
+              <div class="form-group">
+                <label for="crcPhone">Phone Number:</label>
+                <input type="tel" class="form-control" id="crcPhone" name="crcPhone" placeholder="Enter your phone number" required>
+              </div>
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- js for submition of information -->
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const forms = document.querySelectorAll("form");
+    
+        forms.forEach(function (form) {
+          form.addEventListener("submit", function (event) {
+            if (!form.checkValidity()) {
+              event.preventDefault();
+              event.stopPropagation();
+              alert("Please fill in all required fields.");
+            }
+            form.classList.add("was-validated");
+          }, false);
+        });
+      });
+    </script>
+    
+    <!-- Include jQuery and Bootstrap JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+      
+    </body>
+    </html>
