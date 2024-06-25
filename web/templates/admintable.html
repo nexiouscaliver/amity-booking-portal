@@ -313,7 +313,7 @@
                     <div class="dropdown">
                         <a href="#profile">Profile</a>
                         <a href="#settings">Settings</a>
-                        <a href="{{url_for('adminlogin')}}">Logout</a>
+                        <a href="{{url_for('home')}}">Logout</a>
                     </div>
                 </div>
             </div>
@@ -355,7 +355,7 @@
                     <!-- <td>{{ i[0][8] }}</td> etime -->
                     <td>{{ i[0][11] }}</td> 
                     <!-- <td>{{ i[0][12] }}</td> rpdetials -->
-                    <td><button onclick="openScheduleForm('{{ i[0][0] }}', '{{ i[0][2] }}', '{{ i[0][5] }}', '{{ [0,"Auditorium Hall","Seminar Hall","Room No. 105, A2 Building","CRC Conference Room"][i[0][1]] }}', '{{ i[0][6] }}', '{{ make_time(i[0][7]) }}', '{{ make_time(i[0][8]) }}', '{{ i[0][11] }}', '{{ i[0][12] }}')" class="schedule-button">Schedule</button></td>
+                    <td><button onclick="openScheduleForm('{{ i[0][0] }}', '{{ i[0][2] }}', '{{ i[0][5] }}', '{{ [0,"Auditorium Hall","Seminar Hall","Room No. 105, A2 Building","CRC Conference Room"][i[0][1]] }}', '{{ i[0][6] }}', '{{ make_time(i[0][7]) }}', '{{ make_time(i[0][8]) }}', '{{ i[0][11] }}', '{{ i[0][12] }}', '{{ i[0][9] }}')" class="schedule-button">Schedule</button></td>
                 </tr>
                 {% endfor %}
             </tbody>
@@ -402,6 +402,10 @@
                     <input type="text" id="resourcePersonDetail" name="resourcePersonDetail" readonly>
                 </div>
                 <div class="form-group">
+                  <label for="resourcePersonDetail">Faculty Email:</label>
+                  <input type="text" id="facultyEmail" name="facultyEmail" readonly>
+              </div>
+                <div class="form-group">
                     <label for="confirmEvent">Confirm Event:</label>
                     <select id="confirmEvent" name="confirmEvent" required onchange="changeSelectColor(this)">
                         <option value="ACCEPT">Accept Event</option>
@@ -425,7 +429,7 @@
             return {year}-{month}-{day};
         }
 
-        function openScheduleForm(bookingId, schoolName, eventName, venue, eventDate, startTime, endTime, resourcePersonName, resourcePersonDetail) {
+        function openScheduleForm(bookingId, schoolName, eventName, venue, eventDate, startTime, endTime, resourcePersonName, resourcePersonDetail ,facultyEmail) {
             document.getElementById('bookingId').value = bookingId;
             document.getElementById('schoolName').value = schoolName;
             document.getElementById('eventName').value = eventName;
@@ -435,6 +439,7 @@
             document.getElementById('endTime').value = endTime;
             document.getElementById('resourcePersonName').value = resourcePersonName;
             document.getElementById('resourcePersonDetail').value = resourcePersonDetail;
+            document.getElementById('facultyEmail').value = facultyEmail;
             document.getElementById('scheduleFormContainer').style.display = 'block';
         }
 
