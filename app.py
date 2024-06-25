@@ -69,7 +69,7 @@ def send_mail(event_name,event_venue,event_date,start_time,end_time,school_name,
 
     For your convenience, please click on the link below to visit AmiEventHUB and grant us permission to organize this event:
 
-    [AmiEventHUB Link]
+    [AmiEventHUB Link (.../admin)]
 
     Best regards,
     {faculty_name}
@@ -80,6 +80,36 @@ def send_mail(event_name,event_venue,event_date,start_time,end_time,school_name,
     # Send the email
     try:
         msg = Message(subject='Request for Permission to Conduct an Event', recipients=[admin_email])
+        msg.body = email_body
+        mail.send(msg)
+        return True
+    except Exception as e:
+        print(e)
+        return False
+
+def send_mail2(event_name,event_venue,event_date,start_time,end_time,school_name,resource_person_name,resource_person_details,status,user_email):
+    email_body = f"""
+    Dear Faculty,
+
+    I hope this message finds you well.
+
+    The request for permission to conduct an event titled "{event_name}" at {event_venue} on {event_date} from {start_time} to {end_time}. Below are the details of the event:
+    1. School Name: {school_name}
+    2. Resource Person Name: {resource_person_name}
+    3. Resource Person Details: {resource_person_details}
+    
+
+    Your Request has been {status} by the Admin. 
+
+    Kindly check for more details in status section of AmiEventHub.
+
+    Best regards,
+    AmiEventHub
+    """
+
+    # Send the email
+    try:
+        msg = Message(subject='Response to Event Permission', recipients=[user_email])
         msg.body = email_body
         mail.send(msg)
         return True
@@ -109,7 +139,7 @@ def utility_processor():
 def home():
     data=None
     #session['username'] = "TEST"
-    return render_template("test1.html",data=data)
+    return render_template("front.html")
 
 @app.route('/alert')
 def alert():
@@ -181,12 +211,25 @@ def admin():
     if request.method == 'POST':
         bid = request.form["bookingId"]
         status = request.form["confirmEvent"]
+        event_name = request.form["eventName"]
+        event_venue = request.form["venue"]
+        event_date = request.form["eventDate"]
+        start_time = request.form["startTime"]
+        end_time = request.form["endTime"]
+        school_name = request.form["schoolName"]
+        resource_person_name = request.form["resourcePersonName"]
+        resource_person_details = request.form["resourcePersonDetail"]
+        facultyEmail = request.form["facultyEmail"]
         print(bid , status)
         if status=="ACCEPT":
             db.confirm_hall(bid)
+            status2 = "ACCEPTED"
+            send_mail2(event_name,event_venue,event_date,start_time,end_time,school_name,resource_person_name,resource_person_details,status2,facultyEmail)
             return redirect(url_for('admin'))
         elif status=="REJECT":
             db.reject_hall(bid)
+            status2 = "REJECTED"
+            send_mail2(event_name,event_venue,event_date,start_time,end_time,school_name,resource_person_name,resource_person_details,status2,facultyEmail)
             return redirect(url_for('admin'))
     try:
         if session['username']:
