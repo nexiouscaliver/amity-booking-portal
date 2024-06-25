@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin - Hall Management System</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static',filename='apple-touch-icon.png') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static',filename='favicon-32x32.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static',filename='favicon-16x16.png') }}">
+    <link rel="manifest" href="{{ url_for('static',filename='site.webmanifest') }}">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+
+  <style>
+    body {
+      background-color: aliceblue;
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    :root {
+      --primary-color: #04172b;
+      --secondary-color: #061b31;
+      --hover-color: #1a3c59;
+      --white: #ffffff;
+      --gray: #6c757d;
+      --light-green: #90ee90;
+      --light-red: #ffcccb;
+    }
+
+    /* Navbar Styles */
+    .navbar {
+      background-color: var(--primary-color);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 20px;
+      height: 60px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .navbar .logo {
+      display: flex;
+      align-items: center;
+    }
+
+    .navbar .logo img {
+      height: 40px;
+      margin-right: 10px;
+    }
+
+    .navbar .logo a {
+      color: var(--white);
+      font-size: 24px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .navbar .menu {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+    }
+
+    .navbar .menu a {
+      color: var(--white);
+      text-decoration: none;
+      padding: 10px 15px;
+      border-radius: 5px;
+      transition: background-color 0.3s, box-shadow 0.3s;
+      font-weight: bold;
+    }
+
+    .navbar .menu a:hover {
+      background-color: var(--secondary-color);
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .navbar .icon {
+      font-size: 20px;
+      color: var(--white);
+      padding: 10px;
+      cursor: pointer;
+      font-weight: bold;
+      position: relative;
+    }
+
+    .navbar .icon:hover .dropdown {
+      display: block;
+    }
+
+    .dropdown {
+      display: none;
+      position: absolute;
+      top: 40px;
+      right: 0;
+      background-color: var(--primary-color);
+      box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+      z-index: 1;
+      border-radius: 5px;
+      min-width: 150px;
+      overflow: hidden;
+    }
+
+    .dropdown a {
+      color: var(--white);
+      padding: 10px 15px;
+      text-decoration: none;
+      display: block;
+      transition: background-color 0.3s;
+    }
+
+    .dropdown a:hover {
+      background-color: var(--secondary-color);
+    }
+
+    /* Boxes Container */
+    .boxes-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: calc(100vh - 60px); /* Adjusted for the height of the navbar */
+      gap: 20px;
+      padding: 20px;
+    }
+
+    .box {
+      background-color: var(--white);
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      border-radius: 10px;
+      padding: 30px 20px;
+      text-align: center;
+      transition: transform 0.3s, box-shadow 0.3s;
+      width: 300px;
+    }
+
+    .box:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    .box img {
+      width: 100px;
+      height: 100px;
+      margin-bottom: 20px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .box h2 {
+      font-size: 24px;
+      margin-bottom: 20px;
+      color: var(--primary-color);
+    }
+
+    .box button {
+      padding: 10px 20px;
+      font-size: 16px;
+      font-weight: bold;
+      color: var(--white);
+      background-color: var(--primary-color);
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s, box-shadow 0.3s;
+    }
+
+    .box button:hover {
+      background-color: var(--hover-color);
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="navbar">
+      <div class="logo">
+        <img src="Amity-logo.png" alt="Logo">
+        <img src="name.2.png" alt="Logo">
+      </div>
+          
+    </div>
+  </header>
+  <main>
+    <div class="boxes-container">
+      <div class="box">
+        <img src="admin2.png" alt="Admin Photo">
+        <h2>Admin Login</h2>
+        <form action="{{url_for('adminlogin')}}">
+        <button type="submit" >Login</button>
+        </form>
+      </div>
+      <div class="box">
+        <img src="user1.png" alt="User Photo">
+        <h2>User Login</h2>
+        <form action="{{url_for('userlogin')}}">
+        <button type="submit" >Login</button>
+      </form>
+      </div>
+    </div>
+  </main>
+</body>
+
+</html>
