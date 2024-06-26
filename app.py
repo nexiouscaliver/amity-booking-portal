@@ -314,8 +314,8 @@ def userlogin():
         else:
             if login.load_user(username,passwd) == "verify":
                 email = login.getname_user(username)
-                send_mail3(email,gen_code())
-                return redirect(url_for('verifyemail',username=username))
+                #send_mail3(email,gen_code())
+                return redirect(url_for('userlogin'))
             else:
                 error = "Incorrect Credentials!"
                 return render_template('loginuser.html',error=error)
@@ -330,15 +330,16 @@ def usersignup():
         passwd = request.form["user-password"]
         email = request.form["user-email"]
         
-        if (email.split("@")[-1]!="s.amity.edu"):
+        if (email.split("@")[-1]!="mum.amity.edu"):
             alert = 'Please use a valid @mum.amity.edu email address for signup.'
             return render_template('signup.user.html',error=alert)
         else:
             #return redirect(url_for('verifyemail',username=username,password=passwd))
             if login.create_user(username=username,password=passwd,name=email):
                 print(username,passwd,email)
-                send_mail3(email,gen_code())
-                return redirect(url_for('verifyemail',username=username))
+                #send_mail3(email,gen_code())
+                #return redirect(url_for('verifyemail',username=username))
+                return redirect(url_for('userlogin',username=username))
             else:
                 alert = 'Account creation failed. Select different username and Please try again later.'
                 return render_template('signup.user.html',error=alert)
