@@ -159,6 +159,15 @@ def check_hall(hallid:int , date:str , stime:int , etime:int):   #user
     conn.commit()
     conn.close()
 
+def all_status():
+    conn = sqlite3.connect(dbname)
+    c = conn.cursor()
+    sql='select * from status;'
+    a = c.execute(sql)
+    o = a.fetchall()
+    conn.commit()
+    conn.close()
+    return o
 
 def check_pending():    #admin
     conn = sqlite3.connect(dbname)

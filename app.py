@@ -55,6 +55,26 @@ def maketime(time:int):
         time = time[:2]+":"+time[2:]
         return time
 
+#db task functions
+def get_sorted_status():
+    out = db.all_status()
+    accept = []
+    pending = []
+    reject = []
+    final = []
+    for i in out:
+        if i[1] == 'pending':
+            pending.append(i)
+        elif i[1] == 'reject':
+            reject.append(i)
+        else:
+            accept.append(i)
+    final.append(pending)
+    final.append(accept)
+    final.append(reject)
+    return final  #then use db.infofect for each bid.
+    # print(accept,"\n",pending,"\n",reject)
+
 # global code_list
 code_list = []
 
@@ -467,6 +487,7 @@ def admingetreject(bookid):
     else:
         error=f"Booking Number: {bookid}. Request to server Failed. Please Contact Technical Team if Problem Presists"
         return render_template('closetab.html',error=error)
+
 #future
 @app.route('/verifyemail/<username>' ,methods=['GET', 'POST'])
 def verifyemail(username):
