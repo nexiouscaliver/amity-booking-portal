@@ -1,5 +1,6 @@
 ##main flask app :: Shahil kadia
-##Set-ExecutionPolicy Unrestricted -Scope Process;.\.venv\Scripts\activate
+##Set-ExecutionPolicy Unrestricted -Scope Process;.\.venv\Scripts\activate;
+##cd D:\projects\amity-booking-portal
 from flask import *
 from flask import request, jsonify
 from flask import send_from_directory
@@ -25,6 +26,7 @@ app.config['MAIL_PASSWORD'] = 'ffoi rhgz arbn gnaw'  # Replace with your email p
 app.config['MAIL_DEFAULT_SENDER'] = 'amieventhub@gmail.com'  # Replace with your email
 admin_email = 'amieventhub@gmail.com'  # Replace with the admin's email
 mail = Mail(app)
+server_link = "http://127.0.0.1:8000" #replace with production server initial routing address.
 
 #task-related functions
 def hallname(hallid:int):
@@ -65,7 +67,7 @@ def gen_code():
         code = gen_code()
     return code
 
-def send_mail(event_name,event_venue,event_date,start_time,end_time,school_name,hoi_name,resource_person_name,resource_person_details,faculty_phone,faculty_name,faculty_email):
+def send_mail(event_name,event_venue,event_date,start_time,end_time,school_name,hoi_name,resource_person_name,resource_person_details,faculty_phone,faculty_name,faculty_email,bid):
     email_body = f"""
     Dear Sir,
 
@@ -82,25 +84,58 @@ def send_mail(event_name,event_venue,event_date,start_time,end_time,school_name,
 
     For your convenience, please click on the link below to visit AmiEventHUB and grant us permission to organize this event:
 
-    [AmiEventHUB Link (.../admin)]
+    [{server_link}/adminlogin]
+
+    link<{server_link}/adminlogin>
 
     Best regards,
     {faculty_name}
     {school_name}
     {faculty_email}
     """
+    
+    html = f"""<pre>
+    Dear Sir,
 
+    I hope this message finds you well.
+
+    I am writing to request your permission to conduct an event titled "{event_name}" at {event_venue} on {event_date} from {start_time} to {end_time}. Below are the details of the event:
+    1. School Name: {school_name}
+    2. Head of Institution/Director Name: {hoi_name}
+    3. Resource Person Name: {resource_person_name}
+    4. Resource Person Details: {resource_person_details}
+    5. Phone Number of Faculty: {faculty_phone}
+    6. Booking ID : {bid}
+
+    We believe that this event will provide significant value and insights to our attendees, fostering an environment of learning and engagement.
+
+    For your convenience, please click on the link below to visit AmiEventHUB and grant us permission to organize this event.
+
+    Shortcut Links:
+
+        Admin Page :  <a href='{server_link}/admin'>Login Link</a>
+    
+        Approve Request :    <a href='{server_link}/admin/email/approve/{bid}'>Approve</a>
+    
+        Reject Request :     <a href='{server_link}/admin/email/reject/{bid}'>Reject</a>
+                    
+    Best regards,
+    {faculty_name}
+    {school_name}
+    {faculty_email}</pre>
+    """
     # Send the email
     try:
         msg = Message(subject='Request for Permission to Conduct an Event', recipients=[admin_email])
         msg.body = email_body
+        msg.html = html
         mail.send(msg)
         return True
     except Exception as e:
         print(e)
         return False
 
-def send_mail2(event_name,event_venue,event_date,start_time,end_time,school_name,resource_person_name,resource_person_details,status,user_email):
+def send_mail2(event_name,event_venue,event_date,start_time,end_time,school_name,resource_person_name,resource_person_details,status,user_email,bid):
     email_body = f"""
     Dear Faculty,
 
@@ -114,16 +149,42 @@ def send_mail2(event_name,event_venue,event_date,start_time,end_time,school_name
 
     Your Request has been {status} by the Admin. 
 
-    Kindly check for more details in status section of AmiEventHub.
+    Kindly check for more details in status section of AmiEventHub.For your convenience, please click on the link below to visit AmiEventHUB
+
+    Shortcut Links:
+
+        User Page :  <a href='{server_link}/user'>Login Link</a>
 
     Best regards,
     AmiEventHub
     """
+    html = f"""<pre>
+    Dear Faculty,
 
+    I hope this message finds you well.
+
+    The request for permission to conduct an event titled "{event_name}" at {event_venue} on {event_date} from {start_time} to {end_time}. Below are the details of the event:
+    1. School Name: {school_name}
+    2. Resource Person Name: {resource_person_name}
+    3. Resource Person Details: {resource_person_details}
+    4. Booking ID: {bid}
+    
+
+    Your Request has been {status} by the Admin. 
+
+    Kindly check for more details in status section of AmiEventHub.For your convenience, please click on the link below to visit AmiEventHUB
+    
+    Shortcut Links:
+
+        User Page :  <a href='{server_link}/user'>Login Link</a>
+
+    Best regards,
+    AmiEventHub</pre>"""
     # Send the email
     try:
         msg = Message(subject='Response to Event Permission', recipients=[user_email])
         msg.body = email_body
+        msg.html = html
         mail.send(msg)
         return True
     except Exception as e:
@@ -168,18 +229,21 @@ def utility_processor():
             return time
     return dict(make_time=make_time)
 
-#routing functions
+#before-request functions
+@app.before_request
+def make_session_permanent():
+    session.permanent = True
 
+#routing functions
 @app.route('/')
 def home():
-    data=None
     #session['username'] = "TEST"
     return render_template("front.html")
 
 @app.route('/alert')
 def alert():
     #error="Your Request has been successfully sent!"
-    error = send_mail('event_name','event_venue','event_date','start_time','end_time','school_name','hoi_name','resource_person_name','resource_person_details','faculty_phone','faculty_name','faculty_email')
+    error = send_mail('event_name','event_venue','event_date','start_time','end_time','school_name','hoi_name','resource_person_name','resource_person_details','faculty_phone','faculty_name','faculty_email',0)
     print(error)
     return render_template("test1.html",error=error)
 
@@ -214,7 +278,7 @@ def index():
                 bid = db.request_hall(hid,final[0],final[4],final[5],final[6],final[3],uname)
                 db.info_dump(bookid=bid, hallid=hid , school=final[0], fname=final[1], hod=final[2], email=final[7] , phone=final[8] , date=final[4] , stime=final[5] , etime=final[6] , event=final[3],rpname=final[9],rpdetail=final[10])
                 #db.info_dump(bid, hid , sfinal[0], final[1], final[2],final[7] , final[8] , final[4] , final[5] , final[6] , final[3])
-                if (send_mail(final[3],hallname(hid),final[4],final[5],final[6],final[0],final[2],final[9],final[10],final[8],final[1],final[7])):
+                if (send_mail(final[3],hallname(hid),final[4],final[5],final[6],final[0],final[2],final[9],final[10],final[8],final[1],final[7],bid)):
                     
                     error = "Your Request Is Successfully Sent for Approval!"
                     return render_template("index.html",error=error)
@@ -229,7 +293,6 @@ def index():
     else:
         return redirect(url_for('userlogin'))
 
-
 @app.route('/requeststatus' ,methods=['GET', 'POST'])
 def status():
     if session['username']:
@@ -239,8 +302,6 @@ def status():
     else:
         return redirect(url_for('userlogin'))
         
-
-
 @app.route('/admin' ,methods=['GET', 'POST'])
 def admin():
     if request.method == 'POST':
@@ -260,7 +321,7 @@ def admin():
             try:
                 db.confirm_hall(bid)
                 status2 = "ACCEPTED"
-                send_mail2(event_name,event_venue,event_date,start_time,end_time,school_name,resource_person_name,resource_person_details,status2,facultyEmail)
+                send_mail2(event_name,event_venue,event_date,start_time,end_time,school_name,resource_person_name,resource_person_details,status2,facultyEmail,bid)
                 return redirect(url_for('admin'))
             except:
                 return redirect(url_for('admin'))
@@ -268,13 +329,13 @@ def admin():
             try:
                 db.reject_hall(bid)
                 status2 = "REJECTED"
-                send_mail2(event_name,event_venue,event_date,start_time,end_time,school_name,resource_person_name,resource_person_details,status2,facultyEmail)
+                send_mail2(event_name,event_venue,event_date,start_time,end_time,school_name,resource_person_name,resource_person_details,status2,facultyEmail,bid)
                 return redirect(url_for('admin'))
             except:
                 return redirect(url_for('admin'))
     try:
-        if session['username']:
-            username = session['username']
+        if session['admin_username']:
+            username = session['admin_username']
             if (username.split("+")[0]=='ADMIN'):
                 #print("ACCEPTED")
                 output1 = db.check_pending()
@@ -298,7 +359,6 @@ def admin():
         return redirect(url_for('adminlogin'))
     except:
         return redirect(url_for('adminlogin'))
-
 
 @app.route('/login' ,methods=['GET', 'POST'])
 def userlogin():
@@ -346,18 +406,17 @@ def usersignup():
         
     return render_template('signup.user.html',error=alert)
 
-
 @app.route('/adminlogin' ,methods=['GET', 'POST'])
 def adminlogin():
     error = None
-    session.pop('username',None)
+    session.pop('admin_username',None)
     if request.method == 'POST':
         username = request.form["admin-username"]
         passwd = request.form["admin-password"]
         #print(username,passwd)
         if login.load_admin(username,passwd):
             adname = "ADMIN+"+username
-            session['username'] = adname
+            session['admin_username'] = adname
             return redirect(url_for('admin'))
         else:
             error = "Incorrect Credentials!"
@@ -367,7 +426,7 @@ def adminlogin():
 @app.route('/adminsignup' ,methods=['GET', 'POST'])
 def adminsignup():
     alert = None
-    session.pop('username',None)
+    session.pop('admin_username',None)
     if request.method == 'POST':
         username = request.form["admin-username"]
         passwd = request.form["admin-password"]
@@ -387,9 +446,28 @@ def adminsignup():
         
     return render_template('signup.admin.html',error=alert)
 
+#email get requests (admin):
 
+@app.route('/admin/email/approve/<bookid>')
+def admingetapprove(bookid):
+    bookid = int(bookid)
+    if db.confirm_hall(bookid):
+        error=f"Booking Number: {bookid}. Request APPROVED successfully."
+        return render_template('closetab.html',error=error)
+    else:
+        error=f"Booking Number: {bookid}. Request to server Failed. Please Contact Technical Team if Problem Presists"
+        return render_template('closetab.html',error=error)
+
+@app.route('/admin/email/reject/<bookid>')
+def admingetreject(bookid):
+    bookid = int(bookid)
+    if db.reject_hall(bookid):
+        error=f"Booking Number: {bookid}. Request DISAPPROVED successfully."
+        return render_template('closetab.html',error=error)
+    else:
+        error=f"Booking Number: {bookid}. Request to server Failed. Please Contact Technical Team if Problem Presists"
+        return render_template('closetab.html',error=error)
 #future
-
 @app.route('/verifyemail/<username>' ,methods=['GET', 'POST'])
 def verifyemail(username):
     # global code_list
@@ -423,6 +501,7 @@ def verifyemail(username):
         
     return render_template('verifyemail.html',error=alert,email=email)
 
+
 #main runtime
 if __name__ == '__main__':
-    app.run(debug=True,port=7000)
+    app.run(debug=True,port=8000)

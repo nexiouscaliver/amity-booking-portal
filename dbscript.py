@@ -173,48 +173,56 @@ def check_pending():    #admin
 
 
 def confirm_hall(bookid:int):   #admin
-    conn = sqlite3.connect(dbname)
-    c = conn.cursor()
-    sql=f'select * from book where bookid={bookid};'
-    a = c.execute(sql)
-    o = a.fetchall()
-    s = o[0]
-    hallid = s[1]
-    school = s[2]
-    date = s[3]
-    stime = s[4]
-    etime = s[5]
-    event = s[6]
-    sql=f'insert into confirm(bookid,hallid,school,date,stime,etime,event) values({bookid},{hallid},"{school}","{date}",{stime},{etime},"{event}");'
-    c.execute(sql)
-    sql=f'delete from book where bookid={bookid};'
-    c.execute(sql)
-    sql=f'update status set state="confirm" where bookid={bookid}'
-    c.execute(sql)
-    conn.commit()
-    conn.close()
+    try:
+        conn = sqlite3.connect(dbname)
+        c = conn.cursor()
+        sql=f'select * from book where bookid={bookid};'
+        a = c.execute(sql)
+        o = a.fetchall()
+        s = o[0]
+        hallid = s[1]
+        school = s[2]
+        date = s[3]
+        stime = s[4]
+        etime = s[5]
+        event = s[6]
+        sql=f'insert into confirm(bookid,hallid,school,date,stime,etime,event) values({bookid},{hallid},"{school}","{date}",{stime},{etime},"{event}");'
+        c.execute(sql)
+        sql=f'delete from book where bookid={bookid};'
+        c.execute(sql)
+        sql=f'update status set state="confirm" where bookid={bookid}'
+        c.execute(sql)
+        conn.commit()
+        conn.close()
+        return True
+    except:
+        return False
     
 def reject_hall(bookid:int):      #admin
-    conn = sqlite3.connect(dbname)
-    c = conn.cursor()
-    sql=f'select * from book where bookid={bookid};'
-    a = c.execute(sql)
-    o = a.fetchall()
-    s = o[0]
-    hallid = s[1]
-    school = s[2]
-    date = s[3]
-    stime = s[4]
-    etime = s[5]
-    event = s[6]
-    sql=f'insert into reject(bookid,hallid,school,date,stime,etime,event) values({bookid},{hallid},"{school}","{date}",{stime},{etime},"{event}");'
-    c.execute(sql)
-    sql=f'delete from book where bookid={bookid};'
-    c.execute(sql)
-    sql=f'update status set state="reject" where bookid={bookid}'
-    c.execute(sql)
-    conn.commit()
-    conn.close()
+    try:
+        conn = sqlite3.connect(dbname)
+        c = conn.cursor()
+        sql=f'select * from book where bookid={bookid};'
+        a = c.execute(sql)
+        o = a.fetchall()
+        s = o[0]
+        hallid = s[1]
+        school = s[2]
+        date = s[3]
+        stime = s[4]
+        etime = s[5]
+        event = s[6]
+        sql=f'insert into reject(bookid,hallid,school,date,stime,etime,event) values({bookid},{hallid},"{school}","{date}",{stime},{etime},"{event}");'
+        c.execute(sql)
+        sql=f'delete from book where bookid={bookid};'
+        c.execute(sql)
+        sql=f'update status set state="reject" where bookid={bookid}'
+        c.execute(sql)
+        conn.commit()
+        conn.close()
+        return True
+    except:
+        return False
 
 
 
