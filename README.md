@@ -34,7 +34,7 @@ And of course it is open source with a [public repository](https://github.com/ne
 
 Clone the repository from github :
 ```sh
-git clone https://github.com/nexiouscaliver/amity-booking-porta.git
+git clone https://github.com/nexiouscaliver/amity-booking-portal.git
 ```
 
 ## Installation
@@ -42,7 +42,7 @@ It requires [Python](https://www.python.org/) v3.11+ to work perfectly.
 
 Change directory:
 ```sh
-cd amity-booking-porta/
+cd amity-booking-portal/
 ```
 
 Install the dependencies :
@@ -55,7 +55,7 @@ pip install -r requirements.txt
 
 Change to directory :
 ```sh
-cd amity-booking-porta/
+cd amity-booking-portal/
 ```
 
 Run init script to initialize the database:
