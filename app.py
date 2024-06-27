@@ -1,5 +1,5 @@
 ##main flask app :: Shahil kadia
-
+##Set-ExecutionPolicy Unrestricted -Scope Process;.\.venv\Scripts\activate
 from flask import *
 from flask import request, jsonify
 from flask import send_from_directory
