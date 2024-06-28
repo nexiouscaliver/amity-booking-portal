@@ -1,4 +1,4 @@
-##main flask app :: Sundaram singh kadia
+##main flask app :: Shahil kadia
 ##Set-ExecutionPolicy Unrestricted -Scope Process;.\.venv\Scripts\activate;
 ##cd D:\projects\amity-booking-portal
 import os
