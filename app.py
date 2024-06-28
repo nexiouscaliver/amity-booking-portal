@@ -1,14 +1,15 @@
-##main flask app :: Shahil kadia
+##main flask app :: Sundaram singh kadia
 ##Set-ExecutionPolicy Unrestricted -Scope Process;.\.venv\Scripts\activate;
 ##cd D:\projects\amity-booking-portal
-from flask import *
-from flask import request, jsonify
-from flask import send_from_directory
-from flask_mail import Mail, Message
-from werkzeug.utils import secure_filename
-from time import ctime
 import os
 import random
+from time import ctime
+
+from flask import *
+from flask import jsonify, request, send_from_directory
+from flask_mail import Mail, Message
+from werkzeug.utils import secure_filename
+
 import dbscript as db
 import loginscript as login
 
