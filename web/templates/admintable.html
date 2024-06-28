@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Admin - Hall Management System</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static',filename='apple-touch-icon.png') }}">
     <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static',filename='favicon-32x32.png') }}">
@@ -76,52 +77,23 @@
       transition: background-color 0.3s, box-shadow 0.3s;
       font-weight: bold;
     }
-
-    .navbar .menu a:hover {
-      background-color: var(--secondary-color);
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    }
-
-    .navbar .icon {
-      font-size: 20px;
-      color: var(--white);
-      padding: 10px;
-      cursor: pointer;
-      font-weight: bold;
-      position: relative;
-    }
-
-    .navbar .icon:hover .dropdown {
-      display: block;
-    }
-
-    .dropdown {
-      display: none;
-      position: absolute;
-      top: 40px;
-      right: 0;
-      background-color: var(--primary-color);
-      box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
-      z-index: 1;
-      border-radius: 5px;
-      min-width: 150px;
-      overflow: hidden;
-    }
-
-    .dropdown a {
-      color: var(--white);
-      padding: 10px 15px;
-      text-decoration: none;
-      display: block;
-      transition: background-color 0.3s;
-    }
-
-    .dropdown a:hover {
-      background-color: var(--secondary-color);
-    }
+      
+      .navbar .menu a:hover {
+        background-color: var(--secondary-color);
+        transform: scale(1.05);
+        box-shadow: 0 0 0 2px aliceblue; /* it Enhance the shadow */
+      }
+      
+      .navbar .icon {
+        font-size: 20px;
+        color: var(--white);
+        padding: 10px;
+        cursor: pointer;
+        font-weight: bold;
+        position: relative;
+      }
 
     .container {
-      max-width: 800px;
       margin: auto;
       background: #fff;
       padding: 20px;
@@ -156,78 +128,85 @@
       }
     }
 
-    table,
-    th,
-    td {
-      border: 1px solid var(--gray);
+    * Table Styles */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
     }
-
-    th,
-    td {
-      padding: 8px;
+    
+    th, td {
+      border: 1px solid #ccc;
+      padding: 12px;
       text-align: left;
     }
-
+    
     th {
       background-color: #2CA58D;
-      color: var(--white);
+      color: #fff;
     }
-
+    
+    /* Form Styles */
     .form-group {
-      margin-bottom: 15px;
+      margin-bottom: 20px;
     }
-
+    
     label {
-      display: block;
-      margin-bottom: 5px;
-      color: #04172b;
+      font-weight: bold;
+      color: #333;
     }
-
-    input,
+    
+    input[type="text"],
+    input[type="date"],
     select,
     textarea {
       width: 100%;
-      padding: 8px;
-      box-sizing: border-box;
+      padding: 10px;
       border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+      font-size: 16px;
+      margin-top: 5px;
     }
-
-    .schedule-button,
-    .collapse-button {
-      background-color: #04172b;
-      color: white;
+    
+    select {
+      appearance: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      background-color: #fff;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M6 9.5L0 3h12L6 9.5z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position-x: calc(100% - 12px);
+      background-position-y: center;
+      padding-right: 40px;
+    }
+    
+    button {
+      background-color: #2CA58D;
+      color: #fff;
       border: none;
-      padding: 10px 20px;
+      padding: 12px 20px;
       cursor: pointer;
-      margin-top: 10px;
-      border-radius: 5px;
-      position: relative;
-      transition: 0.4s ease;
+      border-radius: 4px;
+      font-size: 16px;
+      transition: background-color 0.3s ease;
     }
-
-    .schedule-button:hover,
-    .collapse-button:hover {
-      background-color: #357ebd;
+    
+    button:hover {
+      background-color: #1E7C65;
     }
-
-    .collapse-button {
-      background-color: #194a7a;
-    }
-
-    .collapse-button:hover {
-      background-color: #2e5e32;
-    }
-
+    
     .button-group {
       display: flex;
       justify-content: space-between;
       align-items: center;
     }
-
+    
     #scheduleFormContainer {
-      background-color: aliceblue;
+      background-color: #f0f8ff;
       padding: 20px;
-      border-radius: 5px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     }
 
     .search-bar {
@@ -302,23 +281,25 @@
 <body>
     <header>
         <div class="navbar">
-            <div class="logo">
-                <img src="Amity-logo.png" alt="Logo">
-                <img src="name.2.png" alt="Logo">
-            </div>
-            <div class="menu">
-                <a href="#dashboard">Dashboard</a>
-                <span class="icon">&#128276;</span>
-                <div class="icon">&#9881;
-                    <div class="dropdown">
-                        <a href="#profile">Profile</a>
-                        <a href="#settings">Settings</a>
-                        <a href="{{url_for('home')}}">Logout</a>
-                    </div>
-                </div>
-            </div>
+          <div class="logo">
+            <img src="Amity-logo.png" alt="Logo">
+            <img src="name.2.png" alt="Logo">
+          </div>
+          <div class="menu">
+            <a href="#calendar" class="menu-item">
+              <i class="fas fa-calendar-alt"></i> <!-- Calendar icon -->
+              Calendar
+            </a>
+            <a href="#notifications" class="menu-item">
+              <i class="fas fa-bell"></i> <!-- Notification icon -->
+              Notifications
+                <a href="{{url_for('status')}}">All Booking</a>
+                <a href="{{url_for('home')}}">Logout</a>
+              </div>
+            </a>
+          </div>
         </div>
-    </header>
+      </header>
     <div class="container">
         <h2>Pending Event Details</h2>
 
@@ -384,15 +365,13 @@
                 <div class="form-group">
                     <label for="eventDate">Date of Event:</label>
                     <input type="date" id="eventDate" name="eventDate" readonly>
-                </div>
+                </div>  
+                <!-- changes done here kadia    -->
                 <div class="form-group">
-                    <label for="startTime">Start Time:</label>
-                    <input type="text" id="startTime" name="startTime" readonly>
+                    <label for="durationofevent">Duration of event:</label>
+                    <input type="text" id="durationofevent" name="durationofevent" readonly>
                 </div>
-                <div class="form-group">
-                    <label for="endTime">End Time:</label>
-                    <input type="text" id="endTime" name="endTime" readonly>
-                </div>
+               
                 <div class="form-group">
                     <label for="resourcePersonName">Resource Person Name:</label>
                     <input type="text" id="resourcePersonName" name="resourcePersonName" readonly>
@@ -429,14 +408,13 @@
             return {year}-{month}-{day};
         }
 
-        function openScheduleForm(bookingId, schoolName, eventName, venue, eventDate, startTime, endTime, resourcePersonName, resourcePersonDetail ,facultyEmail) {
+        function openScheduleForm(bookingId, schoolName, eventName, venue, eventDate, durationofevent, resourcePersonName, resourcePersonDetail ,facultyEmail) {
             document.getElementById('bookingId').value = bookingId;
             document.getElementById('schoolName').value = schoolName;
             document.getElementById('eventName').value = eventName;
             document.getElementById('venue').value = venue;
             document.getElementById('eventDate').value = eventDate;
-            document.getElementById('startTime').value = startTime;
-            document.getElementById('endTime').value = endTime;
+            document.getElementById('durationofevent').value = durationofevent;      /*changes done here kadia*/
             document.getElementById('resourcePersonName').value = resourcePersonName;
             document.getElementById('resourcePersonDetail').value = resourcePersonDetail;
             document.getElementById('facultyEmail').value = facultyEmail;
