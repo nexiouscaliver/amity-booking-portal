@@ -58,22 +58,22 @@ def maketime(time:int):
 #db task functions
 def get_sorted_status():
     out = db.all_status()
-    accept = []
-    pending = []
-    reject = []
     final = []
+    final2 = []
     for i in out:
         if i[1] == 'pending':
-            pending.append(i)
+            final.append(i)
         elif i[1] == 'reject':
-            reject.append(i)
+            final.append(i)
         else:
-            accept.append(i)
-    final.append(pending)
-    final.append(accept)
-    final.append(reject)
-    return final  #then use db.infofect for each bid.
-    # print(accept,"\n",pending,"\n",reject)
+            final.append(i)
+    #return final  #then use db.infofect for each bid.
+    for i in final:
+        bid = i[0]
+        status = str(i[1]).upper()
+        o = db.info_fetch(bid)
+        final2.append([o,status])
+    return final2
 
 # global code_list
 code_list = []
@@ -261,6 +261,18 @@ def utility_processor():
             time = time[:2]+":"+time[2:]
             return time
     return dict(make_time=make_time)
+
+@app.context_processor
+def utility_processor():
+    def getduration(etime):
+        if etime==1300 or etime=="1300":
+            etime = "1st Half"
+        elif etime==1700 or etime=="1700":
+            etime= "2nd Half"
+        elif etime==1701 or etime=="1701":
+            etime= "Full Day"
+        return etime
+    return dict(getduration=getduration)
 
 #before-request functions
 @app.before_request
@@ -521,9 +533,20 @@ def adminsignup():
         
     return render_template('signup.admin.html',error=alert)
 
-#email get requests (admin):
+@app.route('/admin/bookings',methods=['GET'])
+def adminbooking():
+    if session:
+        try:
+            username = session['admin_username']
+            output = get_sorted_status()
+            return render_template('allbooking.html',output=output)
+        except:
+            return render_template('notitab.html',error="You have been logged out of Admin. Please Login again.")
+    else:
+        return render_template('notitab.html',error="You have been logged out of Admin. Please Login again.")
 
-@app.route('/admin/email/approve/<bookid>')
+#email get requests (admin):
+@app.route('/admin/email/approve/<bookid>',methods=['GET'])
 def admingetapprove(bookid):
     bookid = int(bookid)
     if db.confirm_hall(bookid):
@@ -533,7 +556,7 @@ def admingetapprove(bookid):
         error=f"Booking Number: {bookid}. Request to server Failed. Please Contact Technical Team if Problem Presists"
         return render_template('closetab.html',error=error)
 
-@app.route('/admin/email/reject/<bookid>')
+@app.route('/admin/email/reject/<bookid>',methods=['GET'])
 def admingetreject(bookid):
     bookid = int(bookid)
     if db.reject_hall(bookid):
