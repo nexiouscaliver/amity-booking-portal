@@ -261,7 +261,7 @@ td[data-day]:hover {
       <div class="container">
         <h2>Available Halls</h2>
         {% if error %}
-        <p><strong>Update </strong> : {{error}}</p>
+        <!-- <p><strong>Update </strong> : {{error}}</p> -->
         <script>
           alert("{{error}}");
         </script>
@@ -339,7 +339,7 @@ td[data-day]:hover {
               </div>
               <div class="form-group">
                 <label for="auditoriumdate">Date of Event:</label>
-                <input type="date" class="form-control" id="auditoriumdate" name="date" required onchange="updateDayOfWeek('auditoriumdate', 'auditoriumday'); updateCalendarColor('auditoriumdate')">
+                <input type="date" class="form-control" id="auditoriumdate" name="auditoriumdate" required onchange="updateDayOfWeek('auditoriumdate', 'auditoriumday'); updateCalendarColor('auditoriumdate')">
               </div>
               <div class="form-group">
                 <label for="auditoriumday">Day of Event:</label>
@@ -618,12 +618,15 @@ td[data-day]:hover {
     }
     
     function getBookingStatus(date) {
-        // Hard-coded booking status logic for demonstration purposes
-        // In a real scenario, replace this with your actual booking status determination logic
         const day = new Date(date).getDate();
-        if (day % 4 === 0) return 'full';
-        if (day % 4 === 1) return 'first-half';
-        if (day % 4 === 2) return 'second-half';
+        // console.log(day)
+        // console.log(date)
+        {%for i in cal%}
+        if (date==="{{i[0]}}") return '{{i[1]}}';
+        {%endfor%}
+        // if (day % 4 === 0) return 'full';
+        // if (day % 4 === 1) return 'first-half';
+        // if (day % 4 === 2) return 'second-half';
         return 'not-booked';
     }
       

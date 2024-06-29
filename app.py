@@ -298,6 +298,8 @@ def index():
     if session:
         uname = session['username']
         print(uname)
+        cal = db.calender()
+        print("CAL:",cal)
         if request.method == 'POST':
             
             hall = ['auditorium','seminar','room105','crc']
@@ -336,15 +338,15 @@ def index():
                 if (send_mail(final[3],hallname(hid),final[4],final[5],final[6],final[0],final[2],final[9],final[10],final[8],final[1],final[7],bid)):
                     
                     error = "Your Request Is Successfully Sent for Approval!"
-                    return render_template("index.html",error=error)
+                    return render_template("index.html",error=error,cal=cal)
                 else:
                     error=f"Email not sent to Admin due to server issue. But request is sent please send an email manually to {admin_email}."
-                    return render_template("index.html",error=error)
+                    return render_template("index.html",error=error,cal=cal)
             else:
                 error = "Hall Not Available At given Date and Time."
-                return render_template("index.html",error=error)
-            
-        return render_template("index.html",error=error)
+                return render_template("index.html",error=error,cal=cal)
+        
+        return render_template("index.html",error=error,cal=cal)
     else:
         return redirect(url_for('userlogin'))
 
@@ -409,7 +411,7 @@ def admin():
         if session['admin_username']:
             username = session['admin_username']
             if (username.split("+")[0]=='ADMIN'):
-                print("ACCEPTED")
+                # print("ACCEPTED")
                 output1 = db.check_pending()
                 # print(output1)
                 output = []
@@ -421,12 +423,12 @@ def admin():
                 for i in output:
                     j = list(i[0])
                     final.append(j)
-                print(final)
-                print(len(output[0]))
+                # print(final)
+                # print(len(output[0]))
                 for j in final:
                     i = j
-                    print("i value = ",i)
-                    print('i8 = ',i[8])
+                    # print("i value = ",i)
+                    # print('i8 = ',i[8])
                     if i[8]==1300 or i[8]=="1300":
                         print('trigg')
                         i[8] = "1st Half"
@@ -434,7 +436,7 @@ def admin():
                         i[8]= "2nd Half"
                     elif i[8]==1701 or i[8]=="1701":
                         i[8]= "Full Day"
-                print(final)
+                # print(final)
                 return render_template("admintable.html",output=final)
             else:
                 return redirect(url_for('adminlogin'))

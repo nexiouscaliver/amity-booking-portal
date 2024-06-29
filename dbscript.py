@@ -165,6 +165,40 @@ def check_hall(hallid:int , date:str , stime:int , etime:int):   #user
     conn.close()
     return flag
 
+def all_accept_and_pending():
+    conn = sqlite3.connect(dbname)
+    c = conn.cursor()
+    sql='select * from status where state="confirm" or state="pending";'
+    a = c.execute(sql)
+    o = a.fetchall()
+    conn.commit()
+    conn.close()
+    return o
+
+def calender():
+    conn = sqlite3.connect(dbname)
+    c = conn.cursor()
+    sql='select * from status where state="confirm" or state="pending";'
+    a = c.execute(sql)
+    o = a.fetchall()
+    final=[]
+    for i in o:
+        bid = i[0]
+        sql=f'select date,etime from info where bookid={bid};'
+        a = c.execute(sql)
+        f = a.fetchone()
+        final.append(list(f))
+    for i in final:
+        if i[1]==1300 or i[1]=="1300":
+            i[1] = "first-half"
+        elif i[1]==1700 or i[1]=="1700":
+            i[1]= "second-half"
+        elif i[1]==1701 or i[1]=="1701":
+            i[1]= "full"
+    conn.commit()
+    conn.close()
+    return final
+
 def all_status():
     conn = sqlite3.connect(dbname)
     c = conn.cursor()
