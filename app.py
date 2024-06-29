@@ -4,7 +4,6 @@
 import os
 import random
 from time import ctime
-
 from flask import *
 from flask import jsonify, request, send_from_directory
 from flask_mail import Mail, Message
@@ -88,6 +87,15 @@ def gen_code():
         code = gen_code()
     return code
 
+def getduration(etime):
+    if etime==1300 or etime=="1300":
+        etime = "1st Half"
+    elif etime==1700 or etime=="1700":
+        etime= "2nd Half"
+    elif etime==1701 or etime=="1701":
+        etime= "Full Day"
+    return etime
+
 def send_mail(event_name,event_venue,event_date,start_time,end_time,school_name,hoi_name,resource_person_name,resource_person_details,faculty_phone,faculty_name,faculty_email,bid):
     email_body = f"""
     Dear Sir,
@@ -100,6 +108,7 @@ def send_mail(event_name,event_venue,event_date,start_time,end_time,school_name,
     3. Resource Person Name: {resource_person_name}
     4. Resource Person Details: {resource_person_details}
     5. Phone Number of Faculty: {faculty_phone}
+    6. Duration: {getduration(end_time)}
 
     We believe that this event will provide significant value and insights to our attendees, fostering an environment of learning and engagement.
 
@@ -127,6 +136,7 @@ def send_mail(event_name,event_venue,event_date,start_time,end_time,school_name,
     4. Resource Person Details: {resource_person_details}
     5. Phone Number of Faculty: {faculty_phone}
     6. Booking ID : {bid}
+    7. Duration: {getduration(end_time)}
 
     We believe that this event will provide significant value and insights to our attendees, fostering an environment of learning and engagement.
 
@@ -166,6 +176,7 @@ def send_mail2(event_name,event_venue,event_date,start_time,end_time,school_name
     1. School Name: {school_name}
     2. Resource Person Name: {resource_person_name}
     3. Resource Person Details: {resource_person_details}
+    4. Duration: {getduration(end_time)}
     
 
     Your Request has been {status} by the Admin. 
@@ -189,6 +200,7 @@ def send_mail2(event_name,event_venue,event_date,start_time,end_time,school_name
     2. Resource Person Name: {resource_person_name}
     3. Resource Person Details: {resource_person_details}
     4. Booking ID: {bid}
+    5. Duration: {getduration(end_time)}
     
 
     Your Request has been {status} by the Admin. 
@@ -277,7 +289,7 @@ def index():
         if request.method == 'POST':
             
             hall = ['auditorium','seminar','room105','crc']
-            place = ['SchoolName','FacultyName','HodName','EventName','Date','sTime','eTime','Email','Phone','ResourcePersonName','ResourcePersonDetail']
+            place = ['SchoolName','FacultyName','HodName','EventName','date','Duration','Duration','Email','Phone','ResourcePersonName','ResourcePersonDetail']
             final=[]
             loc = ''
             for i in hall:
@@ -289,8 +301,18 @@ def index():
                         loc = i
                     except KeyError as e:
                         print(e)
-            final[5] = trimtime(final[5])
-            final[6] = trimtime(final[6])
+            # final[5] = trimtime(final[5])
+            # final[6] = trimtime(final[6])
+            if (final[5] == "1stHalf"):
+                final[5] = 900
+                final[6] = 1300
+            elif (final[5] == "2ndHalf"):
+                final[5] = 1400
+                final[6] = 1700
+            elif (final[5] == "fullDay"):
+                final[5] = 900
+                final[6] = 1701
+
             hid = hallid(loc)
             
             #print(final)
@@ -319,6 +341,14 @@ def status():
     if session['username']:
         username = session['username']
         output = db.check_request(username)
+        print(output)
+        for i in output:
+            if i[5]==1300 or i[5]=="1300":
+                i[5] = "1st Half"
+            elif i[5]==1700 or i[5]=="1700":
+                i[5]= "2nd Half"
+            elif i[5]==1701 or i[5]=="1701":
+                i[5]= "Full Day"
         return render_template("statuspage.html",output=output)
     else:
         return redirect(url_for('userlogin'))
@@ -331,8 +361,17 @@ def admin():
         event_name = request.form["eventName"]
         event_venue = request.form["venue"]
         event_date = request.form["eventDate"]
-        start_time = request.form["startTime"]
-        end_time = request.form["endTime"]
+        event_dur = request.form["durationofevent"]
+        # end_time = request.form["endTime"]
+        if event_dur == "1st Half":
+            start_time = "900"
+            end_time = "1300"
+        elif event_dur == "2st Half":
+            start_time = "1400"
+            end_time = "1700"
+        elif event_dur == "Full Day":
+            start_time = "900"
+            end_time = "1701"
         school_name = request.form["schoolName"]
         resource_person_name = request.form["resourcePersonName"]
         resource_person_details = request.form["resourcePersonDetail"]
@@ -358,27 +397,41 @@ def admin():
         if session['admin_username']:
             username = session['admin_username']
             if (username.split("+")[0]=='ADMIN'):
-                #print("ACCEPTED")
+                print("ACCEPTED")
                 output1 = db.check_pending()
-                #print(output1)
+                # print(output1)
                 output = []
                 for i in output1:
                     output2 = db.info_fetch(i[0])
                     #output2[0][1] = hallname(output2[0][1])
                     output.append(output2)
-                #print(output)
-                
-                
-                return render_template("admintable.html",output=output)
+                final = []
+                for i in output:
+                    j = list(i[0])
+                    final.append(j)
+                print(final)
+                print(len(output[0]))
+                for j in final:
+                    i = j
+                    print("i value = ",i)
+                    print('i8 = ',i[8])
+                    if i[8]==1300 or i[8]=="1300":
+                        print('trigg')
+                        i[8] = "1st Half"
+                    elif i[8]==1700 or i[8]=="1700":
+                        i[8]= "2nd Half"
+                    elif i[8]==1701 or i[8]=="1701":
+                        i[8]= "Full Day"
+                print(final)
+                return render_template("admintable.html",output=final)
             else:
                 return redirect(url_for('adminlogin'))
         else:
             return redirect(url_for('adminlogin'))
-        
-        
-            
+ 
         return redirect(url_for('adminlogin'))
-    except:
+    except Exception as e:
+        print(e)
         return redirect(url_for('adminlogin'))
 
 @app.route('/login' ,methods=['GET', 'POST'])
@@ -438,6 +491,7 @@ def adminlogin():
         if login.load_admin(username,passwd):
             adname = "ADMIN+"+username
             session['admin_username'] = adname
+            # print("here")
             return redirect(url_for('admin'))
         else:
             error = "Incorrect Credentials!"

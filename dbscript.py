@@ -111,13 +111,19 @@ def check_request(username:str):   #user
     q=[]
     for i in o:
         bid = i[2]
+        # print(bid)
         sql=f'select state from status where bookid={bid}'
+        # print(sql)
         a = c.execute(sql)
         o = a.fetchall()
         status = o[0][0]
+        # print(status)
         sql=f'select * from info where bookid={bid}'
+        # print(sql)
         f = c.execute(sql)
         p = f.fetchall()
+        print(p)
+        # print(p)
         if (status == "confirm"):
             status = 'Confirmed'
         elif (status == "reject"):
@@ -127,9 +133,10 @@ def check_request(username:str):   #user
         l = [bid,p[0][1],p[0][2],p[0][6],p[0][5],p[0][8],status]
         q.append(l)
     for i in q:print(i)
-    return q
     conn.commit()
     conn.close()
+    return q
+    
 
 def check_hall(hallid:int , date:str , stime:int , etime:int):   #user
     conn = sqlite3.connect(dbname)
@@ -154,10 +161,9 @@ def check_hall(hallid:int , date:str , stime:int , etime:int):   #user
         if(endtime>stime):
             flag=False
 
-    return flag
-        
     conn.commit()
     conn.close()
+    return flag
 
 def all_status():
     conn = sqlite3.connect(dbname)
