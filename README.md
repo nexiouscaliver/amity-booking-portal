@@ -44,7 +44,18 @@ Change directory:
 ```sh
 cd amity-booking-portal/
 ```
-
+Create virtual environment :
+```sh
+python -m venv .venv
+```
+Activate virtual environment(linux) :
+```sh
+source .venv/Scripts/activate
+```
+Activate virtual environment(windows) :
+```sh
+.\.venv\Scripts\activate
+```
 Install the dependencies :
 ```sh
 pip install -r requirements.txt
@@ -53,17 +64,14 @@ pip install -r requirements.txt
 
 ## Deployment
 
-Change to directory :
-```sh
-cd amity-booking-portal/
-```
+[run the following steps in above created virtual environment]
 
 Run init script to initialize the database:
 ```sh
 python3 initapp.py
 ```
 
-Start the server on  127.0.0.1:8000 :
+Start the server on  127.0.0.1:8000 (change address and port as needed) :
 ```sh
 flask run -p 8000 -h 127.0.0.1
 ```
