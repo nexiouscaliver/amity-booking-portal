@@ -45,7 +45,8 @@ def trimtime(time:str):
         c = c + i
     return int(c)
 
-def maketime(time:int):
+def maketime(time):
+    time = int(time)
     if len(str(time))==3:
         time = "0"+str(time)
         time = time[:2]+":"+time[2:]
@@ -102,13 +103,13 @@ def send_mail(event_name,event_venue,event_date,start_time,end_time,school_name,
 
     I hope this message finds you well.
 
-    I am writing to request your permission to conduct an event titled "{event_name}" at {event_venue} on {event_date} from {start_time} to {end_time}. Below are the details of the event:
-    1. School Name: {school_name}
-    2. Head of Institution/Director Name: {hoi_name}
-    3. Resource Person Name: {resource_person_name}
-    4. Resource Person Details: {resource_person_details}
-    5. Phone Number of Faculty: {faculty_phone}
-    6. Duration: {getduration(end_time)}
+    I am writing to request your permission to conduct an event titled "{event_name}" at {event_venue} on {event_date} from {maketime(start_time)} to {maketime(end_time)}. Below are the details of the event:
+    • School Name: {school_name}
+    • Head of Institution/Director Name: {hoi_name}
+    • Resource Person Name: {resource_person_name}
+    • Resource Person Details: {resource_person_details}
+    • Phone Number of Faculty: {faculty_phone}
+    • Duration: {getduration(end_time)}
 
     We believe that this event will provide significant value and insights to our attendees, fostering an environment of learning and engagement.
 
@@ -131,14 +132,14 @@ def send_mail(event_name,event_venue,event_date,start_time,end_time,school_name,
 
     I hope this message finds you well.
 
-    I am writing to request your permission to conduct an event titled "{event_name}" at {event_venue} on {event_date} from {start_time} to {end_time}. Below are the details of the event:
-    1. School Name: {school_name}
-    2. Head of Institution/Director Name: {hoi_name}
-    3. Resource Person Name: {resource_person_name}
-    4. Resource Person Details: {resource_person_details}
-    5. Phone Number of Faculty: {faculty_phone}
-    6. Booking ID : {bid}
-    7. Duration: {getduration(end_time)}
+    I am writing to request your permission to conduct an event titled "{event_name}" at {event_venue} on {event_date} from {maketime(start_time)} to {maketime(end_time)}. Below are the details of the event:
+    • School Name: {school_name}
+    • Head of Institution/Director Name: {hoi_name}
+    • Resource Person Name: {resource_person_name}
+    • Resource Person Details: {resource_person_details}
+    • Phone Number of Faculty: {faculty_phone}
+    • Booking ID : {bid}
+    • Duration: {getduration(end_time)}
 
     We believe that this event will provide significant value and insights to our attendees, fostering an environment of learning and engagement.
 
@@ -176,11 +177,11 @@ def send_mail2(event_name,event_venue,event_date,start_time,end_time,school_name
 
     I hope this message finds you well.
 
-    The request for permission to conduct an event titled "{event_name}" at {event_venue} on {event_date} from {start_time} to {end_time}. Below are the details of the event:
-    1. School Name: {school_name}
-    2. Resource Person Name: {resource_person_name}
-    3. Resource Person Details: {resource_person_details}
-    4. Duration: {getduration(end_time)}
+    The request for permission to conduct an event titled "{event_name}" at {event_venue} on {event_date} from {maketime(start_time)} to {maketime(end_time)}. Below are the details of the event:
+    • School Name: {school_name}
+    • Resource Person Name: {resource_person_name}
+    • Resource Person Details: {resource_person_details}
+    • Duration: {getduration(end_time)}
     
 
     Your Request has been {status} by the Admin. 
@@ -201,12 +202,12 @@ def send_mail2(event_name,event_venue,event_date,start_time,end_time,school_name
 
     I hope this message finds you well.
 
-    The request for permission to conduct an event titled "{event_name}" at {event_venue} on {event_date} from {start_time} to {end_time}. Below are the details of the event:
-    1. School Name: {school_name}
-    2. Resource Person Name: {resource_person_name}
-    3. Resource Person Details: {resource_person_details}
-    4. Booking ID: {bid}
-    5. Duration: {getduration(end_time)}
+    The request for permission to conduct an event titled "{event_name}" at {event_venue} on {event_date} from {maketime(start_time)} to {maketime(end_time)}. Below are the details of the event:
+    • School Name: {school_name}
+    • Resource Person Name: {resource_person_name}
+    • Resource Person Details: {resource_person_details}
+    • Booking ID: {bid}
+    • Duration: {getduration(end_time)}
     
 
     Your Request has been {status} by the Admin. 
@@ -302,7 +303,7 @@ def alert():
     print(error)
     return render_template("test1.html",error=error)
 
-@app.route('/index' ,methods=['GET', 'POST'])
+@app.route('/user' ,methods=['GET', 'POST'])
 def index():
     error = None
     if session:
@@ -590,7 +591,32 @@ def usercalender():
     print(output)
     return render_template('calenderuser.html',output=output)
 
-#future
+@app.route('/admin/notification',methods=['GET'])
+def adminnoti():
+    if session:
+        try:
+            username = session['admin_username']
+            output = get_sorted_status()
+            return render_template('adminnotification.html',output=output)
+        except:
+            return render_template('adminnotification.html',error="You have been logged out of Admin. Please Login again.")
+    else:
+        return render_template('adminnotification.html',error="You have been logged out of Admin. Please Login again.")
+
+@app.route('/user/notification',methods=['GET'])
+def usernoti():
+    if session:
+        try:
+            username = session['username']
+            output = get_sorted_status()
+            return render_template('usernotification.html',output=output)
+        except:
+            return render_template('usernotification.html',error="You have been logged out. Please Login again.")
+    else:
+        return render_template('usernotification.html',error="You have been logged out. Please Login again.")
+
+
+#futurescope
 @app.route('/verifyemail/<username>' ,methods=['GET', 'POST'])
 def verifyemail(username):
     # global code_list
