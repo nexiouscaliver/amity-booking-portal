@@ -88,7 +88,7 @@
             margin-bottom: 20px;
         }
         table, th, td {
-            background-color: #b7d4f5;
+            background-color: whitesmoke;
             border: 1px solid ;
         }
         th, td {
@@ -116,12 +116,12 @@
     <header>
         <div class="navbar">
           <div class="logo">
-            <img src="Amity-logo.png" alt="Logo">
-            <img src="name.2.png" alt="Logo">
+            <img src="{{url_for('static',filename='Amity-logo.png')}}" alt="Logo">
+            <img src="{{url_for('static',filename='name.2.png')}}" alt="Logo">
           </div>
           <div class="menu">
-            <a href="{{url_for('homepage')}}">Home</a>
-                <a href="{{url_for('status')}}">Booking Status</a>
+            <a href="{{url_for('admin')}}">Home</a>
+                <a href="{{url_for('adminbooking')}}">All Booking</a>
                 <a href="{{url_for('home')}}">Logout</a>
               </div>
             </a>
@@ -154,39 +154,41 @@
     </div>
     <script>
         const bookings = [
+        {%for i in output%}
             {
-                bookingId: '1',
-                schoolName: 'Aset',
-                eventName: 'Event X',
-                venue: 'Auditorium Hall',
-                eventDate: '2024-06-30',
-                durationofevent: '1st half',
-                resourcePersonName: 'John Doe',
-                resourcePersonDetail: 'Details for John Doe',
-                status: 'ACCEPTED'
+                bookingId: '{{i[0][0][0]}}',
+                schoolName: '{{i[0][0][2]}}',
+                eventName: '{{i[0][0][5]}}',
+                venue: '{{[0,"Auditorium Hall","Seminar Hall","Room No. 105, A2 Building","CRC Conference Room"][i[0][0][1]]}}',
+                eventDate: '{{i[0][0][6]}}',
+                durationofevent: '{{getduration(i[0][0][8])}}',
+                resourcePersonName: '{{i[0][0][11]}}',
+                resourcePersonDetail: '{{i[0][0][12]}}',
+                status: '{{i[1]}}'
             },
-            {
-                bookingId: '3',
-                schoolName: 'Aset',
-                eventName: 'Event X',
-                venue: 'Auditorium Hall',
-                eventDate: '2024-06-30',
-                durationofevent: '1st half',
-                resourcePersonName: 'John Doe',
-                resourcePersonDetail: 'Details for John Doe',
-                status: 'Rejected'
-            },
-            {
-                bookingId: '2',
-                schoolName: 'Aset',
-                eventName: 'Event X',
-                venue: 'Auditorium Hall',
-                eventDate: '2024-06-30',
-                durationofevent: '1st half',
-                resourcePersonName: 'John Doe',
-                resourcePersonDetail: 'Details for John Doe',
-                status: 'ACCEPTED'
-            }
+            {%endfor%} 
+            // {
+            //     bookingId: '3',
+            //     schoolName: 'Aset',
+            //     eventName: 'Event X',
+            //     venue: 'Auditorium Hall',
+            //     eventDate: '2024-06-30',
+            //     durationofevent: '1st half',
+            //     resourcePersonName: 'John Doe',
+            //     resourcePersonDetail: 'Details for John Doe',
+            //     status: 'Rejected'
+            // },
+            // {
+            //     bookingId: '2',
+            //     schoolName: 'Aset',
+            //     eventName: 'Event X',
+            //     venue: 'Auditorium Hall',
+            //     eventDate: '2024-06-30',
+            //     durationofevent: '1st half',
+            //     resourcePersonName: 'John Doe',
+            //     resourcePersonDetail: 'Details for John Doe',
+            //     status: 'ACCEPTED'
+            // }
             // Add more bookings here as needed
         ];
 
