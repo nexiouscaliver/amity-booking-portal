@@ -293,7 +293,7 @@
             <a href="#notifications" class="menu-item">
               <i class="fas fa-bell"></i> <!-- Notification icon -->
               Notifications
-                <a href="{{url_for('status')}}">All Booking</a>
+                <a href="{{url_for('adminbooking')}}">All Booking</a>
                 <a href="{{url_for('home')}}">Logout</a>
               </div>
             </a>
@@ -327,16 +327,16 @@
                 {% for i in output %}
                 
                 <tr>
-                    <td>{{ i[0][0] }}</td> 
-                    <td>{{ i[0][2] }}</td> 
-                    <td>{{ i[0][5] }}</td> 
-                    <td>{{ [0,"Auditorium Hall","Seminar Hall","Room No. 105, A2 Building","CRC Conference Room"][i[0][1]] }}</td> 
-                    <td>{{ i[0][6] }}</td> 
-                    <!-- <td>{{ i[0][7] }}</td> stime -->
-                    <!-- <td>{{ i[0][8] }}</td> etime -->
-                    <td>{{ i[0][11] }}</td> 
-                    <!-- <td>{{ i[0][12] }}</td> rpdetials -->
-                    <td><button onclick="openScheduleForm('{{ i[0][0] }}', '{{ i[0][2] }}', '{{ i[0][5] }}', '{{ [0,"Auditorium Hall","Seminar Hall","Room No. 105, A2 Building","CRC Conference Room"][i[0][1]] }}', '{{ i[0][6] }}', '{{ make_time(i[0][7]) }}', '{{ make_time(i[0][8]) }}', '{{ i[0][11] }}', '{{ i[0][12] }}', '{{ i[0][9] }}')" class="schedule-button">Schedule</button></td>
+                    <td>{{ i[0] }}</td> 
+                    <td>{{ i[2] }}</td> 
+                    <td>{{ i[5] }}</td> 
+                    <td>{{ [0,"Auditorium Hall","Seminar Hall","Room No. 105, A2 Building","CRC Conference Room"][i[1]] }}</td> 
+                    <td>{{ i[6] }}</td> 
+                    <!-- <td>{{ i[7] }}</td> stime -->
+                    <!-- <td>{{ i[8] }}</td> etime -->
+                    <td>{{ i[11] }}</td> 
+                    <!-- <td>{{ i[12] }}</td> rpdetials -->
+                    <td><button onclick="openScheduleForm('{{ i[0] }}', '{{ i[2] }}', '{{ i[5] }}', '{{ [0,"Auditorium Hall","Seminar Hall","Room No. 105, A2 Building","CRC Conference Room"][i[1]] }}', '{{ i[6] }}', '{{ (i[8]) }}', '{{ i[11] }}', '{{ i[12] }}', '{{ i[9] }}')" class="schedule-button">Schedule</button></td>
                 </tr>
                 {% endfor %}
             </tbody>

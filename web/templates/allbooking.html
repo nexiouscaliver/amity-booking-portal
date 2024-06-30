@@ -7,6 +7,12 @@
   <title>All Bookings - Hall Management System</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static',filename='apple-touch-icon.png') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static',filename='favicon-32x32.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static',filename='favicon-16x16.png') }}">
+    <link rel="manifest" href="{{ url_for('static',filename='site.webmanifest') }}">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
   <style>
     body {
       background-color: aliceblue;
@@ -237,11 +243,11 @@
   <header>
     <div class="navbar">
       <div class="logo">
-        <img src="Amity-logo.png" alt="Logo">
-        <img src="name.2.png" alt="Logo">
+        <img src="{{url_for('static',filename='Amity-logo.png')}}" alt="Logo">
+        <img src="{{url_for('static',filename='name.2.png')}}" alt="Logo">
       </div>
       <div class="menu">
-        <a href="{{url_for('status')}}">Home</a>
+        <a href="{{url_for('admin')}}">Home</a>
         <a href="#calendar" class="menu-item">
           <i class="fas fa-calendar-alt"></i> <!-- Calendar icon -->
           Calendar
@@ -261,7 +267,7 @@
     <div class="dropdown">
       <button class="dropbtn">Sort by Status</button>
       <div class="dropdown-content">
-        <a href="#" onclick="sortBookings('')">All</a>     <!-- kadia refresh  page-->
+        <a href="#" onclick="filterAndSortBookings('', '');" value="">All</a>     <!-- kadia refresh  page : filterAndSortBookings('', '');-->
         <a href="#" onclick="sortBookings('PENDING')">Pending</a>
         <a href="#" onclick="sortBookings('REJECTED')">Rejected</a>
         <a href="#" onclick="sortBookings('ACCEPTED')">Accepted</a>
@@ -280,87 +286,100 @@
 
     <!-- Export button -->
     <button onclick="exportToExcel()">Export to Excel</button>
-
+    
     <script>
-
-        
       const bookings = [
+        {%for i in output%}
         {
-          bookingId: '1',
-          schoolName: ' Aset',
-          eventName: 'Event X',
-          venue: 'Auditorium Hall',
-          eventDate: '2024-06-30',
-          durationofevent: '1st half',
-          resourcePersonName: 'John Doe',
-          resourcePersonDetail: 'Details for John Doe',
-          facultyEmail: 'john.doe@example.com',
-          status: 'ACCEPTED'
-        },
-        {
-          bookingId: '2',
-          schoolName: 'Asco',
-          eventName: 'Event Y',
-          venue: 'Seminar Hall',
-          eventDate: '2024-07-01',
-          durationofevent: '2st half',
-          resourcePersonName: 'Jane Smith',
-          resourcePersonDetail: 'Details for Jane Smith',
-          facultyEmail: 'jane.smith@example.com',
-          status: 'REJECTED'
-        }
-,
-        {
-            bookingId: '3',
-            schoolName: 'Ait',
-            eventName: 'Science Exhibition',
-            venue: 'Seminar Hall',
-            eventDate: '2024-09-10',
-            durationofevent: 'Full day',
-            resourcePersonName: 'Priya Sharma',
-            resourcePersonDetail: 'Details for Priya Sharma',
-            facultyEmail: 'priya.sharma@gmail.com',
-            status: 'ACCEPTED'
-          },
-          {
-            bookingId: '4',
-            schoolName: 'Aset',
-            eventName: 'Inter-School Debate Competition',
-            venue: 'crc conference',
-            eventDate: '2024-07-20',
-            durationofevent: '2st half',
-            resourcePersonName: 'Rahul Khanna',
-            resourcePersonDetail: 'Details for Rahul Khanna',
-            facultyEmail: 'rahul.khanna@gmail.com',
-            status: 'PENDING'
-          },
-          {
-            bookingId: '5',
-            schoolName: 'Abs',
-            eventName: 'Annual Sports Day',
-            venue: 'Seminar Hall',
-            eventDate: '2024-10-05',
-            durationofevent: '2st half',
-            resourcePersonName: 'Deepika jha',
-            resourcePersonDetail: 'Details for Deepika Rao',
-            facultyEmail: 'deepika.jha@gmail.com',
-            status: 'REJECTED'
-          },
-          {
-            bookingId: '6',
-            schoolName: 'Aset',
-            eventName: 'Music Concert',
-            venue: 'Room105',
-            eventDate: '2024-09-15',
-            durationofevent: 'full day',
-            resourcePersonName: 'Ananya Reddy',
-            resourcePersonDetail: 'Details for Ananya Reddy',
-            facultyEmail: 'ananya.reddy@gmail.com',
-            status: 'PENDING'
-          }
+          bookingId: '{{i[0][0][0]}}',
+          schoolName: ' {{i[0][0][2]}}',
+          eventName: '{{i[0][0][5]}}',
+          venue: '{{[0,"Auditorium Hall","Seminar Hall","Room No. 105, A2 Building","CRC Conference Room"][i[0][0][1]]}}',
+          eventDate: '{{i[0][0][6]}}',
+          durationofevent: '{{getduration(i[0][0][8])}}',
+          resourcePersonName: '{{i[0][0][11]}}',
+          resourcePersonDetail: '{{i[0][0][12]}}',
+          facultyEmail: '{{i[0][0][9]}}',
+          status: '{{i[1]}}'
+        }, 
+        {%endfor%} 
+        ];
+//         {
+//           bookingId: '1',
+//           schoolName: ' Aset',
+//           eventName: 'Event X',
+//           venue: 'Auditorium Hall',
+//           eventDate: '2024-06-30',
+//           durationofevent: '1st half',
+//           resourcePersonName: 'John Doe',
+//           resourcePersonDetail: 'Details for John Doe',
+//           facultyEmail: 'john.doe@example.com',
+//           status: 'ACCEPTED'
+//         },
+//         {
+//           bookingId: '2',
+//           schoolName: 'Asco',
+//           eventName: 'Event Y',
+//           venue: 'Seminar Hall',
+//           eventDate: '2024-07-01',
+//           durationofevent: '2st half',
+//           resourcePersonName: 'Jane Smith',
+//           resourcePersonDetail: 'Details for Jane Smith',
+//           facultyEmail: 'jane.smith@example.com',
+//           status: 'REJECTED'
+//         }
+// ,
+//         {
+//             bookingId: '3',
+//             schoolName: 'Ait',
+//             eventName: 'Science Exhibition',
+//             venue: 'Seminar Hall',
+//             eventDate: '2024-09-10',
+//             durationofevent: 'Full day',
+//             resourcePersonName: 'Priya Sharma',
+//             resourcePersonDetail: 'Details for Priya Sharma',
+//             facultyEmail: 'priya.sharma@gmail.com',
+//             status: 'ACCEPTED'
+//           },
+//           {
+//             bookingId: '4',
+//             schoolName: 'Aset',
+//             eventName: 'Inter-School Debate Competition',
+//             venue: 'crc conference',
+//             eventDate: '2024-07-20',
+//             durationofevent: '2st half',
+//             resourcePersonName: 'Rahul Khanna',
+//             resourcePersonDetail: 'Details for Rahul Khanna',
+//             facultyEmail: 'rahul.khanna@gmail.com',
+//             status: 'PENDING'
+//           },
+//           {
+//             bookingId: '5',
+//             schoolName: 'Abs',
+//             eventName: 'Annual Sports Day',
+//             venue: 'Seminar Hall',
+//             eventDate: '2024-10-05',
+//             durationofevent: '2st half',
+//             resourcePersonName: 'Deepika jha',
+//             resourcePersonDetail: 'Details for Deepika Rao',
+//             facultyEmail: 'deepika.jha@gmail.com',
+//             status: 'REJECTED'
+//           },
+//           {
+//             bookingId: '6',
+//             schoolName: 'Aset',
+//             eventName: 'Music Concert',
+//             venue: 'Room105',
+//             eventDate: '2024-09-15',
+//             durationofevent: 'full day',
+//             resourcePersonName: 'Ananya Reddy',
+//             resourcePersonDetail: 'Details for Ananya Reddy',
+//             facultyEmail: 'ananya.reddy@gmail.com',
+//             status: 'PENDING'
+//           }
           
         // Add more booking objects as needed
-      ];
+      // ];
 
       function displayBookings(bookings) {
         const bookingList = document.getElementById('bookingList');
@@ -477,7 +496,10 @@ function filterAndSortBookings(statusFilter, searchTerm) {
   // Event listener for sorting dropdown
   document.querySelectorAll('.dropdown-content a').forEach(link => {
     link.addEventListener('click', function() {
-      const status = this.textContent.toUpperCase();
+      var status = this.textContent.toUpperCase();
+      // console.log(status)
+      if(status=="ALL"){status = ""}
+      // console.log(status)
       filterAndSortBookings(status, '');
     });
   });
