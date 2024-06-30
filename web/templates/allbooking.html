@@ -108,7 +108,7 @@
     }
 
     table {
-      background-color: white;
+      background-color: whitesmoke;
       width: 100%;
       border-collapse: collapse;
       margin-bottom: 20px;
@@ -139,7 +139,7 @@
     }
 
     th {
-      background-color: #2CA58D;
+      background-color: #04172b;
       color: #fff;
     }
 
@@ -248,11 +248,11 @@
       </div>
       <div class="menu">
         <a href="{{url_for('admin')}}">Home</a>
-        <a href="#calendar" class="menu-item">
+        <a href="{{url_for('admincalender')}}" class="menu-item">
           <i class="fas fa-calendar-alt"></i> <!-- Calendar icon -->
           Calendar
         </a>
-        <a href="#notifications" class="menu-item">
+        <a href="{{url_for('adminnoti')}}" class="menu-item">
           <i class="fas fa-bell"></i> <!-- Notification icon -->
           Notifications
         </a>
@@ -292,7 +292,7 @@
         {%for i in output%}
         {
           bookingId: '{{i[0][0][0]}}',
-          schoolName: ' {{i[0][0][2]}}',
+          schoolName: '{{i[0][0][2]}}',
           eventName: '{{i[0][0][5]}}',
           venue: '{{[0,"Auditorium Hall","Seminar Hall","Room No. 105, A2 Building","CRC Conference Room"][i[0][0][1]]}}',
           eventDate: '{{i[0][0][6]}}',

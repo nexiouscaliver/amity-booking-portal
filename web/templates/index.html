@@ -237,9 +237,9 @@ td[data-day]:hover {
           <i class="fas fa-calendar-alt"></i> <!-- Calendar icon -->
           Calendar
         </a>
-        <a href="#notifications" class="menu-item">
+        <a href="{{url_for('usernoti')}}" class="menu-item">
           <i class="fas fa-bell"></i> <!-- Notification icon -->
-          Notifications
+          Hall Updates
             <a href="{{url_for('status')}}">Booking Status</a>
             <a href="{{url_for('home')}}">Logout</a>
           </div>
@@ -339,7 +339,7 @@ td[data-day]:hover {
               </div>
               <div class="form-group">
                 <label for="auditoriumdate">Date of Event:</label>
-                <input type="date" class="form-control" id="auditoriumdate" name="auditoriumdate" required onchange="updateDayOfWeek('auditoriumdate', 'auditoriumday'); updateCalendarColor('auditoriumdate')">
+                <input type="date" class="form-control" id="auditoriumdate" name="auditoriumdate" required onchange="updateDayOfWeek('auditoriumdate', 'auditoriumday'); updateCalendarColor('auditoriumdate','auditoriumDuration')">
               </div>
               <div class="form-group">
                 <label for="auditoriumday">Day of Event:</label>
@@ -361,7 +361,7 @@ td[data-day]:hover {
                 <label for="auditoriumPhone">Event Coordinator's Phone Number:</label>
                 <input type="tel" class="form-control" id="auditoriumPhone" name="auditoriumPhone" placeholder="Enter your phone number" required>
               </div>
-              <button type="submit" class="btn btn-primary">Submit</button>
+              <button type="submit" class="btn btn-primary" id="submitmain">Submit</button>
             </form>
           </div>
         </div>
@@ -404,7 +404,7 @@ td[data-day]:hover {
               </div>
               <div class="form-group">
                 <label for="seminardate">Date of Event:</label>
-                <input type="date" class="form-control" id="seminardate" name="seminardate" required onchange="updateDayOfWeek('seminardate', 'seminarday'); updateCalendarColor('seminardate')">
+                <input type="date" class="form-control" id="seminardate" name="seminardate" required onchange="updateDayOfWeek('seminardate', 'seminarday'); updateCalendarColor('seminardate','seminarDuration')">
               </div>
               <div class="form-group">
                 <label for="seminarday">Day of Event:</label>
@@ -427,7 +427,7 @@ td[data-day]:hover {
                 <label for="seminarPhone">Event Coordinator's Phone Number:</label>
                 <input type="tel" class="form-control" id="seminarPhone" name="seminarPhone" placeholder="Enter your phone number" required>
               </div>
-              <button type="submit" class="btn btn-primary">Submit</button>
+              <button type="submit" class="btn btn-primary" id="submitmain">Submit</button>
             </form>
           </div>
         </div>
@@ -470,7 +470,7 @@ td[data-day]:hover {
               </div>
               <div class="form-group">
                 <label for="room105date">Date of Event:</label>
-                <input type="date" class="form-control" id="room105date" name="room105date" required onchange="updateDayOfWeek('room105date', 'room105day'); updateCalendarColor('room105date')">
+                <input type="date" class="form-control" id="room105date" name="room105date" required onchange="updateDayOfWeek('room105date', 'room105day'); updateCalendarColor('room105date','room105Duration')">
               </div>
               <div class="form-group">
                 <label for="room105day">Day of Event:</label>
@@ -492,7 +492,7 @@ td[data-day]:hover {
                 <label for="room105Phone">Event Coordinator's Phone Number:</label>
                 <input type="tel" class="form-control" id="room105Phone" name="room105Phone" placeholder="Enter your phone number" required>
               </div>
-              <button type="submit" class="btn btn-primary">Submit</button>
+              <button type="submit" class="btn btn-primary" id="submitmain">Submit</button>
             </form>
           </div>
         </div>
@@ -536,7 +536,7 @@ td[data-day]:hover {
              
               <div class="form-group">
                 <label for="crcdate">Date of Event:</label>
-                <input type="date" class="form-control" id="crcdate" name="crcdate" required onchange="updateDayOfWeek('crcdate', 'crcday'); updateCalendarColor('crcdate')">
+                <input type="date" class="form-control" id="crcdate" name="crcdate" required onchange="updateDayOfWeek('crcdate', 'crcday'); updateCalendarColor('crcdate','crcDuration')">
               </div>
     
               <div class="form-group">
@@ -559,7 +559,7 @@ td[data-day]:hover {
                 <label for="crcPhone">Event Coordinator's Phone Number:</label>
                 <input type="tel" class="form-control" id="crcPhone" name="crcPhone" placeholder="Enter your phone number" required>
               </div>
-              <button type="submit" class="btn btn-primary">Submit</button>
+              <button type="submit" class="btn btn-primary" id="submitmain">Submit</button>
             </form>
           </div>
         </div>
@@ -592,12 +592,20 @@ td[data-day]:hover {
         dayInput.value = date.toLocaleDateString('en-US', options);
       }
 
-     
-
+    function disablebutton(){
+      document.getElementById("submitmain").disabled = true;
+    }
+    function enablebutton(){
+      document.getElementById("submitmain").disabled = false;
+    }
     
-    function updateCalendarColor(dateInputId) {
+    function updateCalendarColor(dateInputId , givendateid) {
+        
         const dateInput = document.getElementById(dateInputId);
         const dateValue = dateInput.value;
+        const givendate = document.getElementById(givendateid);
+        const givenValue = givendate.value;
+        // console.log(givenValue);
     
         // Hard-coded logic for determining booking status based on date
         const bookingStatus = getBookingStatus(dateValue);
@@ -605,15 +613,29 @@ td[data-day]:hover {
         switch (bookingStatus) {
             case 'full':
                 dateInput.style.backgroundColor = '#ff9999'; // Red for fully booked
+                // disablebutton();
                 break;
             case 'first-half':
                 dateInput.style.backgroundColor = '#ffc966'; // Orange for first half booked
+                // if (givenValue==='first-half') {
+                //   disablebutton();
+                // }
+                // else{
+                //   enablebutton();
+                // }
                 break;
             case 'second-half':
                 dateInput.style.backgroundColor = '#99ccff'; // Blue for second half booked
+                // if (givenValue==='second-half') {
+                //   disablebutton();
+                // }
+                // else{
+                //   enablebutton();
+                // }
                 break;
             default:
                 dateInput.style.backgroundColor = '#b3ffb3'; // Green for not booked
+                // enablebutton();
         }
     }
     
