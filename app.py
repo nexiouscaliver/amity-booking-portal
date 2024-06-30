@@ -578,6 +578,18 @@ def admingetreject(bookid):
         error=f"Booking Number: {bookid}. Request to server Failed. Please Contact Technical Team if Problem Presists"
         return render_template('closetab.html',error=error)
 
+@app.route('/admin/calender',methods=['GET'])
+def admincalender():
+    output = db.calendermain()
+    print(output)
+    return render_template('calenderadmin.html',output=output)
+
+@app.route('/user/calender',methods=['GET'])
+def usercalender():
+    output = db.calendermain()
+    print(output)
+    return render_template('calenderuser.html',output=output)
+
 #future
 @app.route('/verifyemail/<username>' ,methods=['GET', 'POST'])
 def verifyemail(username):

@@ -199,6 +199,40 @@ def calender():
     conn.close()
     return final
 
+def calendermain():
+    conn = sqlite3.connect(dbname)
+    c = conn.cursor()
+    sql='select * from status where state="confirm" or state="pending";'
+    a = c.execute(sql)
+    o = a.fetchall()
+    final=[]
+    for i in o:
+        bid = i[0]
+        sql=f'select date,etime,schoolname,hallid from info where bookid={bid};'
+        a = c.execute(sql)
+        f = a.fetchone()
+        final.append(list(f))
+    for i in final:
+        print("hid=",i[3])
+        if i[1]==1300 or i[1]=="1300":
+            i[1] = "first-half-booked"
+        elif i[1]==1700 or i[1]=="1700":
+            i[1]= "second-half-booked"
+        elif i[1]==1701 or i[1]=="1701":
+            i[1]= "full-booked"
+        if i[3]==1 or i[3]=="1":
+            i[3]="Auditorium"
+        elif i[3]==2 or i[3]=="2":
+            i[3]="Seminar Hall"
+        elif i[3]==3 or i[3]=="3":
+            i[3]="Room No. 105, A2 Building"
+        elif i[3]==4 or i[3]=="4":
+            i[3]="CRC Conference Room"
+        
+    conn.commit()
+    conn.close()
+    return final
+
 def all_status():
     conn = sqlite3.connect(dbname)
     c = conn.cursor()
