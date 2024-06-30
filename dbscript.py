@@ -205,6 +205,7 @@ def calendermain():
     sql='select * from status where state="confirm" or state="pending";'
     a = c.execute(sql)
     o = a.fetchall()
+    print(o)
     final=[]
     for i in o:
         bid = i[0]
@@ -213,7 +214,6 @@ def calendermain():
         f = a.fetchone()
         final.append(list(f))
     for i in final:
-        print("hid=",i[3])
         if i[1]==1300 or i[1]=="1300":
             i[1] = "first-half-booked"
         elif i[1]==1700 or i[1]=="1700":
@@ -228,7 +228,15 @@ def calendermain():
             i[3]="Room No. 105, A2 Building"
         elif i[3]==4 or i[3]=="4":
             i[3]="CRC Conference Room"
-        
+    for i in final:
+        for j in (final[final.index(i):]):
+            if(i[0]==j[0] and i[3]==j[3]):
+                if(i[1]=="first-half-booked"and j[1]=="second-half-booked"):
+                    i[1] = "full-booked"
+                    j[1] = "full-booked"
+                if(i[1]=="second-half-booked"and j[1]=="first-half-booked"):
+                    i[1] = "full-booked"
+                    j[1] = "full-booked"
     conn.commit()
     conn.close()
     return final
