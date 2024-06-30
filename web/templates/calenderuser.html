@@ -51,8 +51,8 @@
           .navbar .menu {
             display: left 20;
             gap: 20px;
-            align-items: 
-          }
+            align-items:
+          ;}
           
           .navbar .menu a {
             color: var(--white);
@@ -258,12 +258,12 @@
             <header>
                 <div class="navbar">
                   <div class="logo">
-                    <img src="Amity-logo.png" alt="Logo">
-                    <img src="name.2.png" alt="Logo">
+                    <img src="{{url_for('static',filename='Amity-logo.png')}}" alt="Logo">
+                    <img src="{{url_for('static',filename='name.2.png')}}" alt="Logo">
                   </div>
                   <div class="menu">
                     
-                        <a href="{{url_for('status')}}">Booking Status</a>
+                        <a href="{{url_for('index')}}">Home</a>
                         <a href="{{url_for('home')}}">Logout</a>
                       </div>
                     </a>
@@ -324,10 +324,13 @@
                     let currentDate = new Date();
             
                     const bookingData = {
-                        '2024-06-01': {status: 'full-booked', school: 'School A', event: 'Event A'},
-                        '2024-06-03': {status: 'first-half-booked', school: 'School C', event: 'Event C'},
-                        '2024-06-04': {status: 'second-half-booked', school: 'School D', event: 'Event D'},
-                        '2024-06-05': {status: 'full-booked', school: 'School E', event: 'Event E'},
+                        {%for i in output%}
+                        '{{i[0]}}': {status: '{{i[1]}}', school: '{{i[2]}}', event: '{{i[3]}}'},
+                        {%endfor%}
+                        // '2024-06-01': {status: 'full-booked', school: 'School A', event: 'Event A'},
+                        // '2024-06-03': {status: 'first-half-booked', school: 'School C', event: 'Event C'},
+                        // '2024-06-04': {status: 'second-half-booked', school: 'School D', event: 'Event D'},
+                        // '2024-06-05': {status: 'full-booked', school: 'School E', event: 'Event E'},
                         // Add more dates as needed
                     };
             

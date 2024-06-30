@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking Calendar</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: aliceblue;
+            margin: 0;
+            font-family: Arial, sans-serif;
+          }
+       
+          
+          :root {
+            --primary-color: #04172b;
+            --secondary-color: #061b31;
+            --white: #ffffff;
+            --gray: #6c757d;
+          }
+          
+          .navbar {
+            background-color: var(--primary-color);
+            display: flex;
+            justify-content: space-evenly; /* maing the space evenly*/
+            align-items: center;
+            padding: 10px 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+          
+          .navbar .logo {
+            display: flex;
+            align-items: center;
+          }
+          
+          .navbar .logo img {
+            width: fit-content;
+            height: 40px;
+            margin-right: 10px;
+          }
+          
+          .navbar .logo a {
+            color: var(--white);
+            font-size: 24px;
+            text-decoration: none;
+            font-weight: bold;
+          }
+          
+          .navbar .menu {
+            display: left 20;
+            gap: 20px;
+            align-items:
+          ;}
+          
+          .navbar .menu a {
+            color: var(--white);
+            text-decoration: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: background-color 0.3s, box-shadow 0.3s;
+            font-weight: bold;
+          }
+          
+          .navbar .menu a:hover {
+            background-color: var(--secondary-color);
+            transform: scale(1.05);
+            box-shadow: 0 0 0 2px aliceblue; /* it Enhance the shadow */
+          }
+          
+          .navbar .icon {
+            font-size: 20px;
+            color: var(--white);
+            padding: 10px;
+            cursor: pointer;
+            font-weight: bold;
+            position: relative;
+          }
+
+          /*for calender*/
+        .calendar-container {
+            background: #42275a; /* fallback for old browsers */
+          background: -webkit-linear-gradient(to right, #42275a, #734b6d); /* Chrome 10-25, Safari 5.1-6 */
+          background: linear-gradient(to right, #42275a, #734b6d); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            width: 80%; /* Adjusted to cover 60% of the screen */
+            height:auto;
+            margin: 20px auto; /* Center the container horizontally with margin auto */
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        
+        
+            .calendar-nav {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 10px 20px;
+                background-image: radial-gradient( circle farthest-corner at 10% 20%,  rgba(100,43,115,1) 0%, rgba(4,0,4,1) 90% );
+                color: white; /* Tailwind gray-400 */
+            }
+        
+            .calendar-nav button {
+                background: none;
+                border: none;
+                color: white; /* Tailwind gray-400 */
+                font-size: 20px;
+                cursor: pointer;
+                padding: 5px 10px;
+                transition: background-color 0.3s;
+            }
+        
+            .calendar-nav button:hover {
+                background-color: rgba(255, 255, 255, 0.1);
+                border-radius: 4px;
+            }
+        
+            .calendar-nav span {
+                font-size: 20px;
+                font-weight: bold;
+            }
+        /*changes done here*/
+            .calendar-header {
+                display: grid;
+                grid-template-columns: repeat(7, 1fr);
+                background-image: radial-gradient( circle farthest-corner at 10% 20%,  rgba(100,43,115,1) 0%, rgba(4,0,4,1) 90% ); /* Tailwind gray-700 */
+                color: white; /* Tailwind gray-400 */
+                text-align: center;
+                padding: 10px 0;
+                font-weight: bold;
+            }
+       /* changes done here */
+            .calendar {
+                display: grid;
+                grid-template-columns: repeat(7, 1fr);
+                gap: 1px;
+                background: #42275a; /* fallback for old browsers */
+          background: -webkit-linear-gradient(to right, #42275a, #734b6d); /* Chrome 10-25, Safari 5.1-6 */
+          background: linear-gradient(to right, #42275a, #734b6d);/* Tailwind gray-900 */
+            }
+        /*changes done here*/
+            .day {
+                width: 100%;
+                padding: 10px;
+                box-sizing: border-box;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                cursor: pointer;
+                background-color: #68d391; /* Tailwind green-400 */
+                color: #1a202c;
+                border-radius: 100px;
+                transition: box-shadow 0.3s;
+            }
+        
+            .day:hover {
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            }
+        
+            .full-booked {
+                background-color: #e53e3e; /* Tailwind red-600 */
+            }
+        
+            .not-booked {
+                background-color: #68d391; /* Tailwind green-400 */
+            }
+        
+            .first-half-booked {
+                background-color: #ed8936; /* Tailwind orange-500 */
+                color: #1a202c; /* Tailwind gray-900 */
+            }
+        
+            .second-half-booked {
+                background-color: #4299e1; /* Tailwind blue-400 */
+                color: #1a202c; /* Tailwind gray-900 */
+            }
+        
+            .day.hidden {
+                visibility: hidden;
+            }
+        
+            .event-info {
+                font-size: 12px;
+                margin-top: 4px;
+                text-align: center;
+            }
+            
+            .legend {
+                display: flex;
+                justify-content: space-around;
+                padding: 10px;
+                margin-top: 20px;
+                 background-image: radial-gradient( circle farthest-corner at 10% 20%,  rgba(100,43,115,1) 0%, rgba(4,0,4,1) 90% );; /* Tailwind gray-800 */
+                border-radius: 8px;
+                width: 100%;
+                color:white;
+                
+            }
+        
+            .legend-item {
+                display: flex;
+                align-items: center;
+            }
+        
+            .legend-color {
+                width: 20px;
+                height: 20px;
+                border-radius: 4px;
+                margin-right: 8px;
+            }
+        
+            .full-booked-legend {
+                background-color: #e53e3e; /* Tailwind red-600 */
+            }
+        
+            .not-booked-legend {
+                background-color: #68d391; /* Tailwind green-400 */
+            }
+        
+            .first-half-booked-legend {
+                background-color: #ed8936; /* Tailwind orange-500 */
+            }
+        
+            .second-half-booked-legend {
+                background-color: #4299e1; /* Tailwind blue-400 */
+            }
+        
+            @media (max-width: 640px) {
+                .calendar-header, .calendar {
+                    grid-template-columns: repeat(3, 1fr);
+                }
+        
+                .day {
+                    font-size: 14px;
+                    padding: 5px;
+                }
+            }
+        
+            @media (max-width: 480px) {
+                .calendar-header, .calendar {
+                    grid-template-columns: repeat(2, 1fr);
+                }
+        
+                .day {
+                    font-size: 12px;
+                    padding: 3px;
+                }
+            }
+        </style>
+        </head>
+        <body>
+            <header>
+                <div class="navbar">
+                  <div class="logo">
+                    <img src="{{url_for('static',filename='Amity-logo.png')}}" alt="Logo">
+                    <img src="{{url_for('static',filename='name.2.png')}}" alt="Logo">
+                  </div>
+                  <div class="menu">
+                    
+                        <a href="{{url_for('admin')}}">Home</a>
+                        <a href="{{url_for('home')}}">Logout</a>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+              </header>
+              
+              <div class="calendar-container">
+                <div class="calendar-nav">
+                    <button id="prevMonth">&lt;</button>
+                    <span id="monthYear"></span>
+                    <button id="nextMonth">&gt;</button>
+                </div>
+                <div class="flex justify-center mb-4">
+                    <select id="monthSelect" class="mx-2 p-2 bg-gray-700 text-gray-400 rounded">
+                        <!-- Options will be populated by JavaScript -->
+                    </select>
+                    <input type="date" id="dateSearch" class="p-2 bg-gray-700 text-gray-400 rounded">
+                </div>
+                <div class="calendar-header">
+                    <div>Sun</div>
+                    <div>Mon</div>
+                    <div>Tue</div>
+                    <div>Wed</div>
+                    <div>Thu</div>
+                    <div>Fri</div>
+                    <div>Sat</div>
+                </div>
+                <div class="calendar" id="calendar"></div>
+                <div class="legend">
+                    <div class="legend-item">
+                        <div class="legend-color full-booked-legend"></div>
+                        <div>Full Booked</div>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color not-booked-legend"></div>
+                        <div>Not Booked</div>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color first-half-booked-legend"></div>
+                        <div>First Half Booked</div>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color second-half-booked-legend"></div>
+                        <div>Second Half Booked</div>
+                    </div>
+                </div>
+            </div>
+            <script>
+                document.addEventListener('DOMContentLoaded', () => {
+                    const calendar = document.getElementById('calendar');
+                    const monthYearDisplay = document.getElementById('monthYear');
+                    const prevMonthButton = document.getElementById('prevMonth');
+                    const nextMonthButton = document.getElementById('nextMonth');
+                    const monthSelect = document.getElementById('monthSelect');
+                    const dateSearch = document.getElementById('dateSearch');
+            
+                    let currentDate = new Date();
+            
+                    const bookingData = {
+                        {%for i in output%}
+                        '{{i[0]}}': {status: '{{i[1]}}', school: '{{i[2]}}', event: '{{i[3]}}'},
+                        {%endfor%}
+                        // '2024-06-01': {status: 'full-booked', school: 'School A', event: 'Event A'},
+                        // '2024-06-03': {status: 'first-half-booked', school: 'School C', event: 'Event C'},
+                        // '2024-06-04': {status: 'second-half-booked', school: 'School D', event: 'Event D'},
+                        // '2024-06-05': {status: 'full-booked', school: 'School E', event: 'Event E'},
+                        // Add more dates as needed
+                    };
+            
+                    const updateCalendar = () => {
+                        calendar.innerHTML = '';
+                        const year = currentDate.getFullYear();
+                        const month = currentDate.getMonth();
+                        const firstDay = new Date(year, month, 1).getDay();
+                        const daysInMonth = new Date(year, month + 1, 0).getDate();
+            
+                        monthYearDisplay.textContent = `${currentDate.toLocaleString('default', { month: 'long' })} ${year}`;
+            
+                        // Fill initial empty slots
+                        for (let i = 0; i < firstDay; i++) {
+                            const emptyDay = document.createElement('div');
+                            emptyDay.classList.add('day', 'hidden');
+                            calendar.appendChild(emptyDay);
+                        }
+            
+                        // Fill days of the month
+                        for (let day = 1; day <= daysInMonth; day++) {
+                            const dateKey = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+                            const dayElement = document.createElement('div');
+                            dayElement.classList.add('day');
+                            dayElement.textContent = day;
+            
+                            const bookingInfo = bookingData[dateKey];
+                            if (bookingInfo) {
+                                dayElement.classList.add(bookingInfo.status);
+                                const eventInfo = document.createElement('div');
+                                eventInfo.classList.add('event-info');
+                                eventInfo.innerHTML = `<div>${bookingInfo.school}</div><div>${bookingInfo.event}</div>`;
+                                dayElement.appendChild(eventInfo);
+                            } else {
+                                dayElement.classList.add('not-booked');
+                            }
+            
+                            dayElement.addEventListener('click', () => toggleBookingStatus(dayElement));
+                            calendar.appendChild(dayElement);
+                        }
+                    };
+            
+                    const toggleBookingStatus = (dayElement) => {
+                        // No changes on click for now, just for display purposes
+                        console.log('Clicked on day:', dayElement.textContent);
+                    };
+            
+                    const populateMonthSelect = () => {
+                        const months = [
+                            'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'
+                        ];
+                        months.forEach((month, index) => {
+                            const option = document.createElement('option');
+                            option.value = index;
+                            option.textContent = month;
+                            monthSelect.appendChild(option);
+                        });
+                        monthSelect.value = currentDate.getMonth();
+                    };
+            
+                    monthSelect.addEventListener('change', () => {
+                        currentDate.setMonth(monthSelect.value);
+                        updateCalendar();
+                    });
+            
+                    dateSearch.addEventListener('change', () => {
+                        const selectedDate = new Date(dateSearch.value);
+                        if (!isNaN(selectedDate)) {
+                            currentDate = selectedDate;
+                            monthSelect.value = currentDate.getMonth();
+                            updateCalendar();
+                        }
+                    });
+            
+                    prevMonthButton.addEventListener('click', () => {
+                        currentDate.setMonth(currentDate.getMonth() - 1);
+                        monthSelect.value = currentDate.getMonth();
+                        updateCalendar();
+                    });
+            
+                    nextMonthButton.addEventListener('click', () => {
+                        currentDate.setMonth(currentDate.getMonth() + 1);
+                        monthSelect.value = currentDate.getMonth();
+                        updateCalendar();
+                    });
+            
+                    populateMonthSelect();
+                    updateCalendar();
+                });
+            </script>
+            
+            </body>
+              </html>
