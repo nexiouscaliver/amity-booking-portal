@@ -143,12 +143,12 @@ def check_hall(hallid:int , date:str , stime:int , etime:int):   #user
     c = conn.cursor()
     final=[]
     flag=True
-    sql=f'select * from book where hallid={hallid} and date="{date}"'
-    a = c.execute(sql)
-    o = a.fetchall()
-    print(o)
-    for i in o:
-        final.append(i)
+    # sql=f'select * from book where hallid={hallid} and date="{date}"'    #for rejecting pending req.
+    # a = c.execute(sql)
+    # o = a.fetchall()
+    # print(o)
+    # for i in o:
+    #     final.append(i)
     sql=f'select * from confirm where hallid={hallid} and date="{date}"'
     a = c.execute(sql)
     o = a.fetchall()
@@ -178,7 +178,8 @@ def all_accept_and_pending():
 def calender():
     conn = sqlite3.connect(dbname)
     c = conn.cursor()
-    sql='select * from status where state="confirm" or state="pending";'
+    # sql='select * from status where state="confirm" or state="pending";'
+    sql='select * from status where state="confirm";'
     a = c.execute(sql)
     o = a.fetchall()
     final=[]
@@ -195,6 +196,15 @@ def calender():
             i[1]= "second-half"
         elif i[1]==1701 or i[1]=="1701":
             i[1]= "full"
+    for i in final:
+        for j in (final[final.index(i):]):
+            if(i[0]==j[0]):
+                if(i[1]=="first-half"and j[1]=="second-half"):
+                    i[1] = "full"
+                    j[1] = "full"
+                if(i[1]=="second-half"and j[1]=="first-half"):
+                    i[1] = "full"
+                    j[1] = "full"
     conn.commit()
     conn.close()
     return final
@@ -202,7 +212,8 @@ def calender():
 def calendermain():
     conn = sqlite3.connect(dbname)
     c = conn.cursor()
-    sql='select * from status where state="confirm" or state="pending";'
+    # sql='select * from status where state="confirm" or state="pending";'
+    sql='select * from status where state="confirm";'
     a = c.execute(sql)
     o = a.fetchall()
     print(o)
@@ -261,34 +272,6 @@ def check_pending():    #admin
     conn.close()
     return o
 
-
-
-def confirm_hall(bookid:int):   #admin
-    try:
-        conn = sqlite3.connect(dbname)
-        c = conn.cursor()
-        sql=f'select * from book where bookid={bookid};'
-        a = c.execute(sql)
-        o = a.fetchall()
-        s = o[0]
-        hallid = s[1]
-        school = s[2]
-        date = s[3]
-        stime = s[4]
-        etime = s[5]
-        event = s[6]
-        sql=f'insert into confirm(bookid,hallid,school,date,stime,etime,event) values({bookid},{hallid},"{school}","{date}",{stime},{etime},"{event}");'
-        c.execute(sql)
-        sql=f'delete from book where bookid={bookid};'
-        c.execute(sql)
-        sql=f'update status set state="confirm" where bookid={bookid}'
-        c.execute(sql)
-        conn.commit()
-        conn.close()
-        return True
-    except:
-        return False
-    
 def reject_hall(bookid:int):      #admin
     try:
         conn = sqlite3.connect(dbname)
@@ -312,9 +295,48 @@ def reject_hall(bookid:int):      #admin
         conn.commit()
         conn.close()
         return True
-    except:
+    except Exception as e:
+        print(e)
         return False
 
-
-
-
+def confirm_hall(bookid:int):   #admin
+    try:
+        conn = sqlite3.connect(dbname)
+        c = conn.cursor()
+        sql=f'select * from book where bookid={bookid};'
+        a = c.execute(sql)
+        o = a.fetchall()
+        s = o[0]
+        hallid = s[1]
+        school = s[2]
+        date = s[3]
+        stime = s[4]
+        etime = s[5]
+        event = s[6]
+        sql=f'insert into confirm(bookid,hallid,school,date,stime,etime,event) values({bookid},{hallid},"{school}","{date}",{stime},{etime},"{event}");'
+        c.execute(sql)
+        sql=f'delete from book where bookid={bookid};'
+        c.execute(sql)
+        sql=f'update status set state="confirm" where bookid={bookid}'
+        c.execute(sql)
+        o = check_pending()
+        conn.commit()
+        conn.close()
+        # print(o)
+        for i in o:
+            # print(i)
+            d = (i[3])
+            h = (i[1])
+            et = (i[5])
+            b = i[0]
+            print(d,h,et,"org",date,hallid,etime,"||",b,"|",bookid)
+            if(d == date and h == hallid and et == etime and str(b) != str(bookid)):
+                reject_hall(int(b))
+                print('finaltrigg!!')
+                
+        
+        return True
+    except Exception as e:
+        print(e)
+        return False
+    
