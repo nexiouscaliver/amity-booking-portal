@@ -248,9 +248,27 @@ def calendermain():
                 if(i[1]=="second-half-booked"and j[1]=="first-half-booked"):
                     i[1] = "full-booked"
                     j[1] = "full-booked"
+    a = []
+    s = []
+    r = []
+    c = []
+    for i in final:
+        if i[3] == "Auditorium":
+            a.append(i)
+        if i[3] == "Seminar Hall":
+            s.append(i)
+        if i[3] == "Room No. 105, A2 Building":
+            r.append(i)
+        if i[3] == "CRC Conference Room":
+            c.append(i)
+    final2 = []
+    final2.append(a)
+    final2.append(s)
+    final2.append(r)
+    final2.append(c)
     conn.commit()
     conn.close()
-    return final
+    return final2
 
 def all_status():
     conn = sqlite3.connect(dbname)
