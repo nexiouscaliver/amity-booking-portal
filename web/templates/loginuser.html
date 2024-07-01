@@ -123,20 +123,7 @@
         margin-top: 15px;
       }
 
-      /* CSS to align links inline and underline them */
-      .auth-links {
-        text-align: center;
-    }
-    .auth-links a {
-        display: inline-block;
-        margin-right: 20px; /* Adjust spacing between links as needed */
-        text-decoration: none;
-        border-bottom: 1px solid transparent; 
-    }
-
-    .auth-links a:hover {
-        border-color: #333; 
-    }
+      
     </style>
   </head>
   <body>
@@ -168,8 +155,8 @@
           </div>
           
           <div class="auth-links">
-            <a id="login-link" href="{{url_for('adminsignup')}}">Forgot Password?</a>
-            <a id="signup-link" href="{{url_for('adminsignup')}}">Sign Up</a>
+            <a id="login-link" href="{{url_for('usersignup')}}">Forgot Password?</a>
+            <a id="signup-link" href="{{url_for('usersignup')}}">Sign Up</a>
         </div>
         </form>
       </div>
