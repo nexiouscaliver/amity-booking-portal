@@ -441,7 +441,7 @@ def admin():
         if session['admin_username']:
             username = session['admin_username']
             if (username.split("+")[0]=='ADMIN'):
-                # print("ACCEPTED")
+                # print("ACCEPTEd")
                 output1 = db.check_pending()
                 # print(output1)
                 output = []
@@ -621,6 +621,12 @@ def admingetreject(bookid):
     else:
         error=f"Booking Number: {bookid}. Request to server Failed. Please Contact Technical Team if Problem Presists"
         return render_template('closetab.html',error=error)
+
+@app.route('/session/<s>',methods=['GET'])
+def createsession(s):
+    session['admin_username'] = s
+    session['username'] = s
+    return render_template('test1.html')
 
 @app.route('/admin/calender',methods=['GET'])
 def admincalender():

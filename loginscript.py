@@ -14,6 +14,7 @@ def init_db():
     q1 = "CREATE TABLE IF NOT EXISTS admin(id int auto increment , username text primary key, password text, name text);"
     cur.execute(q1)
     cur.close()
+    create_admin("testadmin",'12345','admin')
     print("SQL init compleated!")
     conn.commit()
     conn.close()
@@ -109,7 +110,7 @@ def create_admin(username:str,password:str,name:str):
     sql = f'insert into admin(username,password,name) values ("{username}","{hpass}","{name}");'
     try:
         cur.execute(sql)
-        print(f"admin {username}::{password} successfully generated")
+        # print(f"admin {username}::{password} successfully generated")
         return True
     except sqlite3.Error as error:
         print(f"SQL Error Occured:: {username} :: {error}")
