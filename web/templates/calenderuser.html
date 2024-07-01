@@ -255,29 +255,36 @@
         </style>
         </head>
         <body>
+
+
+
+            
             <header>
                 <div class="navbar">
-                  <div class="logo">
-                    <img src="{{url_for('static',filename='Amity-logo.png')}}" alt="Logo">
-                    <img src="{{url_for('static',filename='name.2.png')}}" alt="Logo">
-                  </div>
-                  <div class="menu">
-                    
+                    <div class="logo">
+                        <img src="{{url_for('static',filename='Amity-logo.png')}}" alt="Logo">
+                        <img src="{{url_for('static',filename='name.2.png')}}" alt="Logo">
+                    </div>
+                    <div class="menu">
                         <a href="{{url_for('index')}}">Home</a>
                         <a href="{{url_for('home')}}">Logout</a>
-                      </div>
-                    </a>
-                  </div>
+                    </div>
                 </div>
-              </header>
-              
-              <div class="calendar-container">
+            </header>
+            
+            <div class="calendar-container">
                 <div class="calendar-nav">
                     <button id="prevMonth">&lt;</button>
                     <span id="monthYear"></span>
                     <button id="nextMonth">&gt;</button>
                 </div>
                 <div class="flex justify-center mb-4">
+                    <select id="hallDropdown" class="mx-2 p-2 bg-gray-700 text-gray-400 rounded">
+                        <option value="Auditorium">Auditorium</option>
+                        <option value="SeminarHall">Seminar Hall</option>
+                        <option value="Room105">Room 105</option>
+                        <option value="CRCConferenceRoom">CRC Conference Room</option>
+                    </select>
                     <select id="monthSelect" class="mx-2 p-2 bg-gray-700 text-gray-400 rounded">
                         <!-- Options will be populated by JavaScript -->
                     </select>
@@ -292,27 +299,36 @@
                     <div>Fri</div>
                     <div>Sat</div>
                 </div>
-                <div class="calendar" id="calendar"></div>
+                <div id="calendar" class="calendar"></div>
                 <div class="legend">
                     <div class="legend-item">
                         <div class="legend-color full-booked-legend"></div>
-                        <div>Full Booked</div>
+                        <span>Fully Booked</span>
                     </div>
                     <div class="legend-item">
                         <div class="legend-color not-booked-legend"></div>
-                        <div>Not Booked</div>
+                        <span>Not Booked</span>
                     </div>
                     <div class="legend-item">
                         <div class="legend-color first-half-booked-legend"></div>
-                        <div>First Half Booked</div>
+                        <span>First Half Booked</span>
                     </div>
                     <div class="legend-item">
                         <div class="legend-color second-half-booked-legend"></div>
-                        <div>Second Half Booked</div>
+                        <span>Second Half Booked</span>
                     </div>
                 </div>
             </div>
+        
+
+
+
             <script>
+
+
+
+
+
                 document.addEventListener('DOMContentLoaded', () => {
                     const calendar = document.getElementById('calendar');
                     const monthYearDisplay = document.getElementById('monthYear');
@@ -320,20 +336,39 @@
                     const nextMonthButton = document.getElementById('nextMonth');
                     const monthSelect = document.getElementById('monthSelect');
                     const dateSearch = document.getElementById('dateSearch');
-            
+                    const hallDropdown = document.getElementById('hallDropdown');
+                    
                     let currentDate = new Date();
-            
-                    const bookingData = {
-                        {%for i in output%}
-                        '{{i[0]}}': {status: '{{i[1]}}', school: '{{i[2]}}', event: '{{i[3]}}'},
-                        {%endfor%}
-                        // '2024-06-01': {status: 'full-booked', school: 'School A', event: 'Event A'},
-                        // '2024-06-03': {status: 'first-half-booked', school: 'School C', event: 'Event C'},
-                        // '2024-06-04': {status: 'second-half-booked', school: 'School D', event: 'Event D'},
-                        // '2024-06-05': {status: 'full-booked', school: 'School E', event: 'Event E'},
-                        // Add more dates as needed
+                    let currentHall = 'Auditorium';
+                    
+                    const hallData = {
+                        Auditorium: {
+                            // Example data
+                            '2024-06-01': {status: 'full-booked', school: 'School A', event: 'Event A'},
+                            '2024-06-03': {status: 'first-half-booked', school: 'School C', event: 'Event C'},
+                            '2024-06-04': {status: 'second-half-booked', school: 'School D', event: 'Event D'},
+                        },
+                        SeminarHall: {
+                            // Example data
+                            '2024-06-02': {status: 'full-booked', school: 'School B', event: 'Event B'},
+                            '2024-06-05': {status: 'first-half-booked', school: 'School E', event: 'Event E'},
+                        },
+                        Room105: {
+                            // Example data
+                            '2024-06-06': {status: 'full-booked', school: 'School F', event: 'Event F'},
+                            '2024-06-07': {status: 'first-half-booked', school: 'School G', event: 'Event G'},
+                        },
+                        CRCConferenceRoom: {
+                            // Example data
+                            '2024-06-08': {status: 'full-booked', school: 'School H', event: 'Event H'},
+                            '2024-06-09': {status: 'first-half-booked', school: 'School I', event: 'Event I'},
+                        }
                     };
-            
+
+
+
+
+
                     const updateCalendar = () => {
                         calendar.innerHTML = '';
                         const year = currentDate.getFullYear();
