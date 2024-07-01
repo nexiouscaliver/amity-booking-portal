@@ -324,13 +324,13 @@
                     let currentDate = new Date();
             
                     const bookingData = {
-                        {%for i in output%}
+                       /* {%for i in output%}
                         '{{i[0]}}': {status: '{{i[1]}}', school: '{{i[2]}}', event: '{{i[3]}}'},
-                        {%endfor%}
-                        // '2024-06-01': {status: 'full-booked', school: 'School A', event: 'Event A'},
-                        // '2024-06-03': {status: 'first-half-booked', school: 'School C', event: 'Event C'},
-                        // '2024-06-04': {status: 'second-half-booked', school: 'School D', event: 'Event D'},
-                        // '2024-06-05': {status: 'full-booked', school: 'School E', event: 'Event E'},
+                        {%endfor%} */
+                        '2024-06-01': {status: 'full-booked', school: 'School A', event: 'Event A'},
+                         '2024-06-03': {status: 'first-half-booked', school: 'School C', event: 'Event C'},
+                         '2024-06-04': {status: 'second-half-booked', school: 'School D', event: 'Event D'},
+                         '2024-06-05': {status: 'full-booked', school: 'School E', event: 'Event E'},
                         // Add more dates as needed
                     };
             
