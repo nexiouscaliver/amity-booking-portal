@@ -324,21 +324,33 @@
 
             const hallData = {
                 Auditorium: {
-                    '2024-06-01': {status: 'full-booked', school: 'School A', event: 'Event A' },
-                    '2024-06-03': {status: 'first-half-booked', school: 'School C', event: 'Event C'},
-                    '2024-06-04': {status: 'second-half-booked', school: 'School D', event: 'Event D'},
+                    {%for i in output[0]%}
+                        '{{i[0]}}': {status: '{{i[1]}}', school: '{{i[2]}}', event: '{{i[3]}}'},
+                    {%endfor%}
+                    // '2024-06-01': {status: 'full-booked', school: 'School A', event: 'Event A' },
+                    // '2024-06-03': {status: 'first-half-booked', school: 'School C', event: 'Event C'},
+                    // '2024-06-04': {status: 'second-half-booked', school: 'School D', event: 'Event D'},
                 },
                 SeminarHall: {
-                    '2024-06-04': {status: 'full-booked', school: 'School B', event: 'Event B'},
-                    '2024-06-05': {status: 'first-half-booked', school: 'School E', event: 'Event E'},
+                    {%for i in output[1]%}
+                        '{{i[0]}}': {status: '{{i[1]}}', school: '{{i[2]}}', event: '{{i[3]}}'},
+                    {%endfor%}
+                    // '2024-06-04': {status: 'full-booked', school: 'School B', event: 'Event B'},
+                    // '2024-06-05': {status: 'first-half-booked', school: 'School E', event: 'Event E'},
                 },
                 Room105: {
-                    '2024-06-06': {status: 'full-booked', school: 'School F', event: 'Event F'},
-                    '2024-06-07': {status: 'first-half-booked', school: 'School G', event: 'Event G'},
+                    {%for i in output[2]%}
+                        '{{i[0]}}': {status: '{{i[1]}}', school: '{{i[2]}}', event: '{{i[3]}}'},
+                    {%endfor%}
+                    // '2024-06-06': {status: 'full-booked', school: 'School F', event: 'Event F'},
+                    // '2024-06-07': {status: 'first-half-booked', school: 'School G', event: 'Event G'},
                 },
                 CRCConferenceRoom: {
-                    '2024-06-08': {status: 'full-booked', school: 'School H', event: 'Event H'},
-                    '2024-06-09': {status: 'first-half-booked', school: 'School I', event: 'Event I'},
+                    {%for i in output[3]%}
+                        '{{i[0]}}': {status: '{{i[1]}}', school: '{{i[2]}}', event: '{{i[3]}}'},
+                    {%endfor%}
+                    // '2024-06-08': {status: 'full-booked', school: 'School H', event: 'Event H'},
+                    // '2024-06-09': {status: 'first-half-booked', school: 'School I', event: 'Event I'},
                 }
             };
 
