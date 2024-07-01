@@ -273,7 +273,7 @@
                 <option value="Room105">Room 105</option>
                 <option value="CRCConferenceRoom">CRC Conference Room</option>
             </select>
-            <select id="monthSelect" class="mx-2 p-2 bg-gray-700 text-gray-400 rounded">
+            <select id="monthSelect" class="mx-2 p-2 bg-gray-700 text-gray-400 rounded readonly ">
                 <!-- Options will be populated by JavaScript -->
             </select>
             <input type="date" id="dateSearch" class="p-2 bg-gray-700 text-gray-400 rounded">
@@ -315,6 +315,7 @@
             const prevMonthButton = document.getElementById('prevMonth');
             const nextMonthButton = document.getElementById('nextMonth');
             const monthSelect = document.getElementById('monthSelect');
+            const yearSelect = document.getElementById('yearSelect'); // Add year select element
             const dateSearch = document.getElementById('dateSearch');
             const hallDropdown = document.getElementById('hallDropdown');
 
@@ -397,7 +398,11 @@
                 });
                 monthSelect.value = currentDate.getMonth();
             };
-
+    
+            monthSelect.addEventListener('change', () => {
+                currentDate.setMonth(monthSelect.value);
+                updateCalendar();
+            });
             const handleHallChange = () => {
                 currentHall = hallDropdown.value;
                 updateCalendar();
