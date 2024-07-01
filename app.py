@@ -76,6 +76,25 @@ def get_sorted_status():
         final2.append([o,status])
     return final2
 
+def get_sorted_status2():
+    out = db.all_status()
+    final = []
+    final2 = []
+    for i in out:
+        if i[1] == 'pending':
+            final.append(i)
+        elif i[1] == 'reject':
+            pass
+        else:
+            final.append(i)
+    #return final  #then use db.infofect for each bid.
+    for i in final:
+        bid = i[0]
+        status = str(i[1]).upper()
+        o = db.info_fetch(bid)
+        final2.append([o,status])
+    return final2
+
 # global code_list
 code_list = []
 
@@ -620,7 +639,7 @@ def adminnoti():
     if session:
         try:
             username = session['admin_username']
-            output = get_sorted_status()
+            output = get_sorted_status2()
             return render_template('adminnotification.html',output=output)
         except:
             return render_template('adminnotification.html',error="You have been logged out of Admin. Please Login again.")
@@ -632,7 +651,7 @@ def usernoti():
     if session:
         try:
             username = session['username']
-            output = get_sorted_status()
+            output = get_sorted_status2()
             return render_template('usernotification.html',output=output)
         except:
             return render_template('usernotification.html',error="You have been logged out. Please Login again.")
