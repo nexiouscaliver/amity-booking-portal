@@ -563,6 +563,18 @@ def adminbooking():
 def admingetapprove(bookid):
     bookid = int(bookid)
     if db.confirm_hall(bookid):
+        o = db.info_fetch(bookid)
+        event_name = o[0][5]
+        event_venue = hallname(int(o[0][1]))
+        event_date = o[0][6]
+        start_time = o[0][7]
+        end_time = o[0][8]
+        school_name = o[0][2]
+        resource_person_name = o[0][11]
+        resource_person_details = o[0][12]
+        facultyEmail = o[0][9]
+        status2 = "ACCEPTED"
+        send_mail2(event_name,event_venue,event_date,start_time,end_time,school_name,resource_person_name,resource_person_details,status2,facultyEmail,bookid)
         error=f"Booking Number: {bookid}. Request APPROVED successfully."
         return render_template('closetab.html',error=error)
     else:
@@ -573,6 +585,18 @@ def admingetapprove(bookid):
 def admingetreject(bookid):
     bookid = int(bookid)
     if db.reject_hall(bookid):
+        o = db.info_fetch(bookid)
+        event_name = o[0][5]
+        event_venue = hallname(int(o[0][1]))
+        event_date = o[0][6]
+        start_time = o[0][7]
+        end_time = o[0][8]
+        school_name = o[0][2]
+        resource_person_name = o[0][11]
+        resource_person_details = o[0][12]
+        facultyEmail = o[0][9]
+        status2 = "REJECTED"
+        send_mail2(event_name,event_venue,event_date,start_time,end_time,school_name,resource_person_name,resource_person_details,status2,facultyEmail,bookid)
         error=f"Booking Number: {bookid}. Request DISAPPROVED successfully."
         return render_template('closetab.html',error=error)
     else:
