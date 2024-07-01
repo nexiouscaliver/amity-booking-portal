@@ -142,7 +142,7 @@
     }
     
     th {
-      background-color: #2CA58D;
+      background-image: linear-gradient(to right, #04172b 0%, #243a73 100%);
       color: #fff;
     }
     
@@ -182,7 +182,7 @@
     }
     
     button {
-      background-color: #2CA58D;
+      background-image: linear-gradient(to right, #04172b 0%, #243a73 100%);
       color: #fff;
       border: none;
       padding: 12px 20px;
@@ -193,8 +193,11 @@
     }
     
     button:hover {
-      background-color: #1E7C65;
-    }
+      
+        transform: scale(1.05); /* Slightly increase the size */
+        box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15); /* Enhance the shadow */
+      }
+    
     
     .button-group {
       display: flex;
@@ -315,7 +318,7 @@
                     <th>Event Name</th>
                     <th>Venue</th>
                     <th>Date</th>
-                    <!-- <th>Start Time</th> -->
+                    <th>Duration of Event</th> 
                     <!-- <th>End Time</th> -->
                     <th>Resource Person Name</th>
                     <!-- <th>Resource Person Detail</th> -->
