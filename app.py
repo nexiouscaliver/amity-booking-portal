@@ -63,11 +63,14 @@ def get_sorted_status():
     final = []
     final2 = []
     for i in out:
+        i = list(i)
         if i[1] == 'pending':
             final.append(i)
         elif i[1] == 'reject':
+            i[1] = "rejected"
             final.append(i)
         else:
+            i[1] = "accepted"
             final.append(i)
     #return final  #then use db.infofect for each bid.
     for i in final:
@@ -573,7 +576,8 @@ def adminbooking():
             username = session['admin_username']
             output = get_sorted_status()
             return render_template('allbooking.html',output=output)
-        except:
+        except Exception as e :
+            print(e)
             return render_template('notitab.html',error="You have been logged out of Admin. Please Login again.")
     else:
         return render_template('notitab.html',error="You have been logged out of Admin. Please Login again.")
