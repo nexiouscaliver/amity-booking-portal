@@ -307,6 +307,13 @@ def utility_processor():
             etime= "Full Day"
         return etime
     return dict(getduration=getduration)
+@app.context_processor
+def utility_processor():
+    def hallname(hallid:int):
+        l = [0,"Auditorium Hall","Seminar Hall","Room No. 105, A2 Building","CRC Conference Room","AIIT Conference Room","RICS Conference Room","Atrium"]
+        #l = [0,'auditorium','seminar','room105','crc']
+        return (l[hallid])
+    return dict(hallname=hallname)
 
 #before-request functions
 @app.before_request
