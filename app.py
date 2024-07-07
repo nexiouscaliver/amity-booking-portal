@@ -31,12 +31,12 @@ server_link = "http://127.0.0.1:8000" #replace with production server initial ro
 
 #task-related functions
 def hallname(hallid:int):
-    l = [0,"Auditorium Hall","Seminar Hall","Room No. 105, A2 Building","CRC Conference Room"]
+    l = [0,"Auditorium Hall","Seminar Hall","Room No. 105, A2 Building","CRC Conference Room","AIIT Conference Room","RICS Conference Room","Atrium"]
     #l = [0,'auditorium','seminar','room105','crc']
     return (l[hallid])
 
 def hallid(hallname:str):
-    l = [0,'auditorium','seminar','room105','crc']
+    l = [0,'auditorium','seminar','room105','crc','aiit','rics','atrium']
     return (l.index(hallname))
 
 def trimtime(time:str):
@@ -336,8 +336,8 @@ def index():
         print("CAL:",cal)
         if request.method == 'POST':
             
-            hall = ['auditorium','seminar','room105','crc']
-            place = ['SchoolName','FacultyName','HodName','EventName','date','Duration','Duration','Email','Phone','ResourcePersonName','ResourcePersonDetail']
+            hall = ['auditorium','seminar','room105','crc','AIITConferenceroom','RICSConferenceRoom','Atrium']
+            place = ['SchoolName','FacultyName','HodName','EventName','date','startime','endtime','Email','Phone','ResourcePersonName','ResourcePersonDetail']
             final=[]
             loc = ''
             for i in hall:
@@ -669,6 +669,9 @@ def usernoti():
     else:
         return render_template('usernotification.html',error="You have been logged out. Please Login again.")
 
+@app.route('/test',methods=['GET'])
+def test():
+    return render_template("user.home(new).html")
 
 #futurescope
 @app.route('/verifyemail/<username>' ,methods=['GET', 'POST'])
