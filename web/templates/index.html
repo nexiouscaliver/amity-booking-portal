@@ -267,43 +267,80 @@ td[data-day]:hover {
         </script>
         {% endif %}
         <div class="row">
+
           <div class="col-md-4">
-            <div class="hall">
+            <div class="hall" data-toggle="modal" data-target="#auditoriumModal">
               <img src="audi.front.png" alt="Auditorium Hall">
               <h3>Auditorium Hall</h3>
               <p>Large venue with seating capacity of 500+. Ideal for conferences, lectures, and performances.</p>
-              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#auditoriumModal">Select</button>
+              <button type="button" class="btn btn-primary">Select</button>
             </div>
           </div>
+
           <div class="col-md-4">
-            <div class="hall">
+            <div class="hall" data-toggle="modal" data-target="#seminarModal">
               <img src="seminar.hall1.png" alt="Seminar Hall">
               <h3>Seminar Hall</h3>
               <p>Medium-sized hall with seating capacity of 100+. Suitable for meetings, workshops, and presentations.</p>
-              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#seminarModal">Select</button>
+              <button type="button" class="btn btn-primary" >Select</button>
             </div>
           </div>
+
           <div class="col-md-4">
-            <div class="hall">
+            <div class="hall" data-toggle="modal" data-target="#room105Modal">
               <img src="room105.jpg" alt="Room No. 105, A2 Building">
               <h3>Room No. 105, A2 Building</h3>
               <p>Smaller meeting room with seating capacity of 20+. Perfect for small group discussions and interviews.</p>
-              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#room105Modal">Select</button>
+              <button type="button" class="btn btn-primary">Select</button>
             </div>
           </div>
+
           <div class="col-md-4">
-            <div class="hall">
+            <div class="hall" data-toggle="modal" data-target="#crcModal">
               <img src="conference.jpg" alt="CRC Conference Room">
               <h3>CRC Conference Room</h3>
-              <p>Modern conference room equipped with audio-visual technology. Accommodates up to 50 people.</p>
-              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#crcModal">Select</button>
+              <p>Modern conference room equipped with audio-visual technology. Accommodates up to 20 people.</p>
+              <button type="button" class="btn btn-primary">Select</button>
             </div>
           </div>
+
+
+          <div class="col-md-4">
+            <div class="hall" data-toggle="modal" data-target="#AIITConferenceroomModal">
+              <img src="conference.jpg" alt="AIIT Conference Room">
+              <h3>AIIT Conference Room</h3>
+              <p> Modern conference room equipped with advanced audio-visual technology . Accommodates up to 50 people.
+               </p>
+              <button type="button" class="btn btn-primary">Select</button>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="hall" data-toggle="modal" data-target="#RICSConferenceRoomModal">
+              <img src="conference.jpg" alt="RICS  Conference Room">
+              <h3>RICS  Conference Room</h3>
+              <p> conference room with cutting-edge AV equipment and ergonomic seating. Accommodates up to 50 people.</p>
+              <button type="button" class="btn btn-primary">Select</button>
+            </div>
+          </div>
+
+
+          <div class="col-md-4">
+            <div class="hall" data-toggle="modal" data-target="#AtriumModal">
+              <img src="Atrium1.png" alt="Atrium">
+              <h3>Atrium</h3>
+              <p>Large venue with seating capacity of 500+. Ideal for conferences, lectures, and performances.</p>
+              <button type="button" class="btn btn-primary">Select</button>
+            </div>
+          </div>
+
+
+
         </div>
       </div>
     </section>
 
-    <!-- Auditorium Hall Modal -->
+    <!-- 1 Auditorium Hall Modal -->
     <div class="modal fade" id="auditoriumModal" tabindex="-1" role="dialog" aria-labelledby="auditoriumModalLabel">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -353,12 +390,32 @@ td[data-day]:hover {
                 <input type="text" class="form-control" id="auditoriumEventName" name="auditoriumEventName" placeholder="Enter event name" required>
               </div>
               <div class="form-group">
-                <label for="auditoriumDuration">Event Duration:</label>
-                <select class="form-control" id="auditoriumDuration" name="auditoriumDuration" required>
-                  <option value="1stHalf">1st half day</option>
-                  <option value="2ndHalf">2nd half day</option>
-                  <option value="fullDay">Full day</option>
+                <label for="auditoriumstartime">Start Time</label>
+                <select class="form-control" id="auditoriumstartime" name="auditoriumstartime" required>
+                  <option value="900">09:00 am</option>
+                  <option value="1000">10:00 am</option>
+                  <option value="1100">11:00 am</option>
+                  <option value="1200">12:00 pm</option>
+                  <option value="1300">01:00 pm</option>
+                  <option value="1400">02:00 pm</option>
+                   <option value="1500">03:00 pm</option>
+                   <option value="1600">04:00 pm</option>
+                   <option value="1700">05:00 pm</option>
                 </select>
+                </div>
+                <div class="form-group">
+                  <label for="auditoriumendtime">End Time</label>
+                  <select class="form-control" id="auditoriumendtime" name="auditoriumendtime" required>
+                  <option value="1000">10:00 am</option>
+                  <option value="1100">11:00 am</option>
+                  <option value="1200">12:00 pm</option>
+                  <option value="1300">01:00 pm</option>
+                  <option value="1400">02:00 pm</option>
+                   <option value="1500">03:00 pm</option>
+                   <option value="1600">04:00 pm</option>
+                   <option value="1700">05:00 pm</option>
+                   <option value="1800">06:00 pm</option>
+                  </select>
               </div>
               <div class="form-group">
                 <label for="auditoriumdate">Date of Event:</label>
@@ -391,7 +448,7 @@ td[data-day]:hover {
       </div>
     </div>
     
-    <!-- Seminar Hall Modal -->
+    <!-- 2 Seminar Hall Modal -->
     <div class="modal fade" id="seminarModal" tabindex="-1" role="dialog" aria-labelledby="seminarModalLabel">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -441,12 +498,32 @@ td[data-day]:hover {
                 <input type="text" class="form-control" id="seminarEventName" name="seminarEventName" placeholder="Enter event name" required>
               </div>
               <div class="form-group">
-                <label for="seminarDuration">Event Duration:</label>
-                <select class="form-control" id="seminarDuration" name="seminarDuration" required>
-                  <option value="1stHalf">1st half day</option>
-                  <option value="2ndHalf">2nd half day</option>
-                  <option value="fullDay">Full day</option>
+                <label for="seminarstartime">Start Time</label>
+                <select class="form-control" id="seminarstartime" name="seminarstartime" required>
+                  <option value="900">09:00 am</option>
+                  <option value="1000">10:00 am</option>
+                  <option value="1100">11:00 am</option>
+                  <option value="1200">12:00 pm</option>
+                  <option value="1300">01:00 pm</option>
+                  <option value="1400">02:00 pm</option>
+                   <option value="1500">03:00 pm</option>
+                   <option value="1600">04:00 pm</option>
+                   <option value="1700">05:00 pm</option>
                 </select>
+              </div>
+                <div class="form-group">
+                  <label for="seminarendtime">End Time</label>
+                  <select class="form-control" id="seminarendtime" name="seminarendtime" required>
+                  <option value="1000">10:00 am</option>
+                  <option value="1100">11:00 am</option>
+                  <option value="1200">12:00 pm</option>
+                  <option value="1300">01:00 pm</option>
+                  <option value="1400">02:00 pm</option>
+                   <option value="1500">03:00 pm</option>
+                   <option value="1600">04:00 pm</option>
+                   <option value="1700">05:00 pm</option>
+                   <option value="1800">06:00 pm</option>
+                  </select>
               </div>
               <div class="form-group">
                 <label for="seminardate">Date of Event:</label>
@@ -480,7 +557,7 @@ td[data-day]:hover {
       </div>
     </div>
     
-    <!-- Room No. 105 Modal -->
+    <!-- 2 Room No. 105 Modal -->
     <div class="modal fade" id="room105Modal" tabindex="-1" role="dialog" aria-labelledby="room105ModalLabel">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -530,12 +607,33 @@ td[data-day]:hover {
                 <input type="text" class="form-control" id="room105EventName" name="room105EventName" placeholder="Enter event name" required>
               </div>
               <div class="form-group">
-                <label for="room105Duration">Event Duration:</label>
-                <select class="form-control" id="room105Duration" name="room105Duration" required>
-                  <option value="1stHalf">1st half day</option>
-                  <option value="2ndHalf">2nd half day</option>
-                  <option value="fullDay">Full day</option>
+                <label for="room105startime">Start Time</label>
+                <select class="form-control" id="room105startime" name="room105startime" required>
+                  <option value="900">09:00 am</option>
+                  <option value="1000">10:00 am</option>
+                  <option value="1100">11:00 am</option>
+                  <option value="1200">12:00 pm</option>
+                  <option value="1300">01:00 pm</option>
+                  <option value="1400">02:00 pm</option>
+                   <option value="1500">03:00 pm</option>
+                   <option value="1600">04:00 pm</option>
+                   <option value="1700">05:00 pm</option>
                 </select>
+                </div>
+                
+                <div class="form-group">
+                  <label for="room105endtime">End Time</label>
+                  <select class="form-control" id="room105endtime" name="room105endtime" required>
+                  <option value="1000">10:00 am</option>
+                  <option value="1100">11:00 am</option>
+                  <option value="1200">12:00 pm</option>
+                  <option value="1300">01:00 pm</option>
+                  <option value="1400">02:00 pm</option>
+                   <option value="1500">03:00 pm</option>
+                   <option value="1600">04:00 pm</option>
+                   <option value="1700">05:00 pm</option>
+                   <option value="1800">06:00 pm</option>
+                  </select>
               </div>
               <div class="form-group">
                 <label for="room105date">Date of Event:</label>
@@ -568,7 +666,7 @@ td[data-day]:hover {
       </div>
     </div>
     
-    <!-- CRC Conference Room Modal -->
+    <!-- 3 CRC Conference Room Modal -->
     <div class="modal fade" id="crcModal" tabindex="-1" role="dialog" aria-labelledby="crcModalLabel">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -618,12 +716,32 @@ td[data-day]:hover {
                 <input type="text" class="form-control" id="crcEventName" name="crcEventName" placeholder="Enter event name" required>
               </div>
               <div class="form-group">
-                <label for="crcDuration">Event Duration:</label>
-                <select class="form-control" id="crcDuration" name="crcDuration" required>
-                  <option value="1stHalf">1st half day</option>
-                  <option value="2ndHalf">2nd half day</option>
-                  <option value="fullDay">Full day</option>
+                <label for="crcstartime">Start Time</label>
+                <select class="form-control" id="crcstartime" name="crcstartime" required>
+                  <option value="900">09:00 am</option>
+                  <option value="1000">10:00 am</option>
+                  <option value="1100">11:00 am</option>
+                  <option value="1200">12:00 pm</option>
+                  <option value="1300">01:00 pm</option>
+                  <option value="1400">02:00 pm</option>
+                   <option value="1500">03:00 pm</option>
+                   <option value="1600">04:00 pm</option>
+                   <option value="1700">05:00 pm</option>
                 </select>
+              </div>
+                <div class="form-group">
+                  <label for="crcendtime">End Time</label>
+                  <select class="form-control" id="crcendtime" name="crcendtime" required>
+                  <option value="1000">10:00 am</option>
+                  <option value="1100">11:00 am</option>
+                  <option value="1200">12:00 pm</option>
+                  <option value="1300">01:00 pm</option>
+                  <option value="1400">02:00 pm</option>
+                   <option value="1500">03:00 pm</option>
+                   <option value="1600">04:00 pm</option>
+                   <option value="1700">05:00 pm</option>
+                   <option value="1800">06:00 pm</option>
+                  </select>
               </div>
              
               <div class="form-group">
@@ -650,6 +768,341 @@ td[data-day]:hover {
               <div class="form-group">
                 <label for="crcPhone">Event Coordinator's Phone Number:</label>
                 <input type="tel" class="form-control" id="crcPhone" name="crcPhone" placeholder="Enter your phone number" required>
+              </div>
+              <button type="submit" class="btn btn-primary" id="submitmain">Submit</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4 AIIT conference Room Modal --> 
+            
+    <div class="modal fade" id="AIITConferenceroomModal" tabindex="-1" role="dialog" aria-labelledby="AIITConferenceroomModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="AIITConferenceroomModalLabel">AIIT Conference Room Booking</h4>
+          </div>
+          <div class="modal-body">
+            <form method="post" id="AIITConferenceroomForm" novalidate>
+              <div class="form-group">
+                <label for="AIITConferenceroomSchoolName">School Name:</label>
+                <select class="form-control" id="AIITConferenceroomSchoolName" name="AIITConferenceroomSchoolName" required>
+                  <option value="">Select School Name</option>
+                  <option value="ABS">ABS - Amity Business School</option>
+                  <option value="AFS">AFS - Amity Film School</option>
+                  <option value="AIBAS">AIBAS - Amity Institute of Behavioural & Allied Sciences</option>
+                  <option value="AIB">AIB - Amity Institute of Biotechnology</option>
+                  <option value="ALIT">ALIT - Amity Institute of Information Technology</option>
+                  <option value="AILA">AILA - Amity Institute of Liberal Arts</option>
+                  <option value="AIP">AIP - Amity Institute of Pharmacy</option>
+                  <option value="AIT">AIT - Amity Institute of Technology</option>
+                  <option value="AITT">AITT - Amity Institute of Travel & Tourism</option>
+                  <option value="ALS">ALS - Amity Law School</option>
+                  <option value="ASAP">ASAP - Amity School of Architecture & Planning</option>
+                  <option value="ASAS">ASAS - Amity School of Applied Sciences</option>
+                  <option value="ASCO">ASCO - Amity School of Communication</option>
+                  <option value="ASET">ASET - Amity School of Engineering & Technology</option>
+                  <option value="ASFT">ASFT - Amity School of Fashion Technology</option>
+                  <option value="ASL">ASL - Amity School of Languages</option>
+                  <option value="CISOL">CIIOL - CII Logistics</option>
+                  <option value="TUCSSBERICS"> RICS</option>
+                  <option value="ASFA">ASFA - Amity School of Fine Arts</option>
+                  <option value="AIE">AIE - Amity Institute of Education</option>
+                  <option value="AIN">AIN - Amity Institute of Nanotechnology</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="AIITConferenceroomFacultyName">Event Coordinator Name:</label>
+                <input type="text" class="form-control" id="AIITConferenceroomFacultyName" name="AIITConferenceroomFacultyName" placeholder="Enter your name" required>
+              </div>
+              <div class="form-group">
+                <label for="AIITConferenceroomHodName">HOD/HOI/Director Name:</label>
+                <input type="text" class="form-control" id="AIITConferenceroomHodName" name="AIITConferenceroomHodName" placeholder="Enter HOD/HOI/Director name" required>
+              </div>
+              <div class="form-group">
+                <label for="AIITConferenceroomEventName">Event Name:</label>
+                <input type="text" class="form-control" id="AIITConferenceroomEventName" name="AIITConferenceroomEventName" placeholder="Enter event name" required>
+              </div>
+              <div class="form-group">
+                <label for="AIITConferenceroomstartime">Start Time</label>
+                <select class="form-control" id="AIITConferenceroomstartime" name="AIITConferenceroomstartime" required>
+                  <option value="900">09:00 am</option>
+                  <option value="1000">10:00 am</option>
+                  <option value="1100">11:00 am</option>
+                  <option value="1200">12:00 pm</option>
+                  <option value="1300">01:00 pm</option>
+                  <option value="1400">02:00 pm</option>
+                   <option value="1500">03:00 pm</option>
+                   <option value="1600">04:00 pm</option>
+                   <option value="1700">05:00 pm</option>
+                </select>
+              </div>
+                <div class="form-group">
+                  <label for="AIITConferenceroomendtime">End Time</label>
+                  <select class="form-control" id="AIITConferenceroomendtime" name="AIITConferenceroomendtime" required>
+                  <option value="1000">10:00 am</option>
+                  <option value="1100">11:00 am</option>
+                  <option value="1200">12:00 pm</option>
+                  <option value="1300">01:00 pm</option>
+                  <option value="1400">02:00 pm</option>
+                   <option value="1500">03:00 pm</option>
+                   <option value="1600">04:00 pm</option>
+                   <option value="1700">05:00 pm</option>
+                   <option value="1800">06:00 pm</option>
+                  </select>
+              </div>
+             
+              <div class="form-group">
+                <label for="AIITConferenceroomdate">Date of Event:</label>
+                <input type="date" class="form-control" id="AIITConferenceroomdate" name="AIITConferenceroomdate" required onchange="updateDayOfWeek('AIITConferenceroomdate', 'AIITConferenceroomday'); updateCalendarColor('AIITConferenceroomdate','AIITConferenceroomDuration')">
+              </div>
+    
+              <div class="form-group">
+                <label for="AIITConferenceroomday">Day of the Week:</label>
+                <input type="text" class="form-control" id="AIITConferenceroomday" name="day" readonly>
+              </div>
+              <div class="form-group">
+                <label for="AIITConferenceroomResourcePersonName">Resource Person Name:</label>
+                <input type="text" class="form-control" id="AIITConferenceroomResourcePersonName" name="AIITConferenceroomResourcePersonName" placeholder="Enter resource person name" required>
+              </div>
+              <div class="form-group">
+                <label for="AIITConferenceroomResourcePersonDetail">Resource Person Detail:</label>
+                <textarea class="form-control" id="AIITConferenceroomResourcePersonDetail" name="AIITConferenceroomResourcePersonDetail" placeholder="Enter resource person details " required></textarea>
+              </div>
+              <div class="form-group">
+                <label for="AIITConferenceroomEmail">Event Coordinator's Email:</label>
+                <input type="email" class="form-control" id="AIITConferenceroomEmail" name="AIITConferenceroomEmail" placeholder="Enter your email" required>
+              </div>
+              <div class="form-group">
+                <label for="AIITConferenceroomPhone">Event Coordinator's Phone Number:</label>
+                <input type="tel" class="form-control" id="AIITConferenceroomPhone" name="AIITConferenceroomPhone" placeholder="Enter your phone number" required>
+              </div>
+              <button type="submit" class="btn btn-primary" id="submitmain">Submit</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- 5. RICS Conferenceroom Conference Room Modal -->
+    <div class="modal fade" id="RICSConferenceRoomModal" tabindex="-1" role="dialog" aria-labelledby="RICSConferenceRoomModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="RICSConferenceRoomModalLabel">RICS Conference Room Booking</h4>
+          </div>
+          <div class="modal-body">
+            <form method="post" id="RICSConferenceRoomForm" novalidate>
+              <div class="form-group">
+                <label for="RICSConferenceRoomSchoolName">School Name:</label>
+                <select class="form-control" id="RICSConferenceRoomSchoolName" name="RICSConferenceRoomSchoolName" required>
+                  <option value="">Select School Name</option>
+                  <option value="ABS">ABS - Amity Business School</option>
+                  <option value="AFS">AFS - Amity Film School</option>
+                  <option value="AIBAS">AIBAS - Amity Institute of Behavioural & Allied Sciences</option>
+                  <option value="AIB">AIB - Amity Institute of Biotechnology</option>
+                  <option value="ALIT">ALIT - Amity Institute of Information Technology</option>
+                  <option value="AILA">AILA - Amity Institute of Liberal Arts</option>
+                  <option value="AIP">AIP - Amity Institute of Pharmacy</option>
+                  <option value="AIT">AIT - Amity Institute of Technology</option>
+                  <option value="AITT">AITT - Amity Institute of Travel & Tourism</option>
+                  <option value="ALS">ALS - Amity Law School</option>
+                  <option value="ASAP">ASAP - Amity School of Architecture & Planning</option>
+                  <option value="ASAS">ASAS - Amity School of Applied Sciences</option>
+                  <option value="ASCO">ASCO - Amity School of Communication</option>
+                  <option value="ASET">ASET - Amity School of Engineering & Technology</option>
+                  <option value="ASFT">ASFT - Amity School of Fashion Technology</option>
+                  <option value="ASL">ASL - Amity School of Languages</option>
+                  <option value="CISOL">CIIOL - CII Logistics</option>
+                  <option value="TUCSSBERICS"> RICS</option>
+                  <option value="ASFA">ASFA - Amity School of Fine Arts</option>
+                  <option value="AIE">AIE - Amity Institute of Education</option>
+                  <option value="AIN">AIN - Amity Institute of Nanotechnology</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="RICSConferenceRoomFacultyName">Event Coordinator Name:</label>
+                <input type="text" class="form-control" id="RICSConferenceRoomFacultyName" name="RICSConferenceRoomFacultyName" placeholder="Enter your name" required>
+              </div>
+              <div class="form-group">
+                <label for="RICSConferenceRoomHodName">HOD/HOI/Director Name:</label>
+                <input type="text" class="form-control" id="RICSConferenceRoomHodName" name="RICSConferenceRoomHodName" placeholder="Enter HOD/HOI/Director name" required>
+              </div>
+              <div class="form-group">
+                <label for="RICSConferenceRoomEventName">Event Name:</label>
+                <input type="text" class="form-control" id="RICSConferenceRoomEventName" name="RICSConferenceRoomEventName" placeholder="Enter event name" required>
+              </div>
+              <div class="form-group">
+                <label for="RICSConferenceRoomstartime">Start Time</label>
+                <select class="form-control" id="RICSConferenceRoomstartime" name="RICSConferenceRoomstartime" required>
+                  <option value="900">09:00 am</option>
+                  <option value="1000">10:00 am</option>
+                  <option value="1100">11:00 am</option>
+                  <option value="1200">12:00 pm</option>
+                  <option value="1300">01:00 pm</option>
+                  <option value="1400">02:00 pm</option>
+                   <option value="1500">03:00 pm</option>
+                   <option value="1600">04:00 pm</option>
+                   <option value="1700">05:00 pm</option>
+                </select>
+              </div>
+
+                <div class="form-group">
+                  <label for="RICSConferenceRoomendtime">End Time</label>
+                  <select class="form-control" id="RICSConferenceRoomendtime" name="RICSConferenceRoomendtime" required>
+                  <option value="1000">10:00 am</option>
+                  <option value="1100">11:00 am</option>
+                  <option value="1200">12:00 pm</option>
+                  <option value="1300">01:00 pm</option>
+                  <option value="1400">02:00 pm</option>
+                   <option value="1500">03:00 pm</option>
+                   <option value="1600">04:00 pm</option>
+                   <option value="1700">05:00 pm</option>
+                   <option value="1800">06:00 pm</option>
+                  </select>
+              </div>
+
+              <div class="form-group">
+                <label for="RICSConferenceRoomdate">Date of Event:</label>
+                <input type="date" class="form-control" id="RICSConferenceRoomdate" name="RICSConferenceRoomdate" required onchange="updateDayOfWeek('RICSConferenceRoomdate', 'RICSConferenceRoomday'); updateCalendarColor('RICSConferenceRoomdate','RICSConferenceRoomDuration')">
+              </div>
+    
+              <div class="form-group">
+                <label for="RICSConferenceRoomday">Day of the Week:</label>
+                <input type="text" class="form-control" id="RICSConferenceRoomday" name="day" readonly>
+              </div>
+              <div class="form-group">
+                <label for="RICSConferenceRoomResourcePersonName">Resource Person Name:</label>
+                <input type="text" class="form-control" id="RICSConferenceRoomResourcePersonName" name="RICSConferenceRoomResourcePersonName" placeholder="Enter resource person name" required>
+              </div>
+              <div class="form-group">
+                <label for="RICSConferenceRoomResourcePersonDetail">Resource Person Detail:</label>
+                <textarea class="form-control" id="RICSConferenceRoomResourcePersonDetail" name="RICSConferenceRoomResourcePersonDetail" placeholder="Enter resource person details " required></textarea>
+              </div>
+              <div class="form-group">
+                <label for="RICSConferenceRoomEmail">Event Coordinator's Email:</label>
+                <input type="email" class="form-control" id="RICSConferenceRoomEmail" name="RICSConferenceRoomEmail" placeholder="Enter your email" required>
+              </div>
+              <div class="form-group">
+                <label for="RICSConferenceRoomPhone">Event Coordinator's Phone Number:</label>
+                <input type="tel" class="form-control" id="RICSConferenceRoomPhone" name="RICSConferenceRoomPhone" placeholder="Enter your phone number" required>
+              </div>
+              <button type="submit" class="btn btn-primary" id="submitmain">Submit</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- 6. Atrium Modal -->
+    <div class="modal fade" id="AtriumModal" tabindex="-1" role="dialog" aria-labelledby="AtriumModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="AtriumModalLabel">Atrium Booking</h4>
+          </div>
+          <div class="modal-body">
+            <form method="post" id="AtriumForm" novalidate>
+              <div class="form-group">
+                <label for="AtriumSchoolName">School Name:</label>
+                <select class="form-control" id="AtriumSchoolName" name="AtriumSchoolName" required>
+                  <option value="">Select School Name</option>
+                  <option value="ABS">ABS - Amity Business School</option>
+                  <option value="AFS">AFS - Amity Film School</option>
+                  <option value="AIBAS">AIBAS - Amity Institute of Behavioural & Allied Sciences</option>
+                  <option value="AIB">AIB - Amity Institute of Biotechnology</option>
+                  <option value="ALIT">ALIT - Amity Institute of Information Technology</option>
+                  <option value="AILA">AILA - Amity Institute of Liberal Arts</option>
+                  <option value="AIP">AIP - Amity Institute of Pharmacy</option>
+                  <option value="AIT">AIT - Amity Institute of Technology</option>
+                  <option value="AITT">AITT - Amity Institute of Travel & Tourism</option>
+                  <option value="ALS">ALS - Amity Law School</option>
+                  <option value="ASAP">ASAP - Amity School of Architecture & Planning</option>
+                  <option value="ASAS">ASAS - Amity School of Applied Sciences</option>
+                  <option value="ASCO">ASCO - Amity School of Communication</option>
+                  <option value="ASET">ASET - Amity School of Engineering & Technology</option>
+                  <option value="ASFT">ASFT - Amity School of Fashion Technology</option>
+                  <option value="ASL">ASL - Amity School of Languages</option>
+                  <option value="CISOL">CIIOL - CII Logistics</option>
+                  <option value="TUCSSBERICS"> RICS</option>
+                  <option value="ASFA">ASFA - Amity School of Fine Arts</option>
+                  <option value="AIE">AIE - Amity Institute of Education</option>
+                  <option value="AIN">AIN - Amity Institute of Nanotechnology</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="AtriumFacultyName">Event Coordinator Name:</label>
+                <input type="text" class="form-control" id="AtriumFacultyName" name="AtriumFacultyName" placeholder="Enter your name" required>
+              </div>
+              <div class="form-group">
+                <label for="AtriumHodName">HOD/HOI/Director Name:</label>
+                <input type="text" class="form-control" id="AtriumHodName" name="AtriumHodName" placeholder="Enter HOD/HOI/Director name" required>
+              </div>
+              <div class="form-group">
+                <label for="AtriumEventName">Event Name:</label>
+                <input type="text" class="form-control" id="AtriumEventName" name="AtriumEventName" placeholder="Enter event name" required>
+              </div>
+              <div class="form-group">
+                <label for="Atriumstartime">Start Time</label>
+                <select class="form-control" id="Atriumstartime" name="Atriumstartime" required>
+                  <option value="900">09:00 am</option>
+                  <option value="1000">10:00 am</option>
+                  <option value="1100">11:00 am</option>
+                  <option value="1200">12:00 pm</option>
+                  <option value="1300">01:00 pm</option>
+                  <option value="1400">02:00 pm</option>
+                   <option value="1500">03:00 pm</option>
+                   <option value="1600">04:00 pm</option>
+                   <option value="1700">05:00 pm</option>
+                </select>
+              </div>
+
+                <div class="form-group">
+                  <label for="Atriumendtime">End Time</label>
+                  <select class="form-control" id="Atriumendtime" name="Atriumendtime" required>
+                  <option value="1000">10:00 am</option>
+                  <option value="1100">11:00 am</option>
+                  <option value="1200">12:00 pm</option>
+                  <option value="1300">01:00 pm</option>
+                  <option value="1400">02:00 pm</option>
+                   <option value="1500">03:00 pm</option>
+                   <option value="1600">04:00 pm</option>
+                   <option value="1700">05:00 pm</option>
+                   <option value="1800">06:00 pm</option>
+                  </select>
+              </div>
+             
+              <div class="form-group">
+                <label for="Atriumdate">Date of Event:</label>
+                <input type="date" class="form-control" id="Atriumdate" name="Atriumdate" required onchange="updateDayOfWeek('Atriumdate', 'Atriumday'); updateCalendarColor('Atriumdate','AtriumDuration')">
+              </div>
+    
+              <div class="form-group">
+                <label for="Atriumday">Day of the Week:</label>
+                <input type="text" class="form-control" id="Atriumday" name="day" readonly>
+              </div>
+              <div class="form-group">
+                <label for="AtriumResourcePersonName">Resource Person Name:</label>
+                <input type="text" class="form-control" id="AtriumResourcePersonName" name="AtriumResourcePersonName" placeholder="Enter resource person name" required>
+              </div>
+              <div class="form-group">
+                <label for="AtriumResourcePersonDetail">Resource Person Detail:</label>
+                <textarea class="form-control" id="AtriumResourcePersonDetail" name="AtriumResourcePersonDetail" placeholder="Enter resource person details " required></textarea>
+              </div>
+              <div class="form-group">
+                <label for="AtriumEmail">Event Coordinator's Email:</label>
+                <input type="email" class="form-control" id="AtriumEmail" name="AtriumEmail" placeholder="Enter your email" required>
+              </div>
+              <div class="form-group">
+                <label for="AtriumPhone">Event Coordinator's Phone Number:</label>
+                <input type="tel" class="form-control" id="AtriumPhone" name="AtriumPhone" placeholder="Enter your phone number" required>
               </div>
               <button type="submit" class="btn btn-primary" id="submitmain">Submit</button>
             </form>
@@ -707,8 +1160,8 @@ td[data-day]:hover {
                 dateInput.style.backgroundColor = '#ff9999'; // Red for fully booked
                 // disablebutton();
                 break;
-            case 'first-half':
-                dateInput.style.backgroundColor = '#ffc966'; // Orange for first half booked
+           // case 'first-half':
+              //  dateInput.style.backgroundColor = '#ffc966'; // Orange for first half booked
                 // if (givenValue==='first-half') {
                 //   disablebutton();
                 // }
@@ -716,15 +1169,15 @@ td[data-day]:hover {
                 //   enablebutton();
                 // }
                 break;
-            case 'second-half':
-                dateInput.style.backgroundColor = '#99ccff'; // Blue for second half booked
+            // case 'second-half':
+               // dateInput.style.backgroundColor = '#99ccff'; // Blue for second half booked
                 // if (givenValue==='second-half') {
                 //   disablebutton();
                 // }
                 // else{
                 //   enablebutton();
                 // }
-                break;
+               // break;
             default:
                 dateInput.style.backgroundColor = '#b3ffb3'; // Green for not booked
                 // enablebutton();
@@ -747,9 +1200,16 @@ td[data-day]:hover {
      
 
 
-     
+    //function OF hall box to trigger the modal
+    document.querySelectorAll('.hall').forEach(hall => {
+    hall.addEventListener('click', function(event) {
+      // Prevent the click event from triggering the modal if the button is clicked
+      if (event.target.tagName === 'BUTTON') return;
 
-
+      const modalTarget = hall.querySelector('button').getAttribute('data-target');
+      $(modalTarget).modal('show');
+    });
+  });
 
    
 

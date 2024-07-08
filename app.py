@@ -31,12 +31,12 @@ server_link = "http://127.0.0.1:8000" #replace with production server initial ro
 
 #task-related functions
 def hallname(hallid:int):
-    l = [0,"Auditorium Hall","Seminar Hall","Room No. 105, A2 Building","CRC Conference Room"]
+    l = [0,"Auditorium Hall","Seminar Hall","Room No. 105, A2 Building","CRC Conference Room","AIIT Conference Room","RICS Conference Room","Atrium"]
     #l = [0,'auditorium','seminar','room105','crc']
     return (l[hallid])
 
 def hallid(hallname:str):
-    l = [0,'auditorium','seminar','room105','crc']
+    l = [0,'auditorium','seminar','room105','crc','aiit','rics','atrium']
     return (l.index(hallname))
 
 def trimtime(time:str):
@@ -63,11 +63,14 @@ def get_sorted_status():
     final = []
     final2 = []
     for i in out:
+        i = list(i)
         if i[1] == 'pending':
             final.append(i)
         elif i[1] == 'reject':
+            i[1] = "rejected"
             final.append(i)
         else:
+            i[1] = "accepted"
             final.append(i)
     #return final  #then use db.infofect for each bid.
     for i in final:
@@ -304,6 +307,13 @@ def utility_processor():
             etime= "Full Day"
         return etime
     return dict(getduration=getduration)
+@app.context_processor
+def utility_processor():
+    def hallname(hallid:int):
+        l = [0,"Auditorium Hall","Seminar Hall","Room No. 105, A2 Building","CRC Conference Room","AIIT Conference Room","RICS Conference Room","Atrium"]
+        #l = [0,'auditorium','seminar','room105','crc']
+        return (l[hallid])
+    return dict(hallname=hallname)
 
 #before-request functions
 @app.before_request
@@ -333,8 +343,8 @@ def index():
         print("CAL:",cal)
         if request.method == 'POST':
             
-            hall = ['auditorium','seminar','room105','crc']
-            place = ['SchoolName','FacultyName','HodName','EventName','date','Duration','Duration','Email','Phone','ResourcePersonName','ResourcePersonDetail']
+            hall = ['auditorium','seminar','room105','crc','AIITConferenceroom','RICSConferenceRoom','Atrium']
+            place = ['SchoolName','FacultyName','HodName','EventName','date','startime','endtime','Email','Phone','ResourcePersonName','ResourcePersonDetail']
             final=[]
             loc = ''
             for i in hall:
@@ -573,7 +583,8 @@ def adminbooking():
             username = session['admin_username']
             output = get_sorted_status()
             return render_template('allbooking.html',output=output)
-        except:
+        except Exception as e :
+            print(e)
             return render_template('notitab.html',error="You have been logged out of Admin. Please Login again.")
     else:
         return render_template('notitab.html',error="You have been logged out of Admin. Please Login again.")
@@ -665,6 +676,9 @@ def usernoti():
     else:
         return render_template('usernotification.html',error="You have been logged out. Please Login again.")
 
+@app.route('/test',methods=['GET'])
+def test():
+    return render_template("user.home(new).html")
 
 #futurescope
 @app.route('/verifyemail/<username>' ,methods=['GET', 'POST'])

@@ -5,8 +5,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Hall Management System</title>
-
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static',filename='apple-touch-icon.png') }}">
     <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static',filename='favicon-32x32.png') }}">
     <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static',filename='favicon-16x16.png') }}">
@@ -71,7 +72,8 @@
     
     .navbar .menu a:hover {
       background-color: var(--secondary-color);
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      transform: scale(1.05);
+      box-shadow: 0 0 0 2px aliceblue; /* it Enhance the shadow */
     }
     
     .navbar .icon {
@@ -82,39 +84,11 @@
       font-weight: bold;
       position: relative;
     }
-    
-    .navbar .icon:hover .dropdown {
-      display: block;
-    }
-    
-    .dropdown {
-      display: none;
-      position: absolute;
-      top: 40px;
-      right: 0;
-      background-color: var(--primary-color);
-      box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
-      z-index: 1;
-      border-radius: 5px;
-      min-width: 150px;
-      overflow: hidden;
-    }
-    
-    .dropdown a {
-      color: var(--white);
-      padding: 10px 15px;
-      text-decoration: none;
-      display: block;
-      transition: background-color 0.3s;
-    }
-    
-    .dropdown a:hover {
-      background-color: var(--secondary-color);
-    }
-    
-    .dropdown a:last-child {
-      border-bottom: none;
-    }
+/*.menu-item i.fas {
+  color: rgb(228, 228, 8); 
+}*/
+
+  
     /* Hero Section */
     .hero {
       background: url('hero.audi.jpg') no-repeat center center / cover;
@@ -207,6 +181,46 @@
     footer a:hover {
       text-decoration: underline;
     }
+/*  styling for the color of calender */
+.form-control {
+  border: 1px solid #ccc;
+  padding: 8px;
+  font-size: 14px;
+}
+
+/* Color for fully booked dates */
+.booked-full-color {
+  background-color: #ff9999; /* Red */
+}
+
+/* Color for dates booked for the first half */
+.booked-first-half-color {
+  background-color: #ffc966; /* Orange */
+}
+
+/* Color for dates booked for the second half */
+.booked-second-half-color {
+  background-color: #99ccff; /* Blue */
+}
+
+/* Color for dates that are not booked */
+.not-booked-color {
+  background-color: #b3ffb3; /* Green */
+}
+
+
+ /*  styles for the calendar  */
+td[data-day] {
+  border-radius: 50%;
+  text-align: center;
+  line-height: 2;
+  cursor: pointer;
+}
+
+td[data-day]:hover {
+  background-color: black;
+}
+
   </style>
 </head>
 
@@ -217,22 +231,24 @@
       <div class="logo">
         <img src="Amity-logo.png" alt="Logo">
         <img src="name.2.png" alt="Logo">
-       
       </div>
       <div class="menu">
-        <a href="#aboutus">About Us</a>
-        <span class="icon">&#128276;</span>
-        <div class="icon">&#9881;
-          <div class="dropdown">
-            <a href="#profile">Profile</a>
-            <a href="{{url_for('status')}}">Status</a>
-            <a href="{{url_for('userlogin')}}">Logout</a>
+        <a href="{{url_for('usercalender')}}" class="menu-item">
+          <i class="fas fa-calendar-alt"></i> <!-- Calendar icon -->
+          Calendar
+        </a>
+        <a href="{{url_for('usernoti')}}" class="menu-item">
+          <i class="fas fa-bell"></i> <!-- Notification icon -->
+          Hall Updates
+            <a href="{{url_for('status')}}">Booking Status</a>
+            <a href="{{url_for('home')}}">Logout</a>
           </div>
-        </div>
+        </a>
       </div>
     </div>
   </header>
-
+  
+  
   <main>
     <section class="hero">
       <div class="container">
@@ -245,7 +261,7 @@
       <div class="container">
         <h2>Available Halls</h2>
         {% if error %}
-        <p><strong>Update </strong> : {{error}}</p>
+        <!-- <p><strong>Update </strong> : {{error}}</p> -->
         <script>
           alert("{{error}}");
         </script>
@@ -299,10 +315,33 @@
             <form method="post" id="auditoriumForm" novalidate>
               <div class="form-group">
                 <label for="auditoriumSchoolName">School Name:</label>
-                <input type="text" class="form-control" id="auditoriumSchoolName" name="auditoriumSchoolName" placeholder="Enter your school name" required>
+                <select class="form-control" id="auditoriumSchoolName" name="auditoriumSchoolName" required>
+                  <option value="">Select School Name</option>
+                  <option value="ABS">ABS - Amity Business School</option>
+                  <option value="AFS">AFS - Amity Film School</option>
+                  <option value="AIBAS">AIBAS - Amity Institute of Behavioural & Allied Sciences</option>
+                  <option value="AIB">AIB - Amity Institute of Biotechnology</option>
+                  <option value="ALIT">ALIT - Amity Institute of Information Technology</option>
+                  <option value="AILA">AILA - Amity Institute of Liberal Arts</option>
+                  <option value="AIP">AIP - Amity Institute of Pharmacy</option>
+                  <option value="AIT">AIT - Amity Institute of Technology</option>
+                  <option value="AITT">AITT - Amity Institute of Travel & Tourism</option>
+                  <option value="ALS">ALS - Amity Law School</option>
+                  <option value="ASAP">ASAP - Amity School of Architecture & Planning</option>
+                  <option value="ASAS">ASAS - Amity School of Applied Sciences</option>
+                  <option value="ASCO">ASCO - Amity School of Communication</option>
+                  <option value="ASET">ASET - Amity School of Engineering & Technology</option>
+                  <option value="ASFT">ASFT - Amity School of Fashion Technology</option>
+                  <option value="ASL">ASL - Amity School of Languages</option>
+                  <option value="CISOL">CIIOL - CII Logistics</option>
+                  <option value="TUCSSBERICS"> RICS</option>
+                  <option value="ASFA">ASFA - Amity School of Fine Arts</option>
+                  <option value="AIE">AIE - Amity Institute of Education</option>
+                  <option value="AIN">AIN - Amity Institute of Nanotechnology</option>
+                </select>
               </div>
               <div class="form-group">
-                <label for="auditoriumFacultyName">Faculty Name:</label>
+                <label for="auditoriumFacultyName">Event Coordinator Name:</label>
                 <input type="text" class="form-control" id="auditoriumFacultyName" name="auditoriumFacultyName" placeholder="Enter your name" required>
               </div>
               <div class="form-group">
@@ -314,26 +353,38 @@
                 <input type="text" class="form-control" id="auditoriumEventName" name="auditoriumEventName" placeholder="Enter event name" required>
               </div>
               <div class="form-group">
-                <label for="auditoriumDate">Date:</label>
-                <input type="date" class="form-control" id="auditoriumDate" name="auditoriumDate" required>
+                <label for="auditoriumDuration">Event Duration:</label>
+                <select class="form-control" id="auditoriumDuration" name="auditoriumDuration" required>
+                  <option value="1stHalf">1st half day</option>
+                  <option value="2ndHalf">2nd half day</option>
+                  <option value="fullDay">Full day</option>
+                </select>
               </div>
               <div class="form-group">
-                <label for="auditoriumTime">Start Time:</label>
-                <input type="time" class="form-control" id="sauditoriumTime" name="auditoriumsTime" required>
+                <label for="auditoriumdate">Date of Event:</label>
+                <input type="date" class="form-control" id="auditoriumdate" name="auditoriumdate" required onchange="updateDayOfWeek('auditoriumdate', 'auditoriumday'); updateCalendarColor('auditoriumdate','auditoriumDuration')">
               </div>
               <div class="form-group">
-                <label for="auditoriumTime">End Time:</label>
-                <input type="time" class="form-control" id="eauditoriumTime" name="auditoriumeTime" required>
+                <label for="auditoriumday">Day of Event:</label>
+                <input type="text" class="form-control" id="auditoriumday" name="auditoriumday" readonly>
               </div>
               <div class="form-group">
-                <label for="auditoriumEmail">Email:</label>
+                <label for="auditoriumResourcePersonName">Resource Person Name:</label>
+                <input type="text" class="form-control" id="auditoriumResourcePersonName" name="auditoriumResourcePersonName" placeholder="Enter resource person name" required>
+              </div>
+              <div class="form-group">
+                <label for="auditoriumResourcePersonDetail">Resource Person Detail:</label>
+                <textarea class="form-control" id="auditoriumResourcePersonDetail" name="auditoriumResourcePersonDetail" placeholder="Enter resource person details" required></textarea>
+              </div>
+              <div class="form-group">
+                <label for="auditoriumEmail">Event Coordinator's Email:</label>
                 <input type="email" class="form-control" id="auditoriumEmail" name="auditoriumEmail" placeholder="Enter your email" required>
               </div>
               <div class="form-group">
-                <label for="auditoriumPhone">Phone Number:</label>
+                <label for="auditoriumPhone">Event Coordinator's Phone Number:</label>
                 <input type="tel" class="form-control" id="auditoriumPhone" name="auditoriumPhone" placeholder="Enter your phone number" required>
               </div>
-              <button type="submit" class="btn btn-primary">Submit</button>
+              <button type="submit" class="btn btn-primary" id="submitmain">Submit</button>
             </form>
           </div>
         </div>
@@ -352,11 +403,34 @@
             <form method="post" id="seminarForm" novalidate>
               <div class="form-group">
                 <label for="seminarSchoolName">School Name:</label>
-                <input type="text" class="form-control" id="seminarSchoolName" name="seminarSchoolName" placeholder="Enter your school name" required>
+                <select class="form-control" id="seminarSchoolName" name="seminarSchoolName" required>
+                  <option value="">Select School Name</option>
+                  <option value="ABS">ABS - Amity Business School</option>
+                  <option value="AFS">AFS - Amity Film School</option>
+                  <option value="AIBAS">AIBAS - Amity Institute of Behavioural & Allied Sciences</option>
+                  <option value="AIB">AIB - Amity Institute of Biotechnology</option>
+                  <option value="ALIT">ALIT - Amity Institute of Information Technology</option>
+                  <option value="AILA">AILA - Amity Institute of Liberal Arts</option>
+                  <option value="AIP">AIP - Amity Institute of Pharmacy</option>
+                  <option value="AIT">AIT - Amity Institute of Technology</option>
+                  <option value="AITT">AITT - Amity Institute of Travel & Tourism</option>
+                  <option value="ALS">ALS - Amity Law School</option>
+                  <option value="ASAP">ASAP - Amity School of Architecture & Planning</option>
+                  <option value="ASAS">ASAS - Amity School of Applied Sciences</option>
+                  <option value="ASCO">ASCO - Amity School of Communication</option>
+                  <option value="ASET">ASET - Amity School of Engineering & Technology</option>
+                  <option value="ASFT">ASFT - Amity School of Fashion Technology</option>
+                  <option value="ASL">ASL - Amity School of Languages</option>
+                  <option value="CISOL">CIIOL - CII Logistics</option>
+                  <option value="TUCSSBERICS"> RICS</option>
+                  <option value="ASFA">ASFA - Amity School of Fine Arts</option>
+                  <option value="AIE">AIE - Amity Institute of Education</option>
+                  <option value="AIN">AIN - Amity Institute of Nanotechnology</option>
+                </select>
               </div>
               <div class="form-group">
-                <label for="seminarFacultyName">Faculty Name:</label>
-                <input type="text" class="form-control" id="seminarFacultyName" name="seminarFacultyName" placeholder="Enter your name" required>
+                <label for="seminarFacultyName">Event Coordinator Name:</label>
+                <input type="text" class="form-control" id="seminarEventCoordinatoryName" name="seminarFacultyName" placeholder="Enter your name" required>
               </div>
               <div class="form-group">
                 <label for="seminarHodName">HOD/HOI/Director Name:</label>
@@ -367,26 +441,39 @@
                 <input type="text" class="form-control" id="seminarEventName" name="seminarEventName" placeholder="Enter event name" required>
               </div>
               <div class="form-group">
-                <label for="seminarDate">Date:</label>
-                <input type="date" class="form-control" id="seminarDate" name="seminarDate" required>
+                <label for="seminarDuration">Event Duration:</label>
+                <select class="form-control" id="seminarDuration" name="seminarDuration" required>
+                  <option value="1stHalf">1st half day</option>
+                  <option value="2ndHalf">2nd half day</option>
+                  <option value="fullDay">Full day</option>
+                </select>
               </div>
               <div class="form-group">
-                <label for="seminarTime">Start Time:</label>
-                <input type="time" class="form-control" id="seminarsTime" name="seminarsTime" required>
+                <label for="seminardate">Date of Event:</label>
+                <input type="date" class="form-control" id="seminardate" name="seminardate" required onchange="updateDayOfWeek('seminardate', 'seminarday'); updateCalendarColor('seminardate','seminarDuration')">
               </div>
               <div class="form-group">
-                <label for="seminarTime">End Time:</label>
-                <input type="time" class="form-control" id="seminareTime" name="seminareTime" required>
+                <label for="seminarday">Day of Event:</label>
+                <input type="text" class="form-control" id="seminarday" name="day" readonly>
+              </div>
+              
+              <div class="form-group">
+                <label for="seminarResourcePersonName">Resource Person Name:</label>
+                <input type="text" class="form-control" id="seminarResourcePersonName" name="seminarResourcePersonName" placeholder="Enter resource person name" required>
               </div>
               <div class="form-group">
-                <label for="seminarEmail">Email:</label>
+                <label for="seminarResourcePersonDetail">Resource Person Detail:</label>
+                <textarea class="form-control" id="seminarResourcePersonDetail" name="seminarResourcePersonDetail" placeholder="Enter resource person details " required></textarea>
+              </div>
+              <div class="form-group">
+                <label for="seminarEmail">Event Coordinator's Email:</label>
                 <input type="email" class="form-control" id="seminarEmail" name="seminarEmail" placeholder="Enter your email" required>
               </div>
               <div class="form-group">
-                <label for="seminarPhone">Phone Number:</label>
+                <label for="seminarPhone">Event Coordinator's Phone Number:</label>
                 <input type="tel" class="form-control" id="seminarPhone" name="seminarPhone" placeholder="Enter your phone number" required>
               </div>
-              <button type="submit" class="btn btn-primary">Submit</button>
+              <button type="submit" class="btn btn-primary" id="submitmain">Submit</button>
             </form>
           </div>
         </div>
@@ -405,10 +492,33 @@
             <form method="post" id="room105Form" novalidate>
               <div class="form-group">
                 <label for="room105SchoolName">School Name:</label>
-                <input type="text" class="form-control" id="room105SchoolName" name="room105SchoolName" placeholder="Enter your school name" required>
+                <select class="form-control" id="room105SchoolName" name="room105SchoolName" required>
+                  <option value="">Select School Name</option>
+                  <option value="ABS">ABS - Amity Business School</option>
+                  <option value="AFS">AFS - Amity Film School</option>
+                  <option value="AIBAS">AIBAS - Amity Institute of Behavioural & Allied Sciences</option>
+                  <option value="AIB">AIB - Amity Institute of Biotechnology</option>
+                  <option value="ALIT">ALIT - Amity Institute of Information Technology</option>
+                  <option value="AILA">AILA - Amity Institute of Liberal Arts</option>
+                  <option value="AIP">AIP - Amity Institute of Pharmacy</option>
+                  <option value="AIT">AIT - Amity Institute of Technology</option>
+                  <option value="AITT">AITT - Amity Institute of Travel & Tourism</option>
+                  <option value="ALS">ALS - Amity Law School</option>
+                  <option value="ASAP">ASAP - Amity School of Architecture & Planning</option>
+                  <option value="ASAS">ASAS - Amity School of Applied Sciences</option>
+                  <option value="ASCO">ASCO - Amity School of Communication</option>
+                  <option value="ASET">ASET - Amity School of Engineering & Technology</option>
+                  <option value="ASFT">ASFT - Amity School of Fashion Technology</option>
+                  <option value="ASL">ASL - Amity School of Languages</option>
+                  <option value="CISOL">CIIOL - CII Logistics</option>
+                  <option value="TUCSSBERICS">RICS</option>
+                  <option value="ASFA">ASFA - Amity School of Fine Arts</option>
+                  <option value="AIE">AIE - Amity Institute of Education</option>
+                  <option value="AIN">AIN - Amity Institute of Nanotechnology</option>
+                </select>
               </div>
               <div class="form-group">
-                <label for="room105FacultyName">Faculty Name:</label>
+                <label for="room105FacultyName">Event Coordinator Name:</label>
                 <input type="text" class="form-control" id="room105FacultyName" name="room105FacultyName" placeholder="Enter your name" required>
               </div>
               <div class="form-group">
@@ -420,26 +530,38 @@
                 <input type="text" class="form-control" id="room105EventName" name="room105EventName" placeholder="Enter event name" required>
               </div>
               <div class="form-group">
-                <label for="room105Date">Date:</label>
-                <input type="date" class="form-control" id="room105Date" name="room105Date" required>
+                <label for="room105Duration">Event Duration:</label>
+                <select class="form-control" id="room105Duration" name="room105Duration" required>
+                  <option value="1stHalf">1st half day</option>
+                  <option value="2ndHalf">2nd half day</option>
+                  <option value="fullDay">Full day</option>
+                </select>
               </div>
               <div class="form-group">
-                <label for="room105Time">Start Time:</label>
-                <input type="time" class="form-control" id="room105sTime" name="room105sTime" required>
+                <label for="room105date">Date of Event:</label>
+                <input type="date" class="form-control" id="room105date" name="room105date" required onchange="updateDayOfWeek('room105date', 'room105day'); updateCalendarColor('room105date','room105Duration')">
               </div>
               <div class="form-group">
-                <label for="room105Time">End Time:</label>
-                <input type="time" class="form-control" id="room105eTime" name="room105eTime" required>
+                <label for="room105day">Day of Event:</label>
+                <input type="text" class="form-control" id="room105day" name="day" readonly>
               </div>
               <div class="form-group">
-                <label for="room105Email">Email:</label>
+                <label for="room105ResourcePersonName">Resource Person Name:</label>
+                <input type="text" class="form-control" id="room105ResourcePersonName" name="room105ResourcePersonName" placeholder="Enter resource person name" required>
+              </div>
+              <div class="form-group">
+                <label for="room105ResourcePersonDetail">Resource Person Detail:</label>
+                <textarea class="form-control" id="room105ResourcePersonDetail" name="room105ResourcePersonDetail" placeholder="Enter resource person details " required></textarea>
+              </div>
+              <div class="form-group">
+                <label for="room105Email">Event Coordinator's Email:</label>
                 <input type="email" class="form-control" id="room105Email" name="room105Email" placeholder="Enter your email" required>
               </div>
               <div class="form-group">
-                <label for="room105Phone">Phone Number:</label>
+                <label for="room105Phone">Event Coordinator's Phone Number:</label>
                 <input type="tel" class="form-control" id="room105Phone" name="room105Phone" placeholder="Enter your phone number" required>
               </div>
-              <button type="submit" class="btn btn-primary">Submit</button>
+              <button type="submit" class="btn btn-primary" id="submitmain">Submit</button>
             </form>
           </div>
         </div>
@@ -458,10 +580,33 @@
             <form method="post" id="crcForm" novalidate>
               <div class="form-group">
                 <label for="crcSchoolName">School Name:</label>
-                <input type="text" class="form-control" id="crcSchoolName" name="crcSchoolName" placeholder="Enter your school name" required>
+                <select class="form-control" id="crcSchoolName" name="crcSchoolName" required>
+                  <option value="">Select School Name</option>
+                  <option value="ABS">ABS - Amity Business School</option>
+                  <option value="AFS">AFS - Amity Film School</option>
+                  <option value="AIBAS">AIBAS - Amity Institute of Behavioural & Allied Sciences</option>
+                  <option value="AIB">AIB - Amity Institute of Biotechnology</option>
+                  <option value="ALIT">ALIT - Amity Institute of Information Technology</option>
+                  <option value="AILA">AILA - Amity Institute of Liberal Arts</option>
+                  <option value="AIP">AIP - Amity Institute of Pharmacy</option>
+                  <option value="AIT">AIT - Amity Institute of Technology</option>
+                  <option value="AITT">AITT - Amity Institute of Travel & Tourism</option>
+                  <option value="ALS">ALS - Amity Law School</option>
+                  <option value="ASAP">ASAP - Amity School of Architecture & Planning</option>
+                  <option value="ASAS">ASAS - Amity School of Applied Sciences</option>
+                  <option value="ASCO">ASCO - Amity School of Communication</option>
+                  <option value="ASET">ASET - Amity School of Engineering & Technology</option>
+                  <option value="ASFT">ASFT - Amity School of Fashion Technology</option>
+                  <option value="ASL">ASL - Amity School of Languages</option>
+                  <option value="CISOL">CIIOL - CII Logistics</option>
+                  <option value="TUCSSBERICS"> RICS</option>
+                  <option value="ASFA">ASFA - Amity School of Fine Arts</option>
+                  <option value="AIE">AIE - Amity Institute of Education</option>
+                  <option value="AIN">AIN - Amity Institute of Nanotechnology</option>
+                </select>
               </div>
               <div class="form-group">
-                <label for="crcFacultyName">Faculty Name:</label>
+                <label for="crcFacultyName">Event Coordinator Name:</label>
                 <input type="text" class="form-control" id="crcFacultyName" name="crcFacultyName" placeholder="Enter your name" required>
               </div>
               <div class="form-group">
@@ -473,32 +618,48 @@
                 <input type="text" class="form-control" id="crcEventName" name="crcEventName" placeholder="Enter event name" required>
               </div>
               <div class="form-group">
-                <label for="crcDate">Date:</label>
-                <input type="date" class="form-control" id="crcDate" name="crcDate" required>
+                <label for="crcDuration">Event Duration:</label>
+                <select class="form-control" id="crcDuration" name="crcDuration" required>
+                  <option value="1stHalf">1st half day</option>
+                  <option value="2ndHalf">2nd half day</option>
+                  <option value="fullDay">Full day</option>
+                </select>
+              </div>
+             
+              <div class="form-group">
+                <label for="crcdate">Date of Event:</label>
+                <input type="date" class="form-control" id="crcdate" name="crcdate" required onchange="updateDayOfWeek('crcdate', 'crcday'); updateCalendarColor('crcdate','crcDuration')">
+              </div>
+    
+              <div class="form-group">
+                <label for="crcday">Day of the Week:</label>
+                <input type="text" class="form-control" id="crcday" name="day" readonly>
               </div>
               <div class="form-group">
-                <label for="crcTime">Start Time:</label>
-                <input type="time" class="form-control" id="crcsTime" name="crcsTime" required>
+                <label for="crcResourcePersonName">Resource Person Name:</label>
+                <input type="text" class="form-control" id="crcResourcePersonName" name="crcResourcePersonName" placeholder="Enter resource person name" required>
               </div>
               <div class="form-group">
-                <label for="crcTime">End Time:</label>
-                <input type="time" class="form-control" id="crceTime" name="crceTime" required>
+                <label for="crcResourcePersonDetail">Resource Person Detail:</label>
+                <textarea class="form-control" id="crcResourcePersonDetail" name="crcResourcePersonDetail" placeholder="Enter resource person details " required></textarea>
               </div>
               <div class="form-group">
-                <label for="crcEmail">Email:</label>
+                <label for="crcEmail">Event Coordinator's Email:</label>
                 <input type="email" class="form-control" id="crcEmail" name="crcEmail" placeholder="Enter your email" required>
               </div>
               <div class="form-group">
-                <label for="crcPhone">Phone Number:</label>
+                <label for="crcPhone">Event Coordinator's Phone Number:</label>
                 <input type="tel" class="form-control" id="crcPhone" name="crcPhone" placeholder="Enter your phone number" required>
               </div>
-              <button type="submit" class="btn btn-primary">Submit</button>
+              <button type="submit" class="btn btn-primary" id="submitmain">Submit</button>
             </form>
           </div>
         </div>
       </div>
     </div>
-    <!-- js for submition of information -->
+
+
+  <!-- js for 1st submition of all information  and 2nd day of week accoording to date -->
     <script>
       document.addEventListener("DOMContentLoaded", function () {
         const forms = document.querySelectorAll("form");
@@ -514,9 +675,89 @@
           }, false);
         });
       });
+ 
+      function updateDayOfWeek(dateInputId, dayInputId) {
+        const dateInput = document.getElementById(dateInputId);
+        const dayInput = document.getElementById(dayInputId);
+        const date = new Date(dateInput.value);
+        const options = { weekday: 'long' };
+        dayInput.value = date.toLocaleDateString('en-US', options);
+      }
+
+    function disablebutton(){
+      document.getElementById("submitmain").disabled = true;
+    }
+    function enablebutton(){
+      document.getElementById("submitmain").disabled = false;
+    }
+    
+    function updateCalendarColor(dateInputId , givendateid) {
+        
+        const dateInput = document.getElementById(dateInputId);
+        const dateValue = dateInput.value;
+        const givendate = document.getElementById(givendateid);
+        const givenValue = givendate.value;
+        // console.log(givenValue);
+    
+        // Hard-coded logic for determining booking status based on date
+        const bookingStatus = getBookingStatus(dateValue);
+    
+        switch (bookingStatus) {
+            case 'full':
+                dateInput.style.backgroundColor = '#ff9999'; // Red for fully booked
+                // disablebutton();
+                break;
+            case 'first-half':
+                dateInput.style.backgroundColor = '#ffc966'; // Orange for first half booked
+                // if (givenValue==='first-half') {
+                //   disablebutton();
+                // }
+                // else{
+                //   enablebutton();
+                // }
+                break;
+            case 'second-half':
+                dateInput.style.backgroundColor = '#99ccff'; // Blue for second half booked
+                // if (givenValue==='second-half') {
+                //   disablebutton();
+                // }
+                // else{
+                //   enablebutton();
+                // }
+                break;
+            default:
+                dateInput.style.backgroundColor = '#b3ffb3'; // Green for not booked
+                // enablebutton();
+        }
+    }
+    
+    function getBookingStatus(date) {
+        const day = new Date(date).getDate();
+        // console.log(day)
+        // console.log(date)
+        {%for i in cal%}
+        if (date==="{{i[0]}}") return '{{i[1]}}';
+        {%endfor%}
+        // if (day % 4 === 0) return 'full';
+        // if (day % 4 === 1) return 'first-half';
+        // if (day % 4 === 2) return 'second-half';
+        return 'not-booked';
+    }
+      
+     
+
+
+     
+
+
+
+   
+
     </script>
     
-    <!-- Include jQuery and Bootstrap JS -->
+    <!-- Include jQuery and Bootstrap JS  and jQuery UI libraries-->
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.10.1/main.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
       
