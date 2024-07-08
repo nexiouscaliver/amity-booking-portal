@@ -226,7 +226,7 @@
           {%for i in output%}
           <tr>
             <td>{{i[0]}}</td>
-            <td>{{[0,"Auditorium Hall","Seminar Hall","Room No. 105, A2 Building","CRC Conference Room"][i[1]]}}</td>
+            <td>{{hallname(i[1])}}</td>
             <td>{{i[3]}}</td>
             <td>{{i[2]}}</td>
             <td>{{i[4]}}</td>
