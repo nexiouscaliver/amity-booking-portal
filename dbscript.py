@@ -220,7 +220,7 @@ def calendermain():
     final=[]
     for i in o:
         bid = i[0]
-        sql=f'select date,etime,schoolname,hallid from info where bookid={bid};'
+        sql=f'select date,etime,schoolname,hallid,stime,fname,eventname from info where bookid={bid};'
         a = c.execute(sql)
         f = a.fetchone()
         final.append(list(f))
