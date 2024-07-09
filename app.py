@@ -680,7 +680,7 @@ def usernoti():
 def test():
     output = db.calendermain()
     print(output)
-    return render_template("cal(new).html")
+    return render_template("cal(new).html",output=output)
 
 #futurescope
 @app.route('/verifyemail/<username>' ,methods=['GET', 'POST'])

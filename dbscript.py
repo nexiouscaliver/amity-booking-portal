@@ -225,12 +225,12 @@ def calendermain():
         f = a.fetchone()
         final.append(list(f))
     for i in final:
-        if i[1]==1300 or i[1]=="1300":
-            i[1] = "first-half-booked"
-        elif i[1]==1700 or i[1]=="1700":
-            i[1]= "second-half-booked"
-        elif i[1]==1701 or i[1]=="1701":
-            i[1]= "full-booked"
+        # if i[1]==1300 or i[1]=="1300":
+        #     i[1] = "first-half-booked"
+        # elif i[1]==1700 or i[1]=="1700":
+        #     i[1]= "second-half-booked"
+        # elif i[1]==1701 or i[1]=="1701":
+        #     i[1]= "full-booked"
         if i[3]==1 or i[3]=="1":
             i[3]="Auditorium"
         elif i[3]==2 or i[3]=="2":
@@ -284,6 +284,10 @@ def calendermain():
     final2.append(d)
     final2.append(e)
     final2.append(f)
+    for i in final:
+        for j in i:
+            # print(j)
+            print(i)
     conn.commit()
     conn.close()
     return final2
