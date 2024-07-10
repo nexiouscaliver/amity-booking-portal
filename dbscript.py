@@ -284,10 +284,10 @@ def calendermain():
     final2.append(d)
     final2.append(e)
     final2.append(f)
-    for i in final:
-        for j in i:
-            # print(j)
-            print(i)
+    # for i in final2:
+    #     for j in i:
+    #         print(j)
+    #         # print(i) 1 ,4
     conn.commit()
     conn.close()
     return final2
