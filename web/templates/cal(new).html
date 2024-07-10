@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Booking Calendar</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         body {
             background-color: aliceblue;
@@ -236,30 +237,7 @@
             background-color: #4299e1;
         }
         
-        @media (max-width: 640px) {
-            .calendar-header,
-            .calendar {
-                grid-template-columns: repeat(3, 1fr);
-                
-            }
-        
-            .day {
-                font-size: 14px;
-                padding: 5px;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .calendar-header,
-            .calendar {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        
-            .day {
-                font-size: 12px;
-                padding: 3px;
-            }
-        }
+       
 
 
 
@@ -271,188 +249,148 @@
         
         
         /*slots*/
-        
-.time-slot-popup {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: white;
-    border: 1px solid #ccc;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    z-index: 1000;
-    width: 80%;
-    max-width: 600px;
-}
-
-.time-slot-content {
-    margin-top: 10px;
-}
-
-.time-slot-chart {
-    display: grid;
-    grid-template-columns: 1fr 3fr;
-    gap: 5px;
-}
-
-.time-slot-row {
-    display: contents; /* Let the parent grid handle layout */
-}
-
-.time-slot-time {
-    padding: 10px;
-    border: 1px solid #ccc;
-    text-align: center;
-}
-
-.time-slot-status {
-    padding: 10px;
-    border: 1px solid #ccc;
-    text-align: center;
-    background-color: lightgreen; /* Default background for free slots */
-    color: white;
-}
-
-.booked {
-    background-color: lightcoral; /* Light red background for booked slots */
-}
-
-.pending {
-    background-color: lightyellow; /* Light yellow background for pending slots */
-    color: black;
-}
-
-.free {
-    background-color: lightgreen; /* Green background for free slots */
-}
-
-.disappear {
-    opacity: 0;
-    transition: opacity 0.3s ease-in-out;
-}
-
-.close-button {
-    display: block;
-    margin: 10px auto;
-    padding: 5px 10px;
-    background-color: #f44336;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.close-button:hover {
-    background-color: #d32f2f;
-}
-keyframes popIn {
-    from {
-      opacity: 0;
-      transform: scale(0.9);
-    }
-    to {
-      opacity: 1;
-      transform: scale(1);
-    }
-  }
-  
-
-
+        .time-slot-popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #04172b; /* Dark blue background */
+            border: 1px solid #ccc;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            color: white; 
+            max-width: 90%; 
+            max-height: 90%; 
+            overflow-x: auto; /* Enable horizontal scrolling */
+            overflow-y: hidden; /* Disable vertical scrolling */
+        }
         
         
-        /*slots*/
         
-.time-slot-popup {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: white;
-    border: 1px solid #ccc;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    z-index: 1000;
-    width: 80%;
-    max-width: 600px;
-}
+        
+        .time-slot-content {
+            margin-top: 10px;
+        }
+        
+        .time-slot-chart {
+            display: flex;
+            align-items: center;
+            justify-content: space-between; /* Adjust  */
+            gap: 10px; /* Or use margin: 10px;*/
+        }
+        
+        .time-slot-time,
+        .time-slot-status {
+            padding: 10px;
+            border: 2px solid #ccc;
+            text-align: center;
+            flex: 1; /* Take up remaining space */
+            transition: transform 0.3s ease-out; /* Smooth transition for size change */
+        }
+        
+        .time-slot-time:hover,
+        .time-slot-status:hover {
+            transform: scale(1.1); /* Increase size on hover */
+        }
+         
 
-.time-slot-content {
-    margin-top: 10px;
-}
-
-.time-slot-chart {
-    display: grid;
-    grid-template-columns: 1fr 3fr;
-    gap: 5px;
-}
-
-.time-slot-row {
-    display: contents; /* Let the parent grid handle layout */
-}
-
-.time-slot-time {
-    padding: 10px;
-    border: 1px solid #ccc;
-    text-align: center;
-}
-
-.time-slot-status {
-    padding: 10px;
-    border: 1px solid #ccc;
-    text-align: center;
-    background-color: lightgreen; /* Default background for free slots */
-    color: white;
-}
-
-.booked {
-    background-color: lightcoral; /* Light red background for booked slots */
-}
-
-.pending {
-    background-color: lightyellow; /* Light yellow background for pending slots */
-    color: black;
-}
-
-.free {
-    background-color: lightgreen; /* Green background for free slots */
-}
-
-.disappear {
-    opacity: 0;
-    transition: opacity 0.3s ease-in-out;
-}
-
-.close-button {
-    display: block;
-    margin: 10px auto;
-    padding: 5px 10px;
-    background-color: #f44336;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.close-button:hover {
-    background-color: #d32f2f;
-}
-keyframes popIn {
-    from {
-      opacity: 0;
-      transform: scale(0.9);
-    }
-    to {
-      opacity: 1;
-      transform: scale(1);
-    }
-  }
-  
-
-
-
+        
+        .status-data {
+            position: absolute;
+            top: -100%; /* Start from above the box */
+            left: 0;
+            width: auto;
+            height: auto;
+            background-color: transparent; /* Transparent initially */
+            animation: slideInDown 0.5s forwards; /* Animation for sliding in */
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            transition: transform 0.3s ease-out; /* Smooth transition for size change */
+        }
+        
+        .status-data:hover {
+            transform: scale(1.2); /* Increase size on hover */
+        }
+        
+        @keyframes slideInDown {
+            from {
+                top: -100%; /* Start from above the box */
+            }
+            to {
+                top: 0; /* Slide in downwards */
+            }
+        }
+        
+        
+        
+        .booked {
+            background-color: lightcoral; /* Light red background for booked slots */
+        }
+        
+        .pending {
+            background-color: lightyellow; /* Light yellow background for pending slots */
+            color: black;
+        }
+        
+        .free {
+            background-color: lightgreen; /* Green background for free slots */
+        }
+        
+        .close-button {
+            display: block;
+            margin: 10px auto;
+            padding: 5px 10px;
+            background-color: #f44336; /* Red close button */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        
+        .close-button:hover {
+            background-color: #d32f2f; /* Darker red hover color */
+        }
+        
+        .time-slot-popup.disappear {
+            opacity: 0;
+        }
+        
+      
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+        }
+        
+        .nav-buttons button {
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+            color: white; /* Adjust text color as needed */
+            font-size: 1.2em; /* Adjust font size as needed */
+            padding: 5px 10px; /* Adjust padding as needed */
+        }
+        
+        .nav-buttons button:hover {
+            transform: scale(1.1);
+            color: #555; /* Adjust hover text color */
+        }
+        
+        .nav-buttons button:focus {
+            outline: none;
+        }
+        
+        .nav-buttons button:active {
+            transform: scale(0.9);
+        }
+        
     </style>
 </head>
 <body>
@@ -537,10 +475,10 @@ keyframes popIn {
             const hallData = {
                 Auditorium: {
                     '2024-07-01': [
-      { starttime: '9 am', endtime: '11 am', status: 'booked', school: 'School A', event: 'Event A',eventcordinator: 'Event C' },
-      { starttime: '12 pm', endtime: '3 pm', status: 'booked', school: 'School A', event: 'Event A',eventcordinator: 'Event C' },
-      { starttime: '4 pm', endtime: '5 pm', status: 'pending', school: 'School A', event: 'Event A',eventcordinator: 'Event C' },
-      // Add more data here
+      { starttime: '9 am', endtime: '11 am', status: 'booked', school: 'Amity shool of enginering and science', event: 'Event A',eventcordinator: 'Eventtttttttttttttttttt' },
+      { starttime: '12 pm', endtime: '1 pm', status: 'booked', school: 'School A', event: 'Event A',eventcordinator: 'Eventtttttttttttttttttttt' },
+      { starttime: '2 pm', endtime: '4 pm', status: 'pending', school: 'School A', event: 'Event A',eventcordinator: 'Event ttttttttttttttttt' },
+                 // Add more data here
     ],
                     '2024-07-03': [{ starttime: '9', endtime: '12', status: 'booked', school: 'School C', event: 'Event C' , eventcordinator: 'Event C'}],
                     '2024-07-04': [{ starttime: '9', endtime: '12', status: 'booked', school: 'School D', event: 'Event D' ,eventcordinator: 'Event C'}],
@@ -609,10 +547,8 @@ keyframes popIn {
             return slots;
         };
         
-      
-      
 
-
+        
             // Inside the updateCalendar() function
 
 const updateCalendar = () => {
@@ -668,20 +604,9 @@ const updateCalendar = () => {
 
 
 
-
-
-
-
-
-
-
 const showTimeSlotPopup = (dateKey) => {
     // Remove existing popup if any
-    const existingPopup = document.querySelector('.time-slot-popup');
-    if (existingPopup) {
-        existingPopup.classList.add('disappear');
-        setTimeout(() => existingPopup.remove(), 300); // Delay for animation to complete
-    }
+    closePopup();
 
     const popup = document.createElement('div');
     popup.classList.add('time-slot-popup');
@@ -691,11 +616,10 @@ const showTimeSlotPopup = (dateKey) => {
     popup.appendChild(title);
 
     const closeButton = document.createElement('button');
-    closeButton.textContent = 'Close';
     closeButton.classList.add('close-button');
+    closeButton.innerHTML = '<i class="fas fa-times"></i>';
     closeButton.addEventListener('click', () => {
-        popup.classList.add('disappear');
-        setTimeout(() => popup.remove(), 300); // Delay for animation to complete
+        closePopup();
     });
     popup.appendChild(closeButton);
 
@@ -712,15 +636,65 @@ const showTimeSlotPopup = (dateKey) => {
         chart.appendChild(slotElement);
     });
 
+    const navButtons = document.createElement('div');
+    navButtons.classList.add('nav-buttons');
+
+    const prevButton = document.createElement('button');
+prevButton.classList.add('nav-button', 'prev-button'); // Added 'nav-button' class for styling
+prevButton.innerHTML = '<i class="fas fa-chevron-left"></i>';
+prevButton.addEventListener('click', () => {
+    const prevDateKey = getPreviousDateKey(dateKey);
+    showTimeSlotPopup(prevDateKey);
+});
+navButtons.appendChild(prevButton);
+
+const nextButton = document.createElement('button');
+nextButton.classList.add('nav-button', 'next-button'); // Added 'nav-button' class for styling
+nextButton.innerHTML = '<i class="fas fa-chevron-right"></i>';
+nextButton.addEventListener('click', () => {
+    const nextDateKey = getNextDateKey(dateKey);
+    showTimeSlotPopup(nextDateKey);
+});
+navButtons.appendChild(nextButton);
+
+    popup.appendChild(navButtons);
+
     document.body.appendChild(popup);
 
     popup.addEventListener('click', (event) => {
         if (event.target === popup) {
-            popup.classList.add('disappear');
-            setTimeout(() => popup.remove(), 300); // Delay for animation to complete
+            closePopup();
         }
     });
 };
+
+// Function to close the current popup and all popups
+const closePopup = () => {
+    const existingPopups = document.querySelectorAll('.time-slot-popup');
+    existingPopups.forEach(popup => {
+        popup.classList.add('disappear');
+        setTimeout(() => popup.remove(), 300); // Delay for animation to complete
+    });
+};
+
+// Function to get the previous date key
+const getPreviousDateKey = (currentDateKey) => {
+    const currentDate = new Date(currentDateKey);
+    currentDate.setDate(currentDate.getDate() - 1);
+    return currentDate.toISOString().split('T')[0];
+};
+
+// Function to get the next date key
+const getNextDateKey = (currentDateKey) => {
+    const currentDate = new Date(currentDateKey);
+    currentDate.setDate(currentDate.getDate() + 1);
+    return currentDate.toISOString().split('T')[0];
+};
+
+
+
+
+
 
 const createTimeSlotElement = (timeSlot, dateKey) => {
     const slotElement = document.createElement('div');
@@ -743,7 +717,8 @@ const createTimeSlotElement = (timeSlot, dateKey) => {
             const slots = convertToTimeSlots(booking.starttime, booking.endtime);
             if (slots.includes(timeSlot)) {
                 isBooked = true;
-                const currentBookingData = `${booking.school} - ${booking.event} - ${booking.eventcordinator}`;
+                const currentBookingData = `SCHOOL - ${booking.school}\nEVENT - ${booking.event}\nCOORDINATOR - ${booking.eventcordinator}`;
+
                 if (!bookingData.includes(currentBookingData)) {
                     bookingData.push(currentBookingData);
                 }
