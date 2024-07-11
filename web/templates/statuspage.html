@@ -265,20 +265,7 @@
       </div>
     </nav>
   </header>
-  <script>
-    function changeSelectColor(select,status) {
-            if (status === 'ACCEPT') {
-              select.style.backgroundColor = 'var(--light-green)';
-              select.style.color = 'var(--primary-color)';
-            } else if (status === 'REJECT') {
-              select.style.backgroundColor = 'var(--light-red)';
-              select.style.color = 'var(--primary-color)';
-            } else {
-              select.style.backgroundColor = '';
-              select.style.color = '';
-            }
-          }
-  </script>
+ 
   <main>
     <div class="main-content">
       <h1>Booking Status</h1>
@@ -299,7 +286,7 @@
           
 
 
-          <!-- <tr>
+           <tr>
             <form class="cancel-form" onsubmit="return confirmCancel(event)">
                 <td>1</td>
                 <td>Auditorium</td>
@@ -311,7 +298,7 @@
                 <td>Pending</td>
                 <td><button type="button" class="cancel-button" onclick="showPopup(event)">  Cancel  </button></td>
             </form>
-        </tr> -->
+        </tr> 
           
           {%for i in output%}
           <tr>
