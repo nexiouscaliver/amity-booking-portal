@@ -122,7 +122,7 @@ def check_request(username:str):   #user
         # print(sql)
         f = c.execute(sql)
         p = f.fetchall()
-        print(p)
+        # print(p)
         # print(p)
         if (status == "confirm"):
             status = 'Confirmed'
@@ -130,7 +130,7 @@ def check_request(username:str):   #user
             status = 'Rejected'
         elif (status == "pending"):
             status = "Pending"
-        l = [bid,p[0][1],p[0][2],p[0][6],p[0][5],p[0][8],status]
+        l = [bid,p[0][1],p[0][2],p[0][6],p[0][5],p[0][8],status,p[0][7]]
         q.append(l)
     for i in q:print(i)
     conn.commit()
