@@ -299,7 +299,7 @@
           
 
 
-          <tr>
+          <!-- <tr>
             <form class="cancel-form" onsubmit="return confirmCancel(event)">
                 <td>1</td>
                 <td>Auditorium</td>
@@ -311,30 +311,35 @@
                 <td>Pending</td>
                 <td><button type="button" class="cancel-button" onclick="showPopup(event)">  Cancel  </button></td>
             </form>
-        </tr>
-          <!-- <tr>
-            <td>12345</td>
-            <td>Auditorium</td>
-            <td>10-02-2024</td>
-            <td>10:00 AM</td>
-             <td>12:00 AM</td> 
-            <td>Confirmed</td> -->
-          <!-- </tr> -->
-          <!-- {%for i in output%}
-          <p>{{(i)}}</p>
-          {%endfor%} -->
+        </tr> -->
+          
           {%for i in output%}
           <tr>
+            <form class="cancel-form" method="post" onsubmit="return confirmCancel(event)">
+                <td>{{i[0]}}</td>
+                <td>{{hallname(i[1])}}</td>
+                <td>{{i[3]}}</td>
+                <td>{{i[2]}}</td>
+                <td>{{i[4]}}</td>
+                <td>{{make_time(i[7])}}</td>
+                <td>{{make_time(i[5])}}</td>
+                <td>{{i[6]}}</td>
+                {%if i[6] == "Pending" or i[6] == "Confirmed"%}
+                <td><button type="button" class="cancel-button" onclick="showPopup(event)">  Cancel  </button></td>
+                {%endif%}
+              </form>
+          </tr>
+          <!-- <tr>
             <td>{{i[0]}}</td>
             <td>{{hallname(i[1])}}</td>
             <td>{{i[3]}}</td>
             <td>{{i[2]}}</td>
             <td>{{i[4]}}</td>
 
-            <td>{{i[5]}}</td>
+            <td>{{make_time(i[7])}}</td>
+            <td>{{make_time(i[5])}}</td>
             <td>{{i[6]}}</td>
-            
-          </tr>
+          </tr> -->
           {%endfor%}
           </table>
       </div>

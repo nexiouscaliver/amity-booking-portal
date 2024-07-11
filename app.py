@@ -393,17 +393,19 @@ def index():
 
 @app.route('/requeststatus' ,methods=['GET', 'POST'])
 def status():
+    if request.method == 'POST':
+        print("METHOD ACTIVATE")
     if session['username']:
         username = session['username']
         output = db.check_request(username)
         # print(output)
-        for i in output:
-            if i[5]==1300 or i[5]=="1300":
-                i[5] = "1st Half"
-            elif i[5]==1700 or i[5]=="1700":
-                i[5]= "2nd Half"
-            elif i[5]==1701 or i[5]=="1701":
-                i[5]= "Full Day"
+        # for i in output:
+        #     if i[5]==1300 or i[5]=="1300":
+        #         i[5] = "1st Half"
+        #     elif i[5]==1700 or i[5]=="1700":
+        #         i[5]= "2nd Half"
+        #     elif i[5]==1701 or i[5]=="1701":
+        #         i[5]= "Full Day"
         return render_template("statuspage.html",output=output)
     else:
         return redirect(url_for('userlogin'))
@@ -470,13 +472,13 @@ def admin():
                     i = j
                     # print("i value = ",i)
                     # print('i8 = ',i[8])
-                    if i[8]==1300 or i[8]=="1300":
-                        # print('trigg')
-                        i[8] = "1st Half"
-                    elif i[8]==1700 or i[8]=="1700":
-                        i[8]= "2nd Half"
-                    elif i[8]==1701 or i[8]=="1701":
-                        i[8]= "Full Day"
+                    # if i[8]==1300 or i[8]=="1300":
+                    #     # print('trigg')
+                    #     i[8] = "1st Half"
+                    # elif i[8]==1700 or i[8]=="1700":
+                    #     i[8]= "2nd Half"
+                    # elif i[8]==1701 or i[8]=="1701":
+                    #     i[8]= "Full Day"
                 # print(final)
                 return render_template("admintable.html",output=final)
             else:
