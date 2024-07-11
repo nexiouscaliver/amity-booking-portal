@@ -418,17 +418,17 @@ def admin():
         event_name = request.form["eventName"]
         event_venue = request.form["venue"]
         event_date = request.form["eventDate"]
-        event_dur = request.form["durationofevent"]
-        # end_time = request.form["endTime"]
-        if event_dur == "1st Half":
-            start_time = "900"
-            end_time = "1300"
-        elif event_dur == "2st Half":
-            start_time = "1400"
-            end_time = "1700"
-        elif event_dur == "Full Day":
-            start_time = "900"
-            end_time = "1701"
+        start_time = request.form["stime"]
+        end_time = request.form["etime"]
+        # if event_dur == "1st Half":
+        #     start_time = "900"
+        #     end_time = "1300"
+        # elif event_dur == "2st Half":
+        #     start_time = "1400"
+        #     end_time = "1700"
+        # elif event_dur == "Full Day":
+        #     start_time = "900"
+        #     end_time = "1701"
         school_name = request.form["schoolName"]
         resource_person_name = request.form["resourcePersonName"]
         resource_person_details = request.form["resourcePersonDetail"]
@@ -584,7 +584,6 @@ def adminbooking():
         try:
             username = session['admin_username']
             output = get_sorted_status()
-            print(output)
             return render_template('allbooking.html',output=output)
         except Exception as e :
             print(e)
@@ -711,24 +710,22 @@ def usernoti():
 
 @app.route('/test',methods=['GET'])
 def test():
-    output = db.calendermain()
-    # print(output)
-    for i in output:
-        for j in i:
-            st = maketime(j[1])
-            et = maketime(j[4])
-            d = datetime.strptime(st, "%H:%M")
-            j[1] = d.strftime("%I %p")
-            if j[1][0]=="0":
-                j[1]=j[1][1:]
-            j[1] = j[1].lower()
-            d = datetime.strptime(et, "%H:%M")
-            j[4] = d.strftime("%I %p")
-            if j[4][0]=="0":
-                j[4]=j[4][1:]
-            j[4] = j[4].lower()
-    # print(output)
-    return render_template("cal.n.html",output=output)
+    if request.method == 'POST':
+        print("METHOD ACTIVATE")
+    if session['username']:
+        username = session['username']
+        output = db.check_request(username)
+        # print(output)
+        # for i in output:
+        #     if i[5]==1300 or i[5]=="1300":
+        #         i[5] = "1st Half"
+        #     elif i[5]==1700 or i[5]=="1700":
+        #         i[5]= "2nd Half"
+        #     elif i[5]==1701 or i[5]=="1701":
+        #         i[5]= "Full Day"
+        return render_template("test.admin.html",output=output)
+    else:
+        return redirect(url_for('userlogin'))
 
 #futurescope
 @app.route('/verifyemail/<username>' ,methods=['GET', 'POST'])
