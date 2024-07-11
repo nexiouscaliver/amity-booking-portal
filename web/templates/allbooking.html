@@ -297,9 +297,10 @@
           bookingId: '{{i[0][0][0]}}',
           schoolName: '{{i[0][0][2]}}',
           eventName: '{{i[0][0][5]}}',
-          venue: '{{[0,"Auditorium Hall","Seminar Hall","Room No. 105, A2 Building","CRC Conference Room"][i[0][0][1]]}}',
+          venue: '{{hallname(i[0][0][1])}}',
           eventDate: '{{i[0][0][6]}}',
           durationofevent: '{{getduration(i[0][0][8])}}',
+          //changes should be done here
           resourcePersonName: '{{i[0][0][11]}}',
           resourcePersonDetail: '{{i[0][0][12]}}',
           facultyEmail: '{{i[0][0][9]}}',
@@ -409,7 +410,8 @@
                 <td>${booking.eventName}</td>
                 <td>${booking.venue}</td>
                 <td>${booking.eventDate}</td>
-                <td>${booking.durationofevent}</td>
+                <td>${booking.starttime}</td>
+                <td>${booking.endtime}</td>
                 <td>${booking.resourcePersonName}</td>
                 <td>${booking.resourcePersonDetail}</td>
                 <td>${booking.facultyEmail}</td>

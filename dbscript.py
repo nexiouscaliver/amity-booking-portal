@@ -216,21 +216,21 @@ def calendermain():
     sql='select * from status where state="confirm";'
     a = c.execute(sql)
     o = a.fetchall()
-    print(o)
+    # print(o)
     final=[]
     for i in o:
         bid = i[0]
-        sql=f'select date,etime,schoolname,hallid from info where bookid={bid};'
+        sql=f'select date,etime,schoolname,hallid,stime,fname,eventname from info where bookid={bid};'
         a = c.execute(sql)
         f = a.fetchone()
         final.append(list(f))
     for i in final:
-        if i[1]==1300 or i[1]=="1300":
-            i[1] = "first-half-booked"
-        elif i[1]==1700 or i[1]=="1700":
-            i[1]= "second-half-booked"
-        elif i[1]==1701 or i[1]=="1701":
-            i[1]= "full-booked"
+        # if i[1]==1300 or i[1]=="1300":
+        #     i[1] = "first-half-booked"
+        # elif i[1]==1700 or i[1]=="1700":
+        #     i[1]= "second-half-booked"
+        # elif i[1]==1701 or i[1]=="1701":
+        #     i[1]= "full-booked"
         if i[3]==1 or i[3]=="1":
             i[3]="Auditorium"
         elif i[3]==2 or i[3]=="2":
@@ -239,6 +239,12 @@ def calendermain():
             i[3]="Room No. 105, A2 Building"
         elif i[3]==4 or i[3]=="4":
             i[3]="CRC Conference Room"
+        elif i[3]==5 or i[3]=="5":
+            i[3]="AIIT Conference Room"
+        elif i[3]==6 or i[3]=="6":
+            i[3]="RICS Conference Room"
+        elif i[3]==7 or i[3]=="7":
+            i[3]="Atrium"
     for i in final:
         for j in (final[final.index(i):]):
             if(i[0]==j[0] and i[3]==j[3]):
@@ -252,6 +258,9 @@ def calendermain():
     s = []
     r = []
     c = []
+    d = []
+    e = []
+    f = []
     for i in final:
         if i[3] == "Auditorium":
             a.append(i)
@@ -261,11 +270,24 @@ def calendermain():
             r.append(i)
         if i[3] == "CRC Conference Room":
             c.append(i)
+        if i[3] == "AIIT Conference Roomm":
+            d.append(i)
+        if i[3] == "RICS Conference Room":
+            e.append(i)
+        if i[3] == "Atrium":
+            f.append(i)
     final2 = []
     final2.append(a)
     final2.append(s)
     final2.append(r)
     final2.append(c)
+    final2.append(d)
+    final2.append(e)
+    final2.append(f)
+    for i in final:
+        for j in i:
+            # print(j)
+            print(i)
     conn.commit()
     conn.close()
     return final2

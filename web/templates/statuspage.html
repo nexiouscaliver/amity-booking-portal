@@ -207,8 +207,9 @@
             <th>Hall Name</th>
             <th>Date</th>
             <th>School</th>
-            <th>Event Name</th>
-            <th>Duration</th>
+            <th>Event Name</th> 
+            <th>Start time</th>
+            <th>End time</th>
             <th>Status</th>
           </tr>
           
@@ -226,10 +227,11 @@
           {%for i in output%}
           <tr>
             <td>{{i[0]}}</td>
-            <td>{{[0,"Auditorium Hall","Seminar Hall","Room No. 105, A2 Building","CRC Conference Room"][i[1]]}}</td>
+            <td>{{hallname(i[1])}}</td>
             <td>{{i[3]}}</td>
             <td>{{i[2]}}</td>
             <td>{{i[4]}}</td>
+
             <td>{{i[5]}}</td>
             <td>{{i[6]}}</td>
             

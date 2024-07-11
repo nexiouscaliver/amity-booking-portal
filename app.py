@@ -36,7 +36,7 @@ def hallname(hallid:int):
     return (l[hallid])
 
 def hallid(hallname:str):
-    l = [0,'auditorium','seminar','room105','crc','aiit','rics','atrium']
+    l = [0,'auditorium','seminar','room105','crc','AIITConferenceroom','RICSConferenceRoom','Atrium']
     return (l.index(hallname))
 
 def trimtime(time:str):
@@ -358,15 +358,15 @@ def index():
                         print(e)
             # final[5] = trimtime(final[5])
             # final[6] = trimtime(final[6])
-            if (final[5] == "1stHalf"):
-                final[5] = 900
-                final[6] = 1300
-            elif (final[5] == "2ndHalf"):
-                final[5] = 1400
-                final[6] = 1700
-            elif (final[5] == "fullDay"):
-                final[5] = 900
-                final[6] = 1701
+            # if (final[5] == "1stHalf"):
+            #     final[5] = 900
+            #     final[6] = 1300
+            # elif (final[5] == "2ndHalf"):
+            #     final[5] = 1400
+            #     final[6] = 1700
+            # elif (final[5] == "fullDay"):
+            #     final[5] = 900
+            #     final[6] = 1701
 
             hid = hallid(loc)
             
@@ -678,7 +678,9 @@ def usernoti():
 
 @app.route('/test',methods=['GET'])
 def test():
-    return render_template("user.home(new).html")
+    output = db.calendermain()
+    print(output)
+    return render_template("cal(new).html",output=output)
 
 #futurescope
 @app.route('/verifyemail/<username>' ,methods=['GET', 'POST'])

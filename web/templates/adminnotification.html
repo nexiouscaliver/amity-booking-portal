@@ -141,7 +141,8 @@
                     <th>Event Name</th>
                     <th>Venue</th>
                     <th>Event Date</th>
-                    <th>Duration of Event</th>
+                    <th>Start Time</th>
+                    <th>End Time</th>
                     <th>Resource Person Name</th>
                     <th>Resource Person Details</th>
                     <th>Status</th>
@@ -159,7 +160,7 @@
                 bookingId: '{{i[0][0][0]}}',
                 schoolName: '{{i[0][0][2]}}',
                 eventName: '{{i[0][0][5]}}',
-                venue: '{{[0,"Auditorium Hall","Seminar Hall","Room No. 105, A2 Building","CRC Conference Room"][i[0][0][1]]}}',
+                venue: '{{hallname(i[0][0][1])}}',
                 eventDate: '{{i[0][0][6]}}',
                 durationofevent: '{{getduration(i[0][0][8])}}',
                 resourcePersonName: '{{i[0][0][11]}}',
