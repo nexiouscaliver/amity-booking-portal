@@ -584,6 +584,7 @@ def adminbooking():
         try:
             username = session['admin_username']
             output = get_sorted_status()
+            print(output)
             return render_template('allbooking.html',output=output)
         except Exception as e :
             print(e)
