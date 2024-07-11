@@ -163,7 +163,8 @@
                 eventName: '{{i[0][0][5]}}',
                 venue: '{{hallname(i[0][0][1])}}',
                 eventDate: '{{i[0][0][6]}}',
-                durationofevent: '{{getduration(i[0][0][8])}}',
+                starttime: '{{make_time(i[0][0][7])}}',
+                endtime: '{{make_time(i[0][0][8])}}',
                 resourcePersonName: '{{i[0][0][11]}}',
                 resourcePersonDetail: '{{i[0][0][12]}}',
                 status: '{{i[1]}}'
@@ -205,7 +206,8 @@
                     <td>${booking.eventName}</td>
                     <td>${booking.venue}</td>
                     <td>${booking.eventDate}</td>
-                    <td>${booking.durationofevent}</td>
+                    <td>${booking.starttime}</td>
+                    <td>${booking.endtime}</td>
                     <td>${booking.resourcePersonName}</td>
                     <td>${booking.resourcePersonDetail}</td>
                     <td>${booking.status}</td>
