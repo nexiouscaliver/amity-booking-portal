@@ -472,13 +472,13 @@ def admin():
                     i = j
                     # print("i value = ",i)
                     # print('i8 = ',i[8])
-                    if i[8]==1300 or i[8]=="1300":
-                        # print('trigg')
-                        i[8] = "1st Half"
-                    elif i[8]==1700 or i[8]=="1700":
-                        i[8]= "2nd Half"
-                    elif i[8]==1701 or i[8]=="1701":
-                        i[8]= "Full Day"
+                    # if i[8]==1300 or i[8]=="1300":
+                    #     # print('trigg')
+                    #     i[8] = "1st Half"
+                    # elif i[8]==1700 or i[8]=="1700":
+                    #     i[8]= "2nd Half"
+                    # elif i[8]==1701 or i[8]=="1701":
+                    #     i[8]= "Full Day"
                 # print(final)
                 return render_template("admintable.html",output=final)
             else:
