@@ -4,8 +4,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admin - Hall Management System</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <title>AmiVenueHub - Booking Status</title>
+
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static',filename='apple-touch-icon.png') }}">
     <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static',filename='favicon-32x32.png') }}">
@@ -13,208 +13,78 @@
     <link rel="manifest" href="{{ url_for('static',filename='site.webmanifest') }}">
     <meta name="msapplication-TileColor" content="#da532c">
     <meta name="theme-color" content="#ffffff">
-  <style>
+  <style> 
     body {
       background-color: aliceblue;
       margin: 0;
       font-family: Arial, sans-serif;
-  }
-  
-  :root {
+    }
+
+    :root {
       --primary-color: #04172b;
       --secondary-color: #061b31;
       --white: #ffffff;
       --gray: #6c757d;
-      --light-green: #90ee90;
-      --light-red: #ffcccb;
     }
 
-
-  
-  .navbar {
+    .navbar {
       background-color: var(--primary-color);
       display: flex;
-      justify-content: space-evenly; /* maing the space evenly*/
+      justify-content: space-between;
       align-items: center;
-      width: 100%;
       padding: 10px 20px;
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  }
-  
-  .navbar .logo {
+    }
+
+    .navbar .logo {
       display: flex;
       align-items: center;
-  }
-  
-  .navbar .logo img {
+    }
+
+    .navbar .logo img {
       width: fit-content;
       height: 40px;
       margin-right: 10px;
-  }
-  
-  .navbar .logo a {
+    }
+
+    .navbar .logo a {
       color: var(--white);
       font-size: 24px;
       text-decoration: none;
       font-weight: bold;
-  }
-  
-  .navbar .menu {
+    }
+
+    .navbar .menu {
       display: flex;
       gap: 20px;
-  }
-  
-  .navbar .menu a {
+      align-items: center;
+    }
+
+    .navbar .menu a {
       color: var(--white);
       text-decoration: none;
       padding: 10px 15px;
       border-radius: 5px;
       transition: background-color 0.3s, box-shadow 0.3s;
       font-weight: bold;
-  }
-  
-  .navbar .menu a:hover {
+    }
+
+    .navbar .menu a:hover {
       background-color: var(--secondary-color);
-      transform: scale(1.05);
-      box-shadow: 0 0 0 2px aliceblue;
-  }
-
-    .container {
-      margin: auto;
-      background: #fff;
-      padding: 20px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-      border-radius: 5px;
-      animation: fadeIn 2s ease-in-out;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     }
 
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-      }
-      to {
-        opacity: 1;
-      }
-    }
-
-    table {
-      background-color: white;
-      width: 100%;
-      border-collapse: collapse;
-      margin-bottom: 20px;
-      animation: tableSlideIn 1s ease-in-out;
-    }
-
-    @keyframes tableSlideIn {
-      from {
-        transform: translateX(-100px);
-      }
-      to {
-        transform: translateX(0);
-      }
-    }
-
-    * Table Styles */
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-bottom: 20px;
-    }
-    
-    th, td {
-      border: 1px solid #ccc;
-      padding: 12px;
-      text-align: left;
-    }
-    
-    th {
-      background-image: linear-gradient(to right, #04172b 0%, #243a73 100%);
-      color: #fff;
-    }
-    
-    /* Form Styles */
-    .form-group {
-      margin-bottom: 20px;
-    }
-    
-    label {
-      font-weight: bold;
-      color: #333;
-    }
-    
-    input[type="text"],
-    input[type="date"],
-    select,
-    textarea {
-      width: 100%;
+    .navbar .icon {
+      font-size: 20px;
+      color: var(--white);
       padding: 10px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      box-sizing: border-box;
-      font-size: 16px;
-      margin-top: 5px;
-    }
-    
-    select {
-      appearance: none;
-      -webkit-appearance: none;
-      -moz-appearance: none;
-      background-color: #fff;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M6 9.5L0 3h12L6 9.5z'/%3E%3C/svg%3E");
-      background-repeat: no-repeat;
-      background-position-x: calc(100% - 12px);
-      background-position-y: center;
-      padding-right: 40px;
-    }
-    
-    button {
-      background-image: linear-gradient(to right, #04172b 0%, #243a73 100%);
-      color: #fff;
-      border: none;
-      padding: 12px 20px;
       cursor: pointer;
-      border-radius: 4px;
-      font-size: 16px;
-      transition: background-color 0.3s ease;
-    }
-    
-    button:hover {
-      
-        transform: scale(1.05); /* Slightly increase the size */
-        box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15); /* Enhance the shadow */
-      }
-    
-    
-    .button-group {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    
-    #scheduleFormContainer {
-      background-color: #f0f8ff;
-      padding: 20px;
-      border-radius: 8px;
-      
-      width:60%;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-      display: none;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 100;
-    max-width: 90%; /* Adjust as needed */
-    max-height: 85%; /* Adjust as needed */
-    overflow: auto; /* Enable scrolling if the form exceeds the screen size */
+      font-weight: bold;
+      position: relative;
     }
 
-
-
-    .search-bar {
-      display: flex;
-      justify-content: center;
-      margin-bottom: 10px;
+    .navbar .icon:hover .dropdown {
+      display: block;
     }
 
     .dropdown {
@@ -246,291 +116,262 @@
       border-bottom: none;
     }
 
-    .dropdown a {
-      display: block;
+    /* Main Content */
+    .main-content {
+      padding: 50px 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
 
-    .dropdown-content {
-      display: none;
-      position: absolute;
-      background-color: var(--primary-color);
-      min-width: 160px;
-      box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-      z-index: 1;
+    .main-content h1 {
+      margin-bottom: 20px;
+      font-size: 28px;
     }
 
-    .dropdown-content a {
+    .booking-list {
+      width: 80%;
+      background-color: #fff;
+      border-radius: 5px;
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+
+        .booking-list table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .booking-list th,
+    .booking-list td {
+      padding: 10px;
+      border: 1px solid #ddd;
+      text-align: left;
+    }
+
+    .booking-list th {
+      background-color: #04172b;
       color: var(--white);
-      padding: 12px 16px;
-      text-decoration: none;
-      display: block;
+      font-weight: bold;
     }
 
-    .dropdown-content a:hover {
-      background-color: var(--secondary-color);
+    .booking-list tr:nth-child(even) {
+      background-color: #f2f2f2;
     }
+    .cancel-button {
+      background-color: #ff4d4d;
+      color: white;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+  }
 
-    .dropdown:hover .dropdown-content {
-      display: block;
-    }
+  .cancel-button:hover {
+      background-color: #e60000;
+      transform: scale(1.05);  /* Slight zoom effect */
+}
+  
 
-    .select {
-        transition: background-color 0.3s, color 0.3s;
-      }
-      .close-button {
-        position: absolute;
-        top: 10px; /* Adjust as needed */
-        right: 10px; /* Adjust as needed */
-        background: none;
-        border: none;
-        padding: 0;
-        cursor: pointer;
-        background-color: lightcoral;
-        color:white;
-      }
+
+  .popup {
+      display: none;
+      position: fixed;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      padding: 30px;
+      border: 2px solid #04172b;
+      background-color: #fff;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      border-radius: 10px;
+      z-index: 1000;
+      text-align: center;
+  }
+
+  .popup p {
+      margin: 20px 0;
+      font-size: 16px;
+      color: #333;
+      font-weight: bold;
+  }
+
+  .popup .confirm, .popup .cancel {
+      margin: 10px;
+      padding: 10px 20px;
+      cursor: pointer;
+      border: none;
+      border-radius: 5px;
+      color: white;
+      font-size: 14px;
+      transition: background-color 0.3s;
       
-      .close-button svg {
-        width: 1.5em;
-        height: 1.5em;
-        vertical-align: middle;
-      }
+  }
+
+
+  .popup .confirm {
+      background-color: #4CAF50;
+  }
+
+  .popup .confirm:hover {
+      background-color: #45a049;
+      transform: scale(1.05);  
+  }
+
+  .popup .cancel {
+      background-color: #ff4d4d;
       
+  }
 
+  .popup .cancel:hover {
+      background-color: #e60000;
+      transform: scale(1.05);  
+  }
 
-</style>
+  .overlay {
+      display: none;
+      position: fixed;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: 999;
+  }
+  .p{ }
+
+  </style>
 </head>
+
 <body>
   <header>
-    <div class="navbar">
+    <nav class="navbar">
       <div class="logo">
         <img src="Amity-logo.png" alt="Logo">
         <img src="name.2.png" alt="Logo">
+       
       </div>
       <div class="menu">
-        <a href="{{url_for('admincalender')}}" class="menu-item">
-          <i class="fas fa-calendar-alt"></i> <!-- Calendar icon -->
-          Calendar
-        </a>
-        <a href="{{url_for('adminnoti')}}" class="menu-item">
-          <i class="fas fa-bell"></i> <!-- Notification icon -->
-          Hall Updates
-            <a href="{{url_for('adminbooking')}}">All Booking</a>
-            <a href="{{url_for('home')}}">Logout</a>
+        <a href="{{url_for('index')}}">Home</a>
+        <!-- <a href="#">Bookings</a> -->
+        <a href="#">About</a>
+        <div class="icon">
+          <i class="fas fa-bars"></i> <div class="dropdown">
+            <a href="#">Profile</a>
+            <a href="{{url_for('userlogin')}}">Logout</a>
           </div>
-        </a>
+        </div>
+      </div>
+    </nav>
+  </header>
+ 
+  <main>
+    <div class="main-content">
+      <h1>Booking Status</h1>
+
+      <div class="booking-list">
+        <table>
+          <tr>
+            <th>Booking ID</th>
+            <th>Hall Name</th>
+            <th>Date</th>
+            <th>School</th>
+            <th>Event Name</th> 
+            <th>Start time</th>
+            <th>End time</th>
+            <th>Status</th>
+            <th> Edit </th>
+          </tr> 
+          
+
+
+           <tr>
+            <form class="cancel-form" onsubmit="return confirmCancel(event)">
+                <td>1</td>
+                <td>Auditorium</td>
+                <td>2024-07-20</td>
+                <td>School of Science</td>
+                <td>Science Fair</td>
+                <td>9 am</td>
+                <td>5 pm</td>
+                <td>Pending</td>
+                <td><button type="button" class="cancel-button" onclick="showPopup(event)">  Cancel  </button></td>
+            </form>
+        </tr> 
+          
+          {%for i in output%}
+          <tr>
+            <form class="cancel-form" method="post" onsubmit="return confirmCancel(event)">
+                <td>{{i[0]}}</td>
+                <td>{{hallname(i[1])}}</td>
+                <td>{{i[3]}}</td>
+                <td>{{i[2]}}</td>
+                <td>{{i[4]}}</td>
+                <td>{{make_time(i[7])}}</td>
+                <td>{{make_time(i[5])}}</td>
+                <td>{{i[6]}}</td>
+                {%if i[6] == "Pending" or i[6] == "Confirmed"%}
+                <td><button type="button" class="cancel-button" onclick="showPopup(event)">  Cancel  </button></td>
+                {%endif%}
+              </form>
+          </tr>
+          <!-- <tr>
+            <td>{{i[0]}}</td>
+            <td>{{hallname(i[1])}}</td>
+            <td>{{i[3]}}</td>
+            <td>{{i[2]}}</td>
+            <td>{{i[4]}}</td>
+
+            <td>{{make_time(i[7])}}</td>
+            <td>{{make_time(i[5])}}</td>
+            <td>{{i[6]}}</td>
+          </tr> -->
+          {%endfor%}
+          </table>
       </div>
     </div>
-  </header>
-<div class="container">
-    <h2>Pending Event Details</h2>
+    <div class="overlay" onclick="closePopup()"></div>
+    <div class="popup">
+        <p>Are you sure you want to cancel this booking?</p>
+        <button class="confirm">Yes</button>
+        <button class="cancel" onclick="closePopup()">No</button>
+    </div>
 
-    <div class="search-bar">
-        <input type="text" id="searchInput" placeholder="Search requests">
-    </div>
-<table>
-<thead>
-    <tr>
-        <th>Booking ID</th>
-        <th>School Name</th>
-        <th>Event Name</th>
-        <th>Venue</th>
-        <th>Date</th>
-        <th>Start Time</th> 
-        <th>End Time</th> 
-        <th>Resource Person Name</th>
-        <th>Action</th>
-    </tr>
-</thead>
-<tbody id="appointmentTable">
-    
-    <tr>
-        <td>{{ i[0] }}</td> 
-        <td>{{ i[2] }}</td> 
-        <td>{{ i[5] }}</td> 
-        <td>{{ hallname(i[1]) }}</td> 
-        <td>{{ i[6] }}</td> 
-        <td>{{ make_time(i[7]) }}</td>
-        <td>{{ make_time(i[8]) }}</td> 
-        <td>{{ i[11] }}</td> 
-        <td><button onclick="openScheduleForm('{{ i[0] }}', '{{ i[2] }}', '{{ i[5] }}', '{{ hallname(i[1]) }}', '{{ i[6] }}', '{{ make_time(i[7]) }}', '{{ make_time(i[8]) }}', '{{ i[11] }}', '{{ i[12] }}', '{{ i[9] }}', this)" class="schedule-button">Schedule</button></td>
-    </tr>
-  
-    <tr>
-      <td>1aaaaaaaaaaaaa</td> 
-      <td>{{ i[2] }}</td> 
-      <td>{{ i[5] }}</td> 
-      <td>{{ hallname(i[1]) }}</td> 
-      <td>{{ i[6] }}</td> 
-      <td>{{ make_time(i[7]) }}</td>
-      <td>{{ make_time(i[8]) }}</td> 
-      <td>{{ i[11] }}</td> 
-      <td><button onclick="openScheduleForm('{{ i[0] }}', '{{ i[2] }}', '{{ i[5] }}', '{{ hallname(i[1]) }}', '{{ i[6] }}', '{{ make_time(i[7]) }}', '{{ make_time(i[8]) }}', '{{ i[11] }}', '{{ i[12] }}', '{{ i[9] }}', this)" class="schedule-button">Schedule</button></td>
-  </tr>
- 
-  <tr>
-    <td>2</td> 
-    <td>{{ i[2] }}</td> 
-    <td>{{ i[5] }}</td> 
-    <td>{{ hallname(i[1]) }}</td> 
-    <td>{{ i[6] }}</td> 
-    <td>{{ make_time(i[7]) }}</td>
-    <td>{{ make_time(i[8]) }}</td> 
-    <td>{{ i[11] }}</td> 
-    <td><button onclick="openScheduleForm('{{ i[0] }}', '{{ i[2] }}', '{{ i[5] }}', '{{ hallname(i[1]) }}', '{{ i[6] }}', '{{ make_time(i[7]) }}', '{{ make_time(i[8]) }}', '{{ i[11] }}', '{{ i[12] }}', '{{ i[9] }}', this)" class="schedule-button">Schedule</button></td>
-</tr>
 
-</tbody>
-</table>
+  </main>
+  <script>
+    let currentForm = null;
 
-<div id="scheduleFormContainer">
-<h3>Schedule the Event</h3>
-<button type="button" class="close-button" onclick="closeScheduleForm()">
-  <!-- Assuming you're using an SVG close icon -->
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
-    <path fill="currentColor" d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
-  </svg>
-</button>
-
-<form id="scheduleForm" method="post">
-    <div class="form-group">
-        <label for="bookingId">Booking ID:</label>
-        <input type="text" id="bookingId" name="bookingId" readonly>
-    </div>
-    <div class="form-group">
-        <label for="schoolName">School Name:</label>
-        <input type="text" id="schoolName" name="schoolName" readonly>
-    </div>
-    <div class="form-group">
-        <label for="eventName">Event Name:</label>
-        <input type="text" id="eventName" name="eventName" readonly>
-    </div>
-    <div class="form-group">
-        <label for="venue">Venue:</label>
-        <input type="text" id="venue" name="venue" readonly>
-    </div>
-    <div class="form-group">
-        <label for="eventDate">Date of Event:</label>
-        <input type="date" id="eventDate" name="eventDate" readonly>
-    </div>  
-    <div class="form-group">
-        <label for="durationofevent">Start Time of event:</label>
-        <input type="text" id="stime" name="stime" readonly>
-    </div>
-    <div class="form-group">
-        <label for="durationofevent">End Time of event:</label>
-        <input type="text" id="etime" name="etime" readonly>
-    </div>
-    <div class="form-group">
-        <label for="resourcePersonName">Resource Person Name:</label>
-        <input type="text" id="resourcePersonName" name="resourcePersonName" readonly>
-    </div>
-    <div class="form-group">
-        <label for="resourcePersonDetail">Resource Person Detail:</label>
-        <input type="text" id="resourcePersonDetail" name="resourcePersonDetail" readonly>
-    </div>
-    <div class="form-group">
-        <label for="facultyEmail">Faculty Email:</label>
-        <input type="text" id="facultyEmail" name="facultyEmail" readonly>
-    </div>
-    <div class="form-group">
-        <label for="confirmEvent">Confirm Event:</label>
-        <select id="confirmEvent" name="confirmEvent" required onchange="changeSelectColor(this)">
-            <option value="ACCEPT">Accept Event</option>
-            <option value="REJECT">Reject Event</option>
-        </select>
-    </div>
-    <div class="button-group">
-        <button type="submit" class="schedule-button">Submit</button>
-        <button type="button" class="schedule-button" onclick="closeScheduleForm()">Close Form</button>
-    </div>
-</form>
-</div>
-
-<script>
-function formatDate(dateStr) {
-    const date = new Date(dateStr);
-    const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, '0');
-    const day = String(date.getDate()).padStart(2, '0');
-    return `${year}-${month}-${day}`;
-}
-
-function openScheduleForm(bookingId, schoolName, eventName, venue, eventDate, stime, etime, resourcePersonName, resourcePersonDetail, facultyEmail, button) {
-    const formContainer = document.getElementById('scheduleFormContainer');
-    document.getElementById('bookingId').value = bookingId;
-    document.getElementById('schoolName').value = schoolName;
-    document.getElementById('eventName').value = eventName;
-    document.getElementById('venue').value = venue;
-    document.getElementById('eventDate').value = eventDate;
-    document.getElementById('stime').value = stime;
-    document.getElementById('etime').value = etime;
-    document.getElementById('resourcePersonName').value = resourcePersonName;
-    document.getElementById('resourcePersonDetail').value = resourcePersonDetail;
-    document.getElementById('facultyEmail').value = facultyEmail;
-    
-    formContainer.style.display = 'block';
-    
-    // Insert formContainer after the clicked button's row
-    button.closest('tr').after(formContainer);
-
-    // Add dimmed background
-    const dimmedBackground = document.createElement('div');
-    dimmedBackground.className = 'dimmed';
-    document.body.appendChild(dimmedBackground);
-    
-    // Close form when clicking outside
-    dimmedBackground.addEventListener('click', closeScheduleForm);
-}
-
-function closeScheduleForm() {
-    const formContainer = document.getElementById('scheduleFormContainer');
-    formContainer.style.display = 'none';
-    
-    // Remove dimmed background
-    const dimmedBackground = document.querySelector('.dimmed');
-    if (dimmedBackground) {
-        document.body.removeChild(dimmedBackground);
+    function showPopup(event) {
+        event.preventDefault();
+        currentForm = event.target.closest('form');
+        const overlay = document.querySelector('.overlay');
+        const popup = document.querySelector('.popup');
+        overlay.style.display = 'block';
+        popup.style.display = 'block';
     }
-}
 
-document.getElementById('searchInput').addEventListener('keyup', function() {
-    const filter = this.value.toUpperCase();
-    const table = document.getElementById('appointmentTable');
-    const tr = table.getElementsByTagName('tr');
-    for (let i = 0; i < tr.length; i++) {
-        const td = tr[i].getElementsByTagName('td');
-        let txtValue = '';
-        for (let j = 0; j < td.length; j++) {
-            if (td[j]) {
-                txtValue += td[j].textContent || td[j].innerText;
-            }
+    document.querySelector('.confirm').addEventListener('click', function() {
+        closePopup();
+        if (currentForm) {
+            currentForm.submit();
         }
-        if (txtValue.toUpperCase().indexOf(filter) > -1) {
-            tr[i].style.display = '';
-        } else {
-            tr[i].style.display = 'none';
-        }
+    });
+
+    function confirmCancel(event) {
+        event.preventDefault();
+        return false; // Prevent form submission until confirmation
     }
-});
 
-function changeSelectColor(select) {
-  if (select.value === 'ACCEPT') {
-    select.style.backgroundColor = 'var(--light-green)';
-    select.style.color = 'var(--primary-color)';
-  } else if (select.value === 'REJECT') {
-    select.style.backgroundColor = 'var(--light-red)';
-    select.style.color = 'var(--primary-color)';
-  } else {
-    select.style.backgroundColor = '';
-    select.style.color = '';
-  }
-}
-
-document.addEventListener("DOMContentLoaded", function() {
-    const select = document.getElementById('confirmEvent');
-    changeSelectColor(select);
-});
+    function closePopup() {
+        const overlay = document.querySelector('.overlay');
+        const popup = document.querySelector('.popup');
+        overlay.style.display = 'none';
+        popup.style.display = 'none';
+    }
 </script>
 </body>
 
 </html>
+
