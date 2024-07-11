@@ -4,7 +4,7 @@
 import os
 import random
 from time import ctime
-
+from datetime import datetime
 from flask import *
 from flask import jsonify, request, send_from_directory
 from flask_mail import Mail, Message
@@ -643,13 +643,43 @@ def createsession(s):
 @app.route('/admin/calender',methods=['GET'])
 def admincalender():
     output = db.calendermain()
-    print(output)
+    # print(output)
+    for i in output:
+        for j in i:
+            st = maketime(j[1])
+            et = maketime(j[4])
+            d = datetime.strptime(st, "%H:%M")
+            j[1] = d.strftime("%I %p")
+            if j[1][0]=="0":
+                j[1]=j[1][1:]
+            j[1] = j[1].lower()
+            d = datetime.strptime(et, "%H:%M")
+            j[4] = d.strftime("%I %p")
+            if j[4][0]=="0":
+                j[4]=j[4][1:]
+            j[4] = j[4].lower()
+    # print(output)
     return render_template('calenderadmin.html',output=output)
 
 @app.route('/user/calender',methods=['GET'])
 def usercalender():
     output = db.calendermain()
-    print(output)
+    # print(output)
+    for i in output:
+        for j in i:
+            st = maketime(j[1])
+            et = maketime(j[4])
+            d = datetime.strptime(st, "%H:%M")
+            j[1] = d.strftime("%I %p")
+            if j[1][0]=="0":
+                j[1]=j[1][1:]
+            j[1] = j[1].lower()
+            d = datetime.strptime(et, "%H:%M")
+            j[4] = d.strftime("%I %p")
+            if j[4][0]=="0":
+                j[4]=j[4][1:]
+            j[4] = j[4].lower()
+    # print(output)
     return render_template('calenderuser.html',output=output)
 
 @app.route('/admin/notification',methods=['GET'])
@@ -679,8 +709,23 @@ def usernoti():
 @app.route('/test',methods=['GET'])
 def test():
     output = db.calendermain()
-    print(output)
-    return render_template("cal(new).html",output=output)
+    # print(output)
+    for i in output:
+        for j in i:
+            st = maketime(j[1])
+            et = maketime(j[4])
+            d = datetime.strptime(st, "%H:%M")
+            j[1] = d.strftime("%I %p")
+            if j[1][0]=="0":
+                j[1]=j[1][1:]
+            j[1] = j[1].lower()
+            d = datetime.strptime(et, "%H:%M")
+            j[4] = d.strftime("%I %p")
+            if j[4][0]=="0":
+                j[4]=j[4][1:]
+            j[4] = j[4].lower()
+    # print(output)
+    return render_template("cal.n.html",output=output)
 
 #futurescope
 @app.route('/verifyemail/<username>' ,methods=['GET', 'POST'])

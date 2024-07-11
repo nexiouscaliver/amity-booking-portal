@@ -158,6 +158,89 @@
     .booking-list tr:nth-child(even) {
       background-color: #f2f2f2;
     }
+    .cancel-button {
+      background-color: #ff4d4d;
+      color: white;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+  }
+
+  .cancel-button:hover {
+      background-color: #e60000;
+      transform: scale(1.05);  /* Slight zoom effect */
+}
+  
+
+
+  .popup {
+      display: none;
+      position: fixed;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      padding: 30px;
+      border: 2px solid #04172b;
+      background-color: #fff;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      border-radius: 10px;
+      z-index: 1000;
+      text-align: center;
+  }
+
+  .popup p {
+      margin: 20px 0;
+      font-size: 16px;
+      color: #333;
+      font-weight: bold;
+  }
+
+  .popup .confirm, .popup .cancel {
+      margin: 10px;
+      padding: 10px 20px;
+      cursor: pointer;
+      border: none;
+      border-radius: 5px;
+      color: white;
+      font-size: 14px;
+      transition: background-color 0.3s;
+      
+  }
+
+
+  .popup .confirm {
+      background-color: #4CAF50;
+  }
+
+  .popup .confirm:hover {
+      background-color: #45a049;
+      transform: scale(1.05);  
+  }
+
+  .popup .cancel {
+      background-color: #ff4d4d;
+      
+  }
+
+  .popup .cancel:hover {
+      background-color: #e60000;
+      transform: scale(1.05);  
+  }
+
+  .overlay {
+      display: none;
+      position: fixed;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: 999;
+  }
+  .p{ }
+
   </style>
 </head>
 
@@ -211,8 +294,24 @@
             <th>Start time</th>
             <th>End time</th>
             <th>Status</th>
-          </tr>
+            <th> Edit </th>
+          </tr> 
           
+
+
+          <tr>
+            <form class="cancel-form" onsubmit="return confirmCancel(event)">
+                <td>1</td>
+                <td>Auditorium</td>
+                <td>2024-07-20</td>
+                <td>School of Science</td>
+                <td>Science Fair</td>
+                <td>9 am</td>
+                <td>5 pm</td>
+                <td>Pending</td>
+                <td><button type="button" class="cancel-button" onclick="showPopup(event)">  Cancel  </button></td>
+            </form>
+        </tr>
           <!-- <tr>
             <td>12345</td>
             <td>Auditorium</td>
@@ -240,8 +339,46 @@
           </table>
       </div>
     </div>
-  </main>
+    <div class="overlay" onclick="closePopup()"></div>
+    <div class="popup">
+        <p>Are you sure you want to cancel this booking?</p>
+        <button class="confirm">Yes</button>
+        <button class="cancel" onclick="closePopup()">No</button>
+    </div>
 
+
+  </main>
+  <script>
+    let currentForm = null;
+
+    function showPopup(event) {
+        event.preventDefault();
+        currentForm = event.target.closest('form');
+        const overlay = document.querySelector('.overlay');
+        const popup = document.querySelector('.popup');
+        overlay.style.display = 'block';
+        popup.style.display = 'block';
+    }
+
+    document.querySelector('.confirm').addEventListener('click', function() {
+        closePopup();
+        if (currentForm) {
+            currentForm.submit();
+        }
+    });
+
+    function confirmCancel(event) {
+        event.preventDefault();
+        return false; // Prevent form submission until confirmation
+    }
+
+    function closePopup() {
+        const overlay = document.querySelector('.overlay');
+        const popup = document.querySelector('.popup');
+        overlay.style.display = 'none';
+        popup.style.display = 'none';
+    }
+</script>
 </body>
 
 </html>

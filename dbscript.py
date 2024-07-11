@@ -284,13 +284,34 @@ def calendermain():
     final2.append(d)
     final2.append(e)
     final2.append(f)
-    for i in final:
-        for j in i:
-            # print(j)
-            print(i)
+    # for i in final2:
+    #     for j in i:
+    #         print(j)
+    #         # print(i) 1 ,4
     conn.commit()
     conn.close()
     return final2
+
+def reject_app(bid:int , status:str):
+    if status == "ACCEPTED":
+        conn = sqlite3.connect(dbname)
+        c = conn.cursor()
+        sql=f'delete from confirm where bookid={bid};'
+        a = c.execute(sql)
+        o = a.fetchall()
+        conn.commit()
+        conn.close()
+        return True
+    elif status == "REJECTED":
+        conn = sqlite3.connect(dbname)
+        c = conn.cursor()
+        sql=f'delete from book where bookid={bid};'
+        a = c.execute(sql)
+        o = a.fetchall()
+        conn.commit()
+        conn.close()
+        return True
+    return False
 
 def all_status():
     conn = sqlite3.connect(dbname)
