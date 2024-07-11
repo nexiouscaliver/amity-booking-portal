@@ -340,7 +340,7 @@
                     <!-- <td>{{ i[8] }}</td> etime -->
                     <td>{{ i[11] }}</td> 
                     <!-- <td>{{ i[12] }}</td> rpdetials -->
-                    <td><button onclick="openScheduleForm('{{ i[0] }}', '{{ i[2] }}', '{{ i[5] }}', '{{ hallname(i[1]) }}', '{{ i[6] }}', '{{ (i[8]) }}', '{{ i[11] }}', '{{ i[12] }}', '{{ i[9] }}')" class="schedule-button">Schedule</button></td>
+                    <td><button onclick="openScheduleForm('{{ i[0] }}', '{{ i[2] }}', '{{ i[5] }}', '{{ hallname(i[1]) }}', '{{ i[6] }}', '{{ make_time(i[7]) }}', '{{ make_time(i[8]) }}', '{{ i[11] }}', '{{ i[12] }}', '{{ i[9] }}')" class="schedule-button">Schedule</button></td>
                 </tr>
                 {% endfor %}
             </tbody>
@@ -416,13 +416,14 @@
             return {year}-{month}-{day};
         }
 
-        function openScheduleForm(bookingId, schoolName, eventName, venue, eventDate, durationofevent, resourcePersonName, resourcePersonDetail ,facultyEmail) {
+        function openScheduleForm(bookingId, schoolName, eventName, venue, eventDate, stime, etime, resourcePersonName, resourcePersonDetail ,facultyEmail) {
             document.getElementById('bookingId').value = bookingId;
             document.getElementById('schoolName').value = schoolName;
             document.getElementById('eventName').value = eventName;
             document.getElementById('venue').value = venue;
             document.getElementById('eventDate').value = eventDate;
-            document.getElementById('durationofevent').value = durationofevent;      /*changes done here kadia*/
+            document.getElementById('stime').value = stime;      /*changes done here kadia*/
+            document.getElementById('etime').value = etime; 
             document.getElementById('resourcePersonName').value = resourcePersonName;
             document.getElementById('resourcePersonDetail').value = resourcePersonDetail;
             document.getElementById('facultyEmail').value = facultyEmail;
