@@ -299,8 +299,8 @@
           eventName: '{{i[0][0][5]}}',
           venue: '{{hallname(i[0][0][1])}}',
           eventDate: '{{i[0][0][6]}}',
-          durationofevent: '{{getduration(i[0][0][8])}}',
-          //changes should be done here
+          starttime: '{{getduration(i[0][0][8])}}',
+          endtime: '{{getduration(i[0][0][8])}}', 
           resourcePersonName: '{{i[0][0][11]}}',
           resourcePersonDetail: '{{i[0][0][12]}}',
           facultyEmail: '{{i[0][0][9]}}',
@@ -398,7 +398,8 @@
                 <th>Event Name</th>
                 <th>Venue</th>
                 <th>Date</th>
-                <th>Duration of Event</th>
+                <th>Start time </th>
+                <th>End time</th>
                 <th>Resource Person</th>
                 <th>Resource Person Detail</th>
                 <th>Faculty Email</th>
@@ -442,7 +443,8 @@ function filterAndSortBookings(statusFilter, searchTerm) {
         booking.eventName.toLowerCase().includes(lowerCaseSearchTerm) ||
         booking.venue.toLowerCase().includes(lowerCaseSearchTerm) ||
         booking.eventDate.includes(lowerCaseSearchTerm) ||
-        booking.durationofevent.toLowerCase().includes(lowerCaseSearchTerm) ||
+        booking.starttime.toLowerCase().includes(lowerCaseSearchTerm) ||
+        booking.endtime.toLowerCase().includes(lowerCaseSearchTerm) ||
         booking.resourcePersonName.toLowerCase().includes(lowerCaseSearchTerm) ||
         booking.resourcePersonDetail.toLowerCase().includes(lowerCaseSearchTerm) ||
         booking.facultyEmail.toLowerCase().includes(lowerCaseSearchTerm) ||
@@ -471,11 +473,12 @@ function filterAndSortBookings(statusFilter, searchTerm) {
         eventName: row.children[2].textContent,
         venue: row.children[3].textContent,
         eventDate: row.children[4].textContent,
-        durationofevent: row.children[5].textContent,
-        resourcePersonName: row.children[6].textContent,
-        resourcePersonDetail: row.children[7].textContent,
-        facultyEmail: row.children[8].textContent,
-        status: row.children[9].textContent
+        starttime: row.children[5].textContent,
+        endtime: row.children[6].textContent,
+        resourcePersonName: row.children[7].textContent,
+        resourcePersonDetail: row.children[8].textContent,
+        facultyEmail: row.children[9].textContent,
+        status: row.children[10].textContent
       };
     });
   
