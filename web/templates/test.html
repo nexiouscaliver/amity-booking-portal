@@ -4,9 +4,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admin - Hall Management System</title>
+  <title>admin home page</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static',filename='apple-touch-icon.png') }}">
     <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static',filename='favicon-32x32.png') }}">
     <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static',filename='favicon-16x16.png') }}">
@@ -18,66 +19,69 @@
       background-color: aliceblue;
       margin: 0;
       font-family: Arial, sans-serif;
-  }
-  
-  :root {
+    }
+    
+    :root {
       --primary-color: #04172b;
       --secondary-color: #061b31;
       --white: #ffffff;
       --gray: #6c757d;
-      --light-green: #90ee90;
-      --light-red: #ffcccb;
     }
-
-
-  
-  .navbar {
+    
+    .navbar {
       background-color: var(--primary-color);
       display: flex;
-      justify-content: space-evenly; /* maing the space evenly*/
+      justify-content: space-between;
       align-items: center;
-      width: 100%;
       padding: 10px 20px;
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  }
+    }
   
-  .navbar .logo {
+  .logo-container {
       display: flex;
       align-items: center;
   }
   
   .navbar .logo img {
-      width: fit-content;
-      height: 40px;
+      height: 50px;
       margin-right: 10px;
   }
   
-  .navbar .logo a {
-      color: var(--white);
-      font-size: 24px;
-      text-decoration: none;
-      font-weight: bold;
+  .navbar .name img {
+      height: 40px;
   }
   
   .navbar .menu {
-      display: flex;
-      gap: 20px;
-  }
+    display: flex;
+    gap: 20px;
+}
+
+.navbar .menu a {
+    color: var(--white);
+    text-decoration: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    transition: background-color 0.3s, box-shadow 0.3s;
+    font-weight: bold;
+}
+
+.navbar .menu a:hover {
+    background-color: var(--secondary-color);
+    transform: scale(1.05);
+    box-shadow: 0 0 0 2px aliceblue;
+}
   
-  .navbar .menu a {
+    
+    .navbar .icon {
+      font-size: 20px;
       color: var(--white);
-      text-decoration: none;
-      padding: 10px 15px;
-      border-radius: 5px;
-      transition: background-color 0.3s, box-shadow 0.3s;
+      padding: 10px;
+      cursor: pointer;
       font-weight: bold;
-  }
+      position: relative;
+    }
   
-  .navbar .menu a:hover {
-      background-color: var(--secondary-color);
-      transform: scale(1.05);
-      box-shadow: 0 0 0 2px aliceblue;
-  }
+  
 
     .container {
       margin: auto;
@@ -302,25 +306,26 @@
 <body>
   <header>
     <div class="navbar">
-      <div class="logo">
-        <img src="Amity-logo.png" alt="Logo">
-        <img src="name.2.png" alt="Logo">
-      </div>
-      <div class="menu">
-        <a href="{{url_for('admincalender')}}" class="menu-item">
-          <i class="fas fa-calendar-alt"></i> <!-- Calendar icon -->
-          Calendar
-        </a>
-        <a href="{{url_for('adminnoti')}}" class="menu-item">
-          <i class="fas fa-bell"></i> <!-- Notification icon -->
-          Hall Updates
-            <a href="{{url_for('adminbooking')}}">All Booking</a>
-            <a href="{{url_for('home')}}">Logout</a>
-          </div>
-        </a>
-      </div>
+        <div class="logo-container">
+            <div class="logo">
+                <img src="L1.png" alt="Logo">
+            </div>
+            <div class="name">
+                <img src="L2.png" alt="Name Logo">
+            </div>
+        </div>
+        <div class="menu">
+            <a href="{{url_for('usercalender')}}" class="menu-item">
+                <i class="fas fa-calendar-alt"></i> Calendar
+            </a>
+            <a href="{{url_for('usernoti')}}" class="menu-item">
+                <i class="fas fa-bell"></i> Hall Updates
+            </a>
+            <a href="{{url_for('status')}}" class="menu-item">All booking</a>
+            <a href="{{url_for('home')}}" class="menu-item">Logout</a>
+        </div>
     </div>
-  </header>
+</header>
 <div class="container">
     <h2>Pending Event Details</h2>
 
