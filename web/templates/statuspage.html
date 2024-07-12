@@ -352,6 +352,8 @@
                       <input type="hidden" name="start_time" id="hidden-start-time">
                       <input type="hidden" name="end_time" id="hidden-end-time">
                       <input type="hidden" name="status" id="hidden-status">
+                      <input type="hidden" name="ename" id="hidden-ename">
+                      <input type="hidden" name="sname" id="hidden-sname">
                   </form>
               </div>
           </div>
@@ -383,6 +385,8 @@
               const startTime = row.querySelector('td:nth-child(6)').innerText;
               const endTime = row.querySelector('td:nth-child(7)').innerText;
               const status = row.querySelector('td:nth-child(8)').innerText;
+              const sname = row.querySelector('td:nth-child(4)').innerText;
+              const ename = row.querySelector('td:nth-child(5)').innerText;
       
               document.getElementById('popup-booking-id').innerText = bookingId;
               document.getElementById('popup-hall-name').innerText = hallName;
@@ -397,6 +401,8 @@
               document.getElementById('hidden-start-time').value = startTime;
               document.getElementById('hidden-end-time').value = endTime;
               document.getElementById('hidden-status').value = status;
+              document.getElementById('hidden-ename').value = sname;
+              document.getElementById('hidden-sname').value = ename;
       
               const overlay = document.querySelector('.overlay');
               const popup = document.querySelector('.popup');
