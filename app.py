@@ -1,6 +1,4 @@
 ##main flask app :: Shahil kadia 
-##Set-ExecutionPolicy Unrestricted -Scope Process;.\.venv\Scripts\activate;
-##cd D:\projects\amity-booking-portal
 import os
 import random
 from time import ctime
@@ -17,12 +15,12 @@ app = Flask(__name__,
             static_url_path='', 
             static_folder='web/static',
             template_folder='web/templates')
-app.secret_key =  "AMITY_792739"
-app.config['SECRET_KEY'] = "AMITY_792739"
+app.secret_key =  "AMITY_792739"   # Replace with and random key
+app.config['SECRET_KEY'] = "AMITY_792739"  # Replace with and random key
 app.config['MAIL_SERVER'] = 'smtp.gmail.com'
 app.config['MAIL_PORT'] = 587
 app.config['MAIL_USE_TLS'] = True
-app.config['MAIL_USERNAME'] = 'amieventhub@gmail.com'  # Replace with your email hiiii
+app.config['MAIL_USERNAME'] = 'amieventhub@gmail.com'  # Replace with your email
 app.config['MAIL_PASSWORD'] = 'ffoi rhgz arbn gnaw'  # Replace with your email password
 app.config['MAIL_DEFAULT_SENDER'] = 'amieventhub@gmail.com'  # Replace with your email
 admin_email = 'amieventhub@gmail.com'  # Replace with the admin's email
