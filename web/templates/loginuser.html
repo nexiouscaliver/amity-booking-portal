@@ -151,8 +151,8 @@
   <body>
     <div class="container">
       <div class="header">
-        <img src="L1.png" alt="Logo1">
-        <img src="L2.png" alt="Logo2">
+        <img src="{{ url_for('static',filename='L1.png') }}" alt="Logo1">
+        <img src="{{ url_for('static',filename='L2.png') }}" alt="Logo2">
       </div>
       <div class="login-form">
         <h2>User Login</h2>
