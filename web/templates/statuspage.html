@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Status page</title>
+  <title>Hall Management System</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -70,6 +70,7 @@
     transform: scale(1.05);
     box-shadow: 0 0 0 2px aliceblue;
 }
+  
 
     .navbar .icon {
       font-size: 20px;
@@ -236,126 +237,16 @@
       background-color: rgba(0, 0, 0, 0.5);
       z-index: 999;
   }
-  .p{ }
-
-  </style>
-</head>
-
-<body>
-  <header>
-    <div class="navbar">
-        <div class="logo-container">
-            <div class="logo">
-                <img src="L1.png" alt="Logo">
-            </div>
-            <div class="name">
-                <img src="L2.png" alt="Name Logo">
-            </div>
-        </div>
-        <div class="menu">
-            <a href="{{url_for('usercalender')}}" class="menu-item">
-                <i class="fas fa-calendar-alt"></i> Calendar
-            </a>
-            <a href="{{url_for('usernoti')}}" class="menu-item">
-                <i class="fas fa-bell"></i> Hall Updates
-            </a>
-          
-            <a href="{{url_for('home')}}" class="menu-item">Logout</a>
-        </div>
-    </div>
-</header>
-
- 
-  <main>
-    <div class="main-content">
-      <h1>Booking Status</h1>
-
-      <div class="booking-list">
-        <table>
-          <tr>
-            <th>Booking ID</th>
-            <th>Hall Name</th>
-            <th>Date</th>
-            <th>School</th>
-            <th>Event Name</th> 
-            <th>Start time</th>
-            <th>End time</th>
-            <th>Status</th>
-            <th> Edit </th>
-          </tr> 
-          
-
-
-           <tr>
-            <form class="cancel-form" onsubmit="return confirmCancel(event)">
-                <td>1</td>
-                <td>Auditorium</td>
-                <td>2024-07-20</td>
-                <td>School of Science</td>
-                <td>Science Fair</td>
-                <td>9 am</td>
-                <td>5 pm</td>
-                <td>Pending</td>
-                <td><button type="button" class="cancel-button" onclick="showPopup(event)">  Cancel  </button></td>
-            </form>
-        </tr> 
-          
-          {%for i in output%}
-          <tr>
-            <form class="cancel-form" method="post" onsubmit="return confirmCancel(event)">
-                <td>{{i[0]}}</td>
-                <td>{{hallname(i[1])}}</td>
-                <td>{{i[3]}}</td>
-                <td>{{i[2]}}</td>
-                <td>{{i[4]}}</td>
-                <td>{{make_time(i[7])}}</td>
-                <td>{{make_time(i[5])}}</td>
-                <td>{{i[6]}}</td>
-                {%if i[6] == "Pending" or i[6] == "Confirmed"%}
-                <td><button type="button" class="cancel-button" onclick="showPopup(event)">  Cancel  </button></td>
-                {%endif%}
-              </form>
-          </tr>
-          <!-- <tr>
-            <td>{{i[0]}}</td>
-            <td>{{hallname(i[1])}}</td>
-            <td>{{i[3]}}</td>
-            <td>{{i[2]}}</td>
-            <td>{{i[4]}}</td>
-
-            <td>{{make_time(i[7])}}</td>
-            <td>{{make_time(i[5])}}</td>
-            <td>{{i[6]}}</td>
-          </tr> -->
-          {%endfor%}
-          </table>
-      </div>
-    </div>
-    <div class="overlay" onclick="closePopup()"></div>
-    <div class="popup">
-        <p>Are you sure you want to cancel this booking?</p>
-        <button class="confirm">Yes</button>
-        <button class="cancel" onclick="closePopup()">No</button>
-    </div>
-
-
-  </main>
-  <script>
-    let currentForm = null;
-
-    function showPopup(event) {
-        event.preventDefault();
-        currentForm = event.target.closest('form');
-        const overlay = document.querySelector('.overlay');
-        const popup = document.querySelector('.popup');
-        overlay.style.display = 'block';
-        popup.style.display = 'block';
-    }
-
-    document.querySelector('.confirm').addEventListener('click', function() {
-        closePopup();
-        if (currentForm) {
-            currentForm.submit();
+  
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
         }
 
 
