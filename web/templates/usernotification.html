@@ -1,74 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>All event list</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <style>
-        body {
-            background-color: aliceblue;
-            margin: 0;
-            font-family: Arial, sans-serif;
-          }
-       
-          
-          :root {
-            --primary-color: #04172b;
-            --secondary-color: #061b31;
-            --white: #ffffff;
-            --gray: #6c757d;
-          }
-          
-          .navbar {
-            background-color: var(--primary-color);
-            display: flex;
-            justify-content: space-evenly; /* maing the space evenly*/
-            align-items: center;
-            padding: 10px 20px;
-            width:auto;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-        
-          
-          .navbar .logo {
-            display: flex;
-            align-items: center;
-          }
-          
-          .navbar .logo img {
-            width: fit-content;
-            height: 40px;
-            margin-right: 10px;
-          }
-          
-          .navbar .logo a {
-            color: var(--white);
-            font-size: 24px;
-            text-decoration: none;
-            font-weight: bold;
-          }
-          
-          .navbar .menu {
-            display: left 20;
-            gap: 20px;
-            align-items: 
-          }
-          
-          .navbar .menu a {
-            color: var(--white);
-            text-decoration: none;
-            padding: 10px 15px;
-            border-radius: 5px;
-            transition: background-color 0.3s, box-shadow 0.3s;
-            font-weight: bold;
-          }
-          
-          .navbar .menu a:hover {
-            background-color: var(--secondary-color);
-            transform: scale(1.05);
-            box-shadow: 0 0 0 2px aliceblue; /* it Enhance the shadow */
-          }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User notification </title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static',filename='apple-touch-icon.png') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static',filename='favicon-32x32.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static',filename='favicon-16x16.png') }}">
+    <link rel="manifest" href="{{ url_for('static',filename='site.webmanifest') }}">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+  <style>
+    body {
+      background-color: aliceblue;
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+    
+    :root {
+      --primary-color: #04172b;
+      --secondary-color: #061b31;
+      --white: #ffffff;
+      --gray: #6c757d;
+    }
+    
+    .navbar {
+      background-color: var(--primary-color);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 20px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+  
+  .logo-container {
+      display: flex;
+      align-items: center;
+  }
+  
+  .navbar .logo img {
+      height: 50px;
+      margin-right: 10px;
+  }
+  
+  .navbar .name img {
+      height: 40px;
+  }
+  
+  .navbar .menu {
+    display: flex;
+    gap: 20px;
+}
+
+.navbar .menu a {
+    color: var(--white);
+    text-decoration: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    transition: background-color 0.3s, box-shadow 0.3s;
+    font-weight: bold;
+}
+
+.navbar .menu a:hover {
+    background-color: var(--secondary-color);
+    transform: scale(1.05);
+    box-shadow: 0 0 0 2px aliceblue;
+}
+  
           
           .navbar .icon {
             font-size: 20px;
@@ -116,19 +118,26 @@
 
     <header>
         <div class="navbar">
-          <div class="logo">
-            <img src="{{url_for('static',filename='Amity-logo.png')}}" alt="Logo">
-            <img src="{{url_for('static',filename='name.2.png')}}" alt="Logo">
-          </div>
-          <div class="menu">
-            <a href="{{url_for('index')}}">Home</a>
-                <a href="{{url_for('status')}}">Booking Status</a>
-                <a href="{{url_for('home')}}">Logout</a>
-              </div>
-            </a>
-          </div>
+            <div class="logo-container">
+                <div class="logo">
+                    <img src="L1.png" alt="Logo">
+                </div>
+                <div class="name">
+                    <img src="L2.png" alt="Name Logo">
+                </div>
+            </div>
+            <div class="menu">
+                <a href="{{url_for('usercalender')}}" class="menu-item">
+                    <i class="fas fa-calendar-alt"></i> Calendar
+                </a>
+                <a href="{{url_for('userhomepage')}}" class="menu-item">
+                     Home
+                </a>
+                <a href="{{url_for('status')}}" class="menu-item">Booking Status</a>
+                <a href="{{url_for('home')}}" class="menu-item">Logout</a>
+            </div>
         </div>
-      </header>
+    </header>
     <div class="container">
         <h1>Other Events Booking Information</h1>
         <div class="search-bar">

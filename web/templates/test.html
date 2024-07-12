@@ -4,8 +4,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<<<<<<< HEAD
   <title>Hall Management System</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+=======
+<<<<<<< HEAD
+  <title>admin home page</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+=======
+  <title>AmiVenueHub - Booking Status</title>
+
+>>>>>>> 1507b68b196d35941290b30a56d4a2a5afc58fff
+>>>>>>> 7bcd9c9f10f1ea49ac56decf93949544f44f2b8b
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static',filename='apple-touch-icon.png') }}">
@@ -20,14 +30,30 @@
       margin: 0;
       font-family: Arial, sans-serif;
     }
+<<<<<<< HEAD
     
+=======
+<<<<<<< HEAD
+    
+=======
+
+>>>>>>> 1507b68b196d35941290b30a56d4a2a5afc58fff
+>>>>>>> 7bcd9c9f10f1ea49ac56decf93949544f44f2b8b
     :root {
       --primary-color: #04172b;
       --secondary-color: #061b31;
       --white: #ffffff;
       --gray: #6c757d;
     }
+<<<<<<< HEAD
     
+=======
+<<<<<<< HEAD
+    
+=======
+
+>>>>>>> 1507b68b196d35941290b30a56d4a2a5afc58fff
+>>>>>>> 7bcd9c9f10f1ea49ac56decf93949544f44f2b8b
     .navbar {
       background-color: var(--primary-color);
       display: flex;
@@ -36,6 +62,11 @@
       padding: 10px 20px;
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     }
+<<<<<<< HEAD
+  
+  .logo-container {
+=======
+<<<<<<< HEAD
   
   .logo-container {
       display: flex;
@@ -71,6 +102,82 @@
     box-shadow: 0 0 0 2px aliceblue;
 }
   
+    
+    .navbar .icon {
+      font-size: 20px;
+=======
+
+    .navbar .logo {
+>>>>>>> 7bcd9c9f10f1ea49ac56decf93949544f44f2b8b
+      display: flex;
+      align-items: center;
+  }
+  
+  .navbar .logo img {
+      height: 50px;
+      margin-right: 10px;
+  }
+  
+  .navbar .name img {
+      height: 40px;
+  }
+  
+  .navbar .menu {
+    display: flex;
+    gap: 20px;
+}
+
+.navbar .menu a {
+    color: var(--white);
+    text-decoration: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    transition: background-color 0.3s, box-shadow 0.3s;
+    font-weight: bold;
+}
+
+<<<<<<< HEAD
+.navbar .menu a:hover {
+    background-color: var(--secondary-color);
+    transform: scale(1.05);
+    box-shadow: 0 0 0 2px aliceblue;
+}
+  
+=======
+    .navbar .menu {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+    }
+
+    .navbar .menu a {
+>>>>>>> 1507b68b196d35941290b30a56d4a2a5afc58fff
+      color: var(--white);
+      padding: 10px;
+      cursor: pointer;
+      font-weight: bold;
+<<<<<<< HEAD
+      position: relative;
+    }
+  
+  
+
+    .container {
+      margin: auto;
+      background: #fff;
+      padding: 20px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      border-radius: 5px;
+      animation: fadeIn 2s ease-in-out;
+=======
+    }
+
+    .navbar .menu a:hover {
+      background-color: var(--secondary-color);
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+>>>>>>> 1507b68b196d35941290b30a56d4a2a5afc58fff
+    }
+>>>>>>> 7bcd9c9f10f1ea49ac56decf93949544f44f2b8b
 
     .navbar .icon {
       font-size: 20px;
@@ -237,6 +344,7 @@
       background-color: rgba(0, 0, 0, 0.5);
       z-index: 999;
   }
+<<<<<<< HEAD
   
         .overlay {
             display: none;
@@ -247,6 +355,151 @@
             height: 100%;
             background-color: rgba(0, 0, 0, 0.5);
             z-index: 1000;
+=======
+  .p{ }
+
+  </style>
+</head>
+
+<body>
+  <header>
+<<<<<<< HEAD
+    <div class="navbar">
+        <div class="logo-container">
+            <div class="logo">
+                <img src="L1.png" alt="Logo">
+            </div>
+            <div class="name">
+                <img src="L2.png" alt="Name Logo">
+            </div>
+        </div>
+        <div class="menu">
+            <a href="{{url_for('usercalender')}}" class="menu-item">
+                <i class="fas fa-calendar-alt"></i> Calendar
+            </a>
+            <a href="{{url_for('usernoti')}}" class="menu-item">
+                <i class="fas fa-bell"></i> Hall Updates
+            </a>
+            <a href="{{url_for('status')}}" class="menu-item">All booking</a>
+            <a href="{{url_for('home')}}" class="menu-item">Logout</a>
+        </div>
+    </div>
+</header>
+<div class="container">
+    <h2>Pending Event Details</h2>
+=======
+    <nav class="navbar">
+      <div class="logo">
+        <img src="Amity-logo.png" alt="Logo">
+        <img src="name.2.png" alt="Logo">
+       
+      </div>
+      <div class="menu">
+        <a href="{{url_for('index')}}">Home</a>
+        <!-- <a href="#">Bookings</a> -->
+        <a href="#">About</a>
+        <div class="icon">
+          <i class="fas fa-bars"></i> <div class="dropdown">
+            <a href="#">Profile</a>
+            <a href="{{url_for('userlogin')}}">Logout</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </header>
+ 
+  <main>
+    <div class="main-content">
+      <h1>Booking Status</h1>
+
+      <div class="booking-list">
+        <table>
+          <tr>
+            <th>Booking ID</th>
+            <th>Hall Name</th>
+            <th>Date</th>
+            <th>School</th>
+            <th>Event Name</th> 
+            <th>Start time</th>
+            <th>End time</th>
+            <th>Status</th>
+            <th> Edit </th>
+          </tr> 
+          
+
+
+           <tr>
+            <form class="cancel-form" onsubmit="return confirmCancel(event)">
+                <td>1</td>
+                <td>Auditorium</td>
+                <td>2024-07-20</td>
+                <td>School of Science</td>
+                <td>Science Fair</td>
+                <td>9 am</td>
+                <td>5 pm</td>
+                <td>Pending</td>
+                <td><button type="button" class="cancel-button" onclick="showPopup(event)">  Cancel  </button></td>
+            </form>
+        </tr> 
+          
+          {%for i in output%}
+          <tr>
+            <form class="cancel-form" method="post" onsubmit="return confirmCancel(event)">
+                <td>{{i[0]}}</td>
+                <td>{{hallname(i[1])}}</td>
+                <td>{{i[3]}}</td>
+                <td>{{i[2]}}</td>
+                <td>{{i[4]}}</td>
+                <td>{{make_time(i[7])}}</td>
+                <td>{{make_time(i[5])}}</td>
+                <td>{{i[6]}}</td>
+                {%if i[6] == "Pending" or i[6] == "Confirmed"%}
+                <td><button type="button" class="cancel-button" onclick="showPopup(event)">  Cancel  </button></td>
+                {%endif%}
+              </form>
+          </tr>
+          <!-- <tr>
+            <td>{{i[0]}}</td>
+            <td>{{hallname(i[1])}}</td>
+            <td>{{i[3]}}</td>
+            <td>{{i[2]}}</td>
+            <td>{{i[4]}}</td>
+
+            <td>{{make_time(i[7])}}</td>
+            <td>{{make_time(i[5])}}</td>
+            <td>{{i[6]}}</td>
+          </tr> -->
+          {%endfor%}
+          </table>
+      </div>
+    </div>
+    <div class="overlay" onclick="closePopup()"></div>
+    <div class="popup">
+        <p>Are you sure you want to cancel this booking?</p>
+        <button class="confirm">Yes</button>
+        <button class="cancel" onclick="closePopup()">No</button>
+    </div>
+>>>>>>> 1507b68b196d35941290b30a56d4a2a5afc58fff
+
+
+  </main>
+  <script>
+    let currentForm = null;
+
+    function showPopup(event) {
+        event.preventDefault();
+        currentForm = event.target.closest('form');
+        const overlay = document.querySelector('.overlay');
+        const popup = document.querySelector('.popup');
+        overlay.style.display = 'block';
+        popup.style.display = 'block';
+    }
+
+    document.querySelector('.confirm').addEventListener('click', function() {
+        closePopup();
+        if (currentForm) {
+            currentForm.submit();
+>>>>>>> 7bcd9c9f10f1ea49ac56decf93949544f44f2b8b
         }
 
 
