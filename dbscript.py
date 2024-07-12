@@ -226,17 +226,25 @@ def seeall():
 def calendermain():
     conn = sqlite3.connect(dbname)
     c = conn.cursor()
-    # sql='select * from status where state="confirm" or state="pending";'
-    sql='select * from status where state="confirm";'
+    sql='select * from status where state="confirm" or state="pending";'
+    # sql='select * from status where state="confirm";'
     a = c.execute(sql)
     o = a.fetchall()
     # print(o)
     final=[]
     for i in o:
         bid = i[0]
+        sql=f'select state from status where bookid={bid};'
+        a = c.execute(sql)
+        e = a.fetchone()
+        x = e[0]
+        if x == "confirm":
+            x = "booked"
         sql=f'select date,etime,schoolname,hallid,stime,fname,eventname from info where bookid={bid};'
         a = c.execute(sql)
         f = a.fetchone()
+        f = list(f)
+        f.append(x)
         final.append(list(f))
     for i in final:
         # if i[1]==1300 or i[1]=="1300":
