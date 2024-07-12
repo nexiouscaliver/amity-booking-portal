@@ -7,416 +7,423 @@
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        body {
-            background-color: aliceblue;
-            margin: 0;
-            font-family: Arial, sans-serif;
-        }
         
-        :root {
-            --primary-color: #04172b;
-            --secondary-color: #061b31;
-            --white: #ffffff;
-            --gray: #6c757d;
-        }
-        
-        .navbar {
-            background-color: var(--primary-color);
-            display: flex;
-            justify-content: space-evenly; /* maing the space evenly*/
-            align-items: center;
-            padding: 10px 20px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-        
-        .navbar .logo {
-            display: flex;
-            align-items: center;
-        }
-        
-        .navbar .logo img {
-            width: fit-content;
-            height: 40px;
-            margin-right: 10px;
-        }
-        
-        .navbar .logo a {
-            color: var(--white);
-            font-size: 24px;
-            text-decoration: none;
-            font-weight: bold;
-        }
-        
-        .navbar .menu {
-            display: flex;
-            gap: 20px;
-        }
-        
-        .navbar .menu a {
-            color: var(--white);
-            text-decoration: none;
-            padding: 10px 15px;
-            border-radius: 5px;
-            transition: background-color 0.3s, box-shadow 0.3s;
-            font-weight: bold;
-        }
-        
-        .navbar .menu a:hover {
-            background-color: var(--secondary-color);
-            transform: scale(1.05);
-            box-shadow: 0 0 0 2px aliceblue;
-        }
-        
-        
-        .calendar-container {
-            background: #e0f7fa; /* Aquatic theme background */
-            border-radius: 20px; /* Adjust the radius for a more curved appearance */
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            width: 70%; /* Adjust as needed */
-            margin: 0 auto; /* Center horizontally */
-            padding: 20px;
-            position: relative;
-            height: auto;
-            margin: 20px auto; /* Center the container horizontally with margin auto */
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-        }
-        
-        .calendar-nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px 0;
-            background: #23252D; /* Aquatic theme header */
-            color: white; /* Office theme text color */
-            border-top-left-radius: 20px; /* Ensure corners are rounded */
-            border-top-right-radius: 20px;
-        }
-        
-        .calendar-nav button {
-            background: none;
-            border: none;
-            color: white; /* Office theme button color */
-            font-size: 18px;
-            cursor: pointer;
-            padding: 5px 10px;
-            transition: background-color 0.3s;
-        }
-        
-        .calendar-nav button:hover {
-            background-color: rgba(0, 0, 0, 0.1);
-            border-radius: 4px;
-        }
-        
-        .calendar-nav span {
-            font-size: 18px;
-            font-weight: bold;
-        }
-        
-        .calendar-header {
-            display: grid;
-            grid-template-columns: repeat(7, 1fr);
-            background: #23252D; /* Aquatic theme header */
-            color: white; /* Office theme text color */
-            text-align: center;
-            padding: 10px 0;
-            font-weight: bold;
-            border-bottom-left-radius: 20px; /* Ensure corners are rounded */
-            border-bottom-right-radius: 20px;
-        }
-        
-        .calendar {
-            display: grid;
-            grid-template-columns: repeat(7, 1fr);
-            gap: 1px;
-            background: #e0f7fa; /* Aquatic theme body */
-            border-bottom-left-radius: 20px; /* Ensure corners are rounded */
-            border-bottom-right-radius: 20px;
-        }
-        
-        .calendar .day {
-            background: #b2dfdb; /* Aquatic theme day background */
-            color: #004d40; /* Aquatic theme day text */
-            padding: 10px;
-            text-align: center;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-        
-        .calendar .day:hover {
-            background-color: #80cbc4; /* Aquatic theme hover effect */
-        }
-        
-        .calendar .day.booked {
-            background-color: lightcoral; /* Booked color */
-            color: white;
-        }
-        
-        .calendar .day.pending {
-            background-color: #fff176; /* Pending color */
-            color: black;
-        }
-        
-        .calendar .day.not-booked {
-            background-color: #68d391; /* Not booked color */
-            color: black;
-        }
-        
-        
-        .day {
-            width: 100%;
-            padding: 10px;
-            box-sizing: border-box;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-            background-color: white; /* Office theme background */
-            color: #333; /* Office theme text color */
-            border-radius: 50%;  /* Changed to circle */
-            transition: box-shadow 0.3s, transform 0.3s;
-        }
-        
-        .day:hover {
-            background-color: #e0e0e0; /* Darker shade on hover */
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            transform: scale(1.05);  /* Slight zoom effect */
-        }
-        
-        .day.hidden {
-            visibility: hidden;
-        }
-        
-        .event-info {
-            font-size: 12px;
-            margin-top: 4px;
-            text-align: center;
-        }
-        
-        @media (max-width: 640px) {
-            .calendar-header,
-            .calendar {
-                grid-template-columns: repeat(3, 1fr);
-            }
-        
-            .day {
-                font-size: 14px;
-                padding: 5px;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .calendar-header,
-            .calendar {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        
-            .day {
-                font-size: 12px;
-                padding: 3px;
-            }
-        }
-        
-
-
-
-        .legend {
-            display: flex;
-            justify-content: space-around;
-            padding: 10px;
-            margin-top: 20px;
-            background-color: #23252D;
+            body {
+                background-color: aliceblue;
+                margin: 0;
+                font-family: Arial, sans-serif;
+              }
+              
+              :root {
+                --primary-color: #04172b;
+                --secondary-color: #061b31;
+                --white: #ffffff;
+                --gray: #6c757d;
+              }
+              
+              .navbar {
+                background-color: var(--primary-color);
+                display: flex;
+                justify-content: space-evenly; /* maing the space evenly*/
+                align-items: center;
+                padding: 10px 20px;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+              }
             
-            border-radius: 8px;
-            width: 100%;
-            color:white;
+            .logo-container {
+                display: flex;
+                align-items: center;
+            }
             
-        }
-    
-        
-        .legend-item {
-            display: flex;
-            align-items: center;
-        }
-        
-        .legend-color {
-            width: 20px;
-            height: 20px;
-            border-radius: 4px;
-            margin-right: 8px;
-        }
-        
-        .full-booked-legend {
-            background-color: lightcoral;
-        }
-        
-        .not-booked-legend {
-            background-color: #68d391;
-        }
-        
-        .first-half-booked-legend {
-            background-color:  rgb(236, 236, 151);
-        }
-        
-     
-       
-
-
-
-
-
-
-
-
-        
-        
-        /*slots*/
-        .time-slot-popup {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background-color: #04172b; /* Dark blue background */
-            border: 1px solid #ccc;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            z-index: 1000;
-            color: white; 
-            max-width: 90%; 
-            max-height: 90%; 
+            .navbar .logo img {
+                height: 50px;
+                margin-right: 10px;
+            }
+            
+            .navbar .name img {
+                height: 40px;
+            }
+            
+            .navbar .menu {
+              display: flex;
+              gap: 20px;
+          }
           
-        }
+          .navbar .menu a {
+              color: var(--white);
+              text-decoration: none;
+              padding: 10px 15px;
+              border-radius: 5px;
+              transition: background-color 0.3s, box-shadow 0.3s;
+              font-weight: bold;
+          }
+          
+          .navbar .menu a:hover {
+              background-color: var(--secondary-color);
+              transform: scale(1.05);
+              box-shadow: 0 0 0 2px aliceblue;
+          }
+            
+              
+              .navbar .icon {
+                font-size: 20px;
+                color: var(--white);
+                padding: 10px;
+                cursor: pointer;
+                font-weight: bold;
+                position: relative;
+              }
+            
+            .calendar-container {
+                background: #e0f7fa; /* Aquatic theme background */
+                border-radius: 20px; /* Adjust the radius for a more curved appearance */
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                width: 70%; /* Adjust as needed */
+                margin: 0 auto; /* Center horizontally */
+                padding: 20px;
+                position: relative;
+                height: auto;
+                margin: 20px auto; /* Center the container horizontally with margin auto */
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+            }
+            
+            .calendar-nav {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 10px 0;
+                background: #23252D; /* Aquatic theme header */
+                color: white; /* Office theme text color */
+                border-top-left-radius: 20px; /* Ensure corners are rounded */
+                border-top-right-radius: 20px;
+            }
+            
+            .calendar-nav button {
+                background: none;
+                border: none;
+                color: white; /* Office theme button color */
+                font-size: 18px;
+                cursor: pointer;
+                padding: 5px 10px;
+                transition: background-color 0.3s;
+            }
+            
+            .calendar-nav button:hover {
+                background-color: rgba(0, 0, 0, 0.1);
+                border-radius: 4px;
+            }
+            
+            .calendar-nav span {
+                font-size: 18px;
+                font-weight: bold;
+            }
+            
+            .calendar-header {
+                display: grid;
+                grid-template-columns: repeat(7, 1fr);
+                background: #23252D; /* Aquatic theme header */
+                color: white; /* Office theme text color */
+                text-align: center;
+                padding: 10px 0;
+                font-weight: bold;
+                border-bottom-left-radius: 20px; /* Ensure corners are rounded */
+                border-bottom-right-radius: 20px;
+            }
+            
+            .calendar {
+                display: grid;
+                grid-template-columns: repeat(7, 1fr);
+                gap: 1px;
+                background: #e0f7fa; /* Aquatic theme body */
+                border-bottom-left-radius: 20px; /* Ensure corners are rounded */
+                border-bottom-right-radius: 20px;
+            }
+            
+            .calendar .day {
+                background: #b2dfdb; /* Aquatic theme day background */
+                color: #004d40; /* Aquatic theme day text */
+                padding: 10px;
+                text-align: center;
+                cursor: pointer;
+                transition: background-color 0.3s;
+            }
+            
+            .calendar .day:hover {
+                background-color: #80cbc4; /* Aquatic theme hover effect */
+            }
+            
+            .calendar .day.booked {
+                background-color: lightcoral; /* Booked color */
+                color: white;
+            }
+            
+            .calendar .day.pending {
+                background-color: #fff176; /* Pending color */
+                color: black;
+            }
+            
+            .calendar .day.not-booked {
+                background-color: #68d391; /* Not booked color */
+                color: black;
+            }
+            
+            
+            .day {
+                width: 100%;
+                padding: 10px;
+                box-sizing: border-box;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                cursor: pointer;
+                background-color: white; /* Office theme background */
+                color: #333; /* Office theme text color */
+                border-radius: 50%;  /* Changed to circle */
+                transition: box-shadow 0.3s, transform 0.3s;
+            }
+            
+            .day:hover {
+                background-color: #e0e0e0; /* Darker shade on hover */
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+                transform: scale(1.05);  /* Slight zoom effect */
+            }
+            
+            .day.hidden {
+                visibility: hidden;
+            }
+            
+            .event-info {
+                font-size: 12px;
+                margin-top: 4px;
+                text-align: center;
+            }
+            
+            @media (max-width: 640px) {
+                .calendar-header,
+                .calendar {
+                    grid-template-columns: repeat(3, 1fr);
+                }
+            
+                .day {
+                    font-size: 14px;
+                    padding: 5px;
+                }
+            }
+            
+            @media (max-width: 480px) {
+                .calendar-header,
+                .calendar {
+                    grid-template-columns: repeat(2, 1fr);
+                }
+            
+                .day {
+                    font-size: 12px;
+                    padding: 3px;
+                }
+            }
+            
+    
+    
+    
+            .legend {
+                display: flex;
+                justify-content: space-around;
+                padding: 10px;
+                margin-top: 20px;
+                background-color: #23252D;
+                
+                border-radius: 8px;
+                width: 100%;
+                color:white;
+                
+            }
         
-        
-        
-        
-        .time-slot-content {
-            margin-top: 10px;
-        }
-        
-        .time-slot-chart {
-            display: flex;
-            align-items: center;
-            justify-content: space-between; /* Adjust  */
-            gap: 10px; /* Or use margin: 10px;*/
-            overflow-x: auto; /* Enable horizontal scrolling */
-            overflow-y: hidden; /* Disable vertical scrolling */
-        }
-        
-        .time-slot-time,
-        .time-slot-status {
-            padding: 10px;
-            border: 2px solid #ccc;
-            text-align: center;
-            flex: 1; /* Take up remaining space */
-            transition: transform 0.3s ease-out; /* Smooth transition for size change */
-        }
-        
-        .time-slot-time:hover,
-        .time-slot-status:hover {
-            transform: scale(1.1); /* Increase size on hover */
-        }
+            
+            .legend-item {
+                display: flex;
+                align-items: center;
+            }
+            
+            .legend-color {
+                width: 20px;
+                height: 20px;
+                border-radius: 4px;
+                margin-right: 8px;
+            }
+            
+            .full-booked-legend {
+                background-color: lightcoral;
+            }
+            
+            .not-booked-legend {
+                background-color: #68d391;
+            }
+            
+            .first-half-booked-legend {
+                background-color:  rgb(236, 236, 151);
+            }
+            
          
-
-        
-        .status-data {
-            position: absolute;
-            top: -100%; /* Start from above the box */
-            left: 0;
-            width: auto;
-            height: auto;
-            background-color: transparent; /* Transparent initially */
-            animation: slideInDown 0.5s forwards; /* Animation for sliding in */
-            text-align: center;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            transition: transform 0.3s ease-out; /* Smooth transition for size change */
-        }
-        
-        .status-data:hover {
-            transform: scale(1.2); /* Increase size on hover */
-        }
-        
-        @keyframes slideInDown {
-            from {
+           
+    
+    
+    
+    
+    
+    
+    
+    
+            
+            
+            /*slots*/
+            .time-slot-popup {
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background-color: #04172b; /* Dark blue background */
+                border: 1px solid #ccc;
+                padding: 20px;
+                border-radius: 10px;
+                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+                z-index: 1000;
+                color: white; 
+                max-width: 90%; 
+                max-height: 90%; 
+              
+            }
+            
+            
+            
+            
+            .time-slot-content {
+                margin-top: 10px;
+            }
+            
+            .time-slot-chart {
+                display: flex;
+                align-items: center;
+                justify-content: space-between; /* Adjust  */
+                gap: 10px; /* Or use margin: 10px;*/
+                overflow-x: auto; /* Enable horizontal scrolling */
+                overflow-y: hidden; /* Disable vertical scrolling */
+            }
+            
+            .time-slot-time,
+            .time-slot-status {
+                padding: 10px;
+                border: 2px solid #ccc;
+                text-align: center;
+                flex: 1; /* Take up remaining space */
+                transition: transform 0.3s ease-out; /* Smooth transition for size change */
+            }
+            
+            .time-slot-time:hover,
+            .time-slot-status:hover {
+                transform: scale(1.1); /* Increase size on hover */
+            }
+             
+    
+            
+            .status-data {
+                position: absolute;
                 top: -100%; /* Start from above the box */
+                left: 0;
+                width: auto;
+                height: auto;
+                background-color: transparent; /* Transparent initially */
+                animation: slideInDown 0.5s forwards; /* Animation for sliding in */
+                text-align: center;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: white;
+                transition: transform 0.3s ease-out; /* Smooth transition for size change */
             }
-            to {
-                top: 0; /* Slide in downwards */
+            
+            .status-data:hover {
+                transform: scale(1.2); /* Increase size on hover */
             }
-        }
-        
-        
-        
-        .booked {
-            background-color: lightcoral; /* Light red background for booked slots */
-        }
-        
-        .pending {
-            background-color: rgb(236, 236, 151); /* Light yellow background for pending slots */
-            color: black;
-        }
-        
-        .free {
-            background-color: lightgreen; /* Green background for free slots */
-        }
-        
-        .close-button {
-            display: block;
-            margin: 10px auto;
-            padding: 5px 10px;
-            background-color: #f44336; /* Red close button */
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        
-        .close-button:hover {
-            background-color: #d32f2f; /* Darker red hover color */
-        }
-        
-        .time-slot-popup.disappear {
-            opacity: 0;
-        }
-        
-      
-        .nav-buttons {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 40px;
-        }
-        
-        .nav-buttons button {
-            background-color: transparent;
-            border: none;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-weight: bold;
-            color: white; /* Adjust text color as needed */
-            font-size: 1.2em; /* Adjust font size as needed */
-            padding: 5px 10px; /* Adjust padding as needed */
-        }
-        
-        .nav-buttons button:hover {
-            transform: scale(1.1);
-            color: #555; /* Adjust hover text color */
-        }
-        
-        .nav-buttons button:focus {
-            outline: none;
-        }
-        
-        .nav-buttons button:active {
-            transform: scale(0.9);
-        }
-    </style>
+            
+            @keyframes slideInDown {
+                from {
+                    top: -100%; /* Start from above the box */
+                }
+                to {
+                    top: 0; /* Slide in downwards */
+                }
+            }
+            
+            
+            
+            .booked {
+                background-color: lightcoral; /* Light red background for booked slots */
+            }
+            
+            .pending {
+                background-color: rgb(236, 236, 151); /* Light yellow background for pending slots */
+                color: black;
+            }
+            
+            .free {
+                background-color: lightgreen; /* Green background for free slots */
+            }
+            
+            .close-button {
+                display: block;
+                margin: 10px auto;
+                padding: 5px 10px;
+                background-color: #f44336; /* Red close button */
+                color: white;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+            }
+            
+            .close-button:hover {
+                background-color: #d32f2f; /* Darker red hover color */
+            }
+            
+            .time-slot-popup.disappear {
+                opacity: 0;
+            }
+            
+          
+            .nav-buttons {
+                display: flex;
+                justify-content: space-between;
+                margin-top: 40px;
+            }
+            
+            .nav-buttons button {
+                background-color: transparent;
+                border: none;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                font-weight: bold;
+                color: white; /* Adjust text color as needed */
+                font-size: 1.2em; /* Adjust font size as needed */
+                padding: 5px 10px; /* Adjust padding as needed */
+            }
+            
+            .nav-buttons button:hover {
+                transform: scale(1.1);
+                color: #555; /* Adjust hover text color */
+            }
+            
+            .nav-buttons button:focus {
+                outline: none;
+            }
+            
+            .nav-buttons button:active {
+                transform: scale(0.9);
+            }
+            
+        </style>
 </head>
 <body>
     <header>
@@ -643,7 +650,7 @@ const updateCalendar = () => {
                 });
             });
 
-            dayElement.style.backgroundImage = `linear-gradient(to top, red ${bookedSlots * 10}%, transparent ${bookedSlots * 10}%)`;
+            dayElement.style.backgroundImage = `linear-gradient(to top, lightcoral ${bookedSlots * 10}%, transparent ${bookedSlots * 10}%)`;
 
 
             // Show remaining slots on hover
@@ -847,8 +854,8 @@ const createTimeSlotElement = (timeSlot, dateKey) => {
                     currentDate = selectedDate;
                     monthSelect.value = currentDate.getMonth();
                     updateCalendar();
-                }
-            });
+                }    
+            } ) ;
         
             prevMonthButton.addEventListener('click', () => {
                 currentDate.setMonth(currentDate.getMonth() - 1);
@@ -865,7 +872,6 @@ const createTimeSlotElement = (timeSlot, dateKey) => {
             populateMonthSelect();
             updateCalendar();
         });
-        
     </script>
 </body>
 </html>
