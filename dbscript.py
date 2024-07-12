@@ -209,6 +209,20 @@ def calender():
     conn.close()
     return final
 
+def seeall():
+    conn = sqlite3.connect(dbname)
+    c = conn.cursor()
+    x = ['book','confirm','reject','userreq','info','status']
+    for i in x:
+        sql=f'select * from {i};'
+        a = c.execute(sql)
+        o = a.fetchall()
+        print(f"====={i}::TABLE::START=====")
+        for j in o:
+            print(j)
+        print(f"TYPE : {type(i)}")
+        print(f"LEN : {len(i)}")
+        print(f"====={i}::TABLE::END=======")
 def calendermain():
     conn = sqlite3.connect(dbname)
     c = conn.cursor()
@@ -302,6 +316,8 @@ def reject_app(bid:int , status:str):
         a = c.execute(sql)
         sql=f'delete from info where bookid={bid};'
         a = c.execute(sql)
+        sql=f'delete from status where bookid={bid};'
+        a = c.execute(sql)
         conn.commit()
         conn.close()
         return True
@@ -313,6 +329,8 @@ def reject_app(bid:int , status:str):
         sql=f'delete from userreq where bookid={bid};'
         a = c.execute(sql)
         sql=f'delete from info where bookid={bid};'
+        a = c.execute(sql)
+        sql=f'delete from status where bookid={bid};'
         a = c.execute(sql)
         conn.commit()
         conn.close()
