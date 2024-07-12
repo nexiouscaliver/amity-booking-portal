@@ -394,7 +394,22 @@ def index():
 @app.route('/requeststatus' ,methods=['GET', 'POST'])
 def status():
     if request.method == 'POST':
-        print("METHOD ACTIVATE")
+        if session['username']:
+            username = session['username']
+            print("METHOD ACTIVATE")
+            bid = request.form["booking_id"]
+            status = request.form["status"]
+            print(bid,status)
+            if db.reject_app(bid=int(bid),status=status):
+                error = "Venue hall request Rejected Successfully."
+                output = db.check_request(username)
+                return render_template("statuspage.html",output=output,error=error)
+            else:
+                error = "Error : Venue hall request NOT Rejected. Please retry again."
+                output = db.check_request(username)
+                return render_template("statuspage.html",output=output,error=error)
+        else:
+            return redirect(url_for('userlogin'))
     if session['username']:
         username = session['username']
         output = db.check_request(username)
@@ -406,7 +421,8 @@ def status():
         #         i[5]= "2nd Half"
         #     elif i[5]==1701 or i[5]=="1701":
         #         i[5]= "Full Day"
-        return render_template("statuspage.html",output=output)
+        error = None
+        return render_template("statuspage.html",output=output,error=error)
     else:
         return redirect(url_for('userlogin'))
         
@@ -708,10 +724,13 @@ def usernoti():
     else:
         return render_template('usernotification.html',error="You have been logged out. Please Login again.")
 
-@app.route('/test',methods=['GET'])
+@app.route('/test',methods=['GET','POST'])
 def test():
     if request.method == 'POST':
         print("METHOD ACTIVATE")
+        bid = request.form["booking_id"]
+        status = request.form["status"]
+        print(bid,status)
     if session['username']:
         username = session['username']
         output = db.check_request(username)
@@ -723,7 +742,7 @@ def test():
         #         i[5]= "2nd Half"
         #     elif i[5]==1701 or i[5]=="1701":
         #         i[5]= "Full Day"
-        return render_template("test.admin.html",output=output)
+        return render_template("test.status.html",output=output)
     else:
         return redirect(url_for('userlogin'))
 

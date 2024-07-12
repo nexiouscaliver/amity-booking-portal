@@ -118,19 +118,26 @@
 
     <header>
         <div class="navbar">
-          <div class="logo">
-            <img src="{{url_for('static',filename='Amity-logo.png')}}" alt="Logo">
-            <img src="{{url_for('static',filename='name.2.png')}}" alt="Logo">
-          </div>
-          <div class="menu">
-            <a href="{{url_for('index')}}">Home</a>
-                <a href="{{url_for('status')}}">Booking Status</a>
-                <a href="{{url_for('home')}}">Logout</a>
-              </div>
-            </a>
-          </div>
+            <div class="logo-container">
+                <div class="logo">
+                    <img src="1.png" alt="Logo">
+                </div>
+                <div class="name">
+                    <img src="2.png" alt="Name Logo">
+                </div>
+            </div>
+            <div class="menu">
+                <a href="{{url_for('usercalender')}}" class="menu-item">
+                    <i class="fas fa-calendar-alt"></i> Calendar
+                </a>
+                <a href="{{url_for('userhomepage')}}" class="menu-item">
+                     Home
+                </a>
+                <a href="{{url_for('status')}}" class="menu-item">Booking Status</a>
+                <a href="{{url_for('home')}}" class="menu-item">Logout</a>
+            </div>
         </div>
-      </header>
+    </header>
     <div class="container">
         <h1>Other Events Booking Information</h1>
         <div class="search-bar">

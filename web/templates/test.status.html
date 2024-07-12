@@ -269,10 +269,10 @@
         <div class="navbar">
             <div class="logo-container">
                 <div class="logo">
-                    <img src="L1.png" alt="Logo">
+                    <img src="Amity-logo.png" alt="Logo">
                 </div>
                 <div class="name">
-                    <img src="L2.png" alt="Name Logo">
+                    <img src="name.2.png" alt="Name Logo">
                 </div>
             </div>
             <div class="menu">
@@ -293,8 +293,8 @@
               <h1>Booking Status</h1>
       
               <div class="booking-list">
-                  <form id="cancel-booking-form" action="{% url 'cancel_booking' %}" method="post">
-                      {% csrf_token %}
+                  <form id="cancel-booking-form"  method="post">
+                      
                       <table>
                           <thead>
                               <tr>
@@ -310,7 +310,7 @@
                               </tr>
                           </thead>
                           <tbody>
-                              <tr>
+                              <!-- <tr>
                                   <td>1</td>
                                   <td>Auditorium</td>
                                   <td>2024-07-20</td>
@@ -320,11 +320,11 @@
                                   <td>5 pm</td>
                                   <td>Pending</td>
                                   <td><button type="button" class="cancel-button" onclick="showPopup(event)">Cancel</button></td>
-                              </tr>
+                              </tr> -->
                               {% for i in output %}
                               <tr>
                                   <td>{{ i[0] }}</td>
-                                  <td>{{ i[1] }}</td>
+                                  <td>{{ hallname(i[1]) }}</td>
                                   <td>{{ i[3] }}</td>
                                   <td>{{ i[2] }}</td>
                                   <td>{{ i[4] }}</td>
@@ -408,6 +408,5 @@
               popup.style.display = 'none';
           }
       </script>
-      
       </body>
       </html>
