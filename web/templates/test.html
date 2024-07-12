@@ -4,13 +4,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<<<<<<< HEAD
-  <title>admin home page</title>
+  <title>Hall Management System</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-=======
-  <title>AmiVenueHub - Booking Status</title>
-
->>>>>>> 1507b68b196d35941290b30a56d4a2a5afc58fff
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static',filename='apple-touch-icon.png') }}">
@@ -19,28 +14,20 @@
     <link rel="manifest" href="{{ url_for('static',filename='site.webmanifest') }}">
     <meta name="msapplication-TileColor" content="#da532c">
     <meta name="theme-color" content="#ffffff">
-  <style> 
+  <style>
     body {
       background-color: aliceblue;
       margin: 0;
       font-family: Arial, sans-serif;
     }
-<<<<<<< HEAD
     
-=======
-
->>>>>>> 1507b68b196d35941290b30a56d4a2a5afc58fff
     :root {
       --primary-color: #04172b;
       --secondary-color: #061b31;
       --white: #ffffff;
       --gray: #6c757d;
     }
-<<<<<<< HEAD
     
-=======
-
->>>>>>> 1507b68b196d35941290b30a56d4a2a5afc58fff
     .navbar {
       background-color: var(--primary-color);
       display: flex;
@@ -49,7 +36,6 @@
       padding: 10px 20px;
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     }
-<<<<<<< HEAD
   
   .logo-container {
       display: flex;
@@ -85,62 +71,6 @@
     box-shadow: 0 0 0 2px aliceblue;
 }
   
-    
-    .navbar .icon {
-      font-size: 20px;
-=======
-
-    .navbar .logo {
-      display: flex;
-      align-items: center;
-    }
-
-    .navbar .logo img {
-      width: fit-content;
-      height: 40px;
-      margin-right: 10px;
-    }
-
-    .navbar .logo a {
-      color: var(--white);
-      font-size: 24px;
-      text-decoration: none;
-      font-weight: bold;
-    }
-
-    .navbar .menu {
-      display: flex;
-      gap: 20px;
-      align-items: center;
-    }
-
-    .navbar .menu a {
->>>>>>> 1507b68b196d35941290b30a56d4a2a5afc58fff
-      color: var(--white);
-      padding: 10px;
-      cursor: pointer;
-      font-weight: bold;
-<<<<<<< HEAD
-      position: relative;
-    }
-  
-  
-
-    .container {
-      margin: auto;
-      background: #fff;
-      padding: 20px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-      border-radius: 5px;
-      animation: fadeIn 2s ease-in-out;
-=======
-    }
-
-    .navbar .menu a:hover {
-      background-color: var(--secondary-color);
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
->>>>>>> 1507b68b196d35941290b30a56d4a2a5afc58fff
-    }
 
     .navbar .icon {
       font-size: 20px;
@@ -307,165 +237,181 @@
       background-color: rgba(0, 0, 0, 0.5);
       z-index: 999;
   }
-  .p{ }
-
-  </style>
-</head>
-
-<body>
-  <header>
-<<<<<<< HEAD
-    <div class="navbar">
-        <div class="logo-container">
-            <div class="logo">
-                <img src="L1.png" alt="Logo">
-            </div>
-            <div class="name">
-                <img src="L2.png" alt="Name Logo">
-            </div>
-        </div>
-        <div class="menu">
-            <a href="{{url_for('usercalender')}}" class="menu-item">
-                <i class="fas fa-calendar-alt"></i> Calendar
-            </a>
-            <a href="{{url_for('usernoti')}}" class="menu-item">
-                <i class="fas fa-bell"></i> Hall Updates
-            </a>
-            <a href="{{url_for('status')}}" class="menu-item">All booking</a>
-            <a href="{{url_for('home')}}" class="menu-item">Logout</a>
-        </div>
-    </div>
-</header>
-<div class="container">
-    <h2>Pending Event Details</h2>
-=======
-    <nav class="navbar">
-      <div class="logo">
-        <img src="Amity-logo.png" alt="Logo">
-        <img src="name.2.png" alt="Logo">
-       
-      </div>
-      <div class="menu">
-        <a href="{{url_for('index')}}">Home</a>
-        <!-- <a href="#">Bookings</a> -->
-        <a href="#">About</a>
-        <div class="icon">
-          <i class="fas fa-bars"></i> <div class="dropdown">
-            <a href="#">Profile</a>
-            <a href="{{url_for('userlogin')}}">Logout</a>
-          </div>
-        </div>
-      </div>
-    </nav>
-  </header>
- 
-  <main>
-    <div class="main-content">
-      <h1>Booking Status</h1>
-
-      <div class="booking-list">
-        <table>
-          <tr>
-            <th>Booking ID</th>
-            <th>Hall Name</th>
-            <th>Date</th>
-            <th>School</th>
-            <th>Event Name</th> 
-            <th>Start time</th>
-            <th>End time</th>
-            <th>Status</th>
-            <th> Edit </th>
-          </tr> 
-          
-
-
-           <tr>
-            <form class="cancel-form" onsubmit="return confirmCancel(event)">
-                <td>1</td>
-                <td>Auditorium</td>
-                <td>2024-07-20</td>
-                <td>School of Science</td>
-                <td>Science Fair</td>
-                <td>9 am</td>
-                <td>5 pm</td>
-                <td>Pending</td>
-                <td><button type="button" class="cancel-button" onclick="showPopup(event)">  Cancel  </button></td>
-            </form>
-        </tr> 
-          
-          {%for i in output%}
-          <tr>
-            <form class="cancel-form" method="post" onsubmit="return confirmCancel(event)">
-                <td>{{i[0]}}</td>
-                <td>{{hallname(i[1])}}</td>
-                <td>{{i[3]}}</td>
-                <td>{{i[2]}}</td>
-                <td>{{i[4]}}</td>
-                <td>{{make_time(i[7])}}</td>
-                <td>{{make_time(i[5])}}</td>
-                <td>{{i[6]}}</td>
-                {%if i[6] == "Pending" or i[6] == "Confirmed"%}
-                <td><button type="button" class="cancel-button" onclick="showPopup(event)">  Cancel  </button></td>
-                {%endif%}
-              </form>
-          </tr>
-          <!-- <tr>
-            <td>{{i[0]}}</td>
-            <td>{{hallname(i[1])}}</td>
-            <td>{{i[3]}}</td>
-            <td>{{i[2]}}</td>
-            <td>{{i[4]}}</td>
-
-            <td>{{make_time(i[7])}}</td>
-            <td>{{make_time(i[5])}}</td>
-            <td>{{i[6]}}</td>
-          </tr> -->
-          {%endfor%}
-          </table>
-      </div>
-    </div>
-    <div class="overlay" onclick="closePopup()"></div>
-    <div class="popup">
-        <p>Are you sure you want to cancel this booking?</p>
-        <button class="confirm">Yes</button>
-        <button class="cancel" onclick="closePopup()">No</button>
-    </div>
->>>>>>> 1507b68b196d35941290b30a56d4a2a5afc58fff
-
-
-  </main>
-  <script>
-    let currentForm = null;
-
-    function showPopup(event) {
-        event.preventDefault();
-        currentForm = event.target.closest('form');
-        const overlay = document.querySelector('.overlay');
-        const popup = document.querySelector('.popup');
-        overlay.style.display = 'block';
-        popup.style.display = 'block';
-    }
-
-    document.querySelector('.confirm').addEventListener('click', function() {
-        closePopup();
-        if (currentForm) {
-            currentForm.submit();
+  
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
         }
-    });
 
-    function confirmCancel(event) {
-        event.preventDefault();
-        return false; // Prevent form submission until confirmation
-    }
 
-    function closePopup() {
-        const overlay = document.querySelector('.overlay');
-        const popup = document.querySelector('.popup');
-        overlay.style.display = 'none';
-        popup.style.display = 'none';
-    }
-</script>
-</body>
+        .popup-content {
+            text-align: center;
+        }
 
-</html>
+        .popup-content ul {
+            list-style-type: none;
+            padding: 0;
+        }
 
+        .popup-content ul li {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="navbar">
+            <div class="logo-container">
+                <div class="logo">
+                    <img src="Amity-logo.png" alt="Logo">
+                </div>
+                <div class="name">
+                    <img src="name.2.png" alt="Name Logo">
+                </div>
+            </div>
+            <div class="menu">
+                <a href="{{url_for('usercalender')}}" class="menu-item">
+                    <i class="fas fa-calendar-alt"></i> Calendar
+                </a>
+                <a href="{{url_for('usernoti')}}" class="menu-item">
+                    <i class="fas fa-bell"></i> Hall Updates
+                </a>
+              
+                <a href="{{url_for('home')}}" class="menu-item">Logout</a>
+            </div>
+        </div>
+    </header>
+    
+      <main>
+        {% if error %}
+    <script>
+        alert("{{error}}");
+    </script>
+    {% endif %}
+          <div class="main-content">
+              <h1>Booking Status</h1>
+      
+              <div class="booking-list">
+                  <form id="cancel-booking-form"  method="post">
+                      
+                      <table>
+                          <thead>
+                              <tr>
+                                  <th>Booking ID</th>
+                                  <th>Hall Name</th>
+                                  <th>Date</th>
+                                  <th>School</th>
+                                  <th>Event Name</th>
+                                  <th>Start Time</th>
+                                  <th>End Time</th>
+                                  <th>Status</th>
+                                  <th>Edit</th>
+                              </tr>
+                          </thead>
+                          <tbody>
+                              <!-- <tr>
+                                  <td>1</td>
+                                  <td>Auditorium</td>
+                                  <td>2024-07-20</td>
+                                  <td>School of Science</td>
+                                  <td>Science Fair</td>
+                                  <td>9 am</td>
+                                  <td>5 pm</td>
+                                  <td>Pending</td>
+                                  <td><button type="button" class="cancel-button" onclick="showPopup(event)">Cancel</button></td>
+                              </tr> -->
+                              {% for i in output %}
+                              <tr>
+                                  <td>{{ i[0] }}</td>
+                                  <td>{{ hallname(i[1]) }}</td>
+                                  <td>{{ i[3] }}</td>
+                                  <td>{{ i[2] }}</td>
+                                  <td>{{ i[4] }}</td>
+                                  <td>{{ i[7] }}</td>
+                                  <td>{{ i[5] }}</td>
+                                  <td>{{ i[6] }}</td>
+                                  {% if i[6] == "Pending" or i[6] == "Confirmed" %}
+                                  <td><button type="button" class="cancel-button" onclick="showPopup(event)">Cancel</button></td>
+                                  {% endif %}
+                              </tr>
+                              {% endfor %}
+                          </tbody>
+                      </table>
+                      <input type="hidden" name="booking_id" id="hidden-booking-id">
+                      <input type="hidden" name="hall_name" id="hidden-hall-name">
+                      <input type="hidden" name="date" id="hidden-date">
+                      <input type="hidden" name="start_time" id="hidden-start-time">
+                      <input type="hidden" name="end_time" id="hidden-end-time">
+                      <input type="hidden" name="status" id="hidden-status">
+                  </form>
+              </div>
+          </div>
+          <div class="overlay" onclick="closePopup()"></div>
+          <div class="popup">
+              <div class="popup-content">
+                  <p>Are you sure you want to cancel this booking?</p>
+                  <ul>
+                      <li><strong>Booking ID:</strong> <span id="popup-booking-id"></span></li>
+                      <li><strong>Hall Name:</strong> <span id="popup-hall-name"></span></li>
+                      <li><strong>Date:</strong> <span id="popup-date"></span></li>
+                      <li><strong>Start Time:</strong> <span id="popup-start-time"></span></li>
+                      <li><strong>End Time:</strong> <span id="popup-end-time"></span></li>
+                      <li><strong>Status:</strong> <span id="popup-status"></span></li>
+                  </ul>
+                  <button class="confirm" onclick="confirmCancellation()">Yes</button>
+                  <button class="cancel" onclick="closePopup()">No</button>
+              </div>
+          </div>
+      </main>
+      
+      <script>
+          function showPopup(event) {
+              event.preventDefault();
+              const row = event.target.closest('tr');
+              const bookingId = row.querySelector('td:nth-child(1)').innerText;
+              const hallName = row.querySelector('td:nth-child(2)').innerText;
+              const date = row.querySelector('td:nth-child(3)').innerText;
+              const startTime = row.querySelector('td:nth-child(6)').innerText;
+              const endTime = row.querySelector('td:nth-child(7)').innerText;
+              const status = row.querySelector('td:nth-child(8)').innerText;
+      
+              document.getElementById('popup-booking-id').innerText = bookingId;
+              document.getElementById('popup-hall-name').innerText = hallName;
+              document.getElementById('popup-date').innerText = date;
+              document.getElementById('popup-start-time').innerText = startTime;
+              document.getElementById('popup-end-time').innerText = endTime;
+              document.getElementById('popup-status').innerText = status;
+      
+              document.getElementById('hidden-booking-id').value = bookingId;
+              document.getElementById('hidden-hall-name').value = hallName;
+              document.getElementById('hidden-date').value = date;
+              document.getElementById('hidden-start-time').value = startTime;
+              document.getElementById('hidden-end-time').value = endTime;
+              document.getElementById('hidden-status').value = status;
+      
+              const overlay = document.querySelector('.overlay');
+              const popup = document.querySelector('.popup');
+              overlay.style.display = 'block';
+              popup.style.display = 'block';
+          }
+      
+          function confirmCancellation() {
+              const form = document.getElementById('cancel-booking-form');
+              form.submit();
+          }
+      
+          function closePopup() {
+              const overlay = document.querySelector('.overlay');
+              const popup = document.querySelector('.popup');
+              overlay.style.display = 'none';
+              popup.style.display = 'none';
+          }
+      </script>
+      </body>
+      </html>
