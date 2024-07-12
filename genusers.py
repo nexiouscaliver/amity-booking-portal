@@ -2,13 +2,15 @@ import secrets
 import string
 sc = ['ASET','ABS','AFS','AIBAS','AIB','ALIT','ALIA','AIP','AIT','AITT','ALS','ASAP','ASAS','ASCO','ASFT','ASL','CIIOL','RICS','ASFA','AIE','AIN']
 def genpass():
-    al = string.ascii_letters + string.digits
-    passwd = ''.join(secrets.choice(al) for i in range(6))
+    # al = string.ascii_letters + string.digits
+    al = string.digits
+    passwd = ''.join(secrets.choice(al) for i in range(5))
     return passwd
 # final = {}
 # for i in sc:
 #     uname = f"{i}_venue"
 #     passwd = f"venue_{genpass()}"
-#     final[i] = passwd
+#     final[uname] = passwd
 # print(final)
-final = {'ASET': 'venue_00XzX4', 'ABS': 'venue_CeVxyR', 'AFS': 'venue_rAEuV9', 'AIBAS': 'venue_JIpjeR', 'AIB': 'venue_u3A9r0', 'ALIT': 'venue_ds60u0', 'ALIA': 'venue_J6II2R', 'AIP': 'venue_SwrT9y', 'AIT': 'venue_XEjHaa', 'AITT': 'venue_qtw83A', 'ALS': 'venue_qOk3sy', 'ASAP': 'venue_wuEPwV', 'ASAS': 'venue_I8Fc0C', 'ASCO': 'venue_RthX8G', 'ASFT': 'venue_8wOPPy', 'ASL': 'venue_zEb1vK', 'CIIOL': 'venue_3XV5CD', 'RICS': 'venue_nMEQqD', 'ASFA': 'venue_ZhFINZ', 'AIE': 'venue_4w5K1z', 'AIN': 'venue_Y33bR1'}
+final = {'ASET_venue': 'venue_64871', 'ABS_venue': 'venue_42833', 'AFS_venue': 'venue_25858', 'AIBAS_venue': 'venue_70005', 'AIB_venue': 'venue_59460', 'ALIT_venue': 'venue_75586', 'ALIA_venue': 'venue_51953', 'AIP_venue': 'venue_36494', 'AIT_venue': 'venue_29146', 'AITT_venue': 'venue_08191', 'ALS_venue': 'venue_22092', 'ASAP_venue': 'venue_27502', 'ASAS_venue': 'venue_36607', 'ASCO_venue': 'venue_81334', 'ASFT_venue': 'venue_95570', 'ASL_venue': 'venue_76994', 'CIIOL_venue': 'venue_55920', 'RICS_venue': 'venue_39966', 'ASFA_venue': 'venue_74293', 'AIE_venue': 'venue_42924', 'AIN_venue': 'venue_68913'}
+admin = {'ADMIN_venue': 'venue_00000','ADMIN2_venue': 'venue_11111',}
