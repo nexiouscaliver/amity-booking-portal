@@ -52,11 +52,19 @@
       font-size: 1.5em;
     }
 
-    .header img {
-      height: 50px;
-      margin-right: 20px;
+    .header {
+      width: 100%;
+      display: flex;
+      align-items: center;
     }
-
+    
+    .header img {
+      max-height: 60px; /* Adjust the height as needed */
+    }
+    
+    .header img:first-child {
+      max-height: 80px; /* Make the first logo bigger */
+    }
     .login-form {
       width: 100%;
       margin-top: 20px;
@@ -141,8 +149,8 @@
   <body>
     <div class="container">
       <div class="header">
-        <img src="logo.png" alt="Logo">
-        <img src="name.1.png" alt="Logo">
+        <img src="L1.png" alt="Logo1">
+        <img src="L2.png" alt="Logo2">
       </div>
       <div class="login-form">
         <h2>Admin Login</h2>
