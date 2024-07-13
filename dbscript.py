@@ -143,12 +143,12 @@ def check_hall(hallid:int , date:str , stime:int , etime:int):   #user
     c = conn.cursor()
     final=[]
     flag=True
-    # sql=f'select * from book where hallid={hallid} and date="{date}"'    #for rejecting pending req.
-    # a = c.execute(sql)
-    # o = a.fetchall()
-    # print(o)
-    # for i in o:
-    #     final.append(i)
+    sql=f'select * from book where hallid={hallid} and date="{date}"'    #for rejecting pending req.
+    a = c.execute(sql)
+    o = a.fetchall()
+    print(o)
+    for i in o:
+        final.append(i)
     sql=f'select * from confirm where hallid={hallid} and date="{date}"'
     a = c.execute(sql)
     o = a.fetchall()

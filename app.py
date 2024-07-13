@@ -557,12 +557,12 @@ def status():
                 school_name = request.form['sname']
                 print(bid,status)
                 if db.reject_app(bid=int(bid),status=status):
-                    error = "Venue hall request Rejected Successfully."
+                    error = "Venue hall request Cancelled Successfully."
                     send_mail5(event_name,event_venue,event_date,start_time,end_time,school_name,status,bid)
                     output = db.check_request(username)
                     return render_template("statuspage.html",output=output,error=error)
                 else:
-                    error = "Error : Venue hall request NOT Rejected. Please retry again."
+                    error = "Error : Venue hall request NOT Cancelled. Please retry again."
                     output = db.check_request(username)
                     return render_template("statuspage.html",output=output,error=error)
             else:
