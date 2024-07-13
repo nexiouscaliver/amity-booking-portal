@@ -209,20 +209,42 @@ def calender():
     conn.close()
     return final
 
+def seeall():
+    conn = sqlite3.connect(dbname)
+    c = conn.cursor()
+    x = ['book','confirm','reject','userreq','info','status']
+    for i in x:
+        sql=f'select * from {i};'
+        a = c.execute(sql)
+        o = a.fetchall()
+        print(f"====={i}::TABLE::START=====")
+        for j in o:
+            print(j)
+        print(f"TYPE : {type(i)}")
+        print(f"LEN : {len(i)}")
+        print(f"====={i}::TABLE::END=======")
 def calendermain():
     conn = sqlite3.connect(dbname)
     c = conn.cursor()
-    # sql='select * from status where state="confirm" or state="pending";'
-    sql='select * from status where state="confirm";'
+    sql='select * from status where state="confirm" or state="pending";'
+    # sql='select * from status where state="confirm";'
     a = c.execute(sql)
     o = a.fetchall()
     # print(o)
     final=[]
     for i in o:
         bid = i[0]
+        sql=f'select state from status where bookid={bid};'
+        a = c.execute(sql)
+        e = a.fetchone()
+        x = e[0]
+        if x == "confirm":
+            x = "booked"
         sql=f'select date,etime,schoolname,hallid,stime,fname,eventname from info where bookid={bid};'
         a = c.execute(sql)
         f = a.fetchone()
+        f = list(f)
+        f.append(x)
         final.append(list(f))
     for i in final:
         # if i[1]==1300 or i[1]=="1300":
@@ -302,6 +324,8 @@ def reject_app(bid:int , status:str):
         a = c.execute(sql)
         sql=f'delete from info where bookid={bid};'
         a = c.execute(sql)
+        sql=f'delete from status where bookid={bid};'
+        a = c.execute(sql)
         conn.commit()
         conn.close()
         return True
@@ -313,6 +337,8 @@ def reject_app(bid:int , status:str):
         sql=f'delete from userreq where bookid={bid};'
         a = c.execute(sql)
         sql=f'delete from info where bookid={bid};'
+        a = c.execute(sql)
+        sql=f'delete from status where bookid={bid};'
         a = c.execute(sql)
         conn.commit()
         conn.close()

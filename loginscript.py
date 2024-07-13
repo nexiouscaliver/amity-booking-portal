@@ -6,7 +6,7 @@ import os
 dbname = "user.db"
 
 
-def init_db():
+def init_db(): #server
     conn = sqlite3.connect(dbname)
     cur = conn.cursor()
     q1 = "CREATE TABLE IF NOT EXISTS user(id int auto increment , username text primary key, password text, name text);"

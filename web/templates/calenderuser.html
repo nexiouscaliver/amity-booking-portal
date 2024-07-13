@@ -437,7 +437,7 @@
                 </div>
             </div>
             <div class="menu">
-                <a href="{{url_for('userhome')}}" class="menu-item">
+                <a href="{{url_for('index')}}" class="menu-item">
                     <i class="fas fa-calendar-alt"></i> Home
                 </a>
                 <a href="{{url_for('usernoti')}}" class="menu-item">
@@ -459,7 +459,7 @@
                 <option value="Auditorium">Auditorium</option>
                 <option value="SeminarHall">Seminar Hall</option>
                 <option value="Room105">Room 105</option>
-                <option value="CRCConferenceRoom">Crc Conference room </option>
+                <option value="CRCConferenceRoom">CRC Conference Room</option>
                 <option value="AIITConferenceRoom">AIIT Conference Room</option>
                 <option value="RICSConferenceRoom">RICS  Conference Room</option>
                 <option value="Atrium">Atrium</option>
@@ -520,7 +520,7 @@
                  // Add more data here
     // ],           
                     {%for i in output[0]%}
-                  '{{i[0]}}' : [{ starttime: '{{(i[4])}}', endtime: '{{(i[1])}}', status: 'booked', school: '{{i[2]}}', event: '{{i[6]}}' , eventcordinator: '{{i[5]}}'}],
+                  '{{i[0]}}' : [{ starttime: '{{(i[4])}}', endtime: '{{(i[1])}}', status: '{{(i[7])}}', school: '{{i[2]}}', event: '{{i[6]}}' , eventcordinator: '{{i[5]}}'}],
                     {%endfor%}
                     // '2024-07-03': [{ starttime: '9', endtime: '12', status: 'booked', school: 'School C', event: 'Event C' , eventcordinator: 'Event C'}],
                     // '2024-07-04': [{ starttime: '9', endtime: '12', status: 'booked', school: 'School D', event: 'Event D' ,eventcordinator: 'Event C'}],
@@ -529,7 +529,7 @@
 
                 SeminarHall: {
                     {%for i in output[1]%}
-                    '{{i[0]}}' : [{ starttime: '{{(i[4])}}', endtime: '{{(i[1])}}', status: 'booked', school: '{{i[2]}}', event: '{{i[6]}}' , eventcordinator: '{{i[5]}}'}],
+                    '{{i[0]}}' : [{ starttime: '{{(i[4])}}', endtime: '{{(i[1])}}', status: '{{(i[7])}}', school: '{{i[2]}}', event: '{{i[6]}}' , eventcordinator: '{{i[5]}}'}],
                     {%endfor%}
                     // '2024-06-01': [{ starttime: '1 pm', endtime: '2 pm', status: 'booked', school: 'ABI', event: 'AS' , eventcordinator: 'AS'}],
                     // '2024-07-22': [{ starttime: '1 pm', endtime: '9 am', status: 'booked', school: 'hi', event: 'AS2' , eventcordinator: 'AS'}],
@@ -539,35 +539,35 @@
                 },
                 Room105: {
                     {%for i in output[2]%}
-                    '{{i[0]}}' : [{ starttime: '{{(i[4])}}', endtime: '{{(i[1])}}', status: 'booked', school: '{{i[2]}}', event: '{{i[6]}}' , eventcordinator: '{{i[5]}}'}],
+                    '{{i[0]}}' : [{ starttime: '{{(i[4])}}', endtime: '{{(i[1])}}', status: '{{(i[7])}}', school: '{{i[2]}}', event: '{{i[6]}}' , eventcordinator: '{{i[5]}}'}],
                     {%endfor%}
                     // '2024-07-06': [{ starttime: '9', endtime: '10', status: 'booked', school: 'School F', event: 'Event F',eventcordinator: 'Event C' }],
                     // '2024-07-07': [{ starttime: '9', endtime: '12', status: 'booked', school: 'School G', event: 'Event G' ,eventcordinator: 'Event C'}],
                 },
                 CRCConferenceRoom: {
                     {%for i in output[3]%}
-                    '{{i[0]}}' : [{ starttime: '{{(i[4])}}', endtime: '{{(i[1])}}', status: 'booked', school: '{{i[2]}}', event: '{{i[6]}}' , eventcordinator: '{{i[5]}}'}],
+                    '{{i[0]}}' : [{ starttime: '{{(i[4])}}', endtime: '{{(i[1])}}', status: '{{(i[7])}}', school: '{{i[2]}}', event: '{{i[6]}}' , eventcordinator: '{{i[5]}}'}],
                     {%endfor%}
                     // '2024-07-08': [{ starttime: '9', endtime: '10', status: 'booked', school: 'School H', event: 'Event H',eventcordinator: 'Event C' }],
                     // '2024-07-09': [{ starttime: '9', endtime: '12', status: 'booked', school: 'School I', event: 'Event I',eventcordinator: 'Event C' }],
                 },
                 AIITConferenceRoom: {
                     {%for i in output[4]%}
-                    '{{i[0]}}' : [{ starttime: '{{(i[4])}}', endtime: '{{(i[1])}}', status: 'booked', school: '{{i[2]}}', event: '{{i[6]}}' , eventcordinator: '{{i[5]}}'}],
+                    '{{i[0]}}' : [{ starttime: '{{(i[4])}}', endtime: '{{(i[1])}}', status: '{{(i[7])}}', school: '{{i[2]}}', event: '{{i[6]}}' , eventcordinator: '{{i[5]}}'}],
                     {%endfor%}
                     // '2024-07-08': [{ starttime: '9', endtime: '10', status: 'booked', school: 'School H', event: 'Event H',eventcordinator: 'Event C' }],
                     // '2024-07-09': [{ starttime: '9', endtime: '12', status: 'booked', school: 'School I', event: 'Event I',eventcordinator: 'Event C' }],
                 },
                 RICSConferenceRoom: {
                     {%for i in output[5]%}
-                    '{{i[0]}}' : [{ starttime: '{{(i[4])}}', endtime: '{{(i[1])}}', status: 'booked', school: '{{i[2]}}', event: '{{i[6]}}' , eventcordinator: '{{i[5]}}'}],
+                    '{{i[0]}}' : [{ starttime: '{{(i[4])}}', endtime: '{{(i[1])}}', status: '{{(i[7])}}', school: '{{i[2]}}', event: '{{i[6]}}' , eventcordinator: '{{i[5]}}'}],
                     {%endfor%}
                     // '2024-07-08': [{ starttime: '9', endtime: '10', status: 'booked', school: 'School H', event: 'Event H',eventcordinator: 'Event C' }],
                     // '2024-07-09': [{ starttime: '9', endtime: '12', status: 'booked', school: 'School I', event: 'Event I',eventcordinator: 'Event C' }],
                 },
                 Atrium: {
                     {%for i in output[6]%}
-                    '{{i[0]}}' : [{ starttime: '{{(i[4])}}', endtime: '{{(i[1])}}', status: 'booked', school: '{{i[2]}}', event: '{{i[6]}}' , eventcordinator: '{{i[5]}}'}],
+                    '{{i[0]}}' : [{ starttime: '{{(i[4])}}', endtime: '{{(i[1])}}', status: '{{(i[7])}}', school: '{{i[2]}}', event: '{{i[6]}}' , eventcordinator: '{{i[5]}}'}],
                     {%endfor%}
                     // '2024-07-08': [{ starttime: '9', endtime: '10', status: 'booked', school: 'School H', event: 'Event H',eventcordinator: 'Event C' }],
                     // '2024-07-09': [{ starttime: '9', endtime: '12', status: 'booked', school: 'School I', event: 'Event I',eventcordinator: 'Event C' }],

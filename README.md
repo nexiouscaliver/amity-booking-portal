@@ -60,11 +60,22 @@ Install the dependencies :
 ```sh
 pip install -r requirements.txt
 ```
+## Change Variables
 
+Change the following variables in *app.py* brfore deployment:
+```sh
+app.py
+  |-- secret_key (line no. 18 & 19)
+  |-- sender email and password (line no. 23,24,25)
+  |-- admin_email (line no. 26)
+  |-- it_email (line no. 27)
+  |-- server_link (line no. 29)
+```
+Description for purpose is mentioned commented alongside variables.
 
 ## Deployment
 
-[run the following steps in above created virtual environment]
+*run the following steps in above created virtual environment*
 
 Run init script to initialize the database:
 ```sh
@@ -72,6 +83,7 @@ python3 initapp.py
 ```
 
 Start the server on  127.0.0.1:8000 (change address and port as needed) :
+*(WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.)*
 ```sh
 flask run -p 8000 -h 127.0.0.1
 ```
@@ -82,6 +94,8 @@ your preferred browser.
 ```sh
 http://127.0.0.1:8000
 ```
+For production deployment kindly use production WSGI server instead or any other compatible server.
+[Production Deployment](https://flask.palletsprojects.com/en/3.0.x/tutorial/deploy/)
 
 ## License
 
