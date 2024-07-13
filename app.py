@@ -519,7 +519,7 @@ def index():
 
             hid = hallid(loc)
             
-            #print(final)
+            # print(final)
             #print('location = ',hallid(loc))
             if db.check_hall(hid,final[4],final[5],final[6]):
                 bid = db.request_hall(hid,final[0],final[4],final[5],final[6],final[3],uname)

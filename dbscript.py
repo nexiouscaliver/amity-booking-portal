@@ -158,7 +158,7 @@ def check_hall(hallid:int , date:str , stime:int , etime:int):   #user
 
     for i in final:
         endtime = i[5]
-        if(endtime>stime):
+        if(int(endtime)>int(stime)):
             flag=False
 
     conn.commit()
