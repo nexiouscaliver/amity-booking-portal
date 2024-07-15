@@ -15,7 +15,7 @@ import loginscript as login
 app = Flask(__name__,
             static_url_path='', 
             static_folder='web/static',
-            template_folder='web/templates')
+            template_folder='web/templates') 
 app.secret_key =  "AMITY_792739"   # Replace with and random key
 app.config['SECRET_KEY'] = "AMITY_792739"  # Replace with and random key
 app.config['MAIL_SERVER'] = 'smtp.gmail.com'
