@@ -1,50 +1,14 @@
-import mysql.connector
+import sqlite3
 import hashlib
 import sys
 import os
 
-hostname = "localhost"
-username="root"
-portnum = "3388"
+dbname = "user.db"
 
-try:
-    conn = mysql.connector.connect(
-    host=hostname,
-    user=username,
-    password=portnum,
-    port = 3388,
-    database = "amilogin"
-    )
-except Exception as e:
-    print("Error in connection : ",e)
-    print("Reconnecting to server and creating database")
-    conntemp = mysql.connector.connect(
-    host=hostname,
-    user=username,
-    password=portnum,
-    port = 3388,
-    )
-    c = conntemp.cursor()
-    sql = "create database if not exists amilogin;"
-    c.execute(sql)
-    conntemp.commit()
-    conntemp.close()
-    print("Database created! Reconnecting to server...")
-
-conn = mysql.connector.connect(
-    host=hostname,
-    user=username,
-    password=portnum,
-    port = 3388,
-    database = "amilogin"
-    )
-cur = conn.cursor()
-
-def close():
-    conn.commit()
-    conn.close()
 
 def init_db(): #server
+    conn = sqlite3.connect(dbname)
+    cur = conn.cursor()
     q1 = "CREATE TABLE IF NOT EXISTS user(id int auto increment , username text primary key, password text, name text);"
     cur.execute(q1)
     q1 = "CREATE TABLE IF NOT EXISTS admin(id int auto increment , username text primary key, password text, name text);"
@@ -53,18 +17,20 @@ def init_db(): #server
     create_admin("testadmin",'12345','admin')
     print("SQL init compleated!")
     conn.commit()
-    
+    conn.close()
 
 #email = name
 #name = email
 def create_user(username:str,password:str,name:str):
+    conn = sqlite3.connect(dbname)
+    cur = conn.cursor()
     hpass = hashlib.md5(password.encode()).hexdigest()
     sql = f'insert into user(username,password,name) values ("{username}","{hpass}","{name}");'
     try:
         cur.execute(sql)
         print(f"User {username}::{password} successfully generated")
         return True
-    except mysql.connector.Error as error:
+    except sqlite3.Error as error:
         print(f"SQL Error Occured:: {username} :: {error}")
         return False
     except Exception as e:
@@ -73,9 +39,11 @@ def create_user(username:str,password:str,name:str):
     finally:
         cur.close()
         conn.commit()
-        
+        conn.close()
 
 def load_user(username:str,password:str):
+    conn = sqlite3.connect(dbname)
+    cur = conn.cursor()
     uhpass = hashlib.md5(password.encode()).hexdigest()
     sql = f'select password from user where username="{username}";'
     try:
@@ -94,7 +62,7 @@ def load_user(username:str,password:str):
         else:
             print(f"USER Incorrect password :: {username}")
             return False
-    except mysql.connector.Error as error:
+    except sqlite3.Error as error:
         print(f"SQL Error occured :: {username} :: {error}")
         return False
     except Exception as e:
@@ -103,10 +71,12 @@ def load_user(username:str,password:str):
     finally:
         cur.close()
         conn.commit()
-        
+        conn.close()
 
 
 def getname_user(username:str):
+    conn = sqlite3.connect(dbname)
+    cur = conn.cursor()
     sql = f'select name from user where username="{username}";'
     try:
         cur.execute(sql)
@@ -121,7 +91,7 @@ def getname_user(username:str):
         else:
             print(f"USER Incorrect password :: {username}")
             return False
-    except mysql.connector.Error as error:
+    except sqlite3.Error as error:
         print(f"SQL Error occured :: {username} :: {error}")
         return False
     except Exception as e:
@@ -130,17 +100,19 @@ def getname_user(username:str):
     finally:
         cur.close()
         conn.commit()
-        
+        conn.close()
 
 
 def create_admin(username:str,password:str,name:str):
+    conn = sqlite3.connect(dbname)
+    cur = conn.cursor()
     hpass = hashlib.md5(password.encode()).hexdigest()
     sql = f'insert into admin(username,password,name) values ("{username}","{hpass}","{name}");'
     try:
         cur.execute(sql)
         # print(f"admin {username}::{password} successfully generated")
         return True
-    except mysql.connector.Error as error:
+    except sqlite3.Error as error:
         print(f"SQL Error Occured:: {username} :: {error}")
         return False
     except Exception as e:
@@ -149,9 +121,12 @@ def create_admin(username:str,password:str,name:str):
     finally:
         cur.close()
         conn.commit()
-        
+        conn.close()
 
 def load_admin(username:str,password:str):
+    conn = sqlite3.connect(dbname)
+    cur = conn.cursor()
+    
     uhpass = hashlib.md5(password.encode()).hexdigest()
     sql = f'select password from admin where username="{username}";'
     try:
@@ -170,7 +145,7 @@ def load_admin(username:str,password:str):
         else:
             print(f"admin Incorrect password :: {username}")
             return False
-    except mysql.connector.Error as error:
+    except sqlite3.Error as error:
         print(f"SQL Error occured :: {username} :: {error}")
         return False
     except Exception as e:
@@ -179,9 +154,11 @@ def load_admin(username:str,password:str):
     finally:
         cur.close()
         conn.commit()
-        
+        conn.close()
 
 def getname_admin(username:str):
+    conn = sqlite3.connect(dbname)
+    cur = conn.cursor()
     sql = f'select name from admin where username="{username}";'
     try:
         cur.execute(sql)
@@ -196,7 +173,7 @@ def getname_admin(username:str):
         else:
             print(f"admin Incorrect password :: {username}")
             return False
-    except mysql.connector.Error as error:
+    except sqlite3.Error as error:
         print(f"SQL Error occured :: {username} :: {error}")
         return False
     except Exception as e:
@@ -205,3 +182,4 @@ def getname_admin(username:str):
     finally:
         cur.close()
         conn.commit()
+        conn.close()

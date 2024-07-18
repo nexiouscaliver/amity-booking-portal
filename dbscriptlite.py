@@ -1,105 +1,79 @@
-import mysql.connector
+import sqlite3
+#conn = sqlite3.connect("test1.db")
+#c = conn.cursor()
+#conn.commit()
+#conn.close()
 
-hostname = "localhost"
-username="root"
-portnum = "3388"
-
-try:
-    conn = mysql.connector.connect(
-    host=hostname,
-    user=username,
-    password=portnum,
-    port = 3388,
-    database = "amievent"
-    )
-except Exception as e:
-    print("Error in connection : ",e)
-    print("Reconnecting to server and creating database")
-    conntemp = mysql.connector.connect(
-    host=hostname,
-    user=username,
-    password=portnum,
-    port = 3388,
-    )
-    c = conntemp.cursor()
-    sql = "create database if not exists amievent;"
-    c.execute(sql)
-    conntemp.commit()
-    conntemp.close()
-    print("Database created! Reconnecting to server...")
-
-conn = mysql.connector.connect(
-    host=hostname,
-    user=username,
-    password=portnum,
-    port = 3388,
-    database = "amievent"
-    )
-c = conn.cursor()
+dbname = "data.db"
 
 def cmd(s):       #idle-de-bugging
-    c.execute(s)
-    b=c.fetchall()
+    conn = sqlite3.connect(dbname)
+    c = conn.cursor()
+    a=c.execute(s)
+    b=a.fetchall()
     print(b)
     print('type : ',type(b))
     print('len : ',len(b))
     conn.commit()
-
-def close():
-    conn.commit()
     conn.close()
 
 def see(table):       #idle-de-bugging
-    c.execute(f'select * from {table};')
-    b=c.fetchall()
+    conn = sqlite3.connect(dbname)
+    c = conn.cursor()
+    a=c.execute(f'select * from {table};')
+    b=a.fetchall()
     for i in b:
         print(i)
     print('type : ',type(b))
     print('len : ',len(b))
     conn.commit()
-    
+    conn.close()
 
 
 def init():  #server
-    sql = "create table if not exists halls(hallid integer primary key AUTO_INCREMENT,hallname varchar(35));"
+    conn = sqlite3.connect(dbname)
+    c = conn.cursor()
+    sql = "create table if not exists halls(hallid integer primary key autoincrement,hallname varchar(35));"
     c.execute(sql)
-    sql = "create table if not exists book(bookid integer primary key AUTO_INCREMENT , hallid integer, school varchar(50) , date varchar(20) , stime integer, etime integer , event text);"
+    sql = "create table if not exists book(bookid integer primary key autoincrement , hallid integer, school varchar(50) , date varchar(20) , stime integer, etime integer , event text);"
     c.execute(sql)
     sql = "create table if not exists confirm(bookid integer primary key , hallid integer, school varchar(50) , date varchar(20) , stime integer, etime integer , event text);"
     c.execute(sql)
     sql = "create table if not exists reject(bookid integer primary key , hallid integer, school varchar(50) , date varchar(20) , stime integer, etime integer , event text);"
     c.execute(sql)
-    sql = "create table if not exists userreq(userid integer primary key AUTO_INCREMENT , username text , bookid integer);"
+    sql = "create table if not exists userreq(userid integer primary key autoincrement , username text , bookid integer)"
     c.execute(sql)
-    sql = "create table if not exists status(bookid integer primary key , state varchar(15));"
+    sql = "create table if not exists status(bookid integer primary key , state varchar(15))"
     c.execute(sql)
-    sql = "create table if not exists info(bookid integer primary key, hallid integer , schoolname text , fname text , hod text , eventname text ,date text , stime text , etime text, email text , phone text , rpname text , rpdetail text);"
+    sql = "create table if not exists info(bookid integer primary key, hallid integer , schoolname text , fname text , hod text , eventname text ,date text , stime text , etime text, email text , phone text , rpname text , rpdetail text)"
     c.execute(sql)
     try:
         sql='select * from halls;'
-        c.execute(sql)
-        o=c.fetchall()
+        a=c.execute(sql)
+        o=a.fetchall()
         s=[(1, 'audi'), (2, 'sem'), (3, 'a2'), (4, 'crc')]
         if(o==s):
             pass
         else:
-            sql='insert into halls(hallname) values("audi"),("sem"),("a2"),("crc");'
+            sql='insert into halls(hallname) values("audi"),("sem"),("a2"),("crc")'
             c.execute(sql)
     except:
         pass
     conn.commit()
-    
+    conn.close()
 
 
 #user flow -> check_hall:request_hall | reject / check_request
 #admin flow -> check_pending:confirm_hall:reject_hall
 
-def request_hall(hallid:int , school:str , date:str , stime:int , etime:int , event:str , username:str):  #user  
+def request_hall(hallid:int , school:str , date:str , stime:int , etime:int , event:str , username:str):  #user
+    conn = sqlite3.connect(dbname)
+    c = conn.cursor()
     sql=f'insert into book(hallid,school,date,stime,etime,event) values({hallid},"{school}","{date}",{stime},{etime},"{event}");'
     c.execute(sql)
     sql='select * from book'
-    c.execute(sql)
-    o = c.fetchall()
+    a = c.execute(sql)
+    o = a.fetchall()
     last = o[-1]
     bid = last[0]
     sql=f'insert into userreq(username,bookid) values("{username}",{bid})'
@@ -107,38 +81,41 @@ def request_hall(hallid:int , school:str , date:str , stime:int , etime:int , ev
     sql=f'insert into status(bookid,state) values({bid},"pending")'
     c.execute(sql)
     conn.commit()
-    
+    conn.close()
     return bid
 
 def info_dump(bookid:int, hallid:int , school:str, fname:str, hod:str, email:str , phone:str , date:str , stime:int , etime:int , event:str ,rpname:str , rpdetail:str):
-
+    conn = sqlite3.connect(dbname)
+    c = conn.cursor()
     sql=f'insert into info values({bookid}, {hallid} , "{school}", "{fname}", "{hod}", "{event}","{date}", "{stime}", "{etime}", "{email}", "{phone}", "{rpname}", "{rpdetail}")'
     c.execute(sql)
     conn.commit()
-    
+    conn.close()
 
 def info_fetch(bookid:int):
-
+    conn = sqlite3.connect(dbname)
+    c = conn.cursor()
     sql = f'select * from info where bookid={bookid};'
-    c.execute(sql)
-    o = c.fetchall()
+    f = c.execute(sql)
+    o = f.fetchall()
     conn.commit()
-    
+    conn.close()
     return o
 
 def check_request(username:str):   #user
- 
+    conn = sqlite3.connect(dbname)
+    c = conn.cursor()    
     sql=f'select * from userreq where username="{username}"'
-    c.execute(sql)
-    o = c.fetchall()
+    a = c.execute(sql)
+    o = a.fetchall()
     q=[]
     for i in o:
         bid = i[2]
         # print(bid)
         sql=f'select state from status where bookid={bid}'
         # print(sql)
-        c.execute(sql)
-        o = c.fetchall()
+        a = c.execute(sql)
+        o = a.fetchall()
         status = o[0][0]
         # print(status)
         sql=f'select * from info where bookid={bid}'
@@ -157,23 +134,24 @@ def check_request(username:str):   #user
         q.append(l)
     for i in q:print(i)
     conn.commit()
-    
+    conn.close()
     return q
     
 
 def check_hall(hallid:int , date:str , stime:int , etime:int):   #user
-
+    conn = sqlite3.connect(dbname)
+    c = conn.cursor()
     final=[]
     flag=True
     sql=f'select * from book where hallid={hallid} and date="{date}"'    #for rejecting pending req.
-    c.execute(sql)
-    o = c.fetchall()
+    a = c.execute(sql)
+    o = a.fetchall()
     print(o)
     for i in o:
         final.append(i)
     sql=f'select * from confirm where hallid={hallid} and date="{date}"'
-    c.execute(sql)
-    o = c.fetchall()
+    a = c.execute(sql)
+    o = a.fetchall()
     print(o)
     for i in o:
         final.append(i)
@@ -184,30 +162,32 @@ def check_hall(hallid:int , date:str , stime:int , etime:int):   #user
             flag=False
 
     conn.commit()
-    
+    conn.close()
     return flag
 
 def all_accept_and_pending():
-
+    conn = sqlite3.connect(dbname)
+    c = conn.cursor()
     sql='select * from status where state="confirm" or state="pending";'
-    c.execute(sql)
-    o = c.fetchall()
+    a = c.execute(sql)
+    o = a.fetchall()
     conn.commit()
-    
+    conn.close()
     return o
 
 def calender():
-
+    conn = sqlite3.connect(dbname)
+    c = conn.cursor()
     # sql='select * from status where state="confirm" or state="pending";'
     sql='select * from status where state="confirm";'
-    c.execute(sql)
-    o = c.fetchall()
+    a = c.execute(sql)
+    o = a.fetchall()
     final=[]
     for i in o:
         bid = i[0]
         sql=f'select date,etime from info where bookid={bid};'
-        c.execute(sql)
-        f = c.fetchone()
+        a = c.execute(sql)
+        f = a.fetchone()
         final.append(list(f))
     for i in final:
         if i[1]==1300 or i[1]=="1300":
@@ -226,16 +206,17 @@ def calender():
                     i[1] = "full"
                     j[1] = "full"
     conn.commit()
-    
+    conn.close()
     return final
 
 def seeall():
-
+    conn = sqlite3.connect(dbname)
+    c = conn.cursor()
     x = ['book','confirm','reject','userreq','info','status']
     for i in x:
         sql=f'select * from {i};'
-        c.execute(sql)
-        o = c.fetchall()
+        a = c.execute(sql)
+        o = a.fetchall()
         print(f"====={i}::TABLE::START=====")
         for j in o:
             print(j)
@@ -243,23 +224,24 @@ def seeall():
         print(f"LEN : {len(i)}")
         print(f"====={i}::TABLE::END=======")
 def calendermain():
-
+    conn = sqlite3.connect(dbname)
+    c = conn.cursor()
     sql='select * from status where state="confirm" or state="pending";'
     # sql='select * from status where state="confirm";'
-    c.execute(sql)
-    o = c.fetchall()
+    a = c.execute(sql)
+    o = a.fetchall()
     # print(o)
     final=[]
     for i in o:
         bid = i[0]
         sql=f'select state from status where bookid={bid};'
-        c.execute(sql)
+        a = c.execute(sql)
         e = a.fetchone()
         x = e[0]
         if x == "confirm":
             x = "booked"
         sql=f'select date,etime,schoolname,hallid,stime,fname,eventname from info where bookid={bid};'
-        c.execute(sql)
+        a = c.execute(sql)
         f = a.fetchone()
         f = list(f)
         f.append(x)
@@ -329,65 +311,67 @@ def calendermain():
     #         print(j)
     #         # print(i) 1 ,4
     conn.commit()
-    
+    conn.close()
     return final2
 
 def reject_app(bid:int , status:str):
     if status == "Confirmed":
-        
-        
+        conn = sqlite3.connect(dbname)
+        c = conn.cursor()
         sql=f'delete from confirm where bookid={bid};'
-        c.execute(sql)
+        a = c.execute(sql)
         sql=f'delete from userreq where bookid={bid};'
-        c.execute(sql)
+        a = c.execute(sql)
         sql=f'delete from info where bookid={bid};'
-        c.execute(sql)
+        a = c.execute(sql)
         sql=f'delete from status where bookid={bid};'
-        c.execute(sql)
+        a = c.execute(sql)
         conn.commit()
-        
+        conn.close()
         return True
     elif status == "Pending":
-        
-        
+        conn = sqlite3.connect(dbname)
+        c = conn.cursor()
         sql=f'delete from book where bookid={bid};'
-        c.execute(sql)
+        a = c.execute(sql)
         sql=f'delete from userreq where bookid={bid};'
-        c.execute(sql)
+        a = c.execute(sql)
         sql=f'delete from info where bookid={bid};'
-        c.execute(sql)
+        a = c.execute(sql)
         sql=f'delete from status where bookid={bid};'
-        c.execute(sql)
+        a = c.execute(sql)
         conn.commit()
-        
+        conn.close()
         return True
     return False
 
 def all_status():
-
+    conn = sqlite3.connect(dbname)
+    c = conn.cursor()
     sql='select * from status;'
-    c.execute(sql)
-    o = c.fetchall()
+    a = c.execute(sql)
+    o = a.fetchall()
     conn.commit()
-    
+    conn.close()
     return o
 
 def check_pending():    #admin
-
+    conn = sqlite3.connect(dbname)
+    c = conn.cursor()
     sql='select * from book;'
-    c.execute(sql)
-    o = c.fetchall()
+    a = c.execute(sql)
+    o = a.fetchall()
     conn.commit()
-    
+    conn.close()
     return o
 
 def reject_hall(bookid:int):      #admin
     try:
-        
-        
+        conn = sqlite3.connect(dbname)
+        c = conn.cursor()
         sql=f'select * from book where bookid={bookid};'
-        c.execute(sql)
-        o = c.fetchall()
+        a = c.execute(sql)
+        o = a.fetchall()
         s = o[0]
         hallid = s[1]
         school = s[2]
@@ -402,7 +386,7 @@ def reject_hall(bookid:int):      #admin
         sql=f'update status set state="reject" where bookid={bookid}'
         c.execute(sql)
         conn.commit()
-        
+        conn.close()
         return True
     except Exception as e:
         print(e)
@@ -410,11 +394,11 @@ def reject_hall(bookid:int):      #admin
 
 def confirm_hall(bookid:int):   #admin
     try:
-        
-        
+        conn = sqlite3.connect(dbname)
+        c = conn.cursor()
         sql=f'select * from book where bookid={bookid};'
-        c.execute(sql)
-        o = c.fetchall()
+        a = c.execute(sql)
+        o = a.fetchall()
         s = o[0]
         hallid = s[1]
         school = s[2]
@@ -430,7 +414,7 @@ def confirm_hall(bookid:int):   #admin
         c.execute(sql)
         o = check_pending()
         conn.commit()
-        
+        conn.close()
         # print(o)
         for i in o:
             # print(i)
