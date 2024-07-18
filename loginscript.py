@@ -38,16 +38,17 @@ conn = mysql.connector.connect(
     port = 3388,
     database = "amilogin"
     )
-cur = conn.cursor()
+
 
 def close():
     conn.commit()
     conn.close()
 
 def init_db(): #server
-    q1 = "CREATE TABLE IF NOT EXISTS user(id int auto increment , username text primary key, password text, name text);"
+    cur = conn.cursor()
+    q1 = "CREATE TABLE IF NOT EXISTS user(username varchar(30) primary key, password varchar(100), name varchar(30));"
     cur.execute(q1)
-    q1 = "CREATE TABLE IF NOT EXISTS admin(id int auto increment , username text primary key, password text, name text);"
+    q1 = "CREATE TABLE IF NOT EXISTS admin(username varchar(30) primary key, password varchar(100), name varchar(30));"
     cur.execute(q1)
     cur.close()
     create_admin("testadmin",'12345','admin')
@@ -58,6 +59,7 @@ def init_db(): #server
 #email = name
 #name = email
 def create_user(username:str,password:str,name:str):
+    cur = conn.cursor()
     hpass = hashlib.md5(password.encode()).hexdigest()
     sql = f'insert into user(username,password,name) values ("{username}","{hpass}","{name}");'
     try:
@@ -76,6 +78,7 @@ def create_user(username:str,password:str,name:str):
         
 
 def load_user(username:str,password:str):
+    cur = conn.cursor()
     uhpass = hashlib.md5(password.encode()).hexdigest()
     sql = f'select password from user where username="{username}";'
     try:
@@ -107,6 +110,7 @@ def load_user(username:str,password:str):
 
 
 def getname_user(username:str):
+    cur = conn.cursor()
     sql = f'select name from user where username="{username}";'
     try:
         cur.execute(sql)
@@ -134,6 +138,7 @@ def getname_user(username:str):
 
 
 def create_admin(username:str,password:str,name:str):
+    cur = conn.cursor()
     hpass = hashlib.md5(password.encode()).hexdigest()
     sql = f'insert into admin(username,password,name) values ("{username}","{hpass}","{name}");'
     try:
@@ -152,6 +157,7 @@ def create_admin(username:str,password:str,name:str):
         
 
 def load_admin(username:str,password:str):
+    cur = conn.cursor()
     uhpass = hashlib.md5(password.encode()).hexdigest()
     sql = f'select password from admin where username="{username}";'
     try:
@@ -182,6 +188,7 @@ def load_admin(username:str,password:str):
         
 
 def getname_admin(username:str):
+    cur = conn.cursor()
     sql = f'select name from admin where username="{username}";'
     try:
         cur.execute(sql)

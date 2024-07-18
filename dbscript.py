@@ -21,9 +21,9 @@ except Exception as e:
     password=portnum,
     port = 3388,
     )
-    c = conntemp.cursor()
+    ct = conntemp.cursor()
     sql = "create database if not exists amievent;"
-    c.execute(sql)
+    ct.execute(sql)
     conntemp.commit()
     conntemp.close()
     print("Database created! Reconnecting to server...")
@@ -35,9 +35,10 @@ conn = mysql.connector.connect(
     port = 3388,
     database = "amievent"
     )
-c = conn.cursor()
+
 
 def cmd(s):       #idle-de-bugging
+    c = conn.cursor()
     c.execute(s)
     b=c.fetchall()
     print(b)
@@ -50,6 +51,7 @@ def close():
     conn.close()
 
 def see(table):       #idle-de-bugging
+    c = conn.cursor()
     c.execute(f'select * from {table};')
     b=c.fetchall()
     for i in b:
@@ -61,19 +63,20 @@ def see(table):       #idle-de-bugging
 
 
 def init():  #server
+    c = conn.cursor()
     sql = "create table if not exists halls(hallid integer primary key AUTO_INCREMENT,hallname varchar(35));"
     c.execute(sql)
-    sql = "create table if not exists book(bookid integer primary key AUTO_INCREMENT , hallid integer, school varchar(50) , date varchar(20) , stime integer, etime integer , event text);"
+    sql = "create table if not exists book(bookid integer primary key AUTO_INCREMENT , hallid integer, school varchar(50) , date varchar(20) , stime integer, etime integer , event varchar(100));"
     c.execute(sql)
-    sql = "create table if not exists confirm(bookid integer primary key , hallid integer, school varchar(50) , date varchar(20) , stime integer, etime integer , event text);"
+    sql = "create table if not exists confirm(bookid integer primary key , hallid integer, school varchar(50) , date varchar(20) , stime integer, etime integer , event varchar(100));"
     c.execute(sql)
-    sql = "create table if not exists reject(bookid integer primary key , hallid integer, school varchar(50) , date varchar(20) , stime integer, etime integer , event text);"
+    sql = "create table if not exists reject(bookid integer primary key , hallid integer, school varchar(50) , date varchar(20) , stime integer, etime integer , event varchar(100));"
     c.execute(sql)
-    sql = "create table if not exists userreq(userid integer primary key AUTO_INCREMENT , username text , bookid integer);"
+    sql = "create table if not exists userreq(userid integer primary key AUTO_INCREMENT , username varchar(100) , bookid integer);"
     c.execute(sql)
     sql = "create table if not exists status(bookid integer primary key , state varchar(15));"
     c.execute(sql)
-    sql = "create table if not exists info(bookid integer primary key, hallid integer , schoolname text , fname text , hod text , eventname text ,date text , stime text , etime text, email text , phone text , rpname text , rpdetail text);"
+    sql = "create table if not exists info(bookid integer primary key, hallid integer , schoolname varchar(100) , fname varchar(100) , hod varchar(100) , eventname varchar(100) ,date varchar(100) , stime varchar(100) , etime varchar(100), email varchar(100) , phone varchar(100) , rpname varchar(100) , rpdetail varchar(100));"
     c.execute(sql)
     try:
         sql='select * from halls;'
@@ -95,6 +98,7 @@ def init():  #server
 #admin flow -> check_pending:confirm_hall:reject_hall
 
 def request_hall(hallid:int , school:str , date:str , stime:int , etime:int , event:str , username:str):  #user  
+    c = conn.cursor()
     sql=f'insert into book(hallid,school,date,stime,etime,event) values({hallid},"{school}","{date}",{stime},{etime},"{event}");'
     c.execute(sql)
     sql='select * from book'
@@ -111,14 +115,14 @@ def request_hall(hallid:int , school:str , date:str , stime:int , etime:int , ev
     return bid
 
 def info_dump(bookid:int, hallid:int , school:str, fname:str, hod:str, email:str , phone:str , date:str , stime:int , etime:int , event:str ,rpname:str , rpdetail:str):
-
+    c = conn.cursor()
     sql=f'insert into info values({bookid}, {hallid} , "{school}", "{fname}", "{hod}", "{event}","{date}", "{stime}", "{etime}", "{email}", "{phone}", "{rpname}", "{rpdetail}")'
     c.execute(sql)
     conn.commit()
     
 
 def info_fetch(bookid:int):
-
+    c = conn.cursor()
     sql = f'select * from info where bookid={bookid};'
     c.execute(sql)
     o = c.fetchall()
@@ -127,7 +131,7 @@ def info_fetch(bookid:int):
     return o
 
 def check_request(username:str):   #user
- 
+    c = conn.cursor()
     sql=f'select * from userreq where username="{username}"'
     c.execute(sql)
     o = c.fetchall()
@@ -162,7 +166,7 @@ def check_request(username:str):   #user
     
 
 def check_hall(hallid:int , date:str , stime:int , etime:int):   #user
-
+    c = conn.cursor()
     final=[]
     flag=True
     sql=f'select * from book where hallid={hallid} and date="{date}"'    #for rejecting pending req.
@@ -188,7 +192,7 @@ def check_hall(hallid:int , date:str , stime:int , etime:int):   #user
     return flag
 
 def all_accept_and_pending():
-
+    c = conn.cursor()
     sql='select * from status where state="confirm" or state="pending";'
     c.execute(sql)
     o = c.fetchall()
@@ -197,7 +201,7 @@ def all_accept_and_pending():
     return o
 
 def calender():
-
+    c = conn.cursor()
     # sql='select * from status where state="confirm" or state="pending";'
     sql='select * from status where state="confirm";'
     c.execute(sql)
@@ -230,7 +234,7 @@ def calender():
     return final
 
 def seeall():
-
+    c = conn.cursor()
     x = ['book','confirm','reject','userreq','info','status']
     for i in x:
         sql=f'select * from {i};'
@@ -243,7 +247,7 @@ def seeall():
         print(f"LEN : {len(i)}")
         print(f"====={i}::TABLE::END=======")
 def calendermain():
-
+    c = conn.cursor()
     sql='select * from status where state="confirm" or state="pending";'
     # sql='select * from status where state="confirm";'
     c.execute(sql)
@@ -334,8 +338,7 @@ def calendermain():
 
 def reject_app(bid:int , status:str):
     if status == "Confirmed":
-        
-        
+        c = conn.cursor()
         sql=f'delete from confirm where bookid={bid};'
         c.execute(sql)
         sql=f'delete from userreq where bookid={bid};'
@@ -349,7 +352,7 @@ def reject_app(bid:int , status:str):
         return True
     elif status == "Pending":
         
-        
+        c = conn.cursor()
         sql=f'delete from book where bookid={bid};'
         c.execute(sql)
         sql=f'delete from userreq where bookid={bid};'
@@ -364,7 +367,7 @@ def reject_app(bid:int , status:str):
     return False
 
 def all_status():
-
+    c = conn.cursor()
     sql='select * from status;'
     c.execute(sql)
     o = c.fetchall()
@@ -373,7 +376,7 @@ def all_status():
     return o
 
 def check_pending():    #admin
-
+    c = conn.cursor()
     sql='select * from book;'
     c.execute(sql)
     o = c.fetchall()
@@ -384,7 +387,7 @@ def check_pending():    #admin
 def reject_hall(bookid:int):      #admin
     try:
         
-        
+        c = conn.cursor()
         sql=f'select * from book where bookid={bookid};'
         c.execute(sql)
         o = c.fetchall()
@@ -411,7 +414,7 @@ def reject_hall(bookid:int):      #admin
 def confirm_hall(bookid:int):   #admin
     try:
         
-        
+        c = conn.cursor()
         sql=f'select * from book where bookid={bookid};'
         c.execute(sql)
         o = c.fetchall()
