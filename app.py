@@ -9,8 +9,11 @@ from flask import jsonify, request, send_from_directory
 from flask_mail import Mail, Message
 from werkzeug.utils import secure_filename
 
-import dbscript as db
-import loginscript as login
+import dbscript as db         #FOR SQL SERVER DATABASE
+import loginscript as login   #FOR SQL SERVER DATABASE
+
+#import dbscriptlite as db        #FOR SQLITE DATABASE
+#import loginscriptlite as login  #FOR SQLITE DATABASE
 
 app = Flask(__name__,
             static_url_path='', 
