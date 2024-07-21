@@ -1,4 +1,6 @@
 ##main flask app :: Shahil kadia 
+#Set-ExecutionPolicy Unrestricted CurrentUser;.\.venv\Scripts\activate;
+# Description: This file contains the main code for the AmiEventHub application.# -*- coding: utf-8 -*-
 import os
 import random
 from datetime import datetime
