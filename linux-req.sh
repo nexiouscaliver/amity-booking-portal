@@ -18,4 +18,5 @@ gunicorn --bind 0.0.0.0:8000 wsgi:app
 # sudo systemctl enable amity-booking-portal
 # sudo cp amity-booking-portal /etc/nginx/sites-available/
 # sudo ln -s /etc/nginx/sites-available/amity-booking-portal /etc/nginx/sites-enabled
+# sudo chmod 775 -R /home/myFlaskApp
 # sudo systemctl restart nginx
