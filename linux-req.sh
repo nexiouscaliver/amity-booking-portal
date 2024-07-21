@@ -11,6 +11,7 @@ git clone https://github.com/nexiouscaliver/amity-booking-portal.git
 cd amity-booking-portal
 mv amiity-booking-portal/* .
 rm -rf amity-booking-portal
+python initapp.py
 gunicorn --bind 0.0.0.0:8000 wsgi:app
 # sudo cp amity-booking-portal.service /etc/systemd/system/
 # sudo systemctl daemon-reload
