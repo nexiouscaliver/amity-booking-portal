@@ -3,7 +3,7 @@ import os
 import random
 from datetime import datetime
 from time import ctime
-
+import threading
 from flask import *
 from flask import jsonify, request, send_from_directory
 from flask_mail import Mail, Message
@@ -199,7 +199,12 @@ def send_mail(event_name,event_venue,event_date,start_time,end_time,school_name,
         msg = Message(subject=f'Request for Permission to Conduct an Event: {event_name} at {event_date}', recipients=[admin_email])
         msg.body = email_body
         msg.html = html
-        mail.send(msg)
+        @copy_current_request_context
+        def send_message(message):
+            mail.send(message)
+        sender = threading.Thread(name='mail_sender', target=send_message, args=(msg,))
+        sender.start()
+        # mail.send(msg)
         return True
     except Exception as e:
         print(e)
@@ -268,7 +273,12 @@ def send_mail2(event_name,event_venue,event_date,start_time,end_time,school_name
         msg = Message(subject=f'Response to Event: {event_name} Permission at {event_date}', recipients=[user_email])
         msg.body = email_body
         msg.html = html
-        mail.send(msg)
+        @copy_current_request_context
+        def send_message(message):
+            mail.send(message)
+        sender = threading.Thread(name='mail_sender', target=send_message, args=(msg,))
+        sender.start()
+        # mail.send(msg)
         return True
     except Exception as e:
         print(e)
@@ -337,7 +347,12 @@ def send_mail4(event_name,event_venue,event_date,start_time,end_time,school_name
         msg = Message(subject=f'New Event: {event_name} dated {event_date}', recipients=[it_email])
         msg.body = email_body
         msg.html = html
-        mail.send(msg)
+        @copy_current_request_context
+        def send_message(message):
+            mail.send(message)
+        sender = threading.Thread(name='mail_sender', target=send_message, args=(msg,))
+        sender.start()
+        # mail.send(msg)
         return True
     except Exception as e:
         print(e)
@@ -400,7 +415,12 @@ def send_mail5(event_name,event_venue,event_date,start_time,end_time,school_name
         msg = Message(subject=f'Cancel Event: {event_name} dated {event_date}', recipients=[it_email])
         msg.body = email_body
         msg.html = html
-        mail.send(msg)
+        @copy_current_request_context
+        def send_message(message):
+            mail.send(message)
+        sender = threading.Thread(name='mail_sender', target=send_message, args=(msg,))
+        sender.start()
+        # mail.send(msg)
         return True
     except Exception as e:
         print(e)
@@ -424,7 +444,12 @@ def send_mail3(user_email,code):
     try:
         msg = Message(subject='Email Verification by AmiEventHub', recipients=[user_email])
         msg.body = email_body
-        mail.send(msg)
+        @copy_current_request_context
+        def send_message(message):
+            mail.send(message)
+        sender = threading.Thread(name='mail_sender', target=send_message, args=(msg,))
+        sender.start()
+        # mail.send(msg)
         return True
     except Exception as e:
         print(e)
