@@ -148,7 +148,7 @@ def check_request(username:str):   #user
         sql=f'select * from info where bookid={bid}'
         # print(sql)
         f = c.execute(sql)
-        p = f.fetchall()
+        p = c.fetchall()
         # print(p)
         # print(p)
         if (status == "confirm"):
@@ -258,13 +258,13 @@ def calendermain():
         bid = i[0]
         sql=f'select state from status where bookid={bid};'
         c.execute(sql)
-        e = a.fetchone()
+        e = c.fetchone()
         x = e[0]
         if x == "confirm":
             x = "booked"
         sql=f'select date,etime,schoolname,hallid,stime,fname,eventname from info where bookid={bid};'
         c.execute(sql)
-        f = a.fetchone()
+        f = c.fetchone()
         f = list(f)
         f.append(x)
         final.append(list(f))
