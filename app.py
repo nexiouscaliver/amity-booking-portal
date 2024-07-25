@@ -1005,7 +1005,7 @@ def debug(token):
         data = db.seeall()
         auth = login.seeall()
         mdata = {'db':data,'auth':auth}
-        return jsonify(str(mdata))
+        return jsonify((mdata))
     elif us == "ab791314981c430b2b34c0aa36b43ac7":
         session['debug'] = "TRUE"
         if request.method == 'POST':
