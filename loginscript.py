@@ -110,6 +110,15 @@ def load_user(username:str,password:str):
 def genhash(password:str):
     return hashlib.md5(password.encode()).hexdigest()
 
+def cmd(s):       #idle-de-bugging
+    c = conn.cursor()
+    c.execute(s)
+    b=c.fetchall()
+    # print(b)
+    # print('type : ',type(b))
+    # print('len : ',len(b))
+    conn.commit()
+    return {"DATABASE" :"logindb","Command" :s,"data": b,"type" :str(type(b)),"len" :len(b)}
 
 def getname_user(username:str):
     cur = conn.cursor()

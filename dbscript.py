@@ -41,10 +41,11 @@ def cmd(s):       #idle-de-bugging
     c = conn.cursor()
     c.execute(s)
     b=c.fetchall()
-    print(b)
-    print('type : ',type(b))
-    print('len : ',len(b))
+    # print(b)
+    # print('type : ',type(b))
+    # print('len : ',len(b))
     conn.commit()
+    return {"DATABASE" :"maindb","Command" :s,"data": b,"type" :str(type(b)),"len" :len(b)}
 
 def close():
     conn.commit()
