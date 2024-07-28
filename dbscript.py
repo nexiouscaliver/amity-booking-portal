@@ -41,10 +41,11 @@ def cmd(s):       #idle-de-bugging
     c = conn.cursor()
     c.execute(s)
     b=c.fetchall()
-    print(b)
-    print('type : ',type(b))
-    print('len : ',len(b))
+    # print(b)
+    # print('type : ',type(b))
+    # print('len : ',len(b))
     conn.commit()
+    return {"DATABASE" :"maindb","Command" :s,"data": b,"type" :str(type(b)),"len" :len(b)}
 
 def close():
     conn.commit()
@@ -236,16 +237,19 @@ def calender():
 def seeall():
     c = conn.cursor()
     x = ['book','confirm','reject','userreq','info','status']
+    d = {}
     for i in x:
         sql=f'select * from {i};'
         c.execute(sql)
         o = c.fetchall()
-        print(f"====={i}::TABLE::START=====")
-        for j in o:
-            print(j)
-        print(f"TYPE : {type(i)}")
-        print(f"LEN : {len(i)}")
-        print(f"====={i}::TABLE::END=======")
+        # print(f"====={i}::TABLE::START=====")
+        d[i]=o
+        # for j in o:
+        #     print(j)
+        # print(f"TYPE : {type(i)}")
+        # print(f"LEN : {len(i)}")
+        # print(f"====={i}::TABLE::END=======")
+    return d
 def calendermain():
     c = conn.cursor()
     sql='select * from status where state="confirm" or state="pending";'

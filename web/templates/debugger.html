@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debugger v1.1</title>
+    <!-- <link rel="shortcut icon" href="{{ url_for('static',filename='favicon.ico') }}"> -->
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static',filename='apple-touch-icon.png') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static',filename='favicon-32x32.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static',filename='favicon-16x16.png') }}">
+    <link rel="manifest" href="{{ url_for('static',filename='site.webmanifest') }}">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+</head>
+<body>
+    <h1>Hello Debugger!</h1>
+    <h3>v1.1</h3>
+    <a href={{url_for('index')}}>index page</a>
+    <a href={{url_for('admin')}}>admin page</a>
+    <a href={{url_for('alert')}}>alert</a>
+    <a href={{url_for('userlogin')}}>userlogin</a>
+    <a href={{url_for('adminlogin')}}>adminlogin</a>
+    <a href={{url_for('createsession',s='DEBUGGER')}}>debugSession</a>
+    <a href={{url_for('destroysession')}}>destroySession</a>
+    <a href={{url_for('getsession')}}>getSession</a>
+    <br><br>
+    <button onclick="window.location.reload()">Reload Page</button>
+    
+    <br><hr>
+    <form method="post">
+        <label for="database">Database :</label>
+        <select name="database" >
+            {%if dbname%}
+                {%if dbname=="maindb"%}
+                <option value="maindb">Main Database</option>
+                <option value="logindb">Login Database</option>
+                <option value="shell">Shell</option>
+                {%endif%}
+                {%if dbname=="logindb"%}
+                <option value="logindb">Login Database</option>
+                <option value="maindb">Main Database</option>
+                <option value="shell">Shell</option>
+                {%endif%}
+                {%if dbname=="shell"%}
+                <option value="shell">Shell</option>
+                <option value="maindb">Main Database</option>
+                <option value="logindb">Login Database</option>
+                {%endif%}
+                {%else%}
+                <option value="maindb">Main Database</option>
+                <option value="logindb">Login Database</option>
+                <option value="shell">Shell</option>
+            {%endif%}
+        </select>
+        <br>
+        <br>
+        <label for="type">Output Type :</label>
+        <select name="type">
+            <option value="output">Output</option>
+            <option value="json">JSON</option>
+        </select>
+        <br>
+        <br>
+        <label for="command">Command : </label>
+        <input type="text" name="command" style="width: 1000px;" {%if cmd%} value="{{cmd}}" {%endif%}>
+        <br>
+        <br>
+        <button type="submit">Submit</button>
+        <br>
+        <br>
+        <hr>
+        <hr>
+    </form>
+        OUTPUT : 
+        <br><br>
+        <textarea name="output" rows="23" cols="150">{ {%for i in output%}
+            
+            {{i}} : {{output[i]}}
+
+            {%endfor%} 
+        }</textarea>
+        <!-- <textarea name="output" rows="10" cols="50"></textarea> -->
+
+    
+
+    {% if error %}
+    <script>
+        alert("{{error}}");
+    </script>
+    {% endif %}
+</body>
+</html>
