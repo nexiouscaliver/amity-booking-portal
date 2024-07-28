@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>seminar Hall Booking</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static',filename='apple-touch-icon.png') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static',filename='favicon-32x32.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static',filename='favicon-16x16.png') }}">
+    <link rel="manifest" href="{{ url_for('static',filename='site.webmanifest') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" />
+
+    
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+  <style>
+    body {
+      background-color: aliceblue;
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+    
+    :root {
+      --primary-color: #04172b;
+      --secondary-color: #061b31;
+      --white: #ffffff;
+      --gray: #6c757d;
+    }
+    
+    .navbar {
+      background-color: var(--primary-color);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 20px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+  
+  .logo-container {
+      display: flex;
+      align-items: center;
+  }
+  
+  .navbar .logo img {
+      height: 50px;
+      margin-right: 10px;
+  }
+  
+  .navbar .name img {
+      height:50px;
+  }
+  
+  .navbar .menu {
+    display: flex;
+    gap: 20px;
+}
+
+.navbar .menu a {
+    color: var(--white);
+    text-decoration: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    transition: background-color 0.3s, box-shadow 0.3s;
+    font-weight: bold;
+}
+
+.navbar .menu a:hover {
+    background-color: var(--secondary-color);
+    transform: scale(1.05);
+    box-shadow: 0 0 0 2px aliceblue;
+}
+  
+    
+    .navbar .icon {
+      font-size: 20px;
+      color: var(--white);
+      padding: 10px;
+      cursor: pointer;
+      font-weight: bold;
+      position: relative;
+    }
+/*.menu-item i.fas {
+  color: rgb(228, 228, 8); 
+}*/
+
+  
+    /* Hero Section */
+    .hero {
+      background: url('heroo.jpg') no-repeat center center / cover;
+      color: white;
+     
+      text-align: center;
+      padding: 100px 0;
+    }
+
+    .hero h1 {
+      font-size: 50px;
+      margin: 0;
+    }
+
+    .hero p {
+      font-size: 20px;
+    }
+
+    /* Halls Section */
+    .halls {
+      padding: 50px 0;
+      background-color:aliceblue;
+    }
+ 
+    .halls h2 {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .hall {
+      background: #f9f9f9;
+      padding: 20px;
+      margin-bottom: 20px;
+      border-radius: 5px;
+      text-align: center;
+    }
+
+    .hall img {
+      max-width: 100%;
+      height:200px;
+      border-radius: 5px;
+    }
+
+    .hall:hover {
+      transform: scale(1.05); /* Slightly increase the size */
+      box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15); /* Enhance the shadow */
+    }
+    .hall h3 {
+      margin-top: 15px;
+    }
+
+    .hall p {
+      font-size: 16px;
+      color: #666;
+    }
+
+    .hall .btn {
+      margin-top: 10px;
+      background-color: #04172b;
+    }
+
+    /* Modal Styles */
+
+    .modal-header {
+      background-color: #04172b;
+      color: white;
+    }
+
+    .modal-header .close {
+      color: white;
+    }
+
+    .modal-body .form-group {
+      margin-bottom: 20px;
+    }
+   .modal-body .btn-primary{
+    background-color: #04172b;
+   }
+    /* Footer Styles */
+    footer {
+      background-color: #333;
+      color: white;
+      padding: 20px 0;
+      text-align: center;
+    }
+
+    footer a {
+      color: #337ab7;
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+/*  styling for the color of calender */
+.form-control {
+  border: 1px solid #ccc;
+  padding: 8px;
+  font-size: 14px;
+}
+
+
+
+ /*  styles for the calendar  */
+td[data-day] {
+  border-radius: 50%;
+  text-align: center;
+  line-height: 2;
+  cursor: pointer;
+}
+
+td[data-day]:hover {
+  background-color: black;
+}
+.hidden {
+    display: none;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="navbar">
+        <div class="logo-container">
+            <div class="logo">
+                <img src="{{ url_for('static',filename='L1.png') }}" alt="Logo">
+            </div>
+            <div class="name">
+                <img src="{{ url_for('static',filename='L2.png') }}" alt="Name Logo">
+            </div>
+        </div>
+        <div class="menu">
+
+
+            <a href="{{url_for('Home')}}" class="menu-item">
+                <i class="fas fa-home"></i> Home
+            </a>
+            <a href="{{url_for('usercalender')}}" class="menu-item">
+                <i class="fas fa-calendar-alt"></i> Calendar
+            </a>
+           
+           
+            <a href="{{url_for('home')}}" class="menu-item">Logout</a>
+        </div>
+    </div>
+</header>
+  
+<main>   
+    
+      <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header flex items-center justify-between">
+                    <div class="flex items-center">
+                        
+                        <h4 class="modal-title" id="seminarModalLabel">Seminar Hall Booking</h4>
+                    </div>
+                    
+                </div>
+                <div class="modal-body">
+                    <form method="post" id="seminarForm" novalidate>
+          <div class="form-group">
+            <label for="seminarSchoolName">School Name:</label>
+            <select class="form-control" id="seminarSchoolName" name="seminarSchoolName" required>
+              <option value="">Select School Name</option>
+              <option value="ABS">ABS - Amity Business School</option>
+              <option value="AFS">AFS - Amity Film School</option>
+              <option value="AIBAS">AIBAS - Amity Institute of Behavioural & Allied Sciences</option>
+              <option value="AIB">AIB - Amity Institute of Biotechnology</option>
+              <option value="ALIT">ALIT - Amity Institute of Information Technology</option>
+              <option value="AILA">AILA - Amity Institute of Liberal Arts</option>
+              <option value="AIP">AIP - Amity Institute of Pharmacy</option>
+              <option value="AIT">AIT - Amity Institute of Technology</option>
+              <option value="AITT">AITT - Amity Institute of Travel & Tourism</option>
+              <option value="ALS">ALS - Amity Law School</option>
+              <option value="ASAP">ASAP - Amity School of Architecture & Planning</option>
+              <option value="ASAS">ASAS - Amity School of Applied Sciences</option>
+              <option value="ASCO">ASCO - Amity School of Communication</option>
+              <option value="ASET">ASET - Amity School of Engineering & Technology</option>
+              <option value="ASFT">ASFT - Amity School of Fashion Technology</option>
+              <option value="ASL">ASL - Amity School of Languages</option>
+              <option value="CISOL">CIIOL - CII Logistics</option>
+              <option value="TUCSSBERICS"> RICS</option>
+              <option value="ASFA">ASFA - Amity School of Fine Arts</option>
+              <option value="AIE">AIE - Amity Institute of Education</option>
+              <option value="AIN">AIN - Amity Institute of Nanotechnology</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="seminarFacultyName">Event Coordinator Name:</label>
+            <input type="text" class="form-control" id="seminarFacultyName" name="seminarFacultyName" placeholder="Enter your name" required>
+          </div>
+          <div class="form-group">
+            <label for="seminarHodName">HOD/HOI/Director Name:</label>
+            <input type="text" class="form-control" id="seminarHodName" name="seminarHodName" placeholder="Enter HOD/HOI/Director name" required>
+          </div>
+          <div class="form-group">
+            <label for="seminarEventName">Event Name:</label>
+            <input type="text" class="form-control" id="seminarEventName" name="seminarEventName" placeholder="Enter event name" required>
+          </div>
+          <div class="form-group">
+            <label for="seminarstartime">Start Time</label>
+            <select class="form-control" id="seminarstartime" name="seminarstartime" required>
+              <option value="900">09:00 am</option>
+              <option value="1000">10:00 am</option>
+              <option value="1100">11:00 am</option>
+              <option value="1200">12:00 pm</option>
+              <option value="1300">01:00 pm</option>
+              <option value="1400">02:00 pm</option>
+               <option value="1500">03:00 pm</option>
+               <option value="1600">04:00 pm</option>
+               <option value="1700">05:00 pm</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="seminarendtime">End Time</label>
+
+            <select class="form-control" id="seminarendtime" name="seminarendtime" required>
+              <option value="1000">10:00 am</option>
+              <option value="1100">11:00 am</option>
+              <option value="1200">12:00 pm</option>
+              <option value="1300">01:00 pm</option>
+              <option value="1400">02:00 pm</option>
+               <option value="1500">03:00 pm</option>
+               <option value="1600">04:00 pm</option>
+               <option value="1700">05:00 pm</option>
+               <option value="1800">06:00 pm</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="seminardate">Date of Event:</label>
+            <input type="date" class="form-control" id="seminardate" name="seminardate" required onchange="updateDayOfWeek('seminardate', 'seminarday'); updateCalendarColor('seminardate','seminarDuration')">
+          </div>
+          <div class="form-group">
+            <label for="seminarday">Day of Event:</label>
+            <input type="text" class="form-control" id="seminarday" name="seminarday" readonly>
+          </div>
+          <div class="form-group">
+            <label for="seminarResourcePersonName">Resource Person Name:</label>
+            <input type="text" class="form-control" id="seminarResourcePersonName" name="seminarResourcePersonName" placeholder="Enter resource person name" required>
+          </div>
+          <div class="form-group">
+            <label for="seminarResourcePersonDetail">Resource Person Detail:</label>
+            <textarea class="form-control" id="seminarResourcePersonDetail" name="seminarResourcePersonDetail" placeholder="Enter resource person details" required></textarea>
+          </div>
+          <div class="form-group">
+            <label for="seminarEmail">Event Coordinator's Email:</label>
+            <input type="email" class="form-control" id="seminarEmail" name="seminarEmail" placeholder="Enter your email" required>
+          </div>
+          <div class="form-group">
+            <label for="seminarPhone">Event Coordinator's Phone Number:</label>
+            <input type="tel" class="form-control" id="seminarPhone" name="seminarPhone" placeholder="Enter your phone number" required>
+          </div>
+          <button type="submit" class="btn btn-primary" id="submitmain">Submit</button>
+                </form>
+
+
+</div>
+  </div>
+</div>
+
+
+
+</main>
+
+<script>
+  
+  document.addEventListener("DOMContentLoaded", function() {
+  // addd a backend fetch with hardcoded data
+  function fetchData() {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve({
+          date: '2024-08-15',
+          startTime: '1500',
+          endTime: '1600',
+          day: 'Thursday',
+         
+        });
+      }, 1000);
+    });
+  }
+
+  // Update the form fields with fetched data
+  function updateForm(data) {
+    document.getElementById('seminardate').value = data.date;
+    document.getElementById('seminarstartime').value = data.startTime;
+    document.getElementById('seminarendtime').value = data.endTime;
+    document.getElementById('seminarday').value = data.day;
+  
+  }
+
+  // Fetch and update form
+  fetchData().then(data => {
+    updateForm(data);
+  });
+});
+</script>
+
+
+
+  
+    <!-- js for 1st submition of all information  and 2nd day of week accoording to date -->
+      <script>      
+
+        document.addEventListener("DOMContentLoaded", function () {
+          const forms = document.querySelectorAll("form");
+      
+          forms.forEach(function (form) {
+            form.addEventListener("submit", function (event) {
+              if (!form.checkValidity()) {
+                event.preventDefault();
+                event.stopPropagation();
+                alert("Please fill in all required fields.");
+              }
+              form.classList.add("was-validated");
+            }, false);
+          });
+        });
+      //function OF hall box to trigger the modal
+      document.querySelectorAll('.hall').forEach(hall => {
+      hall.addEventListener('click', function(event) {
+        // Prevent the click event from triggering the modal if the button is clicked
+        if (event.target.tagName === 'BUTTON') return;
+  
+        const modalTarget = hall.querySelector('button').getAttribute('data-target');
+        $(modalTarget).modal('show');
+      });
+    });
+     
+   
+      </script>
+      
+  
+     
+      <!-- Include jQuery and Bootstrap JS  and jQuery UI libraries-->
+      
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.10.1/main.min.js"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        
+  
+  
+  
+  
+      </body>
+      </html>
+  
