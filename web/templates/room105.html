@@ -239,7 +239,7 @@ td[data-day]:hover {
         <div class="menu">
 
 
-            <a href="{{url_for('Home')}}" class="menu-item">
+            <a href="{{url_for('index')}}" class="menu-item">
                 <i class="fas fa-home"></i> Home
             </a>
             <a href="{{url_for('usercalender')}}" class="menu-item">
@@ -253,7 +253,12 @@ td[data-day]:hover {
 </header>
   
 <main>   
-    
+  {% if error %}
+  <!-- <p><strong>Update </strong> : {{error}}</p> -->
+  <script>
+    alert("{{error}}");
+  </script>
+  {% endif %}
       <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header flex items-center justify-between">
@@ -377,10 +382,10 @@ td[data-day]:hover {
     return new Promise((resolve) => {
       setTimeout(() => {
         resolve({
-          date: '2024-08-15',
-          startTime: '1500',
-          endTime: '1600',
-          day: 'Thursday',
+          date: '{{date}}',
+          startTime: '{{startTime}}',
+          endTime: '{{endTime}}',
+          day: '{{day}}',
          
         });
       }, 1000);

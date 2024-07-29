@@ -548,6 +548,23 @@ def index():
             print(uname)
             cal = db.calender()
             print("CAL:",cal)
+            output = db.calendermain()
+            # print(output)
+            for i in output:
+                for j in i:
+                    st = maketime(j[1])
+                    et = maketime(j[4])
+                    d = datetime.strptime(st, "%H:%M")
+                    j[1] = d.strftime("%I %p")
+                    if j[1][0]=="0":
+                        j[1]=j[1][1:]
+                    j[1] = j[1].lower()
+                    d = datetime.strptime(et, "%H:%M")
+                    j[4] = d.strftime("%I %p")
+                    if j[4][0]=="0":
+                        j[4]=j[4][1:]
+                    j[4] = j[4].lower()
+            
             if request.method == 'POST':
                 
                 hall = ['auditorium','seminar','room105','crc','AIITConferenceroom','RICSConferenceRoom','Atrium']
@@ -586,15 +603,15 @@ def index():
                     if (send_mail(final[3],hallname(hid),final[4],final[5],final[6],final[0],final[2],final[9],final[10],final[8],final[1],final[7],bid)):
                         
                         error = "Your Request Is Successfully Sent for Approval!"
-                        return render_template("index.html",error=error,cal=cal)
+                        return render_template("index.html",error=error,cal=cal,output=output)
                     else:
                         error=f"Email not sent to Admin due to server issue. But request is sent please send an email manually to {admin_email}."
-                        return render_template("index.html",error=error,cal=cal)
+                        return render_template("index.html",error=error,cal=cal,output=output)
                 else:
                     error = "Hall Not Available At given Date and Time."
-                    return render_template("index.html",error=error,cal=cal)
+                    return render_template("index.html",error=error,cal=cal,output=output)
             
-            return render_template("index.html",error=error,cal=cal)
+            return render_template("index.html",error=error,cal=cal,output=output)
         else:
             return redirect(url_for('userlogin'))
     except Exception as e:
@@ -971,7 +988,7 @@ def usercalender():
                 j[4]=j[4][1:]
             j[4] = j[4].lower()
     # print(output)
-    return render_template('calenderuser.html',output=output)
+    return render_template('calenderuser.html',output=output,server_link=server_link)
 
 @app.route('/admin/notification',methods=['GET'])
 def adminnoti():
@@ -1057,6 +1074,102 @@ def debug(token):
         
     else:
         return "<h1>Not Found</h1><p>The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.<p>"
+    
+
+@app.route('/calender/form/<hallname2>/<date>/<startTime>/<endTime>/<day>',methods=['GET','POST'])
+def calenderform(hallname2,date,startTime,endTime,day):
+    error = None
+    try:
+        if session:
+            uname = session['username']
+            print(uname)
+            cal = db.calender()
+            print("CAL:",cal)
+            output = db.calendermain()
+            # print(output)
+            for i in output:
+                for j in i:
+                    st = maketime(j[1])
+                    et = maketime(j[4])
+                    d = datetime.strptime(st, "%H:%M")
+                    j[1] = d.strftime("%I %p")
+                    if j[1][0]=="0":
+                        j[1]=j[1][1:]
+                    j[1] = j[1].lower()
+                    d = datetime.strptime(et, "%H:%M")
+                    j[4] = d.strftime("%I %p")
+                    if j[4][0]=="0":
+                        j[4]=j[4][1:]
+                    j[4] = j[4].lower()
+            
+            if request.method == 'POST':
+                
+                hall = ['auditorium','seminar','room105','crc','AIITConferenceroom','RICSConferenceRoom','Atrium']
+                place = ['SchoolName','FacultyName','HodName','EventName','date','startime','endtime','Email','Phone','ResourcePersonName','ResourcePersonDetail']
+                final=[]
+                loc = ''
+                for i in hall:
+                    for j in place:
+                        try:
+                            f = i+j
+                            #print(f)
+                            final.append(request.form[f])
+                            loc = i
+                        except KeyError as e:
+                            print(e)
+                # final[5] = trimtime(final[5])
+                # final[6] = trimtime(final[6])
+                # if (final[5] == "1stHalf"):
+                #     final[5] = 900
+                #     final[6] = 1300
+                # elif (final[5] == "2ndHalf"):
+                #     final[5] = 1400
+                #     final[6] = 1700
+                # elif (final[5] == "fullDay"):
+                #     final[5] = 900
+                #     final[6] = 1701
+
+                hid = hallid(loc)
+                
+                # print(final)
+                print('location = ',hallid(loc))
+                if db.check_hall(hid,final[4],final[5],final[6]):
+                    bid = db.request_hall(hid,final[0],final[4],final[5],final[6],final[3],uname)
+                    db.info_dump(bookid=bid, hallid=hid , school=final[0], fname=final[1], hod=final[2], email=final[7] , phone=final[8] , date=final[4] , stime=final[5] , etime=final[6] , event=final[3],rpname=final[9],rpdetail=final[10])
+                    #db.info_dump(bid, hid , sfinal[0], final[1], final[2],final[7] , final[8] , final[4] , final[5] , final[6] , final[3])
+                    if (send_mail(final[3],hallname(hid),final[4],final[5],final[6],final[0],final[2],final[9],final[10],final[8],final[1],final[7],bid)):
+                        
+                        error = "Your Request Is Successfully Sent for Approval!"
+                        # return redirect(url_for("index",error=error,cal=cal,output=output))
+                        return render_template("notitab2.html",error=error)
+                    else:
+                        error=f"Email not sent to Admin due to server issue. But request is sent please send an email manually to {admin_email}."
+                        # return redirect(url_for("index",error=error,cal=cal,output=output))
+                        return render_template("notitab2.html",error=error)
+                else:
+                    error = "Hall Not Available At given Date and Time."
+                    # return redirect(url_for("index",error=error,cal=cal,output=output))
+                    return render_template("notitab2.html",error=error)
+            if hallname2=="Auditorium":
+                return render_template("audi.form.html",error=error,cal=cal,output=output,date=date,startTime=startTime,endTime=endTime,day=day)
+            elif hallname2=="SeminarHall":
+                return render_template("seminar.html",error=error,cal=cal,output=output,date=date,startTime=startTime,endTime=endTime,day=day)
+            elif hallname2=="Room105":
+                return render_template("room105.html",error=error,cal=cal,output=output,date=date,startTime=startTime,endTime=endTime,day=day)
+            elif hallname2=="CRCConferenceRoom":
+                return render_template("crc.html",error=error,cal=cal,output=output,date=date,startTime=startTime,endTime=endTime,day=day)
+            elif hallname2=="AIITConferenceRoom":
+                return render_template("AIB.HTML",error=error,cal=cal,output=output,date=date,startTime=startTime,endTime=endTime,day=day)
+            elif hallname2=="RICSConferenceRoom":
+                return render_template("RICS.html",error=error,cal=cal,output=output,date=date,startTime=startTime,endTime=endTime,day=day)
+            elif hallname2=="Atrium":
+                return render_template("Atrium.html",error=error,cal=cal,output=output,date=date,startTime=startTime,endTime=endTime,day=day)
+            #return render_template("index.html",error=error,cal=cal,output=output)
+        else:
+            return redirect(url_for('userlogin'))
+    except Exception as e:
+        print(e)
+        return redirect(url_for('userlogin'))
     
 
 @app.route('/test',methods=['GET','POST'])

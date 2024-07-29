@@ -1173,6 +1173,26 @@ console.log(`End Time: ${endTimeSlot}`);
             alert(`Submitted:\nDate: ${dateKey}\nStart Time: ${startTimeSlot}\nEnd Time: ${endTimeSlot}\nDay: ${dayOfWeek}`);
           
             closePopup(); // Close the popup after submission
+            // Send GET request to localhost/form with parameters
+            window.location.href = `http://localhost/form?date=${dateKey}&startTime=${startTimeSlot}&endTime=${endTimeSlot}&day=${dayOfWeek}`;
+            // const url = `http://localhost/form?date=${dateKey}&startTime=${startTimeSlot}&endTime=${endTimeSlot}&day=${dayOfWeek}`;
+
+            // fetch(url)
+            //     .then(response => {
+            //         if (response.ok) {
+            //             return response.json();
+            //         } else {
+            //             throw new Error('Error: ' + response.status);
+            //         }
+            //     })
+            //     .then(data => {
+            //         // Handle the response data
+            //         console.log(data);
+            //     })
+            //     .catch(error => {
+            //         // Handle any errors
+            //         console.error(error);
+            //     });
           };
           
           
