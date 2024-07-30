@@ -36,12 +36,12 @@ server_link = "http://127.0.0.1:8000" #replace with production server initial ro
 
 #task-related functions
 def hallname(hallid:int):
-    l = [0,"Auditorium Hall","Seminar Hall","Room No. 105, A2 Building","CRC Conference Room","AIIT Conference Room","RICS Conference Room","Atrium"]
+    l = [0,"Auditorium Hall","Seminar Hall","Room No. 105, A2 Building","CRC Conference Room","AIB Conference Room","RICS Conference Room","Atrium"]
     #l = [0,'auditorium','seminar','room105','crc']
     return (l[hallid])
 
 def hallid(hallname:str):
-    l = [0,'auditorium','seminar','room105','crc','AIITConferenceroom','RICSConferenceRoom','Atrium']
+    l = [0,'auditorium','seminar','room105','crc','AIBConferenceroom','RICSConferenceRoom','Atrium']
     return (l.index(hallname))
 
 def trimtime(time:str):
@@ -567,7 +567,7 @@ def index():
             
             if request.method == 'POST':
                 
-                hall = ['auditorium','seminar','room105','crc','AIITConferenceroom','RICSConferenceRoom','Atrium']
+                hall = ['auditorium','seminar','room105','crc','AIBConferenceroom','RICSConferenceRoom','Atrium']
                 place = ['SchoolName','FacultyName','HodName','EventName','date','startime','endtime','Email','Phone','ResourcePersonName','ResourcePersonDetail']
                 final=[]
                 loc = ''

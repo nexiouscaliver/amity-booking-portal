@@ -2237,7 +2237,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     // '2024-07-08': [{ starttime: '9', endtime: '10', status: 'booked', school: 'School H', event: 'Event H',eventcordinator: 'Event C' }],
                     // '2024-07-09': [{ starttime: '9', endtime: '12', status: 'booked', school: 'School I', event: 'Event I',eventcordinator: 'Event C' }],
                 },
-                AIITConferenceRoom: {
+                AIBConferenceRoom: {
                     {%for i in output[4]%}
                     '{{i[0]}}' : [{ starttime: '{{(i[4])}}', endtime: '{{(i[1])}}', status: '{{(i[7])}}', school: '{{i[2]}}', event: '{{i[6]}}' , eventcordinator: '{{i[5]}}'}],
                     {%endfor%}
