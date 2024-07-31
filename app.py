@@ -3,7 +3,7 @@
 # Description: This file contains the main code for the AmiEventHub application.# -*- coding: utf-8 -*-
 import os
 import random
-from datetime import datetime
+from datetime import date , datetime
 from datetime import timedelta
 import threading
 from flask import *
@@ -32,7 +32,8 @@ app.config['MAIL_DEFAULT_SENDER'] = 'amieventhub@gmail.com'  # Replace with your
 admin_email = 'amieventhub@gmail.com'  # Replace with the admin's email
 it_email = 'amieventhub@gmail.com'  # Replace with the admin's email
 mail = Mail(app)
-server_link = "http://127.0.0.1:8000" #replace with production server initial routing address.
+# server_link = "http://127.0.0.1:8000" #replace with production server initial routing address.
+server_link = "https://786gkd71-8000.inc1.devtunnels.ms/" #replace with production server initial routing address.
 
 #task-related functions
 def hallname(hallid:int):
@@ -593,19 +594,32 @@ def index():
                 #     final[6] = 1701
 
                 hid = hallid(loc)
-                
                 # print(final)
                 #print('location = ',hallid(loc))
                 if db.check_hall(hid,final[4],final[5],final[6]):
-                    bid = db.request_hall(hid,final[0],final[4],final[5],final[6],final[3],uname)
-                    db.info_dump(bookid=bid, hallid=hid , school=final[0], fname=final[1], hod=final[2], email=final[7] , phone=final[8] , date=final[4] , stime=final[5] , etime=final[6] , event=final[3],rpname=final[9],rpdetail=final[10])
-                    #db.info_dump(bid, hid , sfinal[0], final[1], final[2],final[7] , final[8] , final[4] , final[5] , final[6] , final[3])
-                    if (send_mail(final[3],hallname(hid),final[4],final[5],final[6],final[0],final[2],final[9],final[10],final[8],final[1],final[7],bid)):
+                    
+                    year = final[4][:4]
+                    month = final[4][5:7]
+                    day = final[4][8:]
+                    today = date.today()
+                    # today = datetime.date.today() && and given>=today
+                    given = date(int(year),int(month),int(day))
+                    if final[6] > final[5] and given>=today:
+                        print("PASS")
+                        # pass
                         
-                        error = "Your Request Is Successfully Sent for Approval!"
-                        return render_template("index.html",error=error,cal=cal,output=output)
+                        bid = db.request_hall(hid,final[0],final[4],final[5],final[6],final[3],uname)
+                        db.info_dump(bookid=bid, hallid=hid , school=final[0], fname=final[1], hod=final[2], email=final[7] , phone=final[8] , date=final[4] , stime=final[5] , etime=final[6] , event=final[3],rpname=final[9],rpdetail=final[10])
+                        #db.info_dump(bid, hid , sfinal[0], final[1], final[2],final[7] , final[8] , final[4] , final[5] , final[6] , final[3])
+                        if (send_mail(final[3],hallname(hid),final[4],final[5],final[6],final[0],final[2],final[9],final[10],final[8],final[1],final[7],bid)):
+                            
+                            error = "Your Request Is Successfully Sent for Approval!"
+                            return render_template("index.html",error=error,cal=cal,output=output)
+                        else:
+                            error=f"Email not sent to Admin due to server issue. But request is sent please send an email manually to {admin_email}."
+                            return render_template("index.html",error=error,cal=cal,output=output)
                     else:
-                        error=f"Email not sent to Admin due to server issue. But request is sent please send an email manually to {admin_email}."
+                        error = "The Time or Date Entered Is Incorrect. Please Enter Correct Time and Date."
                         return render_template("index.html",error=error,cal=cal,output=output)
                 else:
                     error = "Hall Not Available At given Date and Time."
