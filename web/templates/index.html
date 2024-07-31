@@ -92,10 +92,21 @@
       .hero {
         background: url('heroo.jpg') no-repeat center center / cover;
         color: white;
-       
+        margin-top: 20px;
         text-align: center;
         padding: 100px 0;
       }
+      
+      .bordered-letters {
+        color: white; /* Set the text color to contrast with the border */
+        text-shadow: 
+          -1px -1px 0 black,  
+           1px -1px 0 black,
+          -1px  1px 0 black,
+           1px  1px 0 black;
+        margin: 10px 0; /* Adds some space above and below each element */
+      }
+      
   
       .hero h1 {
         font-size: 50px;
@@ -777,8 +788,8 @@
   <main>
     <section class="hero">
       <div class="container">
-        <h1>Venue Scheduling Software</h1>
-        <h2>Amity University Maharashtra, Mumbai<h2>
+        <h1 class="bordered-letters">Venue Scheduling Software</h1>
+        <h2 class="bordered-letters">Amity University Maharashtra, Mumbai</h2>
       </div>
     </section>
 
