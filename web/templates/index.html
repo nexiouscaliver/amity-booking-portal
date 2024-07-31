@@ -38,6 +38,7 @@
         align-items: center;
         padding: 10px 20px;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        
       }
     
     .logo-container {
@@ -90,22 +91,40 @@
     
       /* Hero Section */
       .hero {
-        background: url('heroo.jpg') no-repeat center center / cover;
-        color: white;
-        margin-top: 20px;
-        text-align: center;
-        padding: 100px 0;
-      }
-      
-      .bordered-letters {
-        color: white; /* Set the text color to contrast with the border */
-        text-shadow: 
-          -1px -1px 0 black,  
-           1px -1px 0 black,
-          -1px  1px 0 black,
-           1px  1px 0 black;
-        margin: 10px 0; /* Adds some space above and below each element */
-      }
+  position: relative;
+  margin-top: 20px;
+  text-align: center;
+  padding: 100px 0; 
+  overflow: hidden; /* Ensure the pseudo-element doesn't overflow */
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('heroo.jpg') no-repeat center center / cover;
+  opacity: 0.7; /* Apply opacity to the background image */
+  z-index: 1; /* Ensure it's behind the text */
+}
+
+.hero .container {
+  position: relative;
+  z-index: 2; /* Ensure the text is above the background */
+}
+
+.bordered-letters {
+  color: #01013e; /* Set the text color to contrast with the border */
+  /* text-shadow: 
+    -1px -1px 0 #01013e,  
+     1px -1px 0 #01013e,
+    -1px  1px 0 #01013e,
+     1px  1px 0 #01013e;  */
+  margin: 10px 0; /* Adds some space above and below each element */
+}
+
       
   
       .hero h1 {
@@ -213,14 +232,21 @@
   td[data-day]:hover {
     background-color: black;
   }
-  .hidden {
-      display: none;
-  }
+
   
   
   
   
-  
+  .hall h2 {
+  font-weight: bold; /* Makes the text bold */
+}
+
+
+
+
+
+
+
   
   
   
@@ -788,7 +814,7 @@
   <main>
     <section class="hero">
       <div class="container">
-        <h1 class="bordered-letters">Venue Scheduling Software</h1>
+        <h1 class="bordered-letters">Venue Scheduler</h1>
         <h2 class="bordered-letters">Amity University Maharashtra, Mumbai</h2>
       </div>
     </section>
