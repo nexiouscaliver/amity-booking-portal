@@ -697,518 +697,269 @@
         
             return slots;
         };
+        
 
         
-        
-    
-       
-        const updateCalendar = (container) => {
-          const calendar = container.querySelector('#calendar');
-          const monthYearDisplay = container.querySelector('#monthYear');
-          const hallDropdown = container.querySelector('#hallDropdown');
-          const monthSelect = container.querySelector('#monthSelect');
-      
-          calendar.innerHTML = ''; // Clear existing calendar content
-      
-          const year = currentDate.getFullYear();
-          const month = currentDate.getMonth();
-          const firstDayOfMonth = new Date(year, month, 1).getDay();
-          const daysInMonth = new Date(year, month + 1, 0).getDate();
-      
-          // Display month and year
-          monthYearDisplay.textContent = `${currentDate.toLocaleString('default', { month: 'long' })} ${year}`;
-      
-          // Add empty cells for days before the 1st of the month to align with Sunday
-          for (let i = 0; i < firstDayOfMonth; i++) {
-              const emptyDay = document.createElement('div');
-              emptyDay.classList.add('day', 'empty');
-              calendar.appendChild(emptyDay);
-          }
-      
-          // Add days of the month
-          for (let day = 1; day <= daysInMonth; day++) {
-              const dateKey = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
-              const dayElement = document.createElement('div');
-              dayElement.classList.add('day');
-              dayElement.textContent = day;
-      
-              const bookings = hallData[currentHall]?.[dateKey];
-              if (bookings) {
-                  let bookedSlots = 0;
-                  let remainingSlots = [...timeSlots];
-      
-                  bookings.forEach(booking => {
-                      const slots = convertToTimeSlots(booking.starttime, booking.endtime);
-                      slots.forEach(slot => {
-                          bookedSlots++;
-                          remainingSlots = remainingSlots.filter(s => s !== slot);
-                      });
-                  });
-      
-                  // Use a gradient to indicate booked slots
-                  dayElement.style.backgroundImage = `linear-gradient(to top, lightcoral ${bookedSlots * 10}%, transparent ${bookedSlots * 10}%)`;
-      
-                  // Show remaining slots on hover
-                  dayElement.title = `Free slots: ${remainingSlots.join(', ')}`;
-              } else {
-                  dayElement.classList.add('not-booked');
-              }
-      
-              // Add event listener to show time slot popup
-              dayElement.addEventListener('click', () => showTimeSlotPopup(dateKey));
-              calendar.appendChild(dayElement);
-          }
-      
-          // Ensure the calendar has rows for all days of the week 
-          const totalCells = calendar.children.length;
-          const rows = Math.ceil(totalCells / 7);
-          const totalCellsNeeded = rows * 7;
-      
-          for (let i = totalCells; i < totalCellsNeeded; i++) {
-              const emptyDay = document.createElement('div');
-              emptyDay.classList.add('day', 'empty');
-              calendar.appendChild(emptyDay);
-          }
-      };
-      
-      const populateMonthSelect = (container) => {
-          const monthSelect = container.querySelector('#monthSelect');
-          const months = [
-              'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'
-          ];
-          months.forEach((month, index) => {
-              const option = document.createElement('option');
-              option.value = index;
-              option.textContent = month;
-              monthSelect.appendChild(option);
-          });
-          monthSelect.value = currentDate.getMonth();
-      };
-      
-      // Event listeners for multiple calendar containers
-      document.querySelectorAll('.calendar-container').forEach(container => {
-          const monthSelect = container.querySelector('#monthSelect');
-          const hallDropdown = container.querySelector('#hallDropdown');
-          const dateSearch = container.querySelector('#dateSearch');
-          const prevMonthButton = container.querySelector('#prevMonth');
-          const nextMonthButton = container.querySelector('#nextMonth');
-      
-          monthSelect.addEventListener('change', () => {
-              currentDate.setMonth(monthSelect.value);
-              updateCalendar(container);
-          });
-      
-          hallDropdown.addEventListener('change', () => {
-              currentHall = hallDropdown.value;
-              updateCalendar(container);
-          });
-      
-          dateSearch.addEventListener('change', () => {
-              selectedDate = new Date(dateSearch.value);
-              if (!isNaN(selectedDate)) {
-                  currentDate = selectedDate;
-                  monthSelect.value = currentDate.getMonth();
-                  updateCalendar(container);
-              }    
-          });
-      
-          prevMonthButton.addEventListener('click', () => {
-              currentDate.setMonth(currentDate.getMonth() - 1);
-              monthSelect.value = currentDate.getMonth();
-              updateCalendar(container);
-          });
-      
-          nextMonthButton.addEventListener('click', () => {
-              currentDate.setMonth(currentDate.getMonth() + 1);
-              monthSelect.value = currentDate.getMonth();
-              updateCalendar(container);
-          });
-      
-          populateMonthSelect(container);
-          updateCalendar(container);
-      });
-      
+            // Inside the updateCalendar() function
 
+const updateCalendar = () => {
+    calendar.innerHTML = '';
+    const year = currentDate.getFullYear();
+    const month = currentDate.getMonth();
+    const firstDay = new Date(year, month, 1).getDay();
+    const daysInMonth = new Date(year, month + 1, 0).getDate();
 
+    monthYearDisplay.textContent = `${currentDate.toLocaleString('default', { month: 'long' })} ${year}`;
 
-
-
-          let selectedSlots = [];
-
-          const showTimeSlotPopup = (dateKey) => {
-              // Remove existing popup if any
-              closePopup();
-          
-              const popup = document.createElement('div');
-              popup.classList.add('time-slot-popup');
-              popup.style.zIndex = '9999'; // Adjust z-index as needed to ensure it appears above other elements
-          
-              const title = document.createElement('h3');
-              title.textContent = `Booking Status for ${dateKey}`;
-              popup.appendChild(title);
-          
-              const closeButton = document.createElement('button');
-              closeButton.classList.add('close-button');
-              closeButton.innerHTML = '<i class="fas fa-times"></i>';
-              closeButton.addEventListener('click', () => {
-                  closePopup();
-              });
-              popup.appendChild(closeButton);
-          
-              const timeSlotContent = document.createElement('div');
-              timeSlotContent.classList.add('time-slot-content');
-              popup.appendChild(timeSlotContent);
-          
-              const chart = document.createElement('div');
-              chart.classList.add('time-slot-chart');
-              timeSlotContent.appendChild(chart);
-          
-              timeSlots.forEach((timeSlot) => {
-                  const slotElement = createTimeSlotElement(timeSlot, dateKey);
-                  chart.appendChild(slotElement);
-              });
-          
-              const navButtons = document.createElement('div');
-              navButtons.classList.add('nav-buttons');
-          
-              const prevButton = document.createElement('button');
-              prevButton.classList.add('nav-button', 'prev-button'); // Added 'nav-button' class for styling
-              prevButton.innerHTML = '<i class="fas fa-chevron-left"></i>';
-              prevButton.addEventListener('click', () => {
-                  const prevDateKey = getPreviousDateKey(dateKey);
-                  showTimeSlotPopup(prevDateKey);
-              });
-              navButtons.appendChild(prevButton);
-          
-              const nextButton = document.createElement('button');
-              nextButton.classList.add('nav-button', 'next-button'); // Added 'nav-button' class for styling
-              nextButton.innerHTML = '<i class="fas fa-chevron-right"></i>';
-              nextButton.addEventListener('click', () => {
-                  const nextDateKey = getNextDateKey(dateKey);
-                  showTimeSlotPopup(nextDateKey);
-              });
-              navButtons.appendChild(nextButton);
-          
-              popup.appendChild(navButtons);
-          
-              const submitContainer = document.createElement('div');
-              submitContainer.classList.add('submit-container');
-          
-              const selectedCount = document.createElement('span');
-              selectedCount.classList.add('selected-count');
-              selectedCount.textContent = `Selected Slots: ${selectedSlots.length}`;
-              submitContainer.appendChild(selectedCount);
-          
-              const submitButton = document.createElement('button');
-              submitButton.classList.add('submit-button');
-              submitButton.textContent = 'Submit';
-              submitButton.addEventListener('click', () => {
-                  submitSelectedSlots(dateKey);
-              });
-              submitContainer.appendChild(submitButton);
-          
-              popup.appendChild(submitContainer);
-          
-              document.body.appendChild(popup);
-          
-              popup.addEventListener('click', (event) => {
-                  if (event.target === popup) {
-                      closePopup();
-                  }
-              });
-          };
-          
-          const closePopup = () => {
-              const existingPopups = document.querySelectorAll('.time-slot-popup');
-              existingPopups.forEach(popup => {
-                  popup.classList.add('disappear');
-                  setTimeout(() => popup.remove(), 300); // Delay for animation to complete
-              });
-              selectedSlots = []; // Reset selected slots when popup is closed
-          };
-          
-          const getPreviousDateKey = (currentDateKey) => {
-              const currentDate = new Date(currentDateKey);
-              currentDate.setDate(currentDate.getDate() - 1);
-              return currentDate.toISOString().split('T')[0];
-          };
-          
-          const getNextDateKey = (currentDateKey) => {
-              const currentDate = new Date(currentDateKey);
-              currentDate.setDate(currentDate.getDate() + 1);
-              return currentDate.toISOString().split('T')[0];
-          };
-          
-          const createTimeSlotElement = (timeSlot, dateKey) => {
-              const slotElement = document.createElement('div');
-              slotElement.classList.add('time-slot-row');
-          
-              const timeElement = document.createElement('div');
-              timeElement.classList.add('time-slot-time');
-              timeElement.textContent = timeSlot;
-              slotElement.appendChild(timeElement);
-          
-              const statusElement = document.createElement('div');
-              statusElement.classList.add('time-slot-status');
-          
-              const bookings = hallData[currentHall][dateKey];
-              let isBooked = false;
-              let bookingData = [];
-          
-              if (bookings) {
-                  bookings.forEach((booking) => {
-                      const slots = convertToTimeSlots(booking.starttime, booking.endtime);
-                      if (slots.includes(timeSlot)) {
-                          isBooked = true;
-                          const currentBookingData = `SCHOOL - ${booking.school}\nEVENT - ${booking.event}\nCOORDINATOR - ${booking.eventcordinator}`;
-          
-                          if (!bookingData.includes(currentBookingData)) {
-                              bookingData.push(currentBookingData);
-                          }
-                      }
-                  });
-              }
-          
-              if (isBooked) {
-                  if (bookingData.length === 1) {
-                      statusElement.textContent = bookingData[0];
-                      if (bookings[0].status === 'booked') {
-                          statusElement.classList.add('booked');
-                      } else if (bookings[0].status === 'pending') {
-                          statusElement.classList.add('pending');
-                      }
-                  } else {
-                      statusElement.textContent = `${bookingData.length} bookings`;
-                      statusElement.classList.add('booked'); // Assume all bookings are of the same status
-                  }
-              } else {
-                  statusElement.textContent = 'Free Slot';
-                  statusElement.classList.add('free');
-                  statusElement.addEventListener('click', () => {
-                      toggleSlotSelection(slotElement, timeSlot, dateKey);
-                  });
-              }
-          
-              slotElement.appendChild(statusElement);
-          
-              return slotElement;
-          };
-
-
-    /*      
-          
-          const toggleSlotSelection = (slotElement, timeSlot, dateKey) => {
-              const slotIndex = timeSlots.indexOf(timeSlot);
-              const previousSlot = timeSlots[slotIndex - 1];
-              const nextSlot = timeSlots[slotIndex + 1];
-          
-              if (selectedSlots.includes(timeSlot)) {
-                  selectedSlots = selectedSlots.filter(slot => slot !== timeSlot);
-                  slotElement.classList.remove('selected');
-                  slotElement.classList.add('unselect-animation');
-                  setTimeout(() => slotElement.classList.remove('unselect-animation'), 300);
-              } else {
-                  if (
-                      (selectedSlots.length === 0) ||
-                      (selectedSlots.includes(previousSlot) || selectedSlots.includes(nextSlot))
-                  ) {
-                      selectedSlots.push(timeSlot);
-                      slotElement.classList.add('selected');
-                      slotElement.classList.add('select-animation');
-                      setTimeout(() => slotElement.classList.remove('select-animation'), 300);
-                  } else {
-                      alert('Please select continuous slots only.');
-                  }
-              }
-              document.querySelector('.selected-count').textContent = `Selected Slots: ${selectedSlots.length}`;
-          };
-          
-          */
-        const toggleSlotSelection = (slotElement, timeSlot, dateKey) => {
-    const slotIndex = timeSlots.indexOf(timeSlot);
-    const previousSlot = timeSlots[slotIndex - 1];
-    const nextSlot = timeSlots[slotIndex + 1];
-
-    if (selectedSlots.includes(timeSlot)) {
-        // Unselect all slots if a slot in the middle is unselected
-        if (selectedSlots.length > 1 && (selectedSlots.includes(previousSlot) && selectedSlots.includes(nextSlot))) {
-            selectedSlots.forEach(slot => {
-                const slotElem = document.querySelector(`[data-time-slot="${slot}"]`);
-                if (slotElem) {
-                    slotElem.classList.remove('selected');
-                    slotElem.classList.add('unselect-animation');
-                    setTimeout(() => {
-                        slotElem.classList.remove('unselect-animation');
-                        slotElem.style.backgroundColor = ''; // Reset to normal color
-                    }, 300);
-                }
-            });
-            selectedSlots = [];
-        } else {
-            // Unselect the single slot
-            selectedSlots = selectedSlots.filter(slot => slot !== timeSlot);
-            slotElement.classList.remove('selected');
-            slotElement.classList.add('unselect-animation');
-            setTimeout(() => {
-                slotElement.classList.remove('unselect-animation');
-                slotElement.style.backgroundColor = ''; // Reset to normal color
-            }, 300);
-        }
-    } else {
-        if (
-            (selectedSlots.length === 0) ||
-            (selectedSlots.includes(previousSlot) || selectedSlots.includes(nextSlot))
-        ) {
-            selectedSlots.push(timeSlot);
-            slotElement.classList.add('selected');
-            slotElement.classList.add('select-animation');
-            setTimeout(() => slotElement.classList.remove('select-animation'), 300);
-        } else {
-            alert('Please select continuous slots only.');
-        }
+    // Fill initial empty slots
+    for (let i = 0; i < firstDay; i++) {
+        const emptyDay = document.createElement('div');
+        emptyDay.classList.add('day', 'hidden');
+        calendar.appendChild(emptyDay);
     }
-    document.querySelector('.selected-count').textContent = `Selected Slots: ${selectedSlots.length}`;
+
+    // Fill days of the month
+    for (let day = 1; day <= daysInMonth; day++) {
+        const dateKey = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+        const dayElement = document.createElement('div');
+        dayElement.classList.add('day');
+        dayElement.textContent = day;
+
+        const bookings = hallData[currentHall][dateKey];
+        if (bookings) {
+            let bookedSlots = 0;
+            let remainingSlots = [...timeSlots];
+
+            bookings.forEach(booking => {
+                const slots = convertToTimeSlots(booking.starttime, booking.endtime);
+                slots.forEach(slot => {
+                    bookedSlots++;
+                    remainingSlots = remainingSlots.filter(s => s !== slot);
+                });
+            });
+
+            dayElement.style.backgroundImage = `linear-gradient(to top, lightcoral ${bookedSlots * 10}%, transparent ${bookedSlots * 10}%)`;
+
+
+            // Show remaining slots on hover
+            dayElement.title = `Free slots: ${remainingSlots.join(', ')}`;
+        } else {
+            dayElement.classList.add('not-booked');
+        }
+
+        dayElement.addEventListener('click', () => showTimeSlotPopup(dateKey));
+        calendar.appendChild(dayElement);
+    }
 };
 
-        
 
 
 
+const showTimeSlotPopup = (dateKey) => {
+    // Remove existing popup if any
+    closePopup();
 
+    const popup = document.createElement('div');
+    popup.classList.add('time-slot-popup');
 
+    const title = document.createElement('h3');
+    title.textContent = `Booking Status for ${dateKey}`;
+    popup.appendChild(title);
 
-          //submiting 
-          const submitSelectedSlots = (dateKey) => {
-            if (selectedSlots.length === 0) {
-                alert('No slots selected!');
-                return;
-            }
-          
-     
-     
-     
-            // Function to convert time slots to a comparable format
-function convertTo24Hour(time) {
-  let [hour, period] = time.split(' ');
-  hour = parseInt(hour);
-  if (period === 'pm' && hour !== 12) {
-      hour += 12;
-  } else if (period === 'am' && hour === 12) {
-      hour = 0;
-  }
-  return hour;
-}
+    const closeButton = document.createElement('button');
+    closeButton.classList.add('close-button');
+    closeButton.innerHTML = '<i class="fas fa-times"></i>';
+    closeButton.addEventListener('click', () => {
+        closePopup();
+    });
+    popup.appendChild(closeButton);
 
-// Extract start and end times
-const sortedSlots = selectedSlots.sort((a, b) => {
-  const [startA, endA] = a.split('-').map(time => time.trim());
-  const [startB, endB] = b.split('-').map(time => time.trim());
-  const startHourA = convertTo24Hour(startA);
-  const startHourB = convertTo24Hour(startB);
-  return startHourA - startHourB;
+    const timeSlotContent = document.createElement('div');
+    timeSlotContent.classList.add('time-slot-content');
+    popup.appendChild(timeSlotContent);
+
+    const chart = document.createElement('div');
+    chart.classList.add('time-slot-chart');
+    timeSlotContent.appendChild(chart);
+
+    timeSlots.forEach((timeSlot) => {
+        const slotElement = createTimeSlotElement(timeSlot, dateKey);
+        chart.appendChild(slotElement);
+    });
+
+    const navButtons = document.createElement('div');
+    navButtons.classList.add('nav-buttons');
+
+    const prevButton = document.createElement('button');
+prevButton.classList.add('nav-button', 'prev-button'); // Added 'nav-button' class for styling
+prevButton.innerHTML = '<i class="fas fa-chevron-left"></i>';
+prevButton.addEventListener('click', () => {
+    const prevDateKey = getPreviousDateKey(dateKey);
+    showTimeSlotPopup(prevDateKey);
 });
+navButtons.appendChild(prevButton);
 
-const startTimeSlot = sortedSlots[0].split('-')[0].trim();
-const endTimeSlot = sortedSlots[sortedSlots.length - 1].split('-')[1].trim();
+const nextButton = document.createElement('button');
+nextButton.classList.add('nav-button', 'next-button'); // Added 'nav-button' class for styling
+nextButton.innerHTML = '<i class="fas fa-chevron-right"></i>';
+nextButton.addEventListener('click', () => {
+    const nextDateKey = getNextDateKey(dateKey);
+    showTimeSlotPopup(nextDateKey);
+});
+navButtons.appendChild(nextButton);
 
-console.log(`Start Time: ${startTimeSlot}`);
-console.log(`End Time: ${endTimeSlot}`);
+    popup.appendChild(navButtons);
 
+    document.body.appendChild(popup);
 
+    popup.addEventListener('click', (event) => {
+        if (event.target === popup) {
+            closePopup();
+        }
+    });
+};
 
+// Function to close the current popup and all popups
+const closePopup = () => {
+    const existingPopups = document.querySelectorAll('.time-slot-popup');
+    existingPopups.forEach(popup => {
+        popup.classList.add('disappear');
+        setTimeout(() => popup.remove(), 300); // Delay for animation to complete
+    });
+};
 
+// Function to get the previous date key
+const getPreviousDateKey = (currentDateKey) => {
+    const currentDate = new Date(currentDateKey);
+    currentDate.setDate(currentDate.getDate() - 1);
+    return currentDate.toISOString().split('T')[0];
+};
 
-
-
-            // Mapping time slots to form values
-            const timeMapping = {
-              '9 am': '900',
-              '10 am': '1000',
-              '11 am': '1100',
-              '12 pm': '1200',
-              '1 pm': '1300',
-              '2 pm': '1400',
-              '3 pm': '1500',
-              '4 pm': '1600',
-              '5 pm': '1700',
-              '6 pm': '1800'
-            };
-          
-            const formStartTime = timeMapping[startTimeSlot];
-            const formEndTime = timeMapping[endTimeSlot];
-          
-            // Format date and day
-            const eventDate = new Date(dateKey).toISOString().split('T')[0];
-            const dayOfWeek = new Date(dateKey).toLocaleString('en-US', { weekday: 'long' });
-          
-            // Debugging logs
-            console.log('Start Slot:', startTimeSlot, 'End Slot:', endTimeSlot);
-            console.log('Mapped Start Time:', formStartTime, 'Mapped End Time:', formEndTime);
-          
-
-
-            // 
-
-
-
-
-
+// Function to get the next date key
+const getNextDateKey = (currentDateKey) => {
+    const currentDate = new Date(currentDateKey);
+    currentDate.setDate(currentDate.getDate() + 1);
+    return currentDate.toISOString().split('T')[0];
+};
 
 
 
 
 
 
+const createTimeSlotElement = (timeSlot, dateKey) => {
+    const slotElement = document.createElement('div');
+    slotElement.classList.add('time-slot-row');
 
+    const timeElement = document.createElement('div');
+    timeElement.classList.add('time-slot-time');
+    timeElement.textContent = timeSlot;
+    slotElement.appendChild(timeElement);
 
+    const statusElement = document.createElement('div');
+    statusElement.classList.add('time-slot-status');
 
+    const bookings = hallData[currentHall][dateKey];
+    let isBooked = false;
+    let bookingData = [];
 
-            console.log('Submitting:', {
-                date: dateKey,
-                startTime: startTimeSlot,
-                endTime: endTimeSlot,
-                day: dayOfWeek
-            });
-          
-            alert(`Submitted:\nDate: ${dateKey}\nStart Time: ${startTimeSlot}\nEnd Time: ${endTimeSlot}\nDay: ${dayOfWeek}`);
-          
-            closePopup(); // Close the popup after submission
-            // Send GET request to localhost/form with parameters
-            window.location.href = `http://localhost/form?date=${dateKey}&startTime=${startTimeSlot}&endTime=${endTimeSlot}&day=${dayOfWeek}`;
-            // const url = `http://localhost/form?date=${dateKey}&startTime=${startTimeSlot}&endTime=${endTimeSlot}&day=${dayOfWeek}`;
+    if (bookings) {
+        bookings.forEach((booking) => {
+            const slots = convertToTimeSlots(booking.starttime, booking.endtime);
+            if (slots.includes(timeSlot)) {
+                isBooked = true;
+                const currentBookingData = `SCHOOL - ${booking.school}\nEVENT - ${booking.event}\nCOORDINATOR - ${booking.eventcordinator}`;
 
-            // fetch(url)
-            //     .then(response => {
-            //         if (response.ok) {
-            //             return response.json();
-            //         } else {
-            //             throw new Error('Error: ' + response.status);
-            //         }
-            //     })
-            //     .then(data => {
-            //         // Handle the response data
-            //         console.log(data);
-            //     })
-            //     .catch(error => {
-            //         // Handle any errors
-            //         console.error(error);
-            //     });
-          };
-          
-          
-          
-          
-
-
-
-
-
-
-
+                if (!bookingData.includes(currentBookingData)) {
+                    bookingData.push(currentBookingData);
+                }
+            }
         });
+    }
+
+    if (isBooked) {
+        if (bookingData.length === 1) {
+            statusElement.textContent = bookingData[0];
+            if (bookings[0].status === 'booked') {
+                statusElement.classList.add('booked');
+            } else if (bookings[0].status === 'pending') {
+                statusElement.classList.add('pending');
+            }
+        } else {
+            statusElement.textContent = `${bookingData.length} bookings`;
+            statusElement.classList.add('booked'); // Assume all bookings are of the same status
+        }
+    } else {
+        statusElement.textContent = 'Free Slot';
+        statusElement.classList.add('free');
+    }
+
+    slotElement.appendChild(statusElement);
+
+    return slotElement;
+};
 
 
+
+
+
+
+
+
+
+
+
+
+
+            const populateMonthSelect = () => {
+                const months = [
+                    'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'
+                ];
+                months.forEach((month, index) => {
+                    const option = document.createElement('option');
+                    option.value = index;
+                    option.textContent = month;
+                    monthSelect.appendChild(option);
+                });
+                monthSelect.value = currentDate.getMonth();
+            };
         
+            monthSelect.addEventListener('change', () => {
+                currentDate.setMonth(monthSelect.value);
+                updateCalendar();
+            });
+        
+            const handleHallChange = () => {
+                currentHall = hallDropdown.value;
+                updateCalendar();
+            };
+        
+            hallDropdown.addEventListener('change', handleHallChange);
+        
+            dateSearch.addEventListener('change', () => {
+                selectedDate = new Date(dateSearch.value);
+                if (!isNaN(selectedDate)) {
+                    currentDate = selectedDate;
+                    monthSelect.value = currentDate.getMonth();
+                    updateCalendar();
+                }    
+            } ) ;
+        
+            prevMonthButton.addEventListener('click', () => {
+                currentDate.setMonth(currentDate.getMonth() - 1);
+                monthSelect.value = currentDate.getMonth();
+                updateCalendar();
+            });
+        
+            nextMonthButton.addEventListener('click', () => {
+                currentDate.setMonth(currentDate.getMonth() + 1);
+                monthSelect.value = currentDate.getMonth();
+                updateCalendar();
+            });
+        
+            populateMonthSelect();
+            updateCalendar();
+        });
     </script>
-    </body>
-    </html>
+</body>
+</html>
