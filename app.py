@@ -220,7 +220,7 @@ def send_mail(event_name,event_venue,event_date,start_time,end_time,school_name,
         @copy_current_request_context
         def send_message(message):
             mail.send(message)
-        sender = threading.Thread(name='mail_sender', target=send_message, args=(msg,))
+        sender = threading.Thread(name='mail_sender1', target=send_message, args=(msg,))
         sender.start()
         # mail.send(msg)
         return True
@@ -266,7 +266,7 @@ def send_mail2(event_name,event_venue,event_date,start_time,end_time,school_name
         @copy_current_request_context
         def send_message(message):
             mail.send(message)
-        sender = threading.Thread(name='mail_sender', target=send_message, args=(msg,))
+        sender = threading.Thread(name='mail_sender2', target=send_message, args=(msg,))
         sender.start()
         # mail.send(msg)
         return True
@@ -277,7 +277,7 @@ def send_mail2(event_name,event_venue,event_date,start_time,end_time,school_name
 def send_mail4(event_name,event_venue,event_date,start_time,end_time,school_name,resource_person_name,resource_person_details,status,user_email,bid):
     
     html = f"""<pre>
-    Dear IT Department,
+    Respected Department,
 
     I hope this message finds you well.
 
@@ -302,7 +302,7 @@ def send_mail4(event_name,event_venue,event_date,start_time,end_time,school_name
                 <th>    </th>
                 <th>Status</th>
                 <th>    </th>
-                <th>Edit</th>
+                
             </tr>
         </thead>
 
@@ -323,10 +323,12 @@ def send_mail4(event_name,event_venue,event_date,start_time,end_time,school_name
             <td>    </td>
             <td>Pending</td>
             <td>    </td>
-            <td><a href='{server_link}/admin/email/approve/{bid}'>Approve</a>|<a href='{server_link}/admin/email/reject/{bid}'>Reject</a></td>
+            
         </tr>
     </table>
     </form>
+
+    The Request has been {status} by the Admin.
 
     • School Name: {school_name}
     • Resource Person Name: {resource_person_name}
@@ -338,7 +340,7 @@ def send_mail4(event_name,event_venue,event_date,start_time,end_time,school_name
     • Duration: {maketime(start_time)} to {maketime(end_time)}
     
 
-    The Request has been {status} by the Admin. 
+     
 
     Kindly check for more details in AmiEventHub.For your convenience, please click on the link below to visit AmiEventHUB
     
@@ -358,7 +360,7 @@ def send_mail4(event_name,event_venue,event_date,start_time,end_time,school_name
         @copy_current_request_context
         def send_message(message):
             mail.send(message)
-        sender = threading.Thread(name='mail_sender', target=send_message, args=(msg,))
+        sender = threading.Thread(name='mail_sender4', target=send_message, args=(msg,))
         sender.start()
         # mail.send(msg)
         return True
@@ -369,7 +371,7 @@ def send_mail4(event_name,event_venue,event_date,start_time,end_time,school_name
 def send_mail5(event_name,event_venue,event_date,start_time,end_time,school_name,status,bid):
     
     html = f"""<pre>
-    Dear IT Department,
+    Respected Department,
 
     I hope this message finds you well.
 
@@ -394,7 +396,7 @@ def send_mail5(event_name,event_venue,event_date,start_time,end_time,school_name
                 <th>    </th>
                 <th>Status</th>
                 <th>    </th>
-                <th>Edit</th>
+                
             </tr>
         </thead>
 
@@ -415,18 +417,18 @@ def send_mail5(event_name,event_venue,event_date,start_time,end_time,school_name
             <td>    </td>
             <td>Pending</td>
             <td>    </td>
-            <td><a href='{server_link}/admin/email/approve/{bid}'>Approve</a>|<a href='{server_link}/admin/email/reject/{bid}'>Reject</a></td>
+            
         </tr>
     </table>
     </form>
+    The Request has been CANCELLED by the USER.
+
     • School Name: {school_name}
     • Booking ID : {bid}
     • Event Venue: {event_venue}
     • Event Date: {event_date}
     • Duration: {maketime(start_time)} to {maketime(end_time)}
-    
 
-    The Request has been CANCELLED by the USER. 
 
     Kindly check for more details in AmiEventHub.For your convenience, please click on the link below to visit AmiEventHUB
     
@@ -446,7 +448,7 @@ def send_mail5(event_name,event_venue,event_date,start_time,end_time,school_name
         @copy_current_request_context
         def send_message(message):
             mail.send(message)
-        sender = threading.Thread(name='mail_sender', target=send_message, args=(msg,))
+        sender = threading.Thread(name='mail_sender5', target=send_message, args=(msg,))
         sender.start()
         # mail.send(msg)
         return True
@@ -478,7 +480,7 @@ def send_mail3(user_email,code):
         @copy_current_request_context
         def send_message(message):
             mail.send(message)
-        sender = threading.Thread(name='mail_sender', target=send_message, args=(msg,))
+        sender = threading.Thread(name='mail_sender3', target=send_message, args=(msg,))
         sender.start()
         # mail.send(msg)
         return True
@@ -708,20 +710,28 @@ def admin():
         # print(bid , status)
         if status=="ACCEPT":
             try:
-                db.confirm_hall(bid)
-                status2 = "ACCEPTED"
-                send_mail2(event_name,event_venue,event_date,start_time,end_time,school_name,resource_person_name,resource_person_details,status2,facultyEmail,bid)
-                send_mail4(event_name,event_venue,event_date,start_time,end_time,school_name,resource_person_name,resource_person_details,status2,facultyEmail,bid)                
-                return redirect(url_for('admin'))
-            except:
+                if(db.confirm_hall(bid)):
+                    status2 = "ACCEPTED"
+                    send_mail2(event_name,event_venue,event_date,start_time,end_time,school_name,resource_person_name,resource_person_details,status2,facultyEmail,bid)
+                    send_mail4(event_name,event_venue,event_date,start_time,end_time,school_name,resource_person_name,resource_person_details,status2,facultyEmail,bid)                
+                    return redirect(url_for('admin'))
+                else:
+                    print("Error in Confirming Hall email.")
+                    return render_template('notitab5.html',error="Error in Confirming Hall. Please try again.")
+            except Exception as e:
+                print(e)
                 return redirect(url_for('admin'))
         elif status=="REJECT":
             try:
-                db.reject_hall(bid)
-                status2 = "REJECTED"
-                send_mail2(event_name,event_venue,event_date,start_time,end_time,school_name,resource_person_name,resource_person_details,status2,facultyEmail,bid)
-                return redirect(url_for('admin'))
-            except:
+                if(db.reject_hall(bid)):
+                    status2 = "REJECTED"
+                    send_mail2(event_name,event_venue,event_date,start_time,end_time,school_name,resource_person_name,resource_person_details,status2,facultyEmail,bid)
+                    return redirect(url_for('admin'))
+                else:
+                    print("Error in Confirming Hall email.")
+                    return render_template('notitab5.html',error="Error in Rejecting Hall. Please try again.")
+            except Exception as e:
+                print(e)
                 return redirect(url_for('admin'))
     try:
         if session['admin_username']:
@@ -888,7 +898,7 @@ def admingetapprove(bookid):
         error=f"Booking Number: {bookid}. Request APPROVED successfully."
         return render_template('closetab.html',error=error)
     else:
-        error=f"Booking Number: {bookid}. Request to server Failed. Please Contact Technical Team if Problem Presists"
+        error=f"Booking Number: {bookid}. Request to server Failed (The Request might have been already alotted, kindly chech again). Please Contact Technical Team if Problem Presists"
         return render_template('closetab.html',error=error)
 
 @app.route('/admin/email/reject/<bookid>',methods=['GET'])
@@ -910,7 +920,7 @@ def admingetreject(bookid):
         error=f"Booking Number: {bookid}. Request DISAPPROVED successfully."
         return render_template('closetab.html',error=error)
     else:
-        error=f"Booking Number: {bookid}. Request to server Failed. Please Contact Technical Team if Problem Presists"
+        error=f"Booking Number: {bookid}. Request to server Failed (The Request might have been already alotted, kindly chech again). Please Contact Technical Team if Problem Presists"
         return render_template('closetab.html',error=error)
 
 @app.route('/session/<s>',methods=['GET'])
