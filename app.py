@@ -604,6 +604,7 @@ def index():
                     today = date.today()
                     # today = datetime.date.today() && and given>=today
                     given = date(int(year),int(month),int(day))
+                    print(f'today {today} and given {given}')
                     if final[6] > final[5] and given>=today:
                         print("PASS")
                         # pass
