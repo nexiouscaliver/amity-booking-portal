@@ -111,6 +111,27 @@ def load_user(username:str,password:str):
 def genhash(password:str):
     return hashlib.md5(password.encode()).hexdigest()
 
+def resetpassuser(username:str,oldpass:str,newpass:str):
+    if(load_user(username,oldpass)):
+        cur = conn.cursor(buffered=True)
+        hpass = hashlib.md5(newpass.encode()).hexdigest()
+        sql = f'update user set password="{hpass}" where username="{username}";'
+        try:
+            cur.execute(sql)
+            print(f"User {username}::{newpass} successfully passwword reset")
+            return True
+        except mysql.connector.Error as error:
+            print(f"SQL Error Occured:: RESET PASS :: {username} :: {error}")
+            return False
+        except Exception as e:
+            print(f"PY Error Occured:: RESET PASS :: {username} :: {e}")
+            return False
+        finally:
+            cur.close()
+            conn.commit()
+    else:
+        return False
+
 def cmd(s):       #idle-de-bugging
     c = conn.cursor(buffered=True)
     c.execute(s)
@@ -166,7 +187,7 @@ def create_admin(username:str,password:str,name:str):
     sql = f'insert into admin(username,password,name) values ("{username}","{hpass}","{name}");'
     try:
         cur.execute(sql)
-        # print(f"admin {username}::{password} successfully generated")
+        print(f"admin {username}::{password} successfully generated")
         return True
     except mysql.connector.Error as error:
         print(f"SQL Error Occured:: {username} :: {error}")
@@ -235,3 +256,24 @@ def getname_admin(username:str):
     finally:
         cur.close()
         conn.commit()
+
+def resetpassadmin(username:str,oldpass:str,newpass:str):
+    if(load_admin(username,oldpass)):
+        cur = conn.cursor(buffered=True)
+        hpass = hashlib.md5(newpass.encode()).hexdigest()
+        sql = f'update admin set password="{hpass}" where username="{username}";'
+        try:
+            cur.execute(sql)
+            print(f"Admin {username}::{newpass} successfully passwword reset")
+            return True
+        except mysql.connector.Error as error:
+            print(f"SQL Error Occured:: RESET PASS ADMIN :: {username} :: {error}")
+            return False
+        except Exception as e:
+            print(f"PY Error Occured:: RESET PASS ADMIN :: {username} :: {e}")
+            return False
+        finally:
+            cur.close()
+            conn.commit()
+    else:
+        return False
