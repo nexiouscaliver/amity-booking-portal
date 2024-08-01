@@ -165,7 +165,7 @@
         <form id="userLoginForm" method="post" onsubmit="return validatePassword()">
             <div class="form-group">
               <label for="user-username">Username:</label>
-              <input type="text" id="user-username" name="user-username" value="Sundaram" readonly>
+              <input type="text" id="user-username" name="user-username" >
             </div>
             <div class="form-group">
               <label for="old-password">Old Password:</label>
@@ -186,37 +186,85 @@
               <button type="submit">Update Password</button>
             </div>
             <div class="auth-links">
-                <a id="Login-page-link" href="{{url_for('usersignup')}}">Back to Admin-Login</a>
+                <a id="Login-page-link" href="{{url_for('adminlogin')}}">Back to Admin-Login</a>
               </div>
           </form>
-Sundaram_123
+
 
       </div>
     </div>
     <script>
-        function validatePassword() {
-          const newPassword = document.getElementById('new-password').value;
-          const confirmPassword = document.getElementById('confirm-new-password').value;
-          const passwordHelp = document.getElementById('passwordHelp');
-        
-          // Regular expression to check the password criteria
-          const passwordCriteria = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W_]).{7,}$/;
-        
-          if (!passwordCriteria.test(newPassword)) {
-            passwordHelp.style.display = 'block';
-            return false;
-          } else {
-            passwordHelp.style.display = 'none';
-          }
-        
-          if (newPassword !== confirmPassword) {
-            alert('New password and confirm password do not match.');
-            return false;
-          }
-        
-          return true;
+      function validatePassword() {
+        const newPassword = document.getElementById('new-password').value;
+        const confirmPassword = document.getElementById('confirm-new-password').value;
+        const passwordHelp = document.getElementById('passwordHelp');
+      
+        // Regular expression to check the password criteria
+        const passwordCriteria = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W_]).{7,}$/;
+      
+        if (!passwordCriteria.test(newPassword)) {
+          passwordHelp.style.display = 'block';
+          return false;
+        } else {
+          passwordHelp.style.display = 'none';
         }
-    </script>
+      
+        if (newPassword !== confirmPassword) {
+          alert('New password and confirm password do not match.');
+          return false;
+        }
+        // fetch("{{server_link}}/resetpassworduser", {
+        //   method: "POST",
+        //   body: JSON.stringify({
+        //     username: getElementById('user-username').value,
+        //     oldpass: getElementById('old-password').value,
+        //     newpass: getElementById('new-password').value
+        //   }),
+        //   headers: {
+        //     "Content-Type": "application/json"
+        //   }
+        // });
+          // .then((response) => response.json())
+          // .then((json) => console.log(json));
+          usernm = document.getElementById('user-username').value;
+          oldpass = document.getElementById('old-password').value;
+          newpass = document.getElementById('new-password').value;
+          const dataToSend = JSON.stringify({"user-username": usernm, "old-password": oldpass,"new-password": newpass});
+          let dataReceived = ""; 
+          fetch("", {
+              credentials: "same-origin",
+              mode: "same-origin",
+              method: "post",
+              headers: { "Content-Type": "application/json" },
+              body: dataToSend
+          })
+              .then(resp => {
+                  if (resp.status === 200) {
+                    // window.location.href = `{{server_link}}/login`;
+                      return resp.json()
+                  } else {
+                      console.log("Status: " + resp.status)
+                      return Promise.reject("server")
+                  }
+              })
+              .then(dataJson => {
+                  dataReceived = JSON.parse(dataJson)
+              })
+              .catch(err => {
+                  if (err === "server") return
+                  console.log(err)
+              })
+
+          console.log(`Received: ${dataReceived}`)  
+          // if (dataReceived === "success") {
+          //   alert("Password Updated Successfully");
+          // } else {
+          //   alert("Password Update Failed");
+            
+          // }
+        return true;
+      }
+  </script>
   </body>
   </html>
   

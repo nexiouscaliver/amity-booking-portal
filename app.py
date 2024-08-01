@@ -1209,6 +1209,40 @@ def test():
     else:
         return redirect(url_for('userlogin'))
 
+@app.route('/resetpassworduser',methods=['GET','POST'])
+def resetuser():
+    if request.method == 'POST':
+        print('here')
+        print(request.data)
+        print(request.is_json)
+        username = request.form["user-username"]
+        oldpass = request.form["old-password"]
+        newpass = request.form["new-password"]
+        print(username,oldpass,newpass)
+        if username=="ASET_venue":
+            return redirect(url_for('userlogin'))
+        else:
+            return render_template('reset.user.html',server_link=server_link,error="Incorrect Credentials. Please try again")
+        pass
+    return render_template('reset.user.html',server_link=server_link)
+
+@app.route('/resetpasswordadmin',methods=['GET','POST'])
+def resetadmin():
+    if request.method == 'POST':
+        print('here')
+        print(request.data)
+        print(request.is_json)
+        username = request.form["user-username"]
+        oldpass = request.form["old-password"]
+        newpass = request.form["new-password"]
+        print(username,oldpass,newpass)
+        if username=="ASET_venue":
+            return redirect(url_for('adminlogin'))
+        else:
+            return render_template('reset.admin.html',server_link=server_link,error="Incorrect Credentials. Please try again")
+        pass
+    return render_template('reset.admin.html',server_link=server_link)
+
 #futurescope
 @app.route('/verifyemail/<username>' ,methods=['GET', 'POST'])
 def verifyemail(username):
