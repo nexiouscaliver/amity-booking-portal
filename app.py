@@ -1129,7 +1129,7 @@ def debug(token):
                 try:
                     return jsonify(output)
                 except Exception as e:
-                    return f"EXCEPTION :: JSON :: {e} <br>{jsonify(str(output))}<br>{(str(output).replace("'",'"'))}<br>{((output))}"
+                    return f"EXCEPTION :: JSON :: {e} <br><br><br>{output}"
             else:pass
         else:
             return render_template('debugger.html')
