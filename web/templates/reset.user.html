@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AmitEventHub - User Login</title>
+  <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static',filename='apple-touch-icon.png') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static',filename='favicon-32x32.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static',filename='favicon-16x16.png') }}">
+    <link rel="manifest" href="{{ url_for('static',filename='site.webmanifest') }}">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    @keyframes fadeIn {
+      0% { opacity: 0; }
+      100% { opacity: 1; }
+    }
+
+    body {
+      font-family: 'Roboto', sans-serif;
+      background-color: aliceblue; /* Light blue background */
+      display: flex;
+      justify-content: center; /* Center the container horizontally */
+      align-items: center; /* Center the container vertically */
+      height: 100vh; /* Full height */
+      margin: 0; /* Remove default margin */
+      animation: fadeIn 1s ease-in-out; /* Apply fade-in animation */
+    }
+
+    .container {
+      background: #fff; /* White background */
+      border: 1px solid #ddd; /* Light gray border */
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.2); /* Increased shadow for depth */
+      display: flex; /* Make container a flexbox */
+      flex-direction: column; /* Stack elements vertically */
+      width: 80%; /* Set container width to 80% */
+      max-width: 500px; /* Max width for large screens */
+      padding: 20px;
+      animation: fadeIn 1s ease-in-out; /* Apply fade-in animation */
+      overflow: hidden; /* Ensure no overflow */
+    }
+
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      background-color: #04172b; /* Dark blue background */
+      color: white;
+      font-size: 1.5em;
+    }
+
+    .header {
+      width: 100%;
+      display: flex;
+      align-items: center;
+    }
+    
+    .header img {
+      max-height: 60px; /* Adjust the height as needed */
+    }
+    
+    .header img:first-child {
+      max-height: 80px; /* Make the first logo bigger */
+    }
+    
+    .login-form {
+      width: 100%;
+      margin-top: 20px;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+      width: 100%; /* Full width for form group */
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+      color: #04172b; /* Dark blue for labels */
+      text-align: left; /* Align labels to the left */
+      width: 100%; /* Full width for labels */
+    }
+
+    input, button {
+      width: 100%;
+      padding: 15px;
+      border: 1px solid #ccc; /* Light gray border */
+      border-radius: 5px; /* Rounded corners */
+      transition: 0.4s ease; /* Smoother transitions */
+    }
+
+    input:focus, button:focus {
+      outline: none; /* Remove default focus outline */
+      border-color: #243a73; /* Darker blue border on focus */
+    }
+
+    button {
+      background-image: linear-gradient(to right, #04172b 0%, #243a73 100%);
+      color: white;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-image: linear-gradient(to right, #243a73 0%, #3f51b5 100%);
+    }
+
+    .form-actions {
+      display: flex; /* Arrange buttons and link horizontally */
+      justify-content: space-between; /* Distribute elements evenly */
+      align-items: center; /* Center align items vertically */
+      margin-top: 15px;
+      width: 100%; /* Full width for form actions */
+    }
+
+    #login-link, #signup-link {
+        color: #04172b; /* Dark blue for links */
+        text-decoration: none; /* Remove underline */
+        transition: 0.3s ease; /* Smoother hover effect */
+      }
+  
+      #login-link:hover, #signup-link:hover {
+        color: #243a73; /* Slightly lighter blue on link hover */
+      }
+  
+      .signup-container {
+        display: flex;
+        justify-content: center; /* Center align the text in the signup link */
+        width: 100%;
+        margin-top: 15px;
+      }
+
+      /* CSS to align links inline and underline them */
+      .auth-links {
+        text-align: center;
+    }
+    .auth-links a {
+        display: inline-block;
+        margin-right: 20px; /* Adjust spacing between links as needed */
+        text-decoration: none;
+        border-bottom: 1px solid transparent; 
+    }
+
+    .auth-links a:hover {
+        border-color: #333; 
+    }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <img src="{{ url_for('static',filename='L1.png') }}" alt="Logo1">
+        <img src="{{ url_for('static',filename='L2.png') }}" alt="Logo2">
+      </div>
+      <div class="login-form">
+      
+        {% if error %}
+        <p><strong>Error </strong> : {{error}}</p>
+        <script>
+          alert("Incorrect username/password. Please Try again.")
+        </script>
+        {% endif %}
+        <form id="userLoginForm" method="post" onsubmit="return validatePassword()">
+            <div class="form-group">
+              <label for="user-username">Username:</label>
+              <input type="text" id="user-username" name="user-username" value="Sundaram" readonly>
+            </div>
+            <div class="form-group">
+              <label for="old-password">Old Password:</label>
+              <input type="password" id="old-password" name="old-password" required>
+            </div>
+            <div class="form-group">
+              <label for="new-password">New Password:</label>
+              <input type="password" id="new-password" name="new-password" required>
+              <small id="passwordHelp" style="display: none; color: red;">
+                Password must contain at least 7 characters, including an uppercase letter, a lowercase letter, a number, and a special character.
+              </small>
+            </div>
+            <div class="form-group">
+              <label for="confirm-new-password">Confirm New Password:</label>
+              <input type="password" id="confirm-new-password" name="confirm-new-password" required>
+            </div>
+            <div class="form-actions">
+              <button type="submit">Update Password</button>
+            </div>
+            <div class="auth-links">
+                <a id="Login-page-link" href="{{url_for('usersignup')}}">Back to User-Login</a>
+              </div>
+          </form>
+Sundaram_123
+
+      </div>
+    </div>
+    <script>
+        function validatePassword() {
+          const newPassword = document.getElementById('new-password').value;
+          const confirmPassword = document.getElementById('confirm-new-password').value;
+          const passwordHelp = document.getElementById('passwordHelp');
+        
+          // Regular expression to check the password criteria
+          const passwordCriteria = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W_]).{7,}$/;
+        
+          if (!passwordCriteria.test(newPassword)) {
+            passwordHelp.style.display = 'block';
+            return false;
+          } else {
+            passwordHelp.style.display = 'none';
+          }
+        
+          if (newPassword !== confirmPassword) {
+            alert('New password and confirm password do not match.');
+            return false;
+          }
+        
+          return true;
+        }
+    </script>
+  </body>
+  </html>
+  
