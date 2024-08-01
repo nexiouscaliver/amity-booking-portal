@@ -1,0 +1,2973 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hall Management System</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static',filename='apple-touch-icon.png') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static',filename='favicon-32x32.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static',filename='favicon-16x16.png') }}">
+    <link rel="manifest" href="{{ url_for('static',filename='site.webmanifest') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" />
+
+    
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+    <style>
+      
+      body, html {
+        background-color: aliceblue;
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+        box-sizing: border-box;
+        font-family: Arial, sans-serif;
+        font-size: 16px;
+  line-height: 1.5;
+    }
+
+
+      :root {
+        --primary-color: #04172b;
+        --secondary-color: #061b31;
+        --white: #ffffff;
+        --gray: #6c757d;
+      }
+      
+      :root {
+        --primary-color: #333;
+        --secondary-color: #555;
+        --white: #fff;
+    }
+  
+    
+    /* Navbar Styles */
+    :root {
+      --primary-color: #333;
+      --secondary-color: #555;
+      --white: #fff;
+  }
+  
+  body, html {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      box-sizing: border-box;
+  }
+  
+  /* Navbar Styles */
+  .navbar {
+      background-color: var(--primary-color);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 20px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .logo-container {
+      display: flex;
+      align-items: center;
+  }
+  
+  .navbar .logo img {
+      height: 50px;
+      margin-right: 10px;
+  }
+  
+  .navbar .name img {
+      height: 50px;
+  }
+  
+  .navbar .menu {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+  }
+  
+  .navbar .menu a {
+      color: var(--white);
+      text-decoration: none;
+      padding: 10px 15px;
+      border-radius: 5px;
+      transition: background-color 0.3s, box-shadow 0.3s;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+  }
+  
+  .navbar .menu a:hover {
+      background-color: var(--secondary-color);
+      transform: scale(1.05);
+      box-shadow: 0 0 0 2px aliceblue;
+  }
+  
+  .navbar .icon {
+      font-size: 20px;
+      color: var(--white);
+      padding: 10px;
+      cursor: pointer;
+      font-weight: bold;
+      position: relative;
+  }
+  
+  /* Responsive Styles */
+  @media (max-width: 768px) {
+      .navbar {
+          flex-direction: column;
+          align-items: flex-start;
+          padding: 10px;
+      }
+  
+      .logo-container {
+          justify-content: center;
+          width: 100%;
+      }
+  
+      .navbar .menu {
+          flex-direction: column;
+          width: 100%;
+          gap: 10px;
+          padding: 10px 0;
+      }
+  
+      .navbar .menu a {
+          width: 100%;
+          text-align: center;
+          padding: 10px 0;
+      }
+  
+      .navbar .icon {
+          width: 100%;
+          text-align: center;
+      }
+  }
+  
+  @media (min-width: 769px) and (max-width: 1024px) {
+      .navbar .menu a {
+          padding: 10px;
+          margin-left: 10px;
+      }
+  }
+    
+
+  /*.menu-item i.fas {
+    color: rgb(228, 228, 8); 
+  }*/
+  
+    
+      /* Hero Section */
+      .hero {
+        background: url('heroo.jpg') no-repeat center center / cover;
+        color: white;
+        margin-top: 20px;
+        text-align: center;
+        padding: 100px 0;
+      }
+      
+      .bordered-letters {
+        color: white; /* Set the text color to contrast with the border */
+        text-shadow: 
+          -1px -1px 0 black,  
+           1px -1px 0 black,
+          -1px  1px 0 black,
+           1px  1px 0 black;
+        margin: 10px 0; /* Adds some space above and below each element */
+      }
+      
+  
+      .hero h1 {
+        font-size: 50px;
+        margin: 0;
+      }
+  
+      .hero p {
+        font-size: 20px;
+      }
+  
+
+  
+    /* Hero Section */
+    .hero {
+      background: url('heroo.jpg') no-repeat center center / cover;
+      color: blue;
+      margin-top: 20px;
+      text-align: center;
+      padding: 100px 0;
+    }
+    
+    .bordered-letters {
+      color: white; /* Set the text color to contrast with the border */
+      text-shadow: 
+        -1px -1px 0 black,  
+         1px -1px 0 black,
+        -1px  1px 0 black,
+         1px  1px 0 black;
+      margin: 10px 0; /* Adds some space above and below each element */
+    }
+    
+    .hero h1 {
+      font-size: 50px;
+      margin: 0;
+    }
+
+    .hero p {
+      font-size: 20px;
+    }
+
+    /* Halls Section */
+    .halls {
+      padding: 50px 0;
+      background-color:aliceblue;
+    }
+ 
+    .halls h2 {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .hall {
+      background: #f9f9f9;
+      padding: 20px;
+      margin-bottom: 20px;
+      border-radius: 5px;
+      text-align: center;
+    }
+
+    .hall img {
+      max-width: 100%;
+      height:200px;
+      border-radius: 5px;
+    }
+
+    .hall:hover {
+      transform: scale(1.05); /* Slightly increase the size */
+      box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15); /* Enhance the shadow */
+    }
+    .hall h3 {
+      margin-top: 15px;
+    }
+
+    .hall p {
+      font-size: 16px;
+      color: #666;
+    }
+
+    .hall .btn {
+      margin-top: 10px;
+      background-color: #04172b;
+    }
+
+  
+      /* Modal Styles */
+  
+      .modal-header {
+        background-color: #04172b;
+        color: white;
+      }
+  
+      .modal-header .close {
+        color: white;
+      }
+  
+      .modal-body .form-group {
+        margin-bottom: 20px;
+      }
+     .modal-body .btn-primary{
+      background-color: #04172b;
+     }
+      /* Footer Styles */
+      footer {
+        background-color: #333;
+        color: white;
+        padding: 20px 0;
+        text-align: center;
+      }
+  
+      footer a {
+        color: #337ab7;
+        text-decoration: none;
+      }
+  
+      footer a:hover {
+        text-decoration: underline;
+      }
+  /*  styling for the color of calender */
+  .form-control {
+    border: 1px solid #ccc;
+    padding: 8px;
+    font-size: 14px;
+  }
+  
+  
+  
+   /*  styles for the calendar  */
+  td[data-day] {
+    border-radius: 50%;
+    text-align: center;
+    line-height: 2;
+    cursor: pointer;
+  }
+  
+  td[data-day]:hover {
+    background-color: black;
+  }
+  .hidden {
+      display: none;
+  }
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  .calendar-container {
+    background: #e0f7fa; /* Aquatic theme background */
+    border-radius: 8px; /* Adjust the radius for a more curved appearance */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 70%; /* Adjust as needed */
+    max-width: 100%;
+    
+    margin: 20px auto; /* Center the container horizontally with margin auto */
+    padding: 10px;
+    align-content: center;
+    height: auto;
+    position: absolute;
+    top: 5%;
+    left: 70%;
+    transform: translate(-50%, 0);
+    z-index: 1000;
+  }
+  
+  /* For small devices (phones, less than 600px) */
+  @media only screen and (max-width: 600px) {
+    .calendar-container {
+      width: 90%;
+      max-width: 90%;
+      top: 5%;
+      left: 70%;
+      transform: translate(-50%, 0);
+    }
+  }
+  
+  /* For medium devices (tablets, 600px to 768px) */
+  @media only screen and (min-width: 600px) and (max-width: 768px) {
+    .calendar-container {
+      width: 80%;
+      max-width: 80%;
+      top: 5%;
+      left: 70%;
+      transform: translate(-50%, 0);
+    }
+  }
+  
+  .calendar-nav,
+  .calendar-header,
+  .calendar,
+  .legend {
+    user-select: none;
+  }
+  
+  .calendar-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    background: #23252D; /* Aquatic theme header */
+    color: white; /* Office theme text color */
+    border-top-left-radius: 20px; /* Ensure corners are rounded */
+    border-top-right-radius: 20px;
+  }
+  
+  .calendar-nav button {
+    background: none;
+    border: none;
+    color: white; /* Office theme button color */
+    font-size: 18px;
+    cursor: pointer;
+    padding: 5px 10px;
+    transition: background-color 0.3s;
+  }
+  
+  .calendar-nav button:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+  }
+  
+  .calendar-nav span {
+    font-size: 18px;
+    font-weight: bold;
+  }
+  
+  .calendar-header {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    background: #23252D; /* Aquatic theme header */
+    color: white; /* Office theme text color */
+    text-align: center;
+    padding: 10px 0;
+    font-weight: bold;
+    border-bottom-left-radius: 20px; /* Ensure corners are rounded */
+    border-bottom-right-radius: 20px;
+  }
+  
+  .calendar {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 1px;
+    background: #e0f7fa; /* Aquatic theme body */
+    border-bottom-left-radius: 20px; /* Ensure corners are rounded */
+    border-bottom-right-radius: 20px;
+  }
+  
+  .calendar .day {
+    background: #b2dfdb; /* Aquatic theme day background */
+    color: #004d40; /* Aquatic theme day text */
+    padding: 10px;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .calendar .day:hover {
+    background-color: #80cbc4; /* Aquatic theme hover effect */
+  }
+  
+  .calendar .day.booked {
+    background-color: lightcoral; /* Booked color */
+    color: white;
+  }
+  
+  .calendar .day.pending {
+    background-color: #fff176; /* Pending color */
+    color: black;
+  }
+  
+  .calendar .day.not-booked {
+    background-color: #68d391; /* Not booked color */
+    color: black;
+  }
+  
+  .day {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    background-color: white; /* Office theme background */
+    color: #333; /* Office theme text color */
+    border-radius: 50%; /* Changed to circle */
+    transition: box-shadow 0.3s, transform 0.3s;
+  }
+  
+  .day:hover {
+    background-color: #e0e0e0; /* Darker shade on hover */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transform: scale(1.05); /* Slight zoom effect */
+  }
+  
+  .day.hidden {
+    visibility: hidden;
+  }
+  
+  .event-info {
+    font-size: 12px;
+    margin-top: 4px;
+    text-align: center;
+  }
+  
+  @media (max-width: 640px) {
+    .calendar-header,
+    .calendar {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  
+    .day {
+      font-size: 14px;
+      padding: 5px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .calendar-header,
+    .calendar {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  
+
+
+
+
+    
+    .day {
+      font-size: 12px;
+      padding: 3px;
+    }
+  }
+  
+  .legend {
+    display: flex;
+    justify-content: space-around;
+    padding: 10px;
+    margin-top: 20px;
+    background-color: #23252D;
+    border-radius: 8px;
+    width: 100%;
+    color: white;
+  }
+  
+  .legend-item {
+    display: flex;
+    align-items: center;
+  }
+  
+  .legend-color {
+    width: 20px;
+    height: 20px;
+    border-radius: 4px;
+    margin-right: 8px;
+  }
+  
+  .full-booked-legend {
+    background-color: lightcoral;
+  }
+  
+  .not-booked-legend {
+    background-color: #68d391;
+  }
+  
+  .pending-legend {
+    background-color: rgb(236, 236, 151);
+  }
+  
+    /*close calender */
+    .calendarclose-button {
+      padding: 2px 4px; 
+      background-color: #c53030; /* Red background color */
+      color:lightcoral; /* Gray text color */
+      border-radius: 4px; 
+      font-size: 12px; 
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center; 
+      transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition */
+    }
+    
+    .calendarclose-button:hover {
+      background-color: #a12828; /* Darker red on hover */
+      color:lightcoral; /* White text color on hover */
+    }
+    
+    .calendarclose-button .icon {
+      width: 12px; 
+      height: 12px; 
+    }
+    
+    .calendarclose-button .label {
+      display: none; 
+    }
+    
+    .ml-auto {
+      margin-left: auto; 
+    }
+    
+    /* Optional: Add fade-in and fade-out animations */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+    
+    @keyframes fadeOut {
+      from {
+        opacity: 1;
+      }
+      to {
+        opacity: 0;
+      }
+    }
+    
+    .fade-in {
+      animation: fadeIn 0.3s ease-in-out;
+    }
+    
+    .fade-out {
+      animation: fadeOut 0.3s ease-in-out;
+    }
+  
+  
+  
+  /*j*/
+  /* Base styles (mobile-first) */
+body {
+    font-size: 16px;
+    line-height: 1.5;
+  }
+  
+  .navbar {
+    flex-direction: column;
+    padding: 10px;
+  }
+  
+  .logo img, .name img {
+    height: auto;
+    max-width: 100%;
+  }
+  
+  .hero {
+    padding: 50px 20px;
+  }
+  
+  .hero h1 {
+    font-size: 2rem;
+  }
+  
+  .hero p {
+    font-size: 1rem;
+  }
+  
+  .hall img {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  .calendar-container {
+    width: 95%;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  
+  /* Responsive adjustments */
+  @media (min-width: 600px) {
+    .navbar {
+      flex-direction: row;
+    }
+  
+    .hero h1 {
+      font-size: 2.5rem;
+    }
+  
+    .calendar-container {
+      width: 80%;
+    }
+  }
+  
+  @media (min-width: 768px) {
+    .hero h1 {
+      font-size: 3rem;
+    }
+  
+    .calendar-container {
+      width: 70%;
+    }
+  }
+  
+  @media (min-width: 1024px) {
+    .calendar-container {
+      width: 60%;
+    }
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  /*slots*/
+  
+     .time-slot-popup {
+                  position: fixed;
+                  top: 50%;
+                  left: 50%;
+                  transform: translate(-50%, -50%);
+                  background-color: #04172b; /* Dark blue background */
+                  border: 1px solid #ccc;
+                  padding: 20px;
+                  border-radius: 10px;
+                  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+                  z-index: 1000;
+                  color: white; 
+                  max-width: 90%; 
+                  max-height: 90%; 
+                
+              }
+              
+              
+              
+              
+              .time-slot-content {
+                  margin-top: 10px;
+              }
+              
+              .time-slot-chart {
+                  display: flex;
+                  align-items: center;
+                  justify-content: space-between; /* Adjust  */
+                  gap: 10px; /* Or use margin: 10px;*/
+                  overflow-x: auto; /* Enable horizontal scrolling */
+                  overflow-y: hidden; /* Disable vertical scrolling */
+              }
+              
+              .time-slot-time,
+              .time-slot-status {
+                  padding: 10px;
+                  border: 2px solid #ccc;
+                  text-align: center;
+                  flex: 1; /* Take up remaining space */
+                  transition: transform 0.3s ease-out; /* Smooth transition for size change */
+              }
+              
+              .time-slot-time:hover,
+              .time-slot-status:hover {
+                  transform: scale(1.1); /* Increase size on hover */
+              }
+               
+      
+              
+              .status-data {
+                  position: absolute;
+                  top: -100%; /* Start from above the box */
+                  left: 0;
+                  width: auto;
+                  height: auto;
+                  background-color: transparent; /* Transparent initially */
+                  animation: slideInDown 0.5s forwards; /* Animation for sliding in */
+                  text-align: center;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  color: white;
+                  transition: transform 0.3s ease-out; /* Smooth transition for size change */
+              }
+              
+              .status-data:hover {
+                  transform: scale(1.2); /* Increase size on hover */
+              }
+              
+              @keyframes slideInDown {
+                  from {
+                      top: -100%; /* Start from above the box */
+                  }
+                  to {
+                      top: 0; /* Slide in downwards */
+                  }
+              }
+              
+              
+              
+              .booked {
+                  background-color: lightcoral; /* Light red background for booked slots */
+              }
+              
+              .pending {
+                  background-color: rgb(236, 236, 151); /* Light yellow background for pending slots */
+                  color: black;
+              }
+              
+              .free {
+                  background-color: lightgreen; /* Green background for free slots */
+              }
+              
+              .close-button {
+                  display: block;
+                  margin: 10px auto;
+                  padding: 5px 10px;
+                  background-color: #f44336; /* Red close button */
+                  color: white;
+                  border: none;
+                  border-radius: 5px;
+                  cursor: pointer;
+              }
+              
+              .close-button:hover {
+                  background-color: #d32f2f; /* Darker red hover color */
+              }
+              
+              .time-slot-popup.disappear {
+                  opacity: 0;
+              }
+              
+            
+              .nav-buttons {
+                  display: flex;
+                  justify-content: space-between;
+                  margin-top: 40px;
+              }
+              
+              .nav-buttons button {
+                  background-color: transparent;
+                  border: none;
+                  cursor: pointer;
+                  transition: all 0.3s ease;
+                  font-weight: bold;
+                  color: white; /* Adjust text color as needed */
+                  font-size: 1.2em; /* Adjust font size as needed */
+                  padding: 5px 10px; /* Adjust padding as needed */
+              }
+              
+              .nav-buttons button:hover {
+                  transform: scale(1.1);
+                  color: #555; /* Adjust hover text color */
+              }
+              
+              .nav-buttons button:focus {
+                  outline: none;
+              }
+              
+              .nav-buttons button:active {
+                  transform: scale(0.9);
+              }
+              
+  
+  
+  
+  
+  
+  
+  
+  
+              
+  .free:hover {
+      background-color: #555;
+    }
+    
+    .selected {
+      background-color: #0a74da;
+      color: #fff;
+      transition: background-color 0.3s;
+    }
+    
+    .select-animation {
+      animation: selectFade 0.3s;
+    }
+    
+    .unselect-animation {
+      animation: unselectFade 0.3s;
+    }
+    
+    .submit-container {
+      margin-top: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .submit-button {
+      background-color: #0a74da;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    
+    .submit-button:hover {
+      background-color: #005bb5;
+    }
+    
+    .selected-count {
+      font-size: 16px;
+    }
+    
+    .nav-buttons {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
+    }
+    
+    .nav-button {
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 20px;
+      cursor: pointer;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    
+    @keyframes selectFade {
+      from { background-color: #555; }
+      to { background-color: #0a74da; }
+    }
+    
+    @keyframes unselectFade {
+      from { background-color: #0a74da; }
+      to { background-color: #555; }
+    }
+    
+    
+    .hidden {
+      display: none;
+    }
+    
+    /*for calendar icon  in form */
+    .relative {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      
+    }
+  
+  
+    </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="navbar">
+        <div class="logo-container">
+            <div class="logo">
+                <img src="{{ url_for('static',filename='L1.png') }}" alt="Logo">
+            </div>
+            <div class="name">
+                <img src="{{ url_for('static',filename='L2.png') }}" alt="Name Logo">
+            </div>
+        </div>
+        <div class="menu">
+            <a href="{{url_for('usercalender')}}" class="menu-item">
+                <i class="fas fa-calendar-alt"></i> Calendar
+            </a>
+            <a href="{{url_for('usernoti')}}" class="menu-item">
+                <i class="fas fa-bell"></i> Hall Updates
+            </a>
+            <a href="{{url_for('status')}}" class="menu-item">Booking Status</a>
+            <a href="{{url_for('home')}}" class="menu-item">Logout</a>
+        </div>
+    </div>
+</header>
+  
+  
+  <main>
+    <section class="hero">
+      <div class="container">
+        <h1 class="bordered-letters">Venue Scheduling Software</h1>
+        <h2 class="bordered-letters">Amity University Maharashtra, Mumbai</h2>
+      </div>
+    </section>
+
+    <section class="halls">
+      <div class="container">
+        <h2>Available Halls</h2>
+        {% if error %}
+        <!-- <p><strong>Update </strong> : {{error}}</p> -->
+        <script>
+          alert("{{error}}");
+        </script>
+        {% endif %}
+        <div class="row">
+
+          <div class="col-md-4">
+            <div class="hall" data-toggle="modal" data-target="#auditoriumModal">
+              <img src="audi.front.png" alt="Auditorium Hall">
+              <h3>Auditorium Hall</h3>
+              <p>Large venue with seating capacity of 500+. Ideal for conferences, lectures, and performances.</p>
+              <button type="button" class="btn btn-primary">Select</button>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="hall" data-toggle="modal" data-target="#seminarModal">
+              <img src="seminar.hall1.png" alt="Seminar Hall">
+              <h3>Seminar Hall</h3>
+              <p>Medium-sized hall with seating capacity of 100+. Suitable for meetings, workshops, and presentations.</p>
+              <button type="button" class="btn btn-primary" >Select</button>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="hall" data-toggle="modal" data-target="#room105Modal">
+              <img src="room.jpg" alt="Room No. 105, A2 Building">
+              <h3>Room No. 105, A2 Building</h3>
+              <p>Smaller meeting room with seating capacity of 20+. Perfect for small group discussions and interviews.</p>
+              <button type="button" class="btn btn-primary">Select</button>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="hall" data-toggle="modal" data-target="#crcModal">
+              <img src="crc.jpg" alt="CRC Conference Room">
+              <h3>CRC Conference Room</h3>
+              <p>Modern conference room equipped with audio-visual technology. Accommodates up to 20 people.</p>
+              <button type="button" class="btn btn-primary">Select</button>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="hall" data-toggle="modal" data-target="#RICSConferenceRoomModal">
+              <img src="RF.jpg" alt="RICS  Conference Room">
+              <h3>RICS  Conference Room</h3>
+              <p> conference room with cutting-edge AV equipment and ergonomic seating. Accommodates up to 50 people.</p>
+              <button type="button" class="btn btn-primary">Select</button>
+            </div>
+          </div>
+
+
+          <div class="col-md-4">
+            <div class="hall" data-toggle="modal" data-target="#AtriumModal">
+              <img src="a.jpg" alt="Atrium">
+              <h3>Atrium</h3>
+              <p>Large venue with seating capacity of 500+. Ideal for conferences, lectures, and performances.</p>
+              <button type="button" class="btn btn-primary">Select</button>
+            </div>
+          </div>
+
+
+          <div class="col-md-4">
+            <div class="hall" data-toggle="modal" data-target="#AIBConferenceroomModal">
+              <img src="conference.jpg" alt="AIB Conference Room">
+              <h3>AIB Conference Room</h3>
+              <p> Modern conference room equipped with advanced audio-visual technology . Accommodates up to 50 people.
+               </p>
+              <button type="button" class="btn btn-primary">Select</button>
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+    </section>
+    
+    
+
+<!-- 1 Auditorium Hall Modal -->
+
+
+      <div class="modal fade" id="auditoriumModal" tabindex="-1" role="dialog" aria-labelledby="auditoriumModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header flex items-center justify-between">
+                    <div class="flex items-center">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <h4 class="modal-title" id="auditoriumModalLabel">Auditorium Hall Booking</h4>
+                    </div>
+                    <div class="relative">
+                        <i id="calendar-icon" class="far fa-calendar-alt cursor-pointer" data-target="auditoriumForm" onclick="toggleCalendar(this)"> Hall Calendar </i>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <form method="post" id="auditoriumForm" novalidate>
+              <div class="form-group">
+                <label for="auditoriumSchoolName">School Name:</label>
+                <select class="form-control" id="auditoriumSchoolName" name="auditoriumSchoolName" required>
+                  <option value="">Select School Name</option>
+                  <option value="ABS">ABS - Amity Business School</option>
+                  <option value="AFS">AFS - Amity Film School</option>
+                  <option value="AIBAS">AIBAS - Amity Institute of Behavioural & Allied Sciences</option>
+                  <option value="AIB">AIB - Amity Institute of Biotechnology</option>
+                  <option value="ALIT">ALIT - Amity Institute of Information Technology</option>
+                  <option value="AILA">AILA - Amity Institute of Liberal Arts</option>
+                  <option value="AIP">AIP - Amity Institute of Pharmacy</option>
+                  <option value="AIT">AIT - Amity Institute of Technology</option>
+                  <option value="AITT">AITT - Amity Institute of Travel & Tourism</option>
+                  <option value="ALS">ALS - Amity Law School</option>
+                  <option value="ASAP">ASAP - Amity School of Architecture & Planning</option>
+                  <option value="ASAS">ASAS - Amity School of Applied Sciences</option>
+                  <option value="ASCO">ASCO - Amity School of Communication</option>
+                  <option value="ASET">ASET - Amity School of Engineering & Technology</option>
+                  <option value="ASFT">ASFT - Amity School of Fashion Technology</option>
+                  <option value="ASL">ASL - Amity School of Languages</option>
+                  <option value="CISOL">CIIOL - CII Logistics</option>
+                  <option value="TUCSSBERICS"> RICS</option>
+                  <option value="ASFA">ASFA - Amity School of Fine Arts</option>
+                  <option value="AIE">AIE - Amity Institute of Education</option>
+                  <option value="AIN">AIN - Amity Institute of Nanotechnology</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="auditoriumFacultyName">Event Coordinator Name:</label>
+                <input type="text" class="form-control" id="auditoriumFacultyName" name="auditoriumFacultyName" placeholder="Enter your name" required>
+              </div>
+              <div class="form-group">
+                <label for="auditoriumHodName">HOD/HOI/Director Name:</label>
+                <input type="text" class="form-control" id="auditoriumHodName" name="auditoriumHodName" placeholder="Enter HOD/HOI/Director name" required>
+              </div>
+              <div class="form-group">
+                <label for="auditoriumEventName">Event Name:</label>
+                <input type="text" class="form-control" id="auditoriumEventName" name="auditoriumEventName" placeholder="Enter event name" required>
+              </div>
+              <div class="form-group">
+                <label for="auditoriumstartime">Start Time</label>
+                <select class="form-control" id="auditoriumstartime" name="auditoriumstartime" required>
+                  <option value="900">09:00 am</option>
+                  <option value="1000">10:00 am</option>
+                  <option value="1100">11:00 am</option>
+                  <option value="1200">12:00 pm</option>
+                  <option value="1300">01:00 pm</option>
+                  <option value="1400">02:00 pm</option>
+                   <option value="1500">03:00 pm</option>
+                   <option value="1600">04:00 pm</option>
+                   <option value="1700">05:00 pm</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="auditoriumendtime">End Time</label>
+
+                <select class="form-control" id="auditoriumendtime" name="auditoriumendtime" required>
+                  <option value="1000">10:00 am</option>
+                  <option value="1100">11:00 am</option>
+                  <option value="1200">12:00 pm</option>
+                  <option value="1300">01:00 pm</option>
+                  <option value="1400">02:00 pm</option>
+                   <option value="1500">03:00 pm</option>
+                   <option value="1600">04:00 pm</option>
+                   <option value="1700">05:00 pm</option>
+                   <option value="1800">06:00 pm</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="auditoriumdate">Date of Event:</label>
+                <input type="date" class="form-control" id="auditoriumdate" name="auditoriumdate" required onchange="updateDayOfWeek('auditoriumdate', 'auditoriumday'); updateCalendarColor('auditoriumdate','auditoriumDuration')">
+              </div>
+              <div class="form-group">
+                <label for="auditoriumday">Day of Event:</label>
+                <input type="text" class="form-control" id="auditoriumday" name="auditoriumday" readonly>
+              </div>
+              <div class="form-group">
+                <label for="auditoriumResourcePersonName">Resource Person Name:</label>
+                <input type="text" class="form-control" id="auditoriumResourcePersonName" name="auditoriumResourcePersonName" placeholder="Enter resource person name" required>
+              </div>
+              <div class="form-group">
+                <label for="auditoriumResourcePersonDetail">Resource Person Detail:</label>
+                <textarea class="form-control" id="auditoriumResourcePersonDetail" name="auditoriumResourcePersonDetail" placeholder="Enter resource person details" required></textarea>
+              </div>
+              <div class="form-group">
+                <label for="auditoriumEmail">Event Coordinator's Email:</label>
+                <input type="email" class="form-control" id="auditoriumEmail" name="auditoriumEmail" placeholder="Enter your email" required>
+              </div>
+              <div class="form-group">
+                <label for="auditoriumPhone">Event Coordinator's Phone Number:</label>
+                <input type="tel" class="form-control" id="auditoriumPhone" name="auditoriumPhone" placeholder="Enter your phone number" required>
+              </div>
+              <button type="submit" class="btn btn-primary" id="submitmain">Submit</button>
+        </form>
+
+        <div id="calendar-container-auditoriumForm" class="calendar-container hidden mt-2">
+          <div class="calendar-nav flex items-center justify-between mb-4">
+              <button id="prevMonth" class="p-2 bg-gray-700 text-gray-400 rounded">&lt;</button>
+              <span id="monthYear" class="text-lg font-semibold"></span>
+              <button id="nextMonth" class="p-2 bg-gray-700 text-gray-400 rounded">&gt;</button>
+              <button id="closeCalendar" class="calendarclose-button flex items-center" data-target="auditoriumForm" onclick="toggleCalendar(this)">
+                  <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                  </svg>
+                  <span class="label"></span>
+              </button>
+          </div>
+          <div class="flex justify-center mb-4">
+              <select id="hallDropdown" class="mx-2 p-2 bg-gray-700 text-gray-400 rounded">
+                  <option value="Auditorium">Auditorium</option>
+                  <option value="SeminarHall">Seminar Hall</option>
+                  <option value="Room105">Room 105</option>
+                  <option value="CRCConferenceRoom">CRC Conference Room</option>
+                  <option value="AIBConferenceRoom">AIIT Conference Room</option>
+                  <option value="RICSConferenceRoom">RICS Conference Room</option>
+                  <option value="Atrium">Atrium</option>
+              </select>
+              <select id="monthSelect" class="mx-2 p-2 bg-gray-700 text-gray-400 rounded readonly">
+                  <!-- Options will be populated by JavaScript -->
+              </select>
+              <input type="date" id="dateSearch" class="p-2 bg-gray-700 text-gray-400 rounded">
+          </div>
+          <div class="calendar-header grid grid-cols-7 gap-1">
+              <div class="text-center">Sun</div>
+              <div class="text-center">Mon</div>
+              <div class="text-center">Tue</div>
+              <div class="text-center">Wed</div>
+              <div class="text-center">Thu</div>
+              <div class="text-center">Fri</div>
+              <div class="text-center">Sat</div>
+          </div>
+          <div id="calendar" class="calendar grid grid-cols-7 gap-1"></div>
+          <div class="legend mt-4 grid grid-cols-3 gap-4">
+              <div class="legend-item flex items-center">
+                  <div class="legend-color full-booked-legend w-4 h-4 mr-2 rounded-full"></div>
+                  <span>Booked Slots</span>
+              </div>
+              <div class="legend-item flex items-center">
+                  <div class="legend-color not-booked-legend w-4 h-4 mr-2 rounded-full"></div>
+                  <span>Not Booked Slots</span>
+              </div>
+              <div class="legend-item flex items-center">
+                  <div class="legend-color pending-legend w-4 h-4 mr-2 rounded-full"></div>
+                  <span>Pending Slots</span>
+              </div>
+          </div>
+      </div>
+
+    </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+<!-- 2.seminar* -->
+
+<div class="modal fade" id="seminarModal" tabindex="-1" role="dialog" aria-labelledby="seminarModalLabel">
+  <div class="modal-dialog" role="document">
+      <div class="modal-content">
+          <div class="modal-header flex items-center justify-between">
+              <div class="flex items-center">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                  </button>
+                  <h4 class="modal-title" id="seminarModalLabel">seminar Hall Booking</h4>
+              </div>
+              <div class="relative">
+                  <i id="calendar-icon" class="far fa-calendar-alt cursor-pointer" data-target="seminarForm" onclick="toggleCalendar(this)"> Hall Calendar </i>
+              </div>
+          </div>
+          <div class="modal-body">
+              <form method="post" id="seminarForm" novalidate>
+        <div class="form-group">
+          <label for="seminarSchoolName">School Name:</label>
+          <select class="form-control" id="seminarSchoolName" name="seminarSchoolName" required>
+            <option value="">Select School Name</option>
+            <option value="ABS">ABS - Amity Business School</option>
+            <option value="AFS">AFS - Amity Film School</option>
+            <option value="AIBAS">AIBAS - Amity Institute of Behavioural & Allied Sciences</option>
+            <option value="AIB">AIB - Amity Institute of Biotechnology</option>
+            <option value="ALIT">ALIT - Amity Institute of Information Technology</option>
+            <option value="AILA">AILA - Amity Institute of Liberal Arts</option>
+            <option value="AIP">AIP - Amity Institute of Pharmacy</option>
+            <option value="AIT">AIT - Amity Institute of Technology</option>
+            <option value="AITT">AITT - Amity Institute of Travel & Tourism</option>
+            <option value="ALS">ALS - Amity Law School</option>
+            <option value="ASAP">ASAP - Amity School of Architecture & Planning</option>
+            <option value="ASAS">ASAS - Amity School of Applied Sciences</option>
+            <option value="ASCO">ASCO - Amity School of Communication</option>
+            <option value="ASET">ASET - Amity School of Engineering & Technology</option>
+            <option value="ASFT">ASFT - Amity School of Fashion Technology</option>
+            <option value="ASL">ASL - Amity School of Languages</option>
+            <option value="CISOL">CIIOL - CII Logistics</option>
+            <option value="TUCSSBERICS"> RICS</option>
+            <option value="ASFA">ASFA - Amity School of Fine Arts</option>
+            <option value="AIE">AIE - Amity Institute of Education</option>
+            <option value="AIN">AIN - Amity Institute of Nanotechnology</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="seminarFacultyName">Event Coordinator Name:</label>
+          <input type="text" class="form-control" id="seminarFacultyName" name="seminarFacultyName" placeholder="Enter your name" required>
+        </div>
+        <div class="form-group">
+          <label for="seminarHodName">HOD/HOI/Director Name:</label>
+          <input type="text" class="form-control" id="seminarHodName" name="seminarHodName" placeholder="Enter HOD/HOI/Director name" required>
+        </div>
+        <div class="form-group">
+          <label for="seminarEventName">Event Name:</label>
+          <input type="text" class="form-control" id="seminarEventName" name="seminarEventName" placeholder="Enter event name" required>
+        </div>
+        <div class="form-group">
+          <label for="seminarstartime">Start Time</label>
+          <select class="form-control" id="seminarstartime" name="seminarstartime" required>
+            <option value="900">09:00 am</option>
+            <option value="1000">10:00 am</option>
+            <option value="1100">11:00 am</option>
+            <option value="1200">12:00 pm</option>
+            <option value="1300">01:00 pm</option>
+            <option value="1400">02:00 pm</option>
+             <option value="1500">03:00 pm</option>
+             <option value="1600">04:00 pm</option>
+             <option value="1700">05:00 pm</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="seminarendtime">End Time</label>
+
+          <select class="form-control" id="seminarendtime" name="seminarendtime" required>
+            <option value="1000">10:00 am</option>
+            <option value="1100">11:00 am</option>
+            <option value="1200">12:00 pm</option>
+            <option value="1300">01:00 pm</option>
+            <option value="1400">02:00 pm</option>
+             <option value="1500">03:00 pm</option>
+             <option value="1600">04:00 pm</option>
+             <option value="1700">05:00 pm</option>
+             <option value="1800">06:00 pm</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="seminardate">Date of Event:</label>
+          <input type="date" class="form-control" id="seminardate" name="seminardate" required onchange="updateDayOfWeek('seminardate', 'seminarday'); updateCalendarColor('seminardate','seminarDuration')">
+        </div>
+        <div class="form-group">
+          <label for="seminarday">Day of Event:</label>
+          <input type="text" class="form-control" id="seminarday" name="seminarday" readonly>
+        </div>
+        <div class="form-group">
+          <label for="seminarResourcePersonName">Resource Person Name:</label>
+          <input type="text" class="form-control" id="seminarResourcePersonName" name="seminarResourcePersonName" placeholder="Enter resource person name" required>
+        </div>
+        <div class="form-group">
+          <label for="seminarResourcePersonDetail">Resource Person Detail:</label>
+          <textarea class="form-control" id="seminarResourcePersonDetail" name="seminarResourcePersonDetail" placeholder="Enter resource person details" required></textarea>
+        </div>
+        <div class="form-group">
+          <label for="seminarEmail">Event Coordinator's Email:</label>
+          <input type="email" class="form-control" id="seminarEmail" name="seminarEmail" placeholder="Enter your email" required>
+        </div>
+        <div class="form-group">
+          <label for="seminarPhone">Event Coordinator's Phone Number:</label>
+          <input type="tel" class="form-control" id="seminarPhone" name="seminarPhone" placeholder="Enter your phone number" required>
+        </div>
+        <button type="submit" class="btn btn-primary" id="submitmain">Submit</button>
+  </form>
+
+  <div id="calendar-container-seminarForm" class="calendar-container hidden mt-2">
+    <div class="calendar-nav flex items-center justify-between mb-4">
+        <button id="prevMonth" class="p-2 bg-gray-700 text-gray-400 rounded">&lt;</button>
+        <span id="monthYear" class="text-lg font-semibold"></span>
+        <button id="nextMonth" class="p-2 bg-gray-700 text-gray-400 rounded">&gt;</button>
+        <button id="closeCalendar" class="calendarclose-button flex items-center" data-target="seminarForm" onclick="toggleCalendar(this)">
+            <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+            <span class="label"></span>
+        </button>
+    </div>
+    <div class="flex justify-center mb-4">
+        <select id="hallDropdown" class="mx-2 p-2 bg-gray-700 text-gray-400 rounded">
+            <option value="Auditorium">Auditorium</option>
+            <option value="SeminarHall">Seminar Hall</option>
+            <option value="Room105">Room 105</option>
+            <option value="CRCConferenceRoom">CRC Conference Room</option>
+            <option value="AIBConferenceRoom">AIB Conference Room</option>
+            <option value="RICSConferenceRoom">RICS Conference Room</option>
+            <option value="Atrium">Atrium</option>
+        </select>
+        <select id="monthSelect" class="mx-2 p-2 bg-gray-700 text-gray-400 rounded readonly">
+            <!-- Options will be populated by JavaScript -->
+        </select>
+        <input type="date" id="dateSearch" class="p-2 bg-gray-700 text-gray-400 rounded">
+    </div>
+    <div class="calendar-header grid grid-cols-7 gap-1">
+        <div class="text-center">Sun</div>
+        <div class="text-center">Mon</div>
+        <div class="text-center">Tue</div>
+        <div class="text-center">Wed</div>
+        <div class="text-center">Thu</div>
+        <div class="text-center">Fri</div>
+        <div class="text-center">Sat</div>
+    </div>
+    <div id="calendar" class="calendar grid grid-cols-7 gap-1"></div>
+    <div class="legend mt-4 grid grid-cols-3 gap-4">
+        <div class="legend-item flex items-center">
+            <div class="legend-color full-booked-legend w-4 h-4 mr-2 rounded-full"></div>
+            <span>Booked Slots</span>
+        </div>
+        <div class="legend-item flex items-center">
+            <div class="legend-color not-booked-legend w-4 h-4 mr-2 rounded-full"></div>
+            <span>Not Booked Slots</span>
+        </div>
+        <div class="legend-item flex items-center">
+            <div class="legend-color pending-legend w-4 h-4 mr-2 rounded-full"></div>
+            <span>Pending Slots</span>
+        </div>
+    </div>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+
+
+
+
+<!-- 3.room105* -->
+
+<div class="modal fade" id="room105Modal" tabindex="-1" role="dialog" aria-labelledby="room105ModalLabel">
+  <div class="modal-dialog" role="document">
+      <div class="modal-content">
+          <div class="modal-header flex items-center justify-between">
+              <div class="flex items-center">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                  </button>
+                  <h4 class="modal-title" id="room105ModalLabel">room105 Hall Booking</h4>
+              </div>
+              <div class="relative">
+                  <i id="calendar-icon" class="far fa-calendar-alt cursor-pointer" data-target="room105Form" onclick="toggleCalendar(this)"> Hall Calendar </i>
+              </div>
+          </div>
+          <div class="modal-body">
+              <form method="post" id="room105Form" novalidate>
+        <div class="form-group">
+          <label for="room105SchoolName">School Name:</label>
+          <select class="form-control" id="room105SchoolName" name="room105SchoolName" required>
+            <option value="">Select School Name</option>
+            <option value="ABS">ABS - Amity Business School</option>
+            <option value="AFS">AFS - Amity Film School</option>
+            <option value="AIBAS">AIBAS - Amity Institute of Behavioural & Allied Sciences</option>
+            <option value="AIB">AIB - Amity Institute of Biotechnology</option>
+            <option value="ALIT">ALIT - Amity Institute of Information Technology</option>
+            <option value="AILA">AILA - Amity Institute of Liberal Arts</option>
+            <option value="AIP">AIP - Amity Institute of Pharmacy</option>
+            <option value="AIT">AIT - Amity Institute of Technology</option>
+            <option value="AITT">AITT - Amity Institute of Travel & Tourism</option>
+            <option value="ALS">ALS - Amity Law School</option>
+            <option value="ASAP">ASAP - Amity School of Architecture & Planning</option>
+            <option value="ASAS">ASAS - Amity School of Applied Sciences</option>
+            <option value="ASCO">ASCO - Amity School of Communication</option>
+            <option value="ASET">ASET - Amity School of Engineering & Technology</option>
+            <option value="ASFT">ASFT - Amity School of Fashion Technology</option>
+            <option value="ASL">ASL - Amity School of Languages</option>
+            <option value="CISOL">CIIOL - CII Logistics</option>
+            <option value="TUCSSBERICS"> RICS</option>
+            <option value="ASFA">ASFA - Amity School of Fine Arts</option>
+            <option value="AIE">AIE - Amity Institute of Education</option>
+            <option value="AIN">AIN - Amity Institute of Nanotechnology</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="room105FacultyName">Event Coordinator Name:</label>
+          <input type="text" class="form-control" id="room105FacultyName" name="room105FacultyName" placeholder="Enter your name" required>
+        </div>
+        <div class="form-group">
+          <label for="room105HodName">HOD/HOI/Director Name:</label>
+          <input type="text" class="form-control" id="room105HodName" name="room105HodName" placeholder="Enter HOD/HOI/Director name" required>
+        </div>
+        <div class="form-group">
+          <label for="room105EventName">Event Name:</label>
+          <input type="text" class="form-control" id="room105EventName" name="room105EventName" placeholder="Enter event name" required>
+        </div>
+        <div class="form-group">
+          <label for="room105startime">Start Time</label>
+          <select class="form-control" id="room105startime" name="room105startime" required>
+            <option value="900">09:00 am</option>
+            <option value="1000">10:00 am</option>
+            <option value="1100">11:00 am</option>
+            <option value="1200">12:00 pm</option>
+            <option value="1300">01:00 pm</option>
+            <option value="1400">02:00 pm</option>
+             <option value="1500">03:00 pm</option>
+             <option value="1600">04:00 pm</option>
+             <option value="1700">05:00 pm</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="room105endtime">End Time</label>
+
+          <select class="form-control" id="room105endtime" name="room105endtime" required>
+            <option value="1000">10:00 am</option>
+            <option value="1100">11:00 am</option>
+            <option value="1200">12:00 pm</option>
+            <option value="1300">01:00 pm</option>
+            <option value="1400">02:00 pm</option>
+             <option value="1500">03:00 pm</option>
+             <option value="1600">04:00 pm</option>
+             <option value="1700">05:00 pm</option>
+             <option value="1800">06:00 pm</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="room105date">Date of Event:</label>
+          <input type="date" class="form-control" id="room105date" name="room105date" required onchange="updateDayOfWeek('room105date', 'room105day'); updateCalendarColor('room105date','room105Duration')">
+        </div>
+        <div class="form-group">
+          <label for="room105day">Day of Event:</label>
+          <input type="text" class="form-control" id="room105day" name="room105day" readonly>
+        </div>
+        <div class="form-group">
+          <label for="room105ResourcePersonName">Resource Person Name:</label>
+          <input type="text" class="form-control" id="room105ResourcePersonName" name="room105ResourcePersonName" placeholder="Enter resource person name" required>
+        </div>
+        <div class="form-group">
+          <label for="room105ResourcePersonDetail">Resource Person Detail:</label>
+          <textarea class="form-control" id="room105ResourcePersonDetail" name="room105ResourcePersonDetail" placeholder="Enter resource person details" required></textarea>
+        </div>
+        <div class="form-group">
+          <label for="room105Email">Event Coordinator's Email:</label>
+          <input type="email" class="form-control" id="room105Email" name="room105Email" placeholder="Enter your email" required>
+        </div>
+        <div class="form-group">
+          <label for="room105Phone">Event Coordinator's Phone Number:</label>
+          <input type="tel" class="form-control" id="room105Phone" name="room105Phone" placeholder="Enter your phone number" required>
+        </div>
+        <button type="submit" class="btn btn-primary" id="submitmain">Submit</button>
+  </form>
+
+  <div id="calendar-container-room105Form" class="calendar-container hidden mt-2">
+    <div class="calendar-nav flex items-center justify-between mb-4">
+        <button id="prevMonth" class="p-2 bg-gray-700 text-gray-400 rounded">&lt;</button>
+        <span id="monthYear" class="text-lg font-semibold"></span>
+        <button id="nextMonth" class="p-2 bg-gray-700 text-gray-400 rounded">&gt;</button>
+        <button id="closeCalendar" class="calendarclose-button flex items-center" data-target="room105Form" onclick="toggleCalendar(this)">
+            <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+            <span class="label"></span>
+        </button>
+    </div>
+    <div class="flex justify-center mb-4">
+        <select id="hallDropdown" class="mx-2 p-2 bg-gray-700 text-gray-400 rounded">
+            <option value="Auditorium">Auditorium</option>
+            <option value="SeminarHall">Seminar Hall</option>
+            <option value="Room105">Room 105</option>
+            <option value="CRCConferenceRoom">CRC Conference Room</option>
+            <option value="AIBConferenceRoom">AIB Conference Room</option>
+            <option value="RICSConferenceRoom">RICS Conference Room</option>
+            <option value="Atrium">Atrium</option>
+        </select>
+        <select id="monthSelect" class="mx-2 p-2 bg-gray-700 text-gray-400 rounded readonly">
+            <!-- Options will be populated by JavaScript -->
+        </select>
+        <input type="date" id="dateSearch" class="p-2 bg-gray-700 text-gray-400 rounded">
+    </div>
+    <div class="calendar-header grid grid-cols-7 gap-1">
+        <div class="text-center">Sun</div>
+        <div class="text-center">Mon</div>
+        <div class="text-center">Tue</div>
+        <div class="text-center">Wed</div>
+        <div class="text-center">Thu</div>
+        <div class="text-center">Fri</div>
+        <div class="text-center">Sat</div>
+    </div>
+    <div id="calendar" class="calendar grid grid-cols-7 gap-1"></div>
+    <div class="legend mt-4 grid grid-cols-3 gap-4">
+        <div class="legend-item flex items-center">
+            <div class="legend-color full-booked-legend w-4 h-4 mr-2 rounded-full"></div>
+            <span>Booked Slots</span>
+        </div>
+        <div class="legend-item flex items-center">
+            <div class="legend-color not-booked-legend w-4 h-4 mr-2 rounded-full"></div>
+            <span>Not Booked Slots</span>
+        </div>
+        <div class="legend-item flex items-center">
+            <div class="legend-color pending-legend w-4 h-4 mr-2 rounded-full"></div>
+            <span>Pending Slots</span>
+        </div>
+    </div>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+
+
+
+
+
+<!-- 4.crc -->
+
+<div class="modal fade" id="crcModal" tabindex="-1" role="dialog" aria-labelledby="crcModalLabel">
+  <div class="modal-dialog" role="document">
+      <div class="modal-content">
+          <div class="modal-header flex items-center justify-between">
+              <div class="flex items-center">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                  </button>
+                  <h4 class="modal-title" id="crcModalLabel">crc Hall Booking</h4>
+              </div>
+              <div class="relative">
+                  <i id="calendar-icon" class="far fa-calendar-alt cursor-pointer" data-target="crcForm" onclick="toggleCalendar(this)"> Hall Calendar </i>
+              </div>
+          </div>
+          <div class="modal-body">
+              <form method="post" id="crcForm" novalidate>
+        <div class="form-group">
+          <label for="crcSchoolName">School Name:</label>
+          <select class="form-control" id="crcSchoolName" name="crcSchoolName" required>
+            <option value="">Select School Name</option>
+            <option value="ABS">ABS - Amity Business School</option>
+            <option value="AFS">AFS - Amity Film School</option>
+            <option value="AIBAS">AIBAS - Amity Institute of Behavioural & Allied Sciences</option>
+            <option value="AIB">AIB - Amity Institute of Biotechnology</option>
+            <option value="ALIT">ALIT - Amity Institute of Information Technology</option>
+            <option value="AILA">AILA - Amity Institute of Liberal Arts</option>
+            <option value="AIP">AIP - Amity Institute of Pharmacy</option>
+            <option value="AIT">AIT - Amity Institute of Technology</option>
+            <option value="AITT">AITT - Amity Institute of Travel & Tourism</option>
+            <option value="ALS">ALS - Amity Law School</option>
+            <option value="ASAP">ASAP - Amity School of Architecture & Planning</option>
+            <option value="ASAS">ASAS - Amity School of Applied Sciences</option>
+            <option value="ASCO">ASCO - Amity School of Communication</option>
+            <option value="ASET">ASET - Amity School of Engineering & Technology</option>
+            <option value="ASFT">ASFT - Amity School of Fashion Technology</option>
+            <option value="ASL">ASL - Amity School of Languages</option>
+            <option value="CISOL">CIIOL - CII Logistics</option>
+            <option value="TUCSSBERICS"> RICS</option>
+            <option value="ASFA">ASFA - Amity School of Fine Arts</option>
+            <option value="AIE">AIE - Amity Institute of Education</option>
+            <option value="AIN">AIN - Amity Institute of Nanotechnology</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="crcFacultyName">Event Coordinator Name:</label>
+          <input type="text" class="form-control" id="crcFacultyName" name="crcFacultyName" placeholder="Enter your name" required>
+        </div>
+        <div class="form-group">
+          <label for="crcHodName">HOD/HOI/Director Name:</label>
+          <input type="text" class="form-control" id="crcHodName" name="crcHodName" placeholder="Enter HOD/HOI/Director name" required>
+        </div>
+        <div class="form-group">
+          <label for="crcEventName">Event Name:</label>
+          <input type="text" class="form-control" id="crcEventName" name="crcEventName" placeholder="Enter event name" required>
+        </div>
+        <div class="form-group">
+          <label for="crcstartime">Start Time</label>
+          <select class="form-control" id="crcstartime" name="crcstartime" required>
+            <option value="900">09:00 am</option>
+            <option value="1000">10:00 am</option>
+            <option value="1100">11:00 am</option>
+            <option value="1200">12:00 pm</option>
+            <option value="1300">01:00 pm</option>
+            <option value="1400">02:00 pm</option>
+             <option value="1500">03:00 pm</option>
+             <option value="1600">04:00 pm</option>
+             <option value="1700">05:00 pm</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="crcendtime">End Time</label>
+
+          <select class="form-control" id="crcendtime" name="crcendtime" required>
+            <option value="1000">10:00 am</option>
+            <option value="1100">11:00 am</option>
+            <option value="1200">12:00 pm</option>
+            <option value="1300">01:00 pm</option>
+            <option value="1400">02:00 pm</option>
+             <option value="1500">03:00 pm</option>
+             <option value="1600">04:00 pm</option>
+             <option value="1700">05:00 pm</option>
+             <option value="1800">06:00 pm</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="crcdate">Date of Event:</label>
+          <input type="date" class="form-control" id="crcdate" name="crcdate" required onchange="updateDayOfWeek('crcdate', 'crcday'); updateCalendarColor('crcdate','crcDuration')">
+        </div>
+        <div class="form-group">
+          <label for="crcday">Day of Event:</label>
+          <input type="text" class="form-control" id="crcday" name="crcday" readonly>
+        </div>
+        <div class="form-group">
+          <label for="crcResourcePersonName">Resource Person Name:</label>
+          <input type="text" class="form-control" id="crcResourcePersonName" name="crcResourcePersonName" placeholder="Enter resource person name" required>
+        </div>
+        <div class="form-group">
+          <label for="crcResourcePersonDetail">Resource Person Detail:</label>
+          <textarea class="form-control" id="crcResourcePersonDetail" name="crcResourcePersonDetail" placeholder="Enter resource person details" required></textarea>
+        </div>
+        <div class="form-group">
+          <label for="crcEmail">Event Coordinator's Email:</label>
+          <input type="email" class="form-control" id="crcEmail" name="crcEmail" placeholder="Enter your email" required>
+        </div>
+        <div class="form-group">
+          <label for="crcPhone">Event Coordinator's Phone Number:</label>
+          <input type="tel" class="form-control" id="crcPhone" name="crcPhone" placeholder="Enter your phone number" required>
+        </div>
+        <button type="submit" class="btn btn-primary" id="submitmain">Submit</button>
+  </form>
+
+  <div id="calendar-container-crcForm" class="calendar-container hidden mt-2">
+    <div class="calendar-nav flex items-center justify-between mb-4">
+        <button id="prevMonth" class="p-2 bg-gray-700 text-gray-400 rounded">&lt;</button>
+        <span id="monthYear" class="text-lg font-semibold"></span>
+        <button id="nextMonth" class="p-2 bg-gray-700 text-gray-400 rounded">&gt;</button>
+        <button id="closeCalendar" class="calendarclose-button flex items-center" data-target="crcForm" onclick="toggleCalendar(this)">
+            <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+            <span class="label"></span>
+        </button>
+    </div>
+    <div class="flex justify-center mb-4">
+        <select id="hallDropdown" class="mx-2 p-2 bg-gray-700 text-gray-400 rounded">
+            <option value="Auditorium">Auditorium</option>
+            <option value="SeminarHall">Seminar Hall</option>
+            <option value="Room105">Room 105</option>
+            <option value="CRCConferenceRoom">CRC Conference Room</option>
+            <option value="AIBConferenceRoom">AIB Conference Room</option>
+            <option value="RICSConferenceRoom">RICS Conference Room</option>
+            <option value="Atrium">Atrium</option>
+        </select>
+        <select id="monthSelect" class="mx-2 p-2 bg-gray-700 text-gray-400 rounded readonly">
+            <!-- Options will be populated by JavaScript -->
+        </select>
+        <input type="date" id="dateSearch" class="p-2 bg-gray-700 text-gray-400 rounded">
+    </div>
+    <div class="calendar-header grid grid-cols-7 gap-1">
+        <div class="text-center">Sun</div>
+        <div class="text-center">Mon</div>
+        <div class="text-center">Tue</div>
+        <div class="text-center">Wed</div>
+        <div class="text-center">Thu</div>
+        <div class="text-center">Fri</div>
+        <div class="text-center">Sat</div>
+    </div>
+    <div id="calendar" class="calendar grid grid-cols-7 gap-1"></div>
+    <div class="legend mt-4 grid grid-cols-3 gap-4">
+        <div class="legend-item flex items-center">
+            <div class="legend-color full-booked-legend w-4 h-4 mr-2 rounded-full"></div>
+            <span>Booked Slots</span>
+        </div>
+        <div class="legend-item flex items-center">
+            <div class="legend-color not-booked-legend w-4 h-4 mr-2 rounded-full"></div>
+            <span>Not Booked Slots</span>
+        </div>
+        <div class="legend-item flex items-center">
+            <div class="legend-color pending-legend w-4 h-4 mr-2 rounded-full"></div>
+            <span>Pending Slots</span>
+        </div>
+    </div>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+<!-- 5.RICSConferenceRoom -->
+
+<div class="modal fade" id="RICSConferenceRoomModal" tabindex="-1" role="dialog" aria-labelledby="RICSConferenceRoomModalLabel">
+  <div class="modal-dialog" role="document">
+      <div class="modal-content">
+          <div class="modal-header flex items-center justify-between">
+              <div class="flex items-center">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                  </button>
+                  <h4 class="modal-title" id="RICSConferenceRoomModalLabel">RICSConferenceRoom Hall Booking</h4>
+              </div>
+              <div class="relative">
+                  <i id="calendar-icon" class="far fa-calendar-alt cursor-pointer" data-target="RICSConferenceRoomForm" onclick="toggleCalendar(this)"> Hall Calendar </i>
+              </div>
+          </div>
+          <div class="modal-body">
+              <form method="post" id="RICSConferenceRoomForm" novalidate>
+        <div class="form-group">
+          <label for="RICSConferenceRoomSchoolName">School Name:</label>
+          <select class="form-control" id="RICSConferenceRoomSchoolName" name="RICSConferenceRoomSchoolName" required>
+            <option value="">Select School Name</option>
+            <option value="ABS">ABS - Amity Business School</option>
+            <option value="AFS">AFS - Amity Film School</option>
+            <option value="AIBAS">AIBAS - Amity Institute of Behavioural & Allied Sciences</option>
+            <option value="AIB">AIB - Amity Institute of Biotechnology</option>
+            <option value="ALIT">ALIT - Amity Institute of Information Technology</option>
+            <option value="AILA">AILA - Amity Institute of Liberal Arts</option>
+            <option value="AIP">AIP - Amity Institute of Pharmacy</option>
+            <option value="AIT">AIT - Amity Institute of Technology</option>
+            <option value="AITT">AITT - Amity Institute of Travel & Tourism</option>
+            <option value="ALS">ALS - Amity Law School</option>
+            <option value="ASAP">ASAP - Amity School of Architecture & Planning</option>
+            <option value="ASAS">ASAS - Amity School of Applied Sciences</option>
+            <option value="ASCO">ASCO - Amity School of Communication</option>
+            <option value="ASET">ASET - Amity School of Engineering & Technology</option>
+            <option value="ASFT">ASFT - Amity School of Fashion Technology</option>
+            <option value="ASL">ASL - Amity School of Languages</option>
+            <option value="CISOL">CIIOL - CII Logistics</option>
+            <option value="TUCSSBERICS"> RICS</option>
+            <option value="ASFA">ASFA - Amity School of Fine Arts</option>
+            <option value="AIE">AIE - Amity Institute of Education</option>
+            <option value="AIN">AIN - Amity Institute of Nanotechnology</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="RICSConferenceRoomFacultyName">Event Coordinator Name:</label>
+          <input type="text" class="form-control" id="RICSConferenceRoomFacultyName" name="RICSConferenceRoomFacultyName" placeholder="Enter your name" required>
+        </div>
+        <div class="form-group">
+          <label for="RICSConferenceRoomHodName">HOD/HOI/Director Name:</label>
+          <input type="text" class="form-control" id="RICSConferenceRoomHodName" name="RICSConferenceRoomHodName" placeholder="Enter HOD/HOI/Director name" required>
+        </div>
+        <div class="form-group">
+          <label for="RICSConferenceRoomEventName">Event Name:</label>
+          <input type="text" class="form-control" id="RICSConferenceRoomEventName" name="RICSConferenceRoomEventName" placeholder="Enter event name" required>
+        </div>
+        <div class="form-group">
+          <label for="RICSConferenceRoomstartime">Start Time</label>
+          <select class="form-control" id="RICSConferenceRoomstartime" name="RICSConferenceRoomstartime" required>
+            <option value="900">09:00 am</option>
+            <option value="1000">10:00 am</option>
+            <option value="1100">11:00 am</option>
+            <option value="1200">12:00 pm</option>
+            <option value="1300">01:00 pm</option>
+            <option value="1400">02:00 pm</option>
+             <option value="1500">03:00 pm</option>
+             <option value="1600">04:00 pm</option>
+             <option value="1700">05:00 pm</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="RICSConferenceRoomendtime">End Time</label>
+
+          <select class="form-control" id="RICSConferenceRoomendtime" name="RICSConferenceRoomendtime" required>
+            <option value="1000">10:00 am</option>
+            <option value="1100">11:00 am</option>
+            <option value="1200">12:00 pm</option>
+            <option value="1300">01:00 pm</option>
+            <option value="1400">02:00 pm</option>
+             <option value="1500">03:00 pm</option>
+             <option value="1600">04:00 pm</option>
+             <option value="1700">05:00 pm</option>
+             <option value="1800">06:00 pm</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="RICSConferenceRoomdate">Date of Event:</label>
+          <input type="date" class="form-control" id="RICSConferenceRoomdate" name="RICSConferenceRoomdate" required onchange="updateDayOfWeek('RICSConferenceRoomdate', 'RICSConferenceRoomday'); updateCalendarColor('RICSConferenceRoomdate','RICSConferenceRoomDuration')">
+        </div>
+        <div class="form-group">
+          <label for="RICSConferenceRoomday">Day of Event:</label>
+          <input type="text" class="form-control" id="RICSConferenceRoomday" name="RICSConferenceRoomday" readonly>
+        </div>
+        <div class="form-group">
+          <label for="RICSConferenceRoomResourcePersonName">Resource Person Name:</label>
+          <input type="text" class="form-control" id="RICSConferenceRoomResourcePersonName" name="RICSConferenceRoomResourcePersonName" placeholder="Enter resource person name" required>
+        </div>
+        <div class="form-group">
+          <label for="RICSConferenceRoomResourcePersonDetail">Resource Person Detail:</label>
+          <textarea class="form-control" id="RICSConferenceRoomResourcePersonDetail" name="RICSConferenceRoomResourcePersonDetail" placeholder="Enter resource person details" required></textarea>
+        </div>
+        <div class="form-group">
+          <label for="RICSConferenceRoomEmail">Event Coordinator's Email:</label>
+          <input type="email" class="form-control" id="RICSConferenceRoomEmail" name="RICSConferenceRoomEmail" placeholder="Enter your email" required>
+        </div>
+        <div class="form-group">
+          <label for="RICSConferenceRoomPhone">Event Coordinator's Phone Number:</label>
+          <input type="tel" class="form-control" id="RICSConferenceRoomPhone" name="RICSConferenceRoomPhone" placeholder="Enter your phone number" required>
+        </div>
+        <button type="submit" class="btn btn-primary" id="submitmain">Submit</button>
+  </form>
+
+  <div id="calendar-container-RICSConferenceRoomForm" class="calendar-container hidden mt-2">
+    <div class="calendar-nav flex items-center justify-between mb-4">
+        <button id="prevMonth" class="p-2 bg-gray-700 text-gray-400 rounded">&lt;</button>
+        <span id="monthYear" class="text-lg font-semibold"></span>
+        <button id="nextMonth" class="p-2 bg-gray-700 text-gray-400 rounded">&gt;</button>
+        <button id="closeCalendar" class="calendarclose-button flex items-center" data-target="RICSConferenceRoomForm" onclick="toggleCalendar(this)">
+            <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+            <span class="label"></span>
+        </button>
+    </div>
+    <div class="flex justify-center mb-4">
+        <select id="hallDropdown" class="mx-2 p-2 bg-gray-700 text-gray-400 rounded">
+            <option value="Auditorium">Auditorium</option>
+            <option value="SeminarHall">Seminar Hall</option>
+            <option value="Room105">Room 105</option>
+            <option value="CRCConferenceRoom">CRC Conference Room</option>
+            <option value="AIBConferenceRoom">AIB Conference Room</option>
+            <option value="RICSConferenceRoom">RICS Conference Room</option>
+            <option value="Atrium">Atrium</option>
+        </select>
+        <select id="monthSelect" class="mx-2 p-2 bg-gray-700 text-gray-400 rounded readonly">
+            <!-- Options will be populated by JavaScript -->
+        </select>
+        <input type="date" id="dateSearch" class="p-2 bg-gray-700 text-gray-400 rounded">
+    </div>
+    <div class="calendar-header grid grid-cols-7 gap-1">
+        <div class="text-center">Sun</div>
+        <div class="text-center">Mon</div>
+        <div class="text-center">Tue</div>
+        <div class="text-center">Wed</div>
+        <div class="text-center">Thu</div>
+        <div class="text-center">Fri</div>
+        <div class="text-center">Sat</div>
+    </div>
+    <div id="calendar" class="calendar grid grid-cols-7 gap-1"></div>
+    <div class="legend mt-4 grid grid-cols-3 gap-4">
+        <div class="legend-item flex items-center">
+            <div class="legend-color full-booked-legend w-4 h-4 mr-2 rounded-full"></div>
+            <span>Booked Slots</span>
+        </div>
+        <div class="legend-item flex items-center">
+            <div class="legend-color not-booked-legend w-4 h-4 mr-2 rounded-full"></div>
+            <span>Not Booked Slots</span>
+        </div>
+        <div class="legend-item flex items-center">
+            <div class="legend-color pending-legend w-4 h-4 mr-2 rounded-full"></div>
+            <span>Pending Slots</span>
+        </div>
+    </div>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+<!-- 6.Atrium -->
+
+<div class="modal fade" id="AtriumModal" tabindex="-1" role="dialog" aria-labelledby="AtriumModalLabel">
+  <div class="modal-dialog" role="document">
+      <div class="modal-content">
+          <div class="modal-header flex items-center justify-between">
+              <div class="flex items-center">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                  </button>
+                  <h4 class="modal-title" id="AtriumModalLabel">Atrium Hall Booking</h4>
+              </div>
+              <div class="relative">
+                  <i id="calendar-icon" class="far fa-calendar-alt cursor-pointer" data-target="AtriumForm" onclick="toggleCalendar(this)"> Hall Calendar </i>
+              </div>
+          </div>
+          <div class="modal-body">
+              <form method="post" id="AtriumForm" novalidate>
+        <div class="form-group">
+          <label for="AtriumSchoolName">School Name:</label>
+          <select class="form-control" id="AtriumSchoolName" name="AtriumSchoolName" required>
+            <option value="">Select School Name</option>
+            <option value="ABS">ABS - Amity Business School</option>
+            <option value="AFS">AFS - Amity Film School</option>
+            <option value="AIBAS">AIBAS - Amity Institute of Behavioural & Allied Sciences</option>
+            <option value="AIB">AIB - Amity Institute of Biotechnology</option>
+            <option value="ALIT">ALIT - Amity Institute of Information Technology</option>
+            <option value="AILA">AILA - Amity Institute of Liberal Arts</option>
+            <option value="AIP">AIP - Amity Institute of Pharmacy</option>
+            <option value="AIT">AIT - Amity Institute of Technology</option>
+            <option value="AITT">AITT - Amity Institute of Travel & Tourism</option>
+            <option value="ALS">ALS - Amity Law School</option>
+            <option value="ASAP">ASAP - Amity School of Architecture & Planning</option>
+            <option value="ASAS">ASAS - Amity School of Applied Sciences</option>
+            <option value="ASCO">ASCO - Amity School of Communication</option>
+            <option value="ASET">ASET - Amity School of Engineering & Technology</option>
+            <option value="ASFT">ASFT - Amity School of Fashion Technology</option>
+            <option value="ASL">ASL - Amity School of Languages</option>
+            <option value="CISOL">CIIOL - CII Logistics</option>
+            <option value="TUCSSBERICS"> RICS</option>
+            <option value="ASFA">ASFA - Amity School of Fine Arts</option>
+            <option value="AIE">AIE - Amity Institute of Education</option>
+            <option value="AIN">AIN - Amity Institute of Nanotechnology</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="AtriumFacultyName">Event Coordinator Name:</label>
+          <input type="text" class="form-control" id="AtriumFacultyName" name="AtriumFacultyName" placeholder="Enter your name" required>
+        </div>
+        <div class="form-group">
+          <label for="AtriumHodName">HOD/HOI/Director Name:</label>
+          <input type="text" class="form-control" id="AtriumHodName" name="AtriumHodName" placeholder="Enter HOD/HOI/Director name" required>
+        </div>
+        <div class="form-group">
+          <label for="AtriumEventName">Event Name:</label>
+          <input type="text" class="form-control" id="AtriumEventName" name="AtriumEventName" placeholder="Enter event name" required>
+        </div>
+        <div class="form-group">
+          <label for="Atriumstartime">Start Time</label>
+          <select class="form-control" id="Atriumstartime" name="Atriumstartime" required>
+            <option value="900">09:00 am</option>
+            <option value="1000">10:00 am</option>
+            <option value="1100">11:00 am</option>
+            <option value="1200">12:00 pm</option>
+            <option value="1300">01:00 pm</option>
+            <option value="1400">02:00 pm</option>
+             <option value="1500">03:00 pm</option>
+             <option value="1600">04:00 pm</option>
+             <option value="1700">05:00 pm</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="Atriumendtime">End Time</label>
+
+          <select class="form-control" id="Atriumendtime" name="Atriumendtime" required>
+            <option value="1000">10:00 am</option>
+            <option value="1100">11:00 am</option>
+            <option value="1200">12:00 pm</option>
+            <option value="1300">01:00 pm</option>
+            <option value="1400">02:00 pm</option>
+             <option value="1500">03:00 pm</option>
+             <option value="1600">04:00 pm</option>
+             <option value="1700">05:00 pm</option>
+             <option value="1800">06:00 pm</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="Atriumdate">Date of Event:</label>
+          <input type="date" class="form-control" id="Atriumdate" name="Atriumdate" required onchange="updateDayOfWeek('Atriumdate', 'Atriumday'); updateCalendarColor('Atriumdate','AtriumDuration')">
+        </div>
+        <div class="form-group">
+          <label for="Atriumday">Day of Event:</label>
+          <input type="text" class="form-control" id="Atriumday" name="Atriumday" readonly>
+        </div>
+        <div class="form-group">
+          <label for="AtriumResourcePersonName">Resource Person Name:</label>
+          <input type="text" class="form-control" id="AtriumResourcePersonName" name="AtriumResourcePersonName" placeholder="Enter resource person name" required>
+        </div>
+        <div class="form-group">
+          <label for="AtriumResourcePersonDetail">Resource Person Detail:</label>
+          <textarea class="form-control" id="AtriumResourcePersonDetail" name="AtriumResourcePersonDetail" placeholder="Enter resource person details" required></textarea>
+        </div>
+        <div class="form-group">
+          <label for="AtriumEmail">Event Coordinator's Email:</label>
+          <input type="email" class="form-control" id="AtriumEmail" name="AtriumEmail" placeholder="Enter your email" required>
+        </div>
+        <div class="form-group">
+          <label for="AtriumPhone">Event Coordinator's Phone Number:</label>
+          <input type="tel" class="form-control" id="AtriumPhone" name="AtriumPhone" placeholder="Enter your phone number" required>
+        </div>
+        <button type="submit" class="btn btn-primary" id="submitmain">Submit</button>
+  </form>
+
+  <div id="calendar-container-AtriumForm" class="calendar-container hidden mt-2">
+    <div class="calendar-nav flex items-center justify-between mb-4">
+        <button id="prevMonth" class="p-2 bg-gray-700 text-gray-400 rounded">&lt;</button>
+        <span id="monthYear" class="text-lg font-semibold"></span>
+        <button id="nextMonth" class="p-2 bg-gray-700 text-gray-400 rounded">&gt;</button>
+        <button id="closeCalendar" class="calendarclose-button flex items-center" data-target="AtriumForm" onclick="toggleCalendar(this)">
+            <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+            <span class="label"></span>
+        </button>
+    </div>
+    <div class="flex justify-center mb-4">
+        <select id="hallDropdown" class="mx-2 p-2 bg-gray-700 text-gray-400 rounded">
+            <option value="Auditorium">Auditorium</option>
+            <option value="SeminarHall">Seminar Hall</option>
+            <option value="Room105">Room 105</option>
+            <option value="CRCConferenceRoom">CRC Conference Room</option>
+            <option value="AIBConferenceRoom">AIB Conference Room</option>
+            <option value="RICSConferenceRoom">RICS Conference Room</option>
+            <option value="Atrium">Atrium</option>
+        </select>
+        <select id="monthSelect" class="mx-2 p-2 bg-gray-700 text-gray-400 rounded readonly">
+            <!-- Options will be populated by JavaScript -->
+        </select>
+
+        <input type="date" id="dateSearch" class="p-2 bg-gray-700 text-gray-400 rounded">
+    </div>
+    <div class="calendar-header grid grid-cols-7 gap-1">
+        <div class="text-center">Sun</div>
+        <div class="text-center">Mon</div>
+        <div class="text-center">Tue</div>
+        <div class="text-center">Wed</div>
+        <div class="text-center">Thu</div>
+        <div class="text-center">Fri</div>
+        <div class="text-center">Sat</div>
+    </div>
+    <div id="calendar" class="calendar grid grid-cols-7 gap-1"></div>
+    <div class="legend mt-4 grid grid-cols-3 gap-4">
+        <div class="legend-item flex items-center">
+            <div class="legend-color full-booked-legend w-4 h-4 mr-2 rounded-full"></div>
+            <span>Booked Slots</span>
+        </div>
+        <div class="legend-item flex items-center">
+            <div class="legend-color not-booked-legend w-4 h-4 mr-2 rounded-full"></div>
+            <span>Not Booked Slots</span>
+        </div>
+        <div class="legend-item flex items-center">
+            <div class="legend-color pending-legend w-4 h-4 mr-2 rounded-full"></div>
+            <span>Pending Slots</span>
+        </div>
+    </div>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+
+
+
+
+
+
+<!-- 7.AIBConferenceroom -->
+
+<div class="modal fade" id="AIBConferenceroomModal" tabindex="-1" role="dialog" aria-labelledby="AIBConferenceroomModalLabel">
+  <div class="modal-dialog" role="document">
+      <div class="modal-content">
+          <div class="modal-header flex items-center justify-between">
+              <div class="flex items-center">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                  </button>
+                  <h4 class="modal-title" id="AIBConferenceroomModalLabel">AIBConferenceroom Hall Booking</h4>
+              </div>
+              <div class="relative">
+                  <i id="calendar-icon" class="far fa-calendar-alt cursor-pointer" data-target="AIBConferenceroomForm" onclick="toggleCalendar(this)"> Hall Calendar </i>
+              </div>
+          </div>
+          <div class="modal-body">
+              <form method="post" id="AIBConferenceroomForm" novalidate>
+        <div class="form-group">
+          <label for="AIBConferenceroomSchoolName">School Name:</label>
+          <select class="form-control" id="AIBConferenceroomSchoolName" name="AIBConferenceroomSchoolName" required>
+            <option value="">Select School Name</option>
+            <option value="ABS">ABS - Amity Business School</option>
+            <option value="AFS">AFS - Amity Film School</option>
+            <option value="AIBAS">AIBAS - Amity Institute of Behavioural & Allied Sciences</option>
+            <option value="AIB">AIB - Amity Institute of Biotechnology</option>
+            <option value="ALIT">ALIT - Amity Institute of Information Technology</option>
+            <option value="AILA">AILA - Amity Institute of Liberal Arts</option>
+            <option value="AIP">AIP - Amity Institute of Pharmacy</option>
+            <option value="AIT">AIT - Amity Institute of Technology</option>
+            <option value="AITT">AITT - Amity Institute of Travel & Tourism</option>
+            <option value="ALS">ALS - Amity Law School</option>
+            <option value="ASAP">ASAP - Amity School of Architecture & Planning</option>
+            <option value="ASAS">ASAS - Amity School of Applied Sciences</option>
+            <option value="ASCO">ASCO - Amity School of Communication</option>
+            <option value="ASET">ASET - Amity School of Engineering & Technology</option>
+            <option value="ASFT">ASFT - Amity School of Fashion Technology</option>
+            <option value="ASL">ASL - Amity School of Languages</option>
+            <option value="CISOL">CIIOL - CII Logistics</option>
+            <option value="TUCSSBERICS"> RICS</option>
+            <option value="ASFA">ASFA - Amity School of Fine Arts</option>
+            <option value="AIE">AIE - Amity Institute of Education</option>
+            <option value="AIN">AIN - Amity Institute of Nanotechnology</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="AIBConferenceroomFacultyName">Event Coordinator Name:</label>
+          <input type="text" class="form-control" id="AIBConferenceroomFacultyName" name="AIBConferenceroomFacultyName" placeholder="Enter your name" required>
+        </div>
+        <div class="form-group">
+          <label for="AIBConferenceroomHodName">HOD/HOI/Director Name:</label>
+          <input type="text" class="form-control" id="AIBConferenceroomHodName" name="AIBConferenceroomHodName" placeholder="Enter HOD/HOI/Director name" required>
+        </div>
+        <div class="form-group">
+          <label for="AIBConferenceroomEventName">Event Name:</label>
+          <input type="text" class="form-control" id="AIBConferenceroomEventName" name="AIBConferenceroomEventName" placeholder="Enter event name" required>
+        </div>
+        <div class="form-group">
+          <label for="AIBConferenceroomstartime">Start Time</label>
+          <select class="form-control" id="AIBConferenceroomstartime" name="AIBConferenceroomstartime" required>
+            <option value="900">09:00 am</option>
+            <option value="1000">10:00 am</option>
+            <option value="1100">11:00 am</option>
+            <option value="1200">12:00 pm</option>
+            <option value="1300">01:00 pm</option>
+            <option value="1400">02:00 pm</option>
+             <option value="1500">03:00 pm</option>
+             <option value="1600">04:00 pm</option>
+             <option value="1700">05:00 pm</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="AIBConferenceroomendtime">End Time</label>
+
+          <select class="form-control" id="AIBConferenceroomendtime" name="AIBConferenceroomendtime" required>
+            <option value="1000">10:00 am</option>
+            <option value="1100">11:00 am</option>
+            <option value="1200">12:00 pm</option>
+            <option value="1300">01:00 pm</option>
+            <option value="1400">02:00 pm</option>
+             <option value="1500">03:00 pm</option>
+             <option value="1600">04:00 pm</option>
+             <option value="1700">05:00 pm</option>
+             <option value="1800">06:00 pm</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="AIBConferenceroomdate">Date of Event:</label>
+          <input type="date" class="form-control" id="AIBConferenceroomdate" name="AIBConferenceroomdate" required onchange="updateDayOfWeek('AIBConferenceroomdate', 'AIBConferenceroomday'); updateCalendarColor('AIBConferenceroomdate','AIBConferenceroomDuration')">
+        </div>
+        <div class="form-group">
+          <label for="AIBConferenceroomday">Day of Event:</label>
+          <input type="text" class="form-control" id="AIBConferenceroomday" name="AIBConferenceroomday" readonly>
+        </div>
+        <div class="form-group">
+          <label for="AIBConferenceroomResourcePersonName">Resource Person Name:</label>
+          <input type="text" class="form-control" id="AIBConferenceroomResourcePersonName" name="AIBConferenceroomResourcePersonName" placeholder="Enter resource person name" required>
+        </div>
+        <div class="form-group">
+          <label for="AIBConferenceroomResourcePersonDetail">Resource Person Detail:</label>
+          <textarea class="form-control" id="AIBConferenceroomResourcePersonDetail" name="AIBConferenceroomResourcePersonDetail" placeholder="Enter resource person details" required></textarea>
+        </div>
+        <div class="form-group">
+          <label for="AIBConferenceroomEmail">Event Coordinator's Email:</label>
+          <input type="email" class="form-control" id="AIBConferenceroomEmail" name="AIBConferenceroomEmail" placeholder="Enter your email" required>
+        </div>
+        <div class="form-group">
+          <label for="AIBConferenceroomPhone">Event Coordinator's Phone Number:</label>
+          <input type="tel" class="form-control" id="AIBConferenceroomPhone" name="AIBConferenceroomPhone" placeholder="Enter your phone number" required>
+        </div>
+        <button type="submit" class="btn btn-primary" id="submitmain">Submit</button>
+  </form>
+
+  <div id="calendar-container-AIBConferenceroomForm" class="calendar-container hidden mt-2">
+    <div class="calendar-nav flex items-center justify-between mb-4">
+        <button id="prevMonth" class="p-2 bg-gray-700 text-gray-400 rounded">&lt;</button>
+        <span id="monthYear" class="text-lg font-semibold"></span>
+        <button id="nextMonth" class="p-2 bg-gray-700 text-gray-400 rounded">&gt;</button>
+        <button id="closeCalendar" class="calendarclose-button flex items-center" data-target="AIBConferenceroomForm" onclick="toggleCalendar(this)">
+            <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+            <span class="label"></span>
+        </button>
+    </div>
+    <div class="flex justify-center mb-4">
+        <select id="hallDropdown" class="mx-2 p-2 bg-gray-700 text-gray-400 rounded">
+            <option value="Auditorium">Auditorium</option>
+            <option value="SeminarHall">Seminar Hall</option>
+            <option value="Room105">Room 105</option>
+            <option value="CRCConferenceRoom">CRC Conference Room</option>
+            <option value="AIBConferenceRoom">AIB Conference Room</option>
+            <option value="RICSConferenceRoom">RICS Conference Room</option>
+            <option value="Atrium">Atrium</option>
+        </select>
+        <select id="monthSelect" class="mx-2 p-2 bg-gray-700 text-gray-400 rounded readonly">
+            <!-- Options will be populated by JavaScript -->
+        </select>
+        <input type="date" id="dateSearch" class="p-2 bg-gray-700 text-gray-400 rounded">
+    </div>
+    <div class="calendar-header grid grid-cols-7 gap-1">
+        <div class="text-center">Sun</div>
+        <div class="text-center">Mon</div>
+        <div class="text-center">Tue</div>
+        <div class="text-center">Wed</div>
+        <div class="text-center">Thu</div>
+        <div class="text-center">Fri</div>
+        <div class="text-center">Sat</div>
+    </div>
+    <div id="calendar" class="calendar grid grid-cols-7 gap-1"></div>
+    <div class="legend mt-4 grid grid-cols-3 gap-4">
+        <div class="legend-item flex items-center">
+            <div class="legend-color full-booked-legend w-4 h-4 mr-2 rounded-full"></div>
+            <span>Booked Slots</span>
+        </div>
+        <div class="legend-item flex items-center">
+            <div class="legend-color not-booked-legend w-4 h-4 mr-2 rounded-full"></div>
+            <span>Not Booked Slots</span>
+        </div>
+        <div class="legend-item flex items-center">
+            <div class="legend-color pending-legend w-4 h-4 mr-2 rounded-full"></div>
+            <span>Pending Slots</span>
+        </div>
+    </div>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+
+
+
+
+
+<script>
+  function toggleCalendar(element) {
+    const targetFormId = element.getAttribute('data-target');
+    const calendarContainer = document.getElementById(`calendar-container-${targetFormId}`);
+    calendarContainer.classList.toggle('hidden');
+}
+
+// Example to initialize multiple forms if needed
+document.addEventListener('DOMContentLoaded', function() {
+    const calendarIcons = document.querySelectorAll('[id^="form-calendar-icon"]');
+    calendarIcons.forEach(icon => {
+        const targetFormId = icon.getAttribute('data-target');
+        const calendarContainer = document.getElementById(`calendar-container-${targetFormId}`);
+        if (!calendarContainer) {
+            console.error(`Calendar container for form ID ${targetFormId} not found`);
+        }
+    });
+});
+
+
+</script>
+
+  <!-- js for 1st submition of all information  and 2nd day of week accoording to date -->
+    <script>     
+      document.addEventListener("DOMContentLoaded", function () {
+        const forms = document.querySelectorAll("form");
+    
+        forms.forEach(function (form) {
+          form.addEventListener("submit", function (event) {
+            if (!form.checkValidity()) {
+              event.preventDefault();
+              event.stopPropagation();
+              alert("Please fill in all required fields.");
+            }
+            form.classList.add("was-validated");
+          }, false);
+        });
+      });
+    //function OF hall box to trigger the modal
+    document.querySelectorAll('.hall').forEach(hall => {
+    hall.addEventListener('click', function(event) {
+      // Prevent the click event from triggering the modal if the button is clicked
+      if (event.target.tagName === 'BUTTON') return;
+
+      const modalTarget = hall.querySelector('button').getAttribute('data-target');
+      $(modalTarget).modal('show');
+    });
+  });
+
+   
+ 
+    </script>
+    
+
+   
+    <!-- Include jQuery and Bootstrap JS  and jQuery UI libraries-->
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.10.1/main.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+      
+
+
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const calendar = document.getElementById('calendar');
+            const monthYearDisplay = document.getElementById('monthYear');
+            const prevMonthButton = document.getElementById('prevMonth');
+            const nextMonthButton = document.getElementById('nextMonth');
+            const monthSelect = document.getElementById('monthSelect');
+            const yearSelect = document.getElementById('yearSelect');
+            const dateSearch = document.getElementById('dateSearch');
+            const hallDropdown = document.getElementById('hallDropdown');
+        
+            let currentDate = new Date();
+            let currentHall = 'Auditorium';
+            let selectedDate = '';
+        
+            const hallData = {
+                Auditorium: {
+                    '2024-07-01': [
+      { starttime: '9 am', endtime: '11 am', status: 'booked', school: 'Amity shool of enginering and science', event: 'Event A',eventcordinator: 'Eventtttttttttttttttttt' },
+      { starttime: '12 pm', endtime: '1 pm', status: 'booked', school: 'School A', event: 'Event A',eventcordinator: 'Eventtttttttttttttttttttt' },
+      { starttime: '2 pm', endtime: '4 pm', status: 'pending', school: 'School A', event: 'Event A',eventcordinator: 'Event ttttttttttttttttt' },
+               
+    ],           
+                
+                    '2024-07-03': [{ starttime: '9', endtime: '12', status: 'booked', school: 'School C', event: 'Event C' , eventcordinator: 'Event C'}],
+                    '2024-07-04': [{ starttime: '9', endtime: '12', status: 'booked', school: 'School D', event: 'Event D' ,eventcordinator: 'Event C'}],
+                    '2024-07-07': [{ starttime: '9', endtime: '10', status: 'pending', school: 'School J', event: 'Event J' ,eventcordinator: 'Event C'}],
+                },
+
+                SeminarHall: {
+                   
+                    '2024-06-01': [{ starttime: '1 pm', endtime: '2 pm', status: 'booked', school: 'ABI', event: 'AS' , eventcordinator: 'AS'}],
+                    '2024-07-22': [{ starttime: '1 pm', endtime: '9 am', status: 'booked', school: 'hi', event: 'AS2' , eventcordinator: 'AS'}],
+                    '2024-07-26': [{ starttime: '1 pm', endtime: '9 am', status: 'booked', school: 'ABI', event: 'AS2' , eventcordinator: 'AS'}],
+                    
+                   
+                },
+                Room105: {
+                    
+                    '2024-07-06': [{ starttime: '9', endtime: '10', status: 'booked', school: 'School F', event: 'Event F',eventcordinator: 'Event C' }],
+                    '2024-07-07': [{ starttime: '9', endtime: '12', status: 'booked', school: 'School G', event: 'Event G' ,eventcordinator: 'Event C'}],
+                },
+                CRCConferenceRoom: {
+                  
+                    '2024-07-08': [{ starttime: '9', endtime: '10', status: 'booked', school: 'School H', event: 'Event H',eventcordinator: 'Event C' }],
+                    '2024-07-09': [{ starttime: '9', endtime: '12', status: 'booked', school: 'School I', event: 'Event I',eventcordinator: 'Event C' }],
+                },
+                AIBConferenceRoom: {
+                  
+                    '2024-07-08': [{ starttime: '9', endtime: '10', status: 'booked', school: 'School H', event: 'Event H',eventcordinator: 'Event C' }],
+                    '2024-07-09': [{ starttime: '9', endtime: '12', status: 'booked', school: 'School I', event: 'Event I',eventcordinator: 'Event C' }],
+                },
+                RICSConferenceRoom: {
+                  
+                    '2024-07-08': [{ starttime: '9', endtime: '10', status: 'booked', school: 'School H', event: 'Event H',eventcordinator: 'Event C' }],
+                    '2024-07-09': [{ starttime: '9', endtime: '12', status: 'booked', school: 'School I', event: 'Event I',eventcordinator: 'Event C' }],
+                },
+                Atrium: {
+                    
+                    '2024-07-08': [{ starttime: '9', endtime: '10', status: 'booked', school: 'School H', event: 'Event H',eventcordinator: 'Event C' }],
+                    '2024-07-09': [{ starttime: '9', endtime: '12', status: 'booked', school: 'School I', event: 'Event I',eventcordinator: 'Event C' }],
+                }
+            };
+        
+            const timeSlots = [
+            '9 am - 10 am', '10 am - 11 am', '11 am - 12 pm', '12 pm - 1 pm',
+            '1 pm - 2 pm', '2 pm - 3 pm', '3 pm - 4 pm', '4 pm - 5 pm', '5 pm - 6 pm'
+        ];
+        
+        const convertToTimeSlots = (startTime, endTime) => {
+            const convertTo24Hour = (time) => {
+                const [hour, modifier] = time.split(' ');
+                let hourInt = parseInt(hour);
+                if (modifier === 'pm' && hourInt !== 12) {
+                    hourInt += 12;
+                } else if (modifier === 'am' && hourInt === 12) {
+                    hourInt = 0;
+                }
+                return hourInt;
+            };
+        
+            const startHour = convertTo24Hour(startTime);
+            const endHour = convertTo24Hour(endTime);
+        
+            let slots = [];
+            for (let hour = startHour; hour < endHour; hour++) {
+                let startHour12 = hour % 12 === 0 ? 12 : hour % 12;
+                let endHour12 = (hour + 1) % 12 === 0 ? 12 : (hour + 1) % 12;
+                let startModifier = hour < 12 || hour === 24 ? 'am' : 'pm';
+                let endModifier = hour + 1 < 12 || hour + 1 === 24 ? 'am' : 'pm';
+                
+                let slot = `${startHour12} ${startModifier} - ${endHour12} ${endModifier}`;
+                slots.push(slot);
+            }
+        
+            return slots;
+        };
+
+        
+        
+    
+       
+        const updateCalendar = (container) => {
+          const calendar = container.querySelector('#calendar');
+          const monthYearDisplay = container.querySelector('#monthYear');
+          const hallDropdown = container.querySelector('#hallDropdown');
+          const monthSelect = container.querySelector('#monthSelect');
+      
+          calendar.innerHTML = ''; // Clear existing calendar content
+      
+          const year = currentDate.getFullYear();
+          const month = currentDate.getMonth();
+          const firstDayOfMonth = new Date(year, month, 1).getDay();
+          const daysInMonth = new Date(year, month + 1, 0).getDate();
+      
+          // Display month and year
+          monthYearDisplay.textContent = `${currentDate.toLocaleString('default', { month: 'long' })} ${year}`;
+      
+          // Add empty cells for days before the 1st of the month to align with Sunday
+          for (let i = 0; i < firstDayOfMonth; i++) {
+              const emptyDay = document.createElement('div');
+              emptyDay.classList.add('day', 'empty');
+              calendar.appendChild(emptyDay);
+          }
+      
+          // Add days of the month
+          for (let day = 1; day <= daysInMonth; day++) {
+              const dateKey = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+              const dayElement = document.createElement('div');
+              dayElement.classList.add('day');
+              dayElement.textContent = day;
+      
+              const bookings = hallData[currentHall]?.[dateKey];
+              if (bookings) {
+                  let bookedSlots = 0;
+                  let remainingSlots = [...timeSlots];
+      
+                  bookings.forEach(booking => {
+                      const slots = convertToTimeSlots(booking.starttime, booking.endtime);
+                      slots.forEach(slot => {
+                          bookedSlots++;
+                          remainingSlots = remainingSlots.filter(s => s !== slot);
+                      });
+                  });
+      
+                  // Use a gradient to indicate booked slots
+                  dayElement.style.backgroundImage = `linear-gradient(to top, lightcoral ${bookedSlots * 10}%, transparent ${bookedSlots * 10}%)`;
+      
+                  // Show remaining slots on hover
+                  dayElement.title = `Free slots: ${remainingSlots.join(', ')}`;
+              } else {
+                  dayElement.classList.add('not-booked');
+              }
+      
+              // Add event listener to show time slot popup
+              dayElement.addEventListener('click', () => showTimeSlotPopup(dateKey));
+              calendar.appendChild(dayElement);
+          }
+      
+          // Ensure the calendar has rows for all days of the week 
+          const totalCells = calendar.children.length;
+          const rows = Math.ceil(totalCells / 7);
+          const totalCellsNeeded = rows * 7;
+      
+          for (let i = totalCells; i < totalCellsNeeded; i++) {
+              const emptyDay = document.createElement('div');
+              emptyDay.classList.add('day', 'empty');
+              calendar.appendChild(emptyDay);
+          }
+      };
+      
+      const populateMonthSelect = (container) => {
+          const monthSelect = container.querySelector('#monthSelect');
+          const months = [
+              'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'
+          ];
+          months.forEach((month, index) => {
+              const option = document.createElement('option');
+              option.value = index;
+              option.textContent = month;
+              monthSelect.appendChild(option);
+          });
+          monthSelect.value = currentDate.getMonth();
+      };
+      
+      // Event listeners for multiple calendar containers
+      document.querySelectorAll('.calendar-container').forEach(container => {
+          const monthSelect = container.querySelector('#monthSelect');
+          const hallDropdown = container.querySelector('#hallDropdown');
+          const dateSearch = container.querySelector('#dateSearch');
+          const prevMonthButton = container.querySelector('#prevMonth');
+          const nextMonthButton = container.querySelector('#nextMonth');
+      
+          monthSelect.addEventListener('change', () => {
+              currentDate.setMonth(monthSelect.value);
+              updateCalendar(container);
+          });
+      
+          hallDropdown.addEventListener('change', () => {
+              currentHall = hallDropdown.value;
+              updateCalendar(container);
+          });
+      
+          dateSearch.addEventListener('change', () => {
+              selectedDate = new Date(dateSearch.value);
+              if (!isNaN(selectedDate)) {
+                  currentDate = selectedDate;
+                  monthSelect.value = currentDate.getMonth();
+                  updateCalendar(container);
+              }    
+          });
+      
+          prevMonthButton.addEventListener('click', () => {
+              currentDate.setMonth(currentDate.getMonth() - 1);
+              monthSelect.value = currentDate.getMonth();
+              updateCalendar(container);
+          });
+      
+          nextMonthButton.addEventListener('click', () => {
+              currentDate.setMonth(currentDate.getMonth() + 1);
+              monthSelect.value = currentDate.getMonth();
+              updateCalendar(container);
+          });
+      
+          populateMonthSelect(container);
+          updateCalendar(container);
+      });
+      
+
+
+
+
+
+          let selectedSlots = [];
+
+          const showTimeSlotPopup = (dateKey) => {
+              // Remove existing popup if any
+              closePopup();
+          
+              const popup = document.createElement('div');
+              popup.classList.add('time-slot-popup');
+              popup.style.zIndex = '9999'; // Adjust z-index as needed to ensure it appears above other elements
+          
+              const title = document.createElement('h3');
+              title.textContent = `Booking Status for ${dateKey}`;
+              popup.appendChild(title);
+          
+              const closeButton = document.createElement('button');
+              closeButton.classList.add('close-button');
+              closeButton.innerHTML = '<i class="fas fa-times"></i>';
+              closeButton.addEventListener('click', () => {
+                  closePopup();
+              });
+              popup.appendChild(closeButton);
+          
+              const timeSlotContent = document.createElement('div');
+              timeSlotContent.classList.add('time-slot-content');
+              popup.appendChild(timeSlotContent);
+          
+              const chart = document.createElement('div');
+              chart.classList.add('time-slot-chart');
+              timeSlotContent.appendChild(chart);
+          
+              timeSlots.forEach((timeSlot) => {
+                  const slotElement = createTimeSlotElement(timeSlot, dateKey);
+                  chart.appendChild(slotElement);
+              });
+          
+              const navButtons = document.createElement('div');
+              navButtons.classList.add('nav-buttons');
+          
+              const prevButton = document.createElement('button');
+              prevButton.classList.add('nav-button', 'prev-button'); // Added 'nav-button' class for styling
+              prevButton.innerHTML = '<i class="fas fa-chevron-left"></i>';
+              prevButton.addEventListener('click', () => {
+                  const prevDateKey = getPreviousDateKey(dateKey);
+                  showTimeSlotPopup(prevDateKey);
+              });
+              navButtons.appendChild(prevButton);
+          
+              const nextButton = document.createElement('button');
+              nextButton.classList.add('nav-button', 'next-button'); // Added 'nav-button' class for styling
+              nextButton.innerHTML = '<i class="fas fa-chevron-right"></i>';
+              nextButton.addEventListener('click', () => {
+                  const nextDateKey = getNextDateKey(dateKey);
+                  showTimeSlotPopup(nextDateKey);
+              });
+              navButtons.appendChild(nextButton);
+          
+              popup.appendChild(navButtons);
+          
+              const submitContainer = document.createElement('div');
+              submitContainer.classList.add('submit-container');
+          
+              const selectedCount = document.createElement('span');
+              selectedCount.classList.add('selected-count');
+              selectedCount.textContent = `Selected Slots: ${selectedSlots.length}`;
+              submitContainer.appendChild(selectedCount);
+          
+              const submitButton = document.createElement('button');
+              submitButton.classList.add('submit-button');
+              submitButton.textContent = 'Submit';
+              submitButton.addEventListener('click', () => {
+                  submitSelectedSlots(dateKey);
+              });
+              submitContainer.appendChild(submitButton);
+          
+              popup.appendChild(submitContainer);
+          
+              document.body.appendChild(popup);
+          
+              popup.addEventListener('click', (event) => {
+                  if (event.target === popup) {
+                      closePopup();
+                  }
+              });
+          };
+          
+          const closePopup = () => {
+              const existingPopups = document.querySelectorAll('.time-slot-popup');
+              existingPopups.forEach(popup => {
+                  popup.classList.add('disappear');
+                  setTimeout(() => popup.remove(), 300); // Delay for animation to complete
+              });
+              selectedSlots = []; // Reset selected slots when popup is closed
+          };
+          
+          const getPreviousDateKey = (currentDateKey) => {
+              const currentDate = new Date(currentDateKey);
+              currentDate.setDate(currentDate.getDate() - 1);
+              return currentDate.toISOString().split('T')[0];
+          };
+          
+          const getNextDateKey = (currentDateKey) => {
+              const currentDate = new Date(currentDateKey);
+              currentDate.setDate(currentDate.getDate() + 1);
+              return currentDate.toISOString().split('T')[0];
+          };
+          
+          const createTimeSlotElement = (timeSlot, dateKey) => {
+              const slotElement = document.createElement('div');
+              slotElement.classList.add('time-slot-row');
+          
+              const timeElement = document.createElement('div');
+              timeElement.classList.add('time-slot-time');
+              timeElement.textContent = timeSlot;
+              slotElement.appendChild(timeElement);
+          
+              const statusElement = document.createElement('div');
+              statusElement.classList.add('time-slot-status');
+          
+              const bookings = hallData[currentHall][dateKey];
+              let isBooked = false;
+              let bookingData = [];
+          
+              if (bookings) {
+                  bookings.forEach((booking) => {
+                      const slots = convertToTimeSlots(booking.starttime, booking.endtime);
+                      if (slots.includes(timeSlot)) {
+                          isBooked = true;
+                          const currentBookingData = `SCHOOL - ${booking.school}\nEVENT - ${booking.event}\nCOORDINATOR - ${booking.eventcordinator}`;
+          
+                          if (!bookingData.includes(currentBookingData)) {
+                              bookingData.push(currentBookingData);
+                          }
+                      }
+                  });
+              }
+          
+              if (isBooked) {
+                  if (bookingData.length === 1) {
+                      statusElement.textContent = bookingData[0];
+                      if (bookings[0].status === 'booked') {
+                          statusElement.classList.add('booked');
+                      } else if (bookings[0].status === 'pending') {
+                          statusElement.classList.add('pending');
+                      }
+                  } else {
+                      statusElement.textContent = `${bookingData.length} bookings`;
+                      statusElement.classList.add('booked'); // Assume all bookings are of the same status
+                  }
+              } else {
+                  statusElement.textContent = 'Free Slot';
+                  statusElement.classList.add('free');
+                  statusElement.addEventListener('click', () => {
+                      toggleSlotSelection(slotElement, timeSlot, dateKey);
+                  });
+              }
+          
+              slotElement.appendChild(statusElement);
+          
+              return slotElement;
+          };
+
+
+ 
+          const toggleSlotSelection = (slotElement, timeSlot, dateKey) => {
+            const slotIndex = timeSlots.indexOf(timeSlot);
+            const previousSlot = timeSlots[slotIndex - 1];
+            const nextSlot = timeSlots[slotIndex + 1];
+        
+            if (selectedSlots.includes(timeSlot)) {
+                // Unselect all slots if a slot in the middle is unselected
+                if (selectedSlots.length > 1 && (selectedSlots.includes(previousSlot) && selectedSlots.includes(nextSlot))) {
+                    selectedSlots.forEach(slot => {
+                        const slotElem = document.querySelector(`[data-time-slot="${slot}"]`);
+                        if (slotElem) {
+                            slotElem.classList.remove('selected');
+                            slotElem.classList.add('unselect-animation');
+                            setTimeout(() => {
+                                slotElem.classList.remove('unselect-animation');
+                                slotElem.style.backgroundColor = ' '; // Reset to normal color
+                            }, 300);
+                        }
+                    });
+                    selectedSlots = [];
+                } else {
+                    // Unselect the single slot
+                    selectedSlots = selectedSlots.filter(slot => slot !== timeSlot);
+                    slotElement.classList.remove('selected');
+                    slotElement.classList.add('unselect-animation');
+                    setTimeout(() => {
+                        slotElement.classList.remove('unselect-animation');
+                        slotElement.style.backgroundColor = ''; // Reset to normal color
+                    }, 300);
+                }
+            } else {
+                if (
+                    (selectedSlots.length === 0) ||
+                    (selectedSlots.includes(previousSlot) || selectedSlots.includes(nextSlot))
+                ) {
+                    selectedSlots.push(timeSlot);
+                    slotElement.classList.add('selected');
+                    slotElement.classList.add('select-animation');
+                    setTimeout(() => slotElement.classList.remove('select-animation'), 300);
+                } else {
+                    alert('Please select continuous slots only.');
+                }
+            }
+            document.querySelector('.selected-count').textContent = `Selected Slots: ${selectedSlots.length}`;
+        };
+        
+
+
+
+
+          //submiting 
+          const submitSelectedSlots = (dateKey) => {
+            if (selectedSlots.length === 0) {
+                alert('No slots selected!');
+                return;
+            }
+          
+     
+     
+     
+            // Function to convert time slots to a comparable format
+function convertTo24Hour(time) {
+  let [hour, period] = time.split(' ');
+  hour = parseInt(hour);
+  if (period === 'pm' && hour !== 12) {
+      hour += 12;
+  } else if (period === 'am' && hour === 12) {
+      hour = 0;
+  }
+  return hour;
+}
+
+// Extract start and end times
+const sortedSlots = selectedSlots.sort((a, b) => {
+  const [startA, endA] = a.split('-').map(time => time.trim());
+  const [startB, endB] = b.split('-').map(time => time.trim());
+  const startHourA = convertTo24Hour(startA);
+  const startHourB = convertTo24Hour(startB);
+  return startHourA - startHourB;
+});
+
+const startTimeSlot = sortedSlots[0].split('-')[0].trim();
+const endTimeSlot = sortedSlots[sortedSlots.length - 1].split('-')[1].trim();
+
+console.log(`Start Time: ${startTimeSlot}`);
+console.log(`End Time: ${endTimeSlot}`);
+
+
+
+
+            // Mapping time slots to form values
+            const timeMapping = {
+              '9 am': '900',
+              '10 am': '1000',
+              '11 am': '1100',
+              '12 pm': '1200',
+              '1 pm': '1300',
+              '2 pm': '1400',
+              '3 pm': '1500',
+              '4 pm': '1600',
+              '5 pm': '1700',
+              '6 pm': '1800'
+            };
+          
+            const formStartTime = timeMapping[startTimeSlot];
+            const formEndTime = timeMapping[endTimeSlot];
+          
+            // Format date and day
+            const eventDate = new Date(dateKey).toISOString().split('T')[0];
+            const dayOfWeek = new Date(dateKey).toLocaleString('en-US', { weekday: 'long' });
+          
+            // Debugging logs
+            console.log('Start Slot:', startTimeSlot, 'End Slot:', endTimeSlot);
+            console.log('Mapped Start Time:', formStartTime, 'Mapped End Time:', formEndTime);
+          
+
+
+            // Update form fields
+
+            
+            //auditorium
+            document.getElementById('auditoriumstartime').value = formStartTime;
+            document.getElementById('auditoriumendtime').value = formEndTime;
+            document.getElementById('auditoriumdate').value = eventDate;
+            document.getElementById('auditoriumday').value = dayOfWeek;
+           // seminar
+            document.getElementById('seminarstartime').value = formStartTime;
+            document.getElementById('seminarendtime').value = formEndTime;
+            document.getElementById('seminardate').value = eventDate;
+            document.getElementById('seminarday').value = dayOfWeek;
+          //  room105
+            document.getElementById('room105startime').value = formStartTime;
+            document.getElementById('room105endtime').value = formEndTime;
+            document.getElementById('room105date').value = eventDate;
+            document.getElementById('room105day').value = dayOfWeek;
+           //CRC
+            document.getElementById('crcstartime').value = formStartTime;
+            document.getElementById('crcendtime').value = formEndTime;
+            document.getElementById('crcdate').value = eventDate;
+            document.getElementById('crcday').value = dayOfWeek;
+            //RICSConferenceRoom
+            document.getElementById('RICSConferenceRoomstartime').value = formStartTime;
+            document.getElementById('RICSConferenceRoomendtime').value = formEndTime;
+            document.getElementById('RICSConferenceRoomdate').value = eventDate;
+            document.getElementById('RICSConferenceRoomday').value = dayOfWeek;
+             //Atrium
+            document.getElementById('Atriumstartime').value = formStartTime;
+            document.getElementById('Atriumendtime').value = formEndTime;
+            document.getElementById('Atriumdate').value = eventDate;
+            document.getElementById('Atriumday').value = dayOfWeek;
+             //AIBConferenceroom
+            document.getElementById('AIBConferenceroomstartime').value = formStartTime;
+            document.getElementById('AIBConferenceroomendtime').value = formEndTime;
+            document.getElementById('AIBConferenceroomdate').value = eventDate;
+            document.getElementById('AIBConferenceroomday').value = dayOfWeek;
+
+
+
+
+            console.log('Submitting:', {
+                date: dateKey,
+                startTime: startTimeSlot,
+                endTime: endTimeSlot,
+                day: dayOfWeek
+            });
+          
+            alert(`Submitted:\nDate: ${dateKey}\nStart Time: ${startTimeSlot}\nEnd Time: ${endTimeSlot}\nDay: ${dayOfWeek}`);
+          
+            closePopup(); // Close the popup after submission
+          };
+          
+
+
+
+        });
+
+
+        
+    </script>
+    </body>
+    </html>
