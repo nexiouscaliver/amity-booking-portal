@@ -3,16 +3,17 @@ import hashlib
 import sys
 import os
 
-hostname = "localhost"
+hostname = "127.0.0.1"
 username="root"
+passwd = "3388"
 portnum = "3388"
 
 try:
     conn = mysql.connector.connect(
     host=hostname,
     user=username,
-    password=portnum,
-    port = 3388,
+    password=passwd,
+    port = portnum,
     database = "amilogin"
     )
 except Exception as e:
@@ -21,10 +22,10 @@ except Exception as e:
     conntemp = mysql.connector.connect(
     host=hostname,
     user=username,
-    password=portnum,
-    port = 3388,
+    password=passwd,
+    port = portnum,
     )
-    c = conntemp.cursor()
+    c = conntemp.cursor(buffered=True)
     sql = "create database if not exists amilogin;"
     c.execute(sql)
     conntemp.commit()
@@ -34,8 +35,8 @@ except Exception as e:
 conn = mysql.connector.connect(
     host=hostname,
     user=username,
-    password=portnum,
-    port = 3388,
+    password=passwd,
+    port = portnum,
     database = "amilogin"
     )
 
@@ -45,7 +46,7 @@ def close():
     conn.close()
 
 def init_db(): #server
-    cur = conn.cursor()
+    cur = conn.cursor(buffered=True)
     q1 = "CREATE TABLE IF NOT EXISTS user(username varchar(30) primary key, password varchar(100), name varchar(30));"
     cur.execute(q1)
     q1 = "CREATE TABLE IF NOT EXISTS admin(username varchar(30) primary key, password varchar(100), name varchar(30));"
@@ -59,7 +60,7 @@ def init_db(): #server
 #email = name
 #name = email
 def create_user(username:str,password:str,name:str):
-    cur = conn.cursor()
+    cur = conn.cursor(buffered=True)
     hpass = hashlib.md5(password.encode()).hexdigest()
     sql = f'insert into user(username,password,name) values ("{username}","{hpass}","{name}");'
     try:
@@ -78,7 +79,7 @@ def create_user(username:str,password:str,name:str):
         
 
 def load_user(username:str,password:str):
-    cur = conn.cursor()
+    cur = conn.cursor(buffered=True)
     uhpass = hashlib.md5(password.encode()).hexdigest()
     sql = f'select password from user where username="{username}";'
     try:
@@ -111,7 +112,7 @@ def genhash(password:str):
     return hashlib.md5(password.encode()).hexdigest()
 
 def cmd(s):       #idle-de-bugging
-    c = conn.cursor()
+    c = conn.cursor(buffered=True)
     c.execute(s)
     b=c.fetchall()
     # print(b)
@@ -121,7 +122,7 @@ def cmd(s):       #idle-de-bugging
     return {"DATABASE" :"logindb","Command" :s,"data": b,"type" :str(type(b)),"len" :len(b)}
 
 def getname_user(username:str):
-    cur = conn.cursor()
+    cur = conn.cursor(buffered=True)
     sql = f'select name from user where username="{username}";'
     try:
         cur.execute(sql)
@@ -147,7 +148,7 @@ def getname_user(username:str):
         conn.commit()
         
 def seeall():
-    cur = conn.cursor()
+    cur = conn.cursor(buffered=True)
     sql = f'select * from user;'
     cur.execute(sql)
     o = cur.fetchall()
@@ -160,7 +161,7 @@ def seeall():
     return d
 
 def create_admin(username:str,password:str,name:str):
-    cur = conn.cursor()
+    cur = conn.cursor(buffered=True)
     hpass = hashlib.md5(password.encode()).hexdigest()
     sql = f'insert into admin(username,password,name) values ("{username}","{hpass}","{name}");'
     try:
@@ -179,7 +180,7 @@ def create_admin(username:str,password:str,name:str):
         
 
 def load_admin(username:str,password:str):
-    cur = conn.cursor()
+    cur = conn.cursor(buffered=True)
     uhpass = hashlib.md5(password.encode()).hexdigest()
     sql = f'select password from admin where username="{username}";'
     try:
@@ -210,7 +211,7 @@ def load_admin(username:str,password:str):
         
 
 def getname_admin(username:str):
-    cur = conn.cursor()
+    cur = conn.cursor(buffered=True)
     sql = f'select name from admin where username="{username}";'
     try:
         cur.execute(sql)
