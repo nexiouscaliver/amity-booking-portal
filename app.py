@@ -923,8 +923,8 @@ def admingetapprove(bookid):
         event_name = o[0][5]
         event_venue = hallname(int(o[0][1]))
         event_date = o[0][6]
-        start_time = o[0][7]
-        end_time = o[0][8]
+        start_time = maketime(o[0][7])
+        end_time = maketime(o[0][8])
         school_name = o[0][2]
         resource_person_name = o[0][11]
         resource_person_details = o[0][12]
@@ -946,8 +946,8 @@ def admingetreject(bookid):
         event_name = o[0][5]
         event_venue = hallname(int(o[0][1]))
         event_date = o[0][6]
-        start_time = o[0][7]
-        end_time = o[0][8]
+        start_time = maketime(o[0][7])
+        end_time = maketime(o[0][8])
         school_name = o[0][2]
         resource_person_name = o[0][11]
         resource_person_details = o[0][12]
