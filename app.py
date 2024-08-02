@@ -269,7 +269,7 @@ def send_mail2(event_name,event_venue,event_date,start_time,end_time,school_name
     • Booking ID : {bid}
     • Event Venue: {event_venue}
     • Event Date: {event_date}
-    • Duration: {maketime(start_time)} to {maketime(end_time)}
+    • Duration: {start_time} to {end_time}
     
 
     Your Request has been {status} by the Admin. 
@@ -344,9 +344,9 @@ def send_mail4(event_name,event_venue,event_date,start_time,end_time,school_name
             <td>    </td>
             <td>{event_name}</td>
             <td>    </td>
-            <td>{maketime(start_time)}</td>
+            <td>{start_time}</td>
             <td>    </td>
-            <td>{maketime(end_time)}</td>
+            <td>{end_time}</td>
             <td>    </td>
             <td>Pending</td>
             <td>    </td>
