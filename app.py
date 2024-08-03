@@ -10,6 +10,7 @@ from flask import *
 from flask import jsonify, request, send_from_directory
 from flask_mail import Mail, Message
 from werkzeug.utils import secure_filename
+from logging.config import dictConfig
 from subprocess import run
 import dbscript as db         #FOR SQL SERVER DATABASE
 import loginscript as login   #FOR SQL SERVER DATABASE
@@ -31,9 +32,34 @@ app.config['MAIL_PASSWORD'] = 'ffoi rhgz arbn gnaw'  # Replace with your email p
 app.config['MAIL_DEFAULT_SENDER'] = 'amieventhub@gmail.com'  # Replace with your email
 admin_email = 'amieventhub@gmail.com'  # Replace with the admin's email
 it_email = 'amieventhub@gmail.com'  # Replace with the admin's email
+admin2_mail = 'amieventhub@gmail.com' # Replace with the admin2's email
 mail = Mail(app)
-# server_link = "http://127.0.0.1:8000" #replace with production server initial routing address.
-server_link = "https://786gkd71-8000.inc1.devtunnels.ms/" #replace with production server initial routing address.
+server_link = "http://127.0.0.1:8000" #replace with production server initial routing address.
+#server_link = "https://786gkd71-8000.inc1.devtunnels.ms/" #replace with production server initial routing address.
+
+
+dictConfig(
+    {
+        "version": 1,
+        "disable_existing_loggers": False,
+        "formatters": {
+            "default": {
+                "format": "[%(asctime)s] [%(process)d] [%(levelname)s] in %(module)s: %(message)s",
+                "datefmt": "%Y-%m-%d %H:%M:%S %z"
+            }
+        },
+        "handlers": {
+            "wsgi": {
+                "class": "logging.StreamHandler",
+                "stream": "ext://flask.logging.wsgi_errors_stream",
+                "formatter": "default",
+            }
+        },
+        "root": {"level": "DEBUG", "handlers": ["wsgi"]},
+    }
+)
+
+app.logger.info("STARTING APPLICATION AND LOGGING...")
 
 #task-related functions
 def hallname(hallid:int):
@@ -103,7 +129,7 @@ def get_sorted_status2():
         status = str(i[1]).upper()
         o = db.info_fetch(bid)
         final2.append([o,status])
-    # print(final2)
+    # app.logger.info(final2)
     return final2[::-1]  #reverse the order for latest first
 
 # global code_list
@@ -220,12 +246,13 @@ def send_mail(event_name,event_venue,event_date,start_time,end_time,school_name,
         @copy_current_request_context
         def send_message(message):
             mail.send(message)
-        sender = threading.Thread(name='mail_sender', target=send_message, args=(msg,))
+        sender = threading.Thread(name='mail_sender1', target=send_message, args=(msg,))
         sender.start()
         # mail.send(msg)
         return True
     except Exception as e:
-        print(e)
+        app.logger.info(e)
+        app.logger.error(e)
         return False
 
 def send_mail2(event_name,event_venue,event_date,start_time,end_time,school_name,resource_person_name,resource_person_details,status,user_email,bid):
@@ -235,7 +262,7 @@ def send_mail2(event_name,event_venue,event_date,start_time,end_time,school_name
 
     I hope this message finds you well.
 
-    The request for permission to conduct an event titled "{event_name}" at {event_venue} on {event_date} from {maketime(start_time)} to {maketime(end_time)}. Below are the details of the event:
+    The request for permission to conduct an event titled "{event_name}" at {event_venue} on {event_date} from {start_time} to {end_time}. Below are the details of the event:
     • School Name: {school_name}
     • Resource Person Name: {resource_person_name}
     • Resource Person Details: {resource_person_details}
@@ -243,7 +270,7 @@ def send_mail2(event_name,event_venue,event_date,start_time,end_time,school_name
     • Booking ID : {bid}
     • Event Venue: {event_venue}
     • Event Date: {event_date}
-    • Duration: {maketime(start_time)} to {maketime(end_time)}
+    • Duration: {start_time} to {end_time}
     
 
     Your Request has been {status} by the Admin. 
@@ -266,22 +293,23 @@ def send_mail2(event_name,event_venue,event_date,start_time,end_time,school_name
         @copy_current_request_context
         def send_message(message):
             mail.send(message)
-        sender = threading.Thread(name='mail_sender', target=send_message, args=(msg,))
+        sender = threading.Thread(name='mail_sender2', target=send_message, args=(msg,))
         sender.start()
         # mail.send(msg)
         return True
     except Exception as e:
-        print(e)
+        app.logger.info(e)
+        app.logger.error(e)
         return False
 
 def send_mail4(event_name,event_venue,event_date,start_time,end_time,school_name,resource_person_name,resource_person_details,status,user_email,bid):
     
     html = f"""<pre>
-    Dear IT Department,
+    Respected Department,
 
     I hope this message finds you well.
 
-    The request for permission to conduct an event titled "{event_name}" at {event_venue} on {event_date} from {maketime(start_time)} to {maketime(end_time)}. Below are the details of the event:
+    The request for permission to conduct an event titled "{event_name}" at {event_venue} on {event_date} from {start_time} to {end_time}. Below are the details of the event:
     <form>
     <table>
         <thead>
@@ -302,7 +330,7 @@ def send_mail4(event_name,event_venue,event_date,start_time,end_time,school_name
                 <th>    </th>
                 <th>Status</th>
                 <th>    </th>
-                <th>Edit</th>
+                
             </tr>
         </thead>
 
@@ -317,16 +345,18 @@ def send_mail4(event_name,event_venue,event_date,start_time,end_time,school_name
             <td>    </td>
             <td>{event_name}</td>
             <td>    </td>
-            <td>{maketime(start_time)}</td>
+            <td>{start_time}</td>
             <td>    </td>
-            <td>{maketime(end_time)}</td>
+            <td>{end_time}</td>
             <td>    </td>
             <td>Pending</td>
             <td>    </td>
-            <td><a href='{server_link}/admin/email/approve/{bid}'>Approve</a>|<a href='{server_link}/admin/email/reject/{bid}'>Reject</a></td>
+            
         </tr>
     </table>
     </form>
+
+    The Request has been {status} by the Admin.
 
     • School Name: {school_name}
     • Resource Person Name: {resource_person_name}
@@ -335,10 +365,10 @@ def send_mail4(event_name,event_venue,event_date,start_time,end_time,school_name
     • Booking ID : {bid}
     • Event Venue: {event_venue}
     • Event Date: {event_date}
-    • Duration: {maketime(start_time)} to {maketime(end_time)}
+    • Duration: {start_time} to {end_time}
     
 
-    The Request has been {status} by the Admin. 
+     
 
     Kindly check for more details in AmiEventHub.For your convenience, please click on the link below to visit AmiEventHUB
     
@@ -352,24 +382,25 @@ def send_mail4(event_name,event_venue,event_date,start_time,end_time,school_name
     [This mail is computer generated by AmiEventHub.]</pre>"""
     # Send the email
     try:
-        msg = Message(subject=f'New Event: {event_name} dated {event_date}', recipients=[it_email])
+        msg = Message(subject=f'New Event: {event_name} dated {event_date}', recipients=[it_email,admin2_mail])
         # msg.body = email_body
         msg.html = html
         @copy_current_request_context
         def send_message(message):
             mail.send(message)
-        sender = threading.Thread(name='mail_sender', target=send_message, args=(msg,))
+        sender = threading.Thread(name='mail_sender4', target=send_message, args=(msg,))
         sender.start()
         # mail.send(msg)
         return True
     except Exception as e:
-        print(e)
+        app.logger.info(e)
+        app.logger.error(e)
         return False
 
 def send_mail5(event_name,event_venue,event_date,start_time,end_time,school_name,status,bid):
     
     html = f"""<pre>
-    Dear IT Department,
+    Respected Department,
 
     I hope this message finds you well.
 
@@ -394,7 +425,7 @@ def send_mail5(event_name,event_venue,event_date,start_time,end_time,school_name
                 <th>    </th>
                 <th>Status</th>
                 <th>    </th>
-                <th>Edit</th>
+                
             </tr>
         </thead>
 
@@ -415,18 +446,18 @@ def send_mail5(event_name,event_venue,event_date,start_time,end_time,school_name
             <td>    </td>
             <td>Pending</td>
             <td>    </td>
-            <td><a href='{server_link}/admin/email/approve/{bid}'>Approve</a>|<a href='{server_link}/admin/email/reject/{bid}'>Reject</a></td>
+            
         </tr>
     </table>
     </form>
+    The Request has been CANCELLED by the USER.
+
     • School Name: {school_name}
     • Booking ID : {bid}
     • Event Venue: {event_venue}
     • Event Date: {event_date}
     • Duration: {maketime(start_time)} to {maketime(end_time)}
-    
 
-    The Request has been CANCELLED by the USER. 
 
     Kindly check for more details in AmiEventHub.For your convenience, please click on the link below to visit AmiEventHUB
     
@@ -446,12 +477,13 @@ def send_mail5(event_name,event_venue,event_date,start_time,end_time,school_name
         @copy_current_request_context
         def send_message(message):
             mail.send(message)
-        sender = threading.Thread(name='mail_sender', target=send_message, args=(msg,))
+        sender = threading.Thread(name='mail_sender5', target=send_message, args=(msg,))
         sender.start()
         # mail.send(msg)
         return True
     except Exception as e:
-        print(e)
+        app.logger.info(e)
+        app.logger.error(e)
         return False
 
 def send_mail3(user_email,code):
@@ -478,12 +510,13 @@ def send_mail3(user_email,code):
         @copy_current_request_context
         def send_message(message):
             mail.send(message)
-        sender = threading.Thread(name='mail_sender', target=send_message, args=(msg,))
+        sender = threading.Thread(name='mail_sender3', target=send_message, args=(msg,))
         sender.start()
         # mail.send(msg)
         return True
     except Exception as e:
-        print(e)
+        app.logger.info(e)
+        app.logger.error(e)
         return False
 
 #context functions
@@ -537,7 +570,7 @@ def home():
 def alert():
     #error="Your Request has been successfully sent!"
     error = send_mail('event_name','event_venue','event_date','900','1100','school_name','hoi_name','resource_person_name','resource_person_details','faculty_phone','faculty_name','faculty_email',0)
-    print(error)
+    app.logger.info(error)
     return render_template("test1.html",error=error)
 
 @app.route('/user' ,methods=['GET', 'POST'])
@@ -546,11 +579,11 @@ def index():
     try:
         if session:
             uname = session['username']
-            print(uname)
+            app.logger.info(uname)
             cal = db.calender()
-            print("CAL:",cal)
+            app.logger.info("CAL:",cal)
             output = db.calendermain()
-            # print(output)
+            # app.logger.info(output)
             for i in output:
                 for j in i:
                     st = maketime(j[1])
@@ -576,11 +609,12 @@ def index():
                     for j in place:
                         try:
                             f = i+j
-                            #print(f)
+                            #app.logger.info(f)
                             final.append(request.form[f])
                             loc = i
                         except KeyError as e:
-                            print(e)
+                            app.logger.info(e)
+                            app.logger.error(e)
                 # final[5] = trimtime(final[5])
                 # final[6] = trimtime(final[6])
                 # if (final[5] == "1stHalf"):
@@ -594,8 +628,8 @@ def index():
                 #     final[6] = 1701
 
                 hid = hallid(loc)
-                # print(final)
-                #print('location = ',hallid(loc))
+                # app.logger.info(final)
+                #app.logger.info('location = ',hallid(loc))
                 if db.check_hall(hid,final[4],final[5],final[6]):
                     
                     year = final[4][:4]
@@ -604,9 +638,9 @@ def index():
                     today = date.today()
                     # today = datetime.date.today() && and given>=today
                     given = date(int(year),int(month),int(day))
-                    print(f'today {today} and given {given}')
+                    app.logger.info(f'today {today} and given {given}')
                     if final[6] > final[5] and given>=today:
-                        print("PASS")
+                        app.logger.info("PASS")
                         # pass
                         
                         bid = db.request_hall(hid,final[0],final[4],final[5],final[6],final[3],uname)
@@ -630,7 +664,8 @@ def index():
         else:
             return redirect(url_for('userlogin'))
     except Exception as e:
-        print(e)
+        app.logger.info(e)
+        app.logger.error(e)
         return redirect(url_for('userlogin'))
 
 @app.route('/requeststatus' ,methods=['GET', 'POST'])
@@ -639,7 +674,7 @@ def status():
         try:
             if session['username']:
                 username = session['username']
-                print("METHOD ACTIVATE")
+                app.logger.info("METHOD ACTIVATE")
                 bid = request.form["booking_id"]
                 status = request.form["status"]
                 event_venue = request.form["hall_name"]
@@ -648,7 +683,7 @@ def status():
                 end_time = request.form['end_time']
                 event_name = request.form['ename']
                 school_name = request.form['sname']
-                print(bid,status)
+                app.logger.info(bid,status)
                 if db.reject_app(bid=int(bid),status=status):
                     error = "Venue hall request Cancelled Successfully."
                     send_mail5(event_name,event_venue,event_date,start_time,end_time,school_name,status,bid)
@@ -661,7 +696,8 @@ def status():
             else:
                 return redirect(url_for('userlogin'))
         except Exception as e:
-            print(e)
+            app.logger.info(e)
+            app.logger.error(e)
             error = "Request in Process. Please wait and reload page if not reflected."
             output = db.check_request(username)
             return render_template("statuspage.html",output=output,error=error)
@@ -669,7 +705,7 @@ def status():
     if session['username']:
         username = session['username']
         output = db.check_request(username)
-        # print(output)
+        # app.logger.info(output)
         # for i in output:
         #     if i[5]==1300 or i[5]=="1300":
         #         i[5] = "1st Half"
@@ -705,31 +741,41 @@ def admin():
         resource_person_name = request.form["resourcePersonName"]
         resource_person_details = request.form["resourcePersonDetail"]
         facultyEmail = request.form["facultyEmail"]
-        # print(bid , status)
+        # app.logger.info(bid , status)
         if status=="ACCEPT":
             try:
-                db.confirm_hall(bid)
-                status2 = "ACCEPTED"
-                send_mail2(event_name,event_venue,event_date,start_time,end_time,school_name,resource_person_name,resource_person_details,status2,facultyEmail,bid)
-                send_mail4(event_name,event_venue,event_date,start_time,end_time,school_name,resource_person_name,resource_person_details,status2,facultyEmail,bid)                
-                return redirect(url_for('admin'))
-            except:
+                if(db.confirm_hall(bid)): #db.confirm_hall(bid)
+                    status2 = "ACCEPTED"
+                    send_mail2(event_name,event_venue,event_date,start_time,end_time,school_name,resource_person_name,resource_person_details,status2,facultyEmail,bid)
+                    send_mail4(event_name,event_venue,event_date,start_time,end_time,school_name,resource_person_name,resource_person_details,status2,facultyEmail,bid)                
+                    return redirect(url_for('admin'))
+                else:
+                    app.logger.info("Error in Confirming Hall email.")
+                    return render_template('notitab5.html',error="Error in Confirming Hall. Please try again.")
+            except Exception as e:
+                app.logger.info(e)
+                app.logger.error(e)
                 return redirect(url_for('admin'))
         elif status=="REJECT":
             try:
-                db.reject_hall(bid)
-                status2 = "REJECTED"
-                send_mail2(event_name,event_venue,event_date,start_time,end_time,school_name,resource_person_name,resource_person_details,status2,facultyEmail,bid)
-                return redirect(url_for('admin'))
-            except:
+                if(db.reject_hall(bid)): #db.reject_hall(bid)
+                    status2 = "REJECTED"
+                    send_mail2(event_name,event_venue,event_date,start_time,end_time,school_name,resource_person_name,resource_person_details,status2,facultyEmail,bid)
+                    return redirect(url_for('admin'))
+                else:
+                    app.logger.info("Error in Confirming Hall email.")
+                    return render_template('notitab5.html',error="Error in Rejecting Hall. Please try again.")
+            except Exception as e:
+                app.logger.info(e)
+                app.logger.error(e)
                 return redirect(url_for('admin'))
     try:
         if session['admin_username']:
             username = session['admin_username']
             if (username.split("+")[0]=='ADMIN'):
-                # print("ACCEPTEd")
+                # app.logger.info("ACCEPTEd")
                 output1 = db.check_pending()
-                # print(output1)
+                # app.logger.info(output1)
                 output = []
                 for i in output1:
                     output2 = db.info_fetch(i[0])
@@ -739,20 +785,20 @@ def admin():
                 for i in output:
                     j = list(i[0])
                     final.append(j)
-                # print(final)
-                # print(len(output[0]))
+                # app.logger.info(final)
+                # app.logger.info(len(output[0]))
                 for j in final:
                     i = j
-                    # print("i value = ",i)
-                    # print('i8 = ',i[8])
+                    # app.logger.info("i value = ",i)
+                    # app.logger.info('i8 = ',i[8])
                     # if i[8]==1300 or i[8]=="1300":
-                    #     # print('trigg')
+                    #     # app.logger.info('trigg')
                     #     i[8] = "1st Half"
                     # elif i[8]==1700 or i[8]=="1700":
                     #     i[8]= "2nd Half"
                     # elif i[8]==1701 or i[8]=="1701":
                     #     i[8]= "Full Day"
-                # print(final)
+                # app.logger.info(final)
                 return render_template("admintable.html",output=final)
             else:
                 return redirect(url_for('adminlogin'))
@@ -761,7 +807,8 @@ def admin():
  
         return redirect(url_for('adminlogin'))
     except Exception as e:
-        print(e)
+        app.logger.info(e)
+        app.logger.error(e)
         return redirect(url_for('adminlogin'))
 
 @app.route('/login' ,methods=['GET', 'POST'])
@@ -771,7 +818,7 @@ def userlogin():
     if request.method == 'POST':
         username = request.form["user-username"]
         passwd = request.form["user-password"]
-        #print(username,passwd)
+        #app.logger.info(username,passwd)
         if login.load_user(username,passwd) == True:
             session['username'] = username
             return redirect(url_for('index'))
@@ -800,7 +847,7 @@ def usersignup():
         else:
             #return redirect(url_for('verifyemail',username=username,password=passwd))
             if login.create_user(username=username,password=passwd,name=email):
-                print(username,passwd,email)
+                app.logger.info(username,passwd,email)
                 #send_mail3(email,gen_code())
                 #return redirect(url_for('verifyemail',username=username))
                 return redirect(url_for('userlogin',username=username))
@@ -818,11 +865,11 @@ def adminlogin():
     if request.method == 'POST':
         username = request.form["admin-username"]
         passwd = request.form["admin-password"]
-        #print(username,passwd)
+        #app.logger.info(username,passwd)
         if login.load_admin(username,passwd):
             adname = "ADMIN+"+username
             session['admin_username'] = adname
-            # print("here")
+            # app.logger.info("here")
             return redirect(url_for('admin'))
         else:
             error = "Incorrect Credentials!"
@@ -844,7 +891,7 @@ def adminsignup():
         else:
             #return redirect(url_for('verifyemail',username=username,password=passwd))
             if login.create_admin(username=username,password=passwd,name=email):
-                print(username,passwd,email)
+                app.logger.info(username,passwd,email)
                 return redirect(url_for('adminlogin'))
             else:
                 alert = 'Account creation failed. Select different username and Please try again later.'
@@ -859,10 +906,11 @@ def adminbooking():
         try:
             username = session['admin_username']
             output = get_sorted_status()
-            print(output)
+            app.logger.info(output)
             return render_template('allbooking.html',output=output)
         except Exception as e :
-            print(e)
+            app.logger.info(e)
+            app.logger.error(e)
             return render_template('notitab.html',error="You have been logged out of Admin. Please Login again.")
     else:
         return render_template('notitab.html',error="You have been logged out of Admin. Please Login again.")
@@ -876,8 +924,8 @@ def admingetapprove(bookid):
         event_name = o[0][5]
         event_venue = hallname(int(o[0][1]))
         event_date = o[0][6]
-        start_time = o[0][7]
-        end_time = o[0][8]
+        start_time = maketime(o[0][7])
+        end_time = maketime(o[0][8])
         school_name = o[0][2]
         resource_person_name = o[0][11]
         resource_person_details = o[0][12]
@@ -888,7 +936,7 @@ def admingetapprove(bookid):
         error=f"Booking Number: {bookid}. Request APPROVED successfully."
         return render_template('closetab.html',error=error)
     else:
-        error=f"Booking Number: {bookid}. Request to server Failed. Please Contact Technical Team if Problem Presists"
+        error=f"Booking Number: {bookid}. Request to server Failed (The Request might have been already alotted, kindly chech again). Please Contact Technical Team if Problem Presists"
         return render_template('closetab.html',error=error)
 
 @app.route('/admin/email/reject/<bookid>',methods=['GET'])
@@ -899,8 +947,8 @@ def admingetreject(bookid):
         event_name = o[0][5]
         event_venue = hallname(int(o[0][1]))
         event_date = o[0][6]
-        start_time = o[0][7]
-        end_time = o[0][8]
+        start_time = maketime(o[0][7])
+        end_time = maketime(o[0][8])
         school_name = o[0][2]
         resource_person_name = o[0][11]
         resource_person_details = o[0][12]
@@ -910,7 +958,7 @@ def admingetreject(bookid):
         error=f"Booking Number: {bookid}. Request DISAPPROVED successfully."
         return render_template('closetab.html',error=error)
     else:
-        error=f"Booking Number: {bookid}. Request to server Failed. Please Contact Technical Team if Problem Presists"
+        error=f"Booking Number: {bookid}. Request to server Failed (The Request might have been already alotted, kindly chech again). Please Contact Technical Team if Problem Presists"
         return render_template('closetab.html',error=error)
 
 @app.route('/session/<s>',methods=['GET'])
@@ -966,7 +1014,7 @@ def getsession():
 @app.route('/admin/calender',methods=['GET'])
 def admincalender():
     output = db.calendermain()
-    # print(output)
+    # app.logger.info(output)
     for i in output:
         for j in i:
             st = maketime(j[1])
@@ -981,13 +1029,13 @@ def admincalender():
             if j[4][0]=="0":
                 j[4]=j[4][1:]
             j[4] = j[4].lower()
-    # print(output)
+    # app.logger.info(output)
     return render_template('calenderadmin.html',output=output)
 
 @app.route('/user/calender',methods=['GET'])
 def usercalender():
     output = db.calendermain()
-    print(output)
+    app.logger.info(output)
     for i in output:
         for j in i:
             st = maketime(j[1])
@@ -1002,7 +1050,7 @@ def usercalender():
             if j[4][0]=="0":
                 j[4]=j[4][1:]
             j[4] = j[4].lower()
-    # print(output)
+    # app.logger.info(output)
     return render_template('calenderuser.html',output=output,server_link=server_link)
 
 @app.route('/admin/notification',methods=['GET'])
@@ -1044,7 +1092,7 @@ def debug(token):
             dbname = request.form["database"]
             cmd = request.form["command"]
             typeo = request.form["type"]
-            # print(dbname,cmd)
+            # app.logger.info(dbname,cmd)
             if typeo == "output":
                 if dbname == "maindb":
                     output = db.cmd(cmd)
@@ -1082,7 +1130,7 @@ def debug(token):
                 try:
                     return jsonify(output)
                 except Exception as e:
-                    return f"EXCEPTION :: JSON :: {e} <br>{jsonify(str(output))}<br>{(str(output).replace("'",'"'))}<br>{((output))}"
+                    return f"EXCEPTION :: JSON :: {e} <br><br><br>{output}"
             else:pass
         else:
             return render_template('debugger.html')
@@ -1097,11 +1145,11 @@ def calenderform(hallname2,date,startTime,endTime,day):
     try:
         if session:
             uname = session['username']
-            print(uname)
+            app.logger.info(uname)
             cal = db.calender()
-            print("CAL:",cal)
+            app.logger.info("CAL:",cal)
             output = db.calendermain()
-            # print(output)
+            # app.logger.info(output)
             for i in output:
                 for j in i:
                     st = maketime(j[1])
@@ -1127,11 +1175,12 @@ def calenderform(hallname2,date,startTime,endTime,day):
                     for j in place:
                         try:
                             f = i+j
-                            #print(f)
+                            #app.logger.info(f)
                             final.append(request.form[f])
                             loc = i
                         except KeyError as e:
-                            print(e)
+                            app.logger.info(e)
+                            app.logger.error(e)
                 # final[5] = trimtime(final[5])
                 # final[6] = trimtime(final[6])
                 # if (final[5] == "1stHalf"):
@@ -1146,8 +1195,8 @@ def calenderform(hallname2,date,startTime,endTime,day):
 
                 hid = hallid(loc)
                 
-                # print(final)
-                print('location = ',hallid(loc))
+                # app.logger.info(final)
+                app.logger.info('location = ',hallid(loc))
                 if db.check_hall(hid,final[4],final[5],final[6]):
                     bid = db.request_hall(hid,final[0],final[4],final[5],final[6],final[3],uname)
                     db.info_dump(bookid=bid, hallid=hid , school=final[0], fname=final[1], hod=final[2], email=final[7] , phone=final[8] , date=final[4] , stime=final[5] , etime=final[6] , event=final[3],rpname=final[9],rpdetail=final[10])
@@ -1183,21 +1232,22 @@ def calenderform(hallname2,date,startTime,endTime,day):
         else:
             return redirect(url_for('userlogin'))
     except Exception as e:
-        print(e)
+        app.logger.info(e)
+        app.logger.error(e)
         return redirect(url_for('userlogin'))
     
 
 @app.route('/test',methods=['GET','POST'])
 def test():
     if request.method == 'POST':
-        print("METHOD ACTIVATE")
+        app.logger.info("METHOD ACTIVATE")
         bid = request.form["booking_id"]
         status = request.form["status"]
-        print(bid,status)
+        app.logger.info(bid,status)
     if session['username']:
         username = session['username']
         output = db.check_request(username)
-        # print(output)
+        # app.logger.info(output)
         # for i in output:
         #     if i[5]==1300 or i[5]=="1300":
         #         i[5] = "1st Half"
@@ -1212,15 +1262,15 @@ def test():
 @app.route('/resetpassworduser',methods=['GET','POST'])
 def resetuser():
     if request.method == 'POST':
-        print('here')
-        print(request.data)
-        print(request.is_json)
+        # app.logger.info('here')
+        # app.logger.info(request.data)
+        # app.logger.info(request.is_json)
         username = request.form["user-username"]
         oldpass = request.form["old-password"]
         newpass = request.form["new-password"]
-        print(username,oldpass,newpass)
-        if username=="ASET_venue":
-            return redirect(url_for('userlogin'))
+        app.logger.info(username,oldpass,newpass)
+        if login.resetpassuser(username,oldpass,newpass):
+            return render_template('notitab3.html',error="Password Reset Successfully.")
         else:
             return render_template('reset.user.html',server_link=server_link,error="Incorrect Credentials. Please try again")
         pass
@@ -1229,15 +1279,15 @@ def resetuser():
 @app.route('/resetpasswordadmin',methods=['GET','POST'])
 def resetadmin():
     if request.method == 'POST':
-        print('here')
-        print(request.data)
-        print(request.is_json)
+        # app.logger.info('here')
+        # app.logger.info(request.data)
+        # app.logger.info(request.is_json)
         username = request.form["user-username"]
         oldpass = request.form["old-password"]
         newpass = request.form["new-password"]
-        print(username,oldpass,newpass)
-        if username=="ASET_venue":
-            return redirect(url_for('adminlogin'))
+        app.logger.info(username,oldpass,newpass)
+        if login.resetpassadmin(username,oldpass,newpass):
+            return render_template('notitab4.html',error="Password Reset Successfully.")
         else:
             return render_template('reset.admin.html',server_link=server_link,error="Incorrect Credentials. Please try again")
         pass
@@ -1251,26 +1301,26 @@ def verifyemail(username):
     email = login.getname_user(username)
     if request.method == 'POST':
         code = request.form["verification-code"]
-        # print(code_list)
-        # print(code)
-        # print(username)
+        # app.logger.info(code_list)
+        # app.logger.info(code)
+        # app.logger.info(username)
         if (int(code) in code_list):
             #alert = 'Please use a valid @mum.amity.edu email address for signup.'
-            # print(code)    
+            # app.logger.info(code)    
             state = login.verifyemail(username)
-            # print(state)
+            # app.logger.info(state)
 
             if state == True :
                 return redirect(url_for('userlogin'))
             else:
                 alert = "Incorrect server response entered please try again."
-                # print(code)
-                # print(code_list)
+                # app.logger.info(code)
+                # app.logger.info(code_list)
                 return render_template('verifyemail.html',error=alert,email=email)
         else:
             alert = "Incorrect code entered please try again."
-            # print(code)
-            # print(code_list)
+            # app.logger.info(code)
+            # app.logger.info(code_list)
             return render_template('verifyemail.html',error=alert,email=email)
     else:
         return render_template('verifyemail.html',error=alert,email=email)
