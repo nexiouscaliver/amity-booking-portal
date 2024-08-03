@@ -22,28 +22,32 @@
         background-color: aliceblue;
         margin: 0;
         font-family: Arial, sans-serif;
-      }
-      
-      :root {
+        font-size: 16px;
+        line-height: 1.5;
+    }
+    
+    :root {
         --primary-color: #04172b;
         --secondary-color: #061b31;
         --white: #ffffff;
-        --gray: #6c757d;
-      }
-      
-      .navbar {
+        --gray: #6c757d;   
+    }
+    
+    .navbar {
         background-color: var(--primary-color);
         display: flex;
-        justify-content: space-between;
         align-items: center;
         padding: 10px 20px;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        
-      }
+        flex-wrap: nowrap;
+        justify-content: space-evenly; /* Space between logo and menu */
+    }
     
     .logo-container {
         display: flex;
         align-items: center;
+        flex: 0 1 auto; /* Prevent the logo from stretching */
+        margin-right: 0; /* Align logo container to the left */
     }
     
     .navbar .logo img {
@@ -52,737 +56,849 @@
     }
     
     .navbar .name img {
-        height:50px;
+        height: 50px;
     }
     
     .navbar .menu {
-      display: flex;
-      gap: 20px;
-  }
-  
-  .navbar .menu a {
-      color: var(--white);
-      text-decoration: none;
-      padding: 10px 15px;
-      border-radius: 5px;
-      transition: background-color 0.3s, box-shadow 0.3s;
-      font-weight: bold;
-  }
-  
-  .navbar .menu a:hover {
-      background-color: var(--secondary-color);
-      transform: scale(1.05);
-      box-shadow: 0 0 0 2px aliceblue;
-  }
+        display: flex;
+        align-items: center;
+        flex-wrap: nowrap;
+        justify-content: space-evenly; /* Evenly space out menu items */
+        flex: 0 1 auto; /* Prevent the menu from stretching */
+        margin-left: 0; /* Align menu to the right */
+    }
     
-      
-      .navbar .icon {
+    .navbar .menu a {
+        color: var(--white);
+        text-decoration: none;
+        padding: 10px 15px;
+        border-radius: 5px;
+        transition: background-color 0.3s, box-shadow 0.3s;
+        font-weight: bold;
+        display: flex;
+        align-items: center;
+        white-space: nowrap; /* Prevent text wrapping */
+        text-align: center;
+        justify-content: center;
+        flex: 1;
+    }
+    
+    .navbar .menu a:hover {
+        background-color: var(--secondary-color);
+        transform: scale(1.05);
+        box-shadow: 0 0 0 2px aliceblue;
+    }
+    
+    .navbar .icon {
         font-size: 20px;
         color: var(--white);
         padding: 10px;
         cursor: pointer;
         font-weight: bold;
         position: relative;
-      }
-  /*.menu-item i.fas {
-    color: rgb(228, 228, 8); 
-  }*/
-  
+    }
     
-      /* Hero Section */
-      .hero {
-  position: relative;
-  margin-top: 20px;
-  text-align: center;
-  padding: 100px 0; 
-  overflow: hidden; /* Ensure the pseudo-element doesn't overflow */
-}
-
-.hero::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: url('heroo.jpg') no-repeat center center / cover;
-  opacity: 0.7; /* Apply opacity to the background image */
-  z-index: 1; /* Ensure it's behind the text */
-}
-
-.hero .container {
-  position: relative;
-  z-index: 2; /* Ensure the text is above the background */
-}
-
-.bordered-letters {
-  color: #01013e; /* Set the text color to contrast with the border */
-  /* text-shadow: 
-    -1px -1px 0 #01013e,  
-     1px -1px 0 #01013e,
-    -1px  1px 0 #01013e,
-     1px  1px 0 #01013e;  */
-  margin: 10px 0; /* Adds some space above and below each element */
-}
-
+    /* Responsive styles */
+    @media (max-width: 768px) {
+        .navbar {
+            padding: 10px;
+        }
+    
+        .navbar .menu a {
+            padding: 8px 10px;
+            font-size: 12px;
+        }
+    }
+    
+    @media (min-width: 769px) and (max-width: 1024px) {
+        .navbar .menu a {
+            padding: 10px;
+            font-size: 14px;
+        }
+    }
+    
+    @media (min-width: 1025px) {
+        .navbar {
+            justify-content: space-between; /* Maintain space-between on large screens */
+        }
+    
+        .logo-container {
+            margin-right: auto; /* Position logo container to the left */
+        }
+    
+        .navbar .menu {
+            margin-left: auto; /* Position menu to the right */
+        }
+    }
+      /*.menu-item i.fas {
+        color: rgb(228, 228, 8); 
+      }*/
       
-  
+        
+          /* Hero Section */
+          .hero {
+            background: url('hero.jpg') no-repeat center center / cover;
+            color: white;
+            margin-top: 20px;
+            text-align: center;
+            padding: 100px 0;
+          }
+          
+          .bordered-letters {
+            color: white; /* Set the text color to contrast with the border */
+            text-shadow: 
+              -1px -1px 0 black,  
+               1px -1px 0 black,
+              -1px  1px 0 black,
+               1px  1px 0 black;
+            margin: 10px 0; /* Adds some space above and below each element */
+          }
+          
+      
+          .hero h1 {
+            font-size: 50px;
+            margin: 0;
+          }
+      
+          .hero p {
+            font-size: 20px;
+          }
+      
+    
+      
+        /* Hero Section */
+        .hero {
+          background: url('hero.jpg') no-repeat center center / cover;
+          color: blue;
+          margin-top: 20px;
+          text-align: center;
+          padding: 100px 0;
+        }
+        
+        .bordered-letters {
+          color: white; /* Set the text color to contrast with the border */
+          text-shadow: 
+            -1px -1px 0 black,  
+             1px -1px 0 black,
+            -1px  1px 0 black,
+             1px  1px 0 black;
+          margin: 10px 0; /* Adds some space above and below each element */
+        }
+        
+        .hero h1 {
+          font-size: 50px;
+          margin: 0;
+        }
+    
+        .hero p {
+          font-size: 20px;
+        }
+    
+        /* Halls Section */
+        .halls {
+          padding: 50px 0;
+          background-color:aliceblue;
+        }
+     
+        .halls h2 {
+          text-align: center;
+          margin-bottom: 30px;
+        }
+    
+        .hall {
+          background: #f9f9f9;
+          padding: 20px;
+          margin-bottom: 20px;
+          border-radius: 5px;
+          text-align: center;
+        }
+    
+        .hall img {
+          max-width: 100%;
+          height:200px;
+          border-radius: 5px;
+        }
+    
+        .hall:hover {
+          transform: scale(1.05); /* Slightly increase the size */
+          box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15); /* Enhance the shadow */
+        }
+        .hall h3 {
+          margin-top: 15px;
+        }
+    
+        .hall p {
+          font-size: 16px;
+          color: #666;
+        }
+    
+        .hall .btn {
+          margin-top: 10px;
+          background-color: #04172b;
+        }
+    
+      
+          /* Modal Styles */
+      
+          .modal-header {
+            background-color: #04172b;
+            color: white;
+          }
+      
+          .modal-header .close {
+            color: white;
+          }
+      
+          .modal-body .form-group {
+            margin-bottom: 20px;
+          }
+         .modal-body .btn-primary{
+          background-color: #04172b;
+         }
+          /* Footer Styles */
+          footer {
+            background-color: #333;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+          }
+      
+          footer a {
+            color: #337ab7;
+            text-decoration: none;
+          }
+      
+          footer a:hover {
+            text-decoration: underline;
+          }
+      /*  styling for the color of calender */
+      .form-control {
+        border: 1px solid #ccc;
+        padding: 8px;
+        font-size: 14px;
+      }
+      
+      
+      
+       /*  styles for the calendar  */
+      td[data-day] {
+        border-radius: 50%;
+        text-align: center;
+        line-height: 2;
+        cursor: pointer;
+      }
+      
+      td[data-day]:hover {
+        background-color: black;
+      }
+      .hidden {
+          display: none;
+      }
+      
+      
+      
+      
+      
+      
+      
+      
+      .calendar-container {
+        background: #e0f7fa; /* Aquatic theme background */
+        border-radius: 8px; /* Adjust the radius for a more curved appearance */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        width: 60%; /* Adjust as needed */
+        max-width: 100%;
+        margin: 20px auto; /* Center the container horizontally with margin auto */
+        padding: 10px;
+        align-content: center;
+        height: auto;
+        position: absolute;
+        top: 5%;
+        left: 50%;
+        transform: translate(-50%, 0);
+        z-index: 1000;
+      }
+      
+      /* For small devices (phones, less than 600px) */
+      @media only screen and (max-width: 600px) {
+        .calendar-container {
+          width: 90%;
+          top: 5%;
+          left: 50%;
+          transform: translate(-50%, 0);
+        }
+      }
+      
+      /* For medium devices (tablets, 600px to 768px) */
+      @media only screen and (min-width: 600px) and (max-width: 768px) {
+        .calendar-container {
+          width: 80%;
+          top: 5%;
+          left: 50%;
+          transform: translate(-50%, 0);
+        }
+      }
+      
+      .calendar-nav,
+      .calendar-header,
+      .calendar,
+      .legend {
+        user-select: none;
+      }
+      
+      .calendar-nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 0;
+        background: #23252D; /* Aquatic theme header */
+        color: white; /* Office theme text color */
+        border-top-left-radius: 8px; /* Ensure corners are rounded */
+        border-top-right-radius: 8px;
+      }
+      
+      .calendar-nav button {
+        background: none;
+        border: none;
+        color: white; /* Office theme button color */
+        font-size: 18px;
+        cursor: pointer;
+        padding: 5px 10px;
+        transition: background-color 0.3s;
+      }
+      
+      .calendar-nav button:hover {
+        background-color: rgba(0, 0, 0, 0.1);
+        border-radius: 4px;
+      }
+      
+      .calendar-nav span {
+        font-size: 18px;
+        font-weight: bold;
+      }
+      
+      .calendar-header {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        gap: 1px;
+        background: #23252D; /* Aquatic theme header */
+        color: white; /* Office theme text color */
+        text-align: center;
+        padding: 10px 0;
+        font-weight: bold;
+      }
+      
+      .calendar {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        gap: 1px;
+        background: #e0f7fa; /* Aquatic theme body */
+      }
+      
+      .calendar .day {
+        background: #b2dfdb; /* Aquatic theme day background */
+        color: #004d40; /* Aquatic theme day text */
+        padding: 10px;
+        text-align: center;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+      
+      .calendar .day:hover {
+        background-color: #80cbc4; /* Aquatic theme hover effect */
+      }
+      
+      .calendar .day.booked {
+        background-color: lightcoral; /* Booked color */
+        color: white;
+      }
+      
+      .calendar .day.pending {
+        background-color: #fff176; /* Pending color */
+        color: black;
+      }
+      
+      .calendar .day.not-booked {
+        background-color: #68d391; /* Not booked color */
+        color: black;
+      }
+      
+      .day {
+        width: 100%;
+        padding: 10px;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        background-color: white; /* Office theme background */
+        color: #333; /* Office theme text color */
+        border-radius: 50%; /* Changed to circle */
+        transition: box-shadow 0.3s, transform 0.3s;
+      }
+      
+      .day:hover {
+        background-color: #e0e0e0; /* Darker shade on hover */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        transform: scale(1.05); /* Slight zoom effect */
+      }
+      
+      .day.hidden {
+        visibility: hidden;
+      }
+      
+      .event-info {
+        font-size: 12px;
+        margin-top: 4px;
+        text-align: center;
+      }
+      
+      @media (max-width: 640px) {
+        .calendar-header div,
+        .calendar .day {
+          font-size: 12px;
+        }
+      }
+      
+      @media (max-width: 480px) {
+        .calendar-header div,
+        .calendar .day {
+          font-size: 10px;
+        }
+      }
+      
+      .legend {
+        display: flex;
+        justify-content: space-around;
+        padding: 10px;
+        margin-top: 20px;
+        background-color: #23252D;
+        border-radius: 8px;
+        width: 100%;
+        color: white;
+      }
+      
+      .legend-item {
+        display: flex;
+        align-items: center;
+      }
+      
+      .legend-color {
+        width: 20px;
+        height: 20px;
+        border-radius: 4px;
+        margin-right: 8px;
+      }
+      
+      .full-booked-legend {
+        background-color: lightcoral;
+      }
+      
+      .not-booked-legend {
+        background-color: #68d391;
+      }
+      
+      .pending-legend {
+        background-color: rgb(236, 236, 151);
+      }
+      
+      /* Close calendar button */
+      .calendarclose-button {
+        padding: 2px 4px;
+        background-color: #c53030; /* Red background color */
+        color: lightcoral; /* Gray text color */
+        border-radius: 4px;
+        font-size: 12px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition */
+      }
+      
+      .calendarclose-button:hover {
+        background-color: #a12828; /* Darker red on hover */
+        color: lightcoral; /* White text color on hover */
+      }
+      
+      .calendarclose-button .icon {
+        width: 12px;
+        height: 12px;
+      }
+      
+      .calendarclose-button .label {
+        display: none;
+      }
+      
+      .ml-auto {
+        margin-left: auto;
+      }
+      
+      /* Optional: Add fade-in and fade-out animations */
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+      
+      @keyframes fadeOut {
+        from {
+          opacity: 1;
+        }
+        to {
+          opacity: 0;
+        }
+      }
+      
+      .fade-in {
+        animation: fadeIn 0.3s ease-in-out;
+      }
+      
+      .fade-out {
+        animation: fadeOut 0.3s ease-in-out;
+      }
+      
+      
+      
+      
+      
+      
+    
+    
+    
+    
+    
+        
+      
+      /*j*/
+      /* Base styles (mobile-first) */
+    
+      
+      .navbar {
+        flex-direction: column;
+        padding: 10px;
+      }
+      
+      .logo img, .name img {
+        height: auto;
+        max-width: 100%;
+      }
+      
+      .hero {
+        padding: 50px 20px;
+      }
+      
       .hero h1 {
-        font-size: 50px;
-        margin: 0;
+        font-size: 2rem;
       }
-  
+      
       .hero p {
-        font-size: 20px;
+        font-size: 1rem;
       }
-  
-      /* Halls Section */
-      .halls {
-        padding: 50px 0;
-        background-color:aliceblue;
-      }
-   
-      .halls h2 {
-        text-align: center;
-        margin-bottom: 30px;
-      }
-  
-      .hall {
-        background: #f9f9f9;
-        padding: 20px;
-        margin-bottom: 20px;
-        border-radius: 5px;
-        text-align: center;
-      }
-  
+      
       .hall img {
         max-width: 100%;
-        height:200px;
-        border-radius: 5px;
+        height: auto;
       }
-  
-      .hall:hover {
-        transform: scale(1.05); /* Slightly increase the size */
-        box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15); /* Enhance the shadow */
-      }
-      .hall h3 {
-        margin-top: 15px;
-      }
-  
-      .hall p {
-        font-size: 16px;
-        color: #666;
-      }
-  
-      .hall .btn {
-        margin-top: 10px;
-        background-color: #04172b;
-      }
-  
-      /* Modal Styles */
-  
-      .modal-header {
-        background-color: #04172b;
-        color: white;
-      }
-  
-      .modal-header .close {
-        color: white;
-      }
-  
-      .modal-body .form-group {
-        margin-bottom: 20px;
-      }
-     .modal-body .btn-primary{
-      background-color: #04172b;
-     }
-      /* Footer Styles */
-      footer {
-        background-color: #333;
-        color: white;
-        padding: 20px 0;
-        text-align: center;
-      }
-  
-      footer a {
-        color: #337ab7;
-        text-decoration: none;
-      }
-  
-      footer a:hover {
-        text-decoration: underline;
-      }
-  /*  styling for the color of calender */
-  .form-control {
-    border: 1px solid #ccc;
-    padding: 8px;
-    font-size: 14px;
-  }
-  
-  
-  
-   /*  styles for the calendar  */
-  td[data-day] {
-    border-radius: 50%;
-    text-align: center;
-    line-height: 2;
-    cursor: pointer;
-  }
-  
-  td[data-day]:hover {
-    background-color: black;
-  }
-
-  
-  
-  
-  
-  .hall h2 {
-  font-weight: bold; /* Makes the text bold */
-}
-
-
-
-
-
-
-
-  
-  
-  
-  
-  
-  
-  .calendar-container {
-    background: #e0f7fa; /* Aquatic theme background */
-    border-radius: 8px; /* Adjust the radius for a more curved appearance */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: 70%; /* Adjust as needed */
-    max-width: 100%;
-    
-    margin: 20px auto; /* Center the container horizontally with margin auto */
-    padding: 10px;
-    align-content: center;
-    height: auto;
-    position: absolute;
-    top: 5%;
-    left: 70%;
-    transform: translate(-50%, 0);
-    z-index: 1000;
-  }
-  
-  /* For small devices (phones, less than 600px) */
-  @media only screen and (max-width: 600px) {
-    .calendar-container {
-      width: 90%;
-      max-width: 90%;
-      top: 5%;
-      left: 70%;
-      transform: translate(-50%, 0);
-    }
-  }
-  
-  /* For medium devices (tablets, 600px to 768px) */
-  @media only screen and (min-width: 600px) and (max-width: 768px) {
-    .calendar-container {
-      width: 80%;
-      max-width: 80%;
-      top: 5%;
-      left: 70%;
-      transform: translate(-50%, 0);
-    }
-  }
-  
-  .calendar-nav,
-  .calendar-header,
-  .calendar,
-  .legend {
-    user-select: none;
-  }
-  
-  .calendar-nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 0;
-    background: #23252D; /* Aquatic theme header */
-    color: white; /* Office theme text color */
-    border-top-left-radius: 20px; /* Ensure corners are rounded */
-    border-top-right-radius: 20px;
-  }
-  
-  .calendar-nav button {
-    background: none;
-    border: none;
-    color: white; /* Office theme button color */
-    font-size: 18px;
-    cursor: pointer;
-    padding: 5px 10px;
-    transition: background-color 0.3s;
-  }
-  
-  .calendar-nav button:hover {
-    background-color: rgba(0, 0, 0, 0.1);
-    border-radius: 4px;
-  }
-  
-  .calendar-nav span {
-    font-size: 18px;
-    font-weight: bold;
-  }
-  
-  .calendar-header {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    background: #23252D; /* Aquatic theme header */
-    color: white; /* Office theme text color */
-    text-align: center;
-    padding: 10px 0;
-    font-weight: bold;
-    border-bottom-left-radius: 20px; /* Ensure corners are rounded */
-    border-bottom-right-radius: 20px;
-  }
-  
-  .calendar {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    gap: 1px;
-    background: #e0f7fa; /* Aquatic theme body */
-    border-bottom-left-radius: 20px; /* Ensure corners are rounded */
-    border-bottom-right-radius: 20px;
-  }
-  
-  .calendar .day {
-    background: #b2dfdb; /* Aquatic theme day background */
-    color: #004d40; /* Aquatic theme day text */
-    padding: 10px;
-    text-align: center;
-    cursor: pointer;
-    transition: background-color 0.3s;
-  }
-  
-  .calendar .day:hover {
-    background-color: #80cbc4; /* Aquatic theme hover effect */
-  }
-  
-  .calendar .day.booked {
-    background-color: lightcoral; /* Booked color */
-    color: white;
-  }
-  
-  .calendar .day.pending {
-    background-color: #fff176; /* Pending color */
-    color: black;
-  }
-  
-  .calendar .day.not-booked {
-    background-color: #68d391; /* Not booked color */
-    color: black;
-  }
-  
-  .day {
-    width: 100%;
-    padding: 10px;
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    background-color: white; /* Office theme background */
-    color: #333; /* Office theme text color */
-    border-radius: 50%; /* Changed to circle */
-    transition: box-shadow 0.3s, transform 0.3s;
-  }
-  
-  .day:hover {
-    background-color: #e0e0e0; /* Darker shade on hover */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    transform: scale(1.05); /* Slight zoom effect */
-  }
-  
-  .day.hidden {
-    visibility: hidden;
-  }
-  
-  .event-info {
-    font-size: 12px;
-    margin-top: 4px;
-    text-align: center;
-  }
-  
-  @media (max-width: 640px) {
-    .calendar-header,
-    .calendar {
-      grid-template-columns: repeat(3, 1fr);
-    }
-  
-    .day {
-      font-size: 14px;
-      padding: 5px;
-    }
-  }
-  
-  @media (max-width: 480px) {
-    .calendar-header,
-    .calendar {
-      grid-template-columns: repeat(2, 1fr);
-    }
-  
-    .day {
-      font-size: 12px;
-      padding: 3px;
-    }
-  }
-  
-  .legend {
-    display: flex;
-    justify-content: space-around;
-    padding: 10px;
-    margin-top: 20px;
-    background-color: #23252D;
-    border-radius: 8px;
-    width: 100%;
-    color: white;
-  }
-  
-  .legend-item {
-    display: flex;
-    align-items: center;
-  }
-  
-  .legend-color {
-    width: 20px;
-    height: 20px;
-    border-radius: 4px;
-    margin-right: 8px;
-  }
-  
-  .full-booked-legend {
-    background-color: lightcoral;
-  }
-  
-  .not-booked-legend {
-    background-color: #68d391;
-  }
-  
-  .pending-legend {
-    background-color: rgb(236, 236, 151);
-  }
-  
-    /*close calender */
-    .calendarclose-button {
-      padding: 2px 4px; 
-      background-color: #c53030; /* Red background color */
-      color:lightcoral; /* Gray text color */
-      border-radius: 4px; 
-      font-size: 12px; 
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center; 
-      transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition */
-    }
-    
-    .calendarclose-button:hover {
-      background-color: #a12828; /* Darker red on hover */
-      color:lightcoral; /* White text color on hover */
-    }
-    
-    .calendarclose-button .icon {
-      width: 12px; 
-      height: 12px; 
-    }
-    
-    .calendarclose-button .label {
-      display: none; 
-    }
-    
-    .ml-auto {
-      margin-left: auto; 
-    }
-    
-    /* Optional: Add fade-in and fade-out animations */
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-      }
-      to {
-        opacity: 1;
-      }
-    }
-    
-    @keyframes fadeOut {
-      from {
-        opacity: 1;
-      }
-      to {
-        opacity: 0;
-      }
-    }
-    
-    .fade-in {
-      animation: fadeIn 0.3s ease-in-out;
-    }
-    
-    .fade-out {
-      animation: fadeOut 0.3s ease-in-out;
-    }
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  /*slots*/
-  
-     .time-slot-popup {
-                  position: fixed;
-                  top: 50%;
-                  left: 50%;
-                  transform: translate(-50%, -50%);
-                  background-color: #04172b; /* Dark blue background */
-                  border: 1px solid #ccc;
-                  padding: 20px;
-                  border-radius: 10px;
-                  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-                  z-index: 1000;
-                  color: white; 
-                  max-width: 90%; 
-                  max-height: 90%; 
-                
-              }
-              
-              
-              
-              
-              .time-slot-content {
-                  margin-top: 10px;
-              }
-              
-              .time-slot-chart {
-                  display: flex;
-                  align-items: center;
-                  justify-content: space-between; /* Adjust  */
-                  gap: 10px; /* Or use margin: 10px;*/
-                  overflow-x: auto; /* Enable horizontal scrolling */
-                  overflow-y: hidden; /* Disable vertical scrolling */
-              }
-              
-              .time-slot-time,
-              .time-slot-status {
-                  padding: 10px;
-                  border: 2px solid #ccc;
-                  text-align: center;
-                  flex: 1; /* Take up remaining space */
-                  transition: transform 0.3s ease-out; /* Smooth transition for size change */
-              }
-              
-              .time-slot-time:hover,
-              .time-slot-status:hover {
-                  transform: scale(1.1); /* Increase size on hover */
-              }
-               
       
-              
-              .status-data {
-                  position: absolute;
-                  top: -100%; /* Start from above the box */
-                  left: 0;
-                  width: auto;
-                  height: auto;
-                  background-color: transparent; /* Transparent initially */
-                  animation: slideInDown 0.5s forwards; /* Animation for sliding in */
-                  text-align: center;
-                  display: flex;
-                  align-items: center;
-                  justify-content: center;
-                  color: white;
-                  transition: transform 0.3s ease-out; /* Smooth transition for size change */
-              }
-              
-              .status-data:hover {
-                  transform: scale(1.2); /* Increase size on hover */
-              }
-              
-              @keyframes slideInDown {
-                  from {
+      .calendar-container {
+        width: 95%;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+      
+      /* Responsive adjustments */
+      @media (min-width: 600px) {
+        .navbar {
+          flex-direction: row;
+        }
+      
+        .hero h1 {
+          font-size: 2.5rem;
+        }
+      
+        .calendar-container {
+          width: 80%;
+        }
+      }
+      
+      @media (min-width: 768px) {
+        .hero h1 {
+          font-size: 3rem;
+        }
+      
+        .calendar-container {
+          width: 70%;
+        }
+      }
+      
+      @media (min-width: 1024px) {
+        .calendar-container {
+          width: 60%;
+        }
+      }
+    
+      .error-message {
+        color: red;
+        font-size: 0.9em;
+        display: none;
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+      
+      /*slots*/
+      
+         .time-slot-popup {
+                      position: fixed;
+                      top: 50%;
+                      left: 50%;
+                      transform: translate(-50%, -50%);
+                      background-color: #04172b; /* Dark blue background */
+                      border: 1px solid #ccc;
+                      padding: 20px;
+                      border-radius: 10px;
+                      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+                      z-index: 1000;
+                      color: white; 
+                      max-width: 90%; 
+                      max-height: 90%; 
+                    
+                  }
+                  
+                  
+                  
+                  
+                  .time-slot-content {
+                      margin-top: 10px;
+                  }
+                  
+                  .time-slot-chart {
+                      display: flex;
+                      align-items: center;
+                      justify-content: space-between; /* Adjust  */
+                      gap: 10px; /* Or use margin: 10px;*/
+                      overflow-x: auto; /* Enable horizontal scrolling */
+                      overflow-y: hidden; /* Disable vertical scrolling */
+                  }
+                  
+                  .time-slot-time,
+                  .time-slot-status {
+                      padding: 10px;
+                      border: 2px solid #ccc;
+                      text-align: center;
+                      flex: 1; /* Take up remaining space */
+                      transition: transform 0.3s ease-out; /* Smooth transition for size change */
+                  }
+                  
+                  .time-slot-time:hover,
+                  .time-slot-status:hover {
+                      transform: scale(1.1); /* Increase size on hover */
+                  }
+                   
+          
+                  
+                  .status-data {
+                      position: absolute;
                       top: -100%; /* Start from above the box */
+                      left: 0;
+                      width: auto;
+                      height: auto;
+                      background-color: transparent; /* Transparent initially */
+                      animation: slideInDown 0.5s forwards; /* Animation for sliding in */
+                      text-align: center;
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;
+                      color: white;
+                      transition: transform 0.3s ease-out; /* Smooth transition for size change */
                   }
-                  to {
-                      top: 0; /* Slide in downwards */
+                  
+                  .status-data:hover {
+                      transform: scale(1.2); /* Increase size on hover */
                   }
-              }
-              
-              
-              
-              .booked {
-                  background-color: lightcoral; /* Light red background for booked slots */
-              }
-              
-              .pending {
-                  background-color: rgb(236, 236, 151); /* Light yellow background for pending slots */
-                  color: black;
-              }
-              
-              .free {
-                  background-color: lightgreen; /* Green background for free slots */
-              }
-              
-              .close-button {
-                  display: block;
-                  margin: 10px auto;
-                  padding: 5px 10px;
-                  background-color: #f44336; /* Red close button */
-                  color: white;
-                  border: none;
-                  border-radius: 5px;
-                  cursor: pointer;
-              }
-              
-              .close-button:hover {
-                  background-color: #d32f2f; /* Darker red hover color */
-              }
-              
-              .time-slot-popup.disappear {
-                  opacity: 0;
-              }
-              
-            
-              .nav-buttons {
-                  display: flex;
-                  justify-content: space-between;
-                  margin-top: 40px;
-              }
-              
-              .nav-buttons button {
-                  background-color: transparent;
-                  border: none;
-                  cursor: pointer;
-                  transition: all 0.3s ease;
-                  font-weight: bold;
-                  color: white; /* Adjust text color as needed */
-                  font-size: 1.2em; /* Adjust font size as needed */
-                  padding: 5px 10px; /* Adjust padding as needed */
-              }
-              
-              .nav-buttons button:hover {
-                  transform: scale(1.1);
-                  color: #555; /* Adjust hover text color */
-              }
-              
-              .nav-buttons button:focus {
-                  outline: none;
-              }
-              
-              .nav-buttons button:active {
-                  transform: scale(0.9);
-              }
-              
-  
-  
-  
-  
-  
-  
-  
-  
-              
-  .free:hover {
-      background-color: #555;
-    }
-    
-    .selected {
-      background-color: #0a74da;
-      color: #fff;
-      transition: background-color 0.3s;
-    }
-    
-    .select-animation {
-      animation: selectFade 0.3s;
-    }
-    
-    .unselect-animation {
-      animation: unselectFade 0.3s;
-    }
-    
-    .submit-container {
-      margin-top: 20px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    
-    .submit-button {
-      background-color: #0a74da;
-      color: #fff;
-      padding: 10px 20px;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      transition: background-color 0.3s;
-    }
-    
-    .submit-button:hover {
-      background-color: #005bb5;
-    }
-    
-    .selected-count {
-      font-size: 16px;
-    }
-    
-    .nav-buttons {
-      display: flex;
-      justify-content: space-between;
-      margin-top: 20px;
-    }
-    
-    .nav-button {
-      background: none;
-      border: none;
-      color: #fff;
-      font-size: 20px;
-      cursor: pointer;
-    }
-    
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-    
-    @keyframes selectFade {
-      from { background-color: #555; }
-      to { background-color: #0a74da; }
-    }
-    
-    @keyframes unselectFade {
-      from { background-color: #0a74da; }
-      to { background-color: #555; }
-    }
-    
-    
-    .hidden {
-      display: none;
-    }
-    
-    /*for calendar icon  in form */
-    .relative {
-      display: flex;
-      justify-content: center;
-      align-items: center;
+                  
+                  @keyframes slideInDown {
+                      from {
+                          top: -100%; /* Start from above the box */
+                      }
+                      to {
+                          top: 0; /* Slide in downwards */
+                      }
+                  }
+                  
+                  
+                  
+                  .booked {
+                      background-color: lightcoral; /* Light red background for booked slots */
+                  }
+                  
+                  .pending {
+                      background-color: rgb(236, 236, 151); /* Light yellow background for pending slots */
+                      color: black;
+                  }
+                  
+                  .free {
+                      background-color: lightgreen; /* Green background for free slots */
+                  }
+                  
+                  .close-button {
+                      display: block;
+                      margin: 10px auto;
+                      padding: 5px 10px;
+                      background-color: #f44336; /* Red close button */
+                      color: white;
+                      border: none;
+                      border-radius: 5px;
+                      cursor: pointer;
+                  }
+                  
+                  .close-button:hover {
+                      background-color: #d32f2f; /* Darker red hover color */
+                  }
+                  
+                  .time-slot-popup.disappear {
+                      opacity: 0;
+                  }
+                  
+                
+                  .nav-buttons {
+                      display: flex;
+                      justify-content: space-between;
+                      margin-top: 40px;
+                  }
+                  
+                  .nav-buttons button {
+                      background-color: transparent;
+                      border: none;
+                      cursor: pointer;
+                      transition: all 0.3s ease;
+                      font-weight: bold;
+                      color: white; /* Adjust text color as needed */
+                      font-size: 1.2em; /* Adjust font size as needed */
+                      padding: 5px 10px; /* Adjust padding as needed */
+                  }
+                  
+                  .nav-buttons button:hover {
+                      transform: scale(1.1);
+                      color: #555; /* Adjust hover text color */
+                  }
+                  
+                  .nav-buttons button:focus {
+                      outline: none;
+                  }
+                  
+                  .nav-buttons button:active {
+                      transform: scale(0.9);
+                  }
+                  
       
-    }
-  
-  
-    </style>
+      
+      
+      
+      
+      
+      
+      
+                  
+      .free:hover {
+          background-color: #555;
+        }
+        
+        .selected {
+          background-color: #0a74da;
+          color: #fff;
+          transition: background-color 0.3s;
+        }
+        
+        .select-animation {
+          animation: selectFade 0.3s;
+        }
+        
+        .unselect-animation {
+          animation: unselectFade 0.3s;
+        }
+        
+        .submit-container {
+          margin-top: 20px;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        }
+        
+        .submit-button {
+          background-color: #0a74da;
+          color: #fff;
+          padding: 10px 20px;
+          border: none;
+          border-radius: 5px;
+          cursor: pointer;
+          transition: background-color 0.3s;
+        }
+        
+        .submit-button:hover {
+          background-color: #005bb5;
+        }
+        
+        .selected-count {
+          font-size: 16px;
+        }
+        
+        .nav-buttons {
+          display: flex;
+          justify-content: space-between;
+          margin-top: 20px;
+        }
+        
+        .nav-button {
+          background: none;
+          border: none;
+          color: #fff;
+          font-size: 20px;
+          cursor: pointer;
+        }
+        
+        @keyframes fadeIn {
+          from { opacity: 0; }
+          to { opacity: 1; }
+        }
+        
+        @keyframes selectFade {
+          from { background-color: #555; }
+          to { background-color: #0a74da; }
+        }
+        
+        @keyframes unselectFade {
+          from { background-color: #0a74da; }
+          to { background-color: #555; }
+        }
+        
+        
+        .hidden {
+          display: none;
+        }
+        
+        /*for calendar icon  in form */
+        .relative {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          
+        }
+      
+      
+        </style>
 </head>
 
 <body>
@@ -791,10 +907,10 @@
     <div class="navbar">
         <div class="logo-container">
             <div class="logo">
-                <img src="{{ url_for('static',filename='L1.png') }}" alt="Logo">
+              <img src="{{ url_for('static',filename='L1.png') }}" alt="Logo">
             </div>
             <div class="name">
-                <img src="{{ url_for('static',filename='L2.png') }}" alt="Name Logo">
+              <img src="{{ url_for('static',filename='L2.png') }}" alt="Name Logo">
             </div>
         </div>
         <div class="menu">
@@ -802,14 +918,13 @@
                 <i class="fas fa-calendar-alt"></i> Calendar
             </a>
             <a href="{{url_for('usernoti')}}" class="menu-item">
-                <i class="fas fa-bell"></i> Hall Updates
+                <i class="fas fa-bell"></i> Updates
             </a>
-            <a href="{{url_for('status')}}" class="menu-item">Booking Status</a>
+            <a href="{{url_for('status')}}" class="menu-item">Status</a>
             <a href="{{url_for('home')}}" class="menu-item">Logout</a>
         </div>
     </div>
 </header>
-  
   
   <main>
     <section class="hero">
@@ -948,18 +1063,25 @@
                   <option value="AIE">AIE - Amity Institute of Education</option>
                   <option value="AIN">AIN - Amity Institute of Nanotechnology</option>
                 </select>
+                <div class="error-message schoolNameError">Please select a school name.</div>
               </div>
               <div class="form-group">
                 <label for="auditoriumFacultyName">Event Coordinator Name:</label>
                 <input type="text" class="form-control" id="auditoriumFacultyName" name="auditoriumFacultyName" placeholder="Enter your name" required>
+                <div class="error-message facultyNameError">Please enter a valid name with letters only.</div>
+
               </div>
               <div class="form-group">
                 <label for="auditoriumHodName">HOD/HOI/Director Name:</label>
                 <input type="text" class="form-control" id="auditoriumHodName" name="auditoriumHodName" placeholder="Enter HOD/HOI/Director name" required>
+                <div class="error-message hodNameError">Please enter a valid name with letters only.</div>
+
               </div>
               <div class="form-group">
                 <label for="auditoriumEventName">Event Name:</label>
                 <input type="text" class="form-control" id="auditoriumEventName" name="auditoriumEventName" placeholder="Enter event name" required>
+                <div class="error-message eventNameError">Please enter the event name.</div>
+
               </div>
               <div class="form-group">
                 <label for="auditoriumstartime">Start Time</label>
@@ -989,30 +1111,42 @@
                    <option value="1700">05:00 pm</option>
                    <option value="1800">06:00 pm</option>
                 </select>
+
               </div>
               <div class="form-group">
                 <label for="auditoriumdate">Date of Event:</label>
                 <input type="date" class="form-control" id="auditoriumdate" name="auditoriumdate" required onchange="updateDayOfWeek('auditoriumdate', 'auditoriumday'); updateCalendarColor('auditoriumdate','auditoriumDuration')">
+                <div class="error-message dateError">Please select a date.</div>
+
               </div>
               <div class="form-group">
                 <label for="auditoriumday">Day of Event:</label>
                 <input type="text" class="form-control" id="auditoriumday" name="auditoriumday" readonly>
+            
               </div>
               <div class="form-group">
                 <label for="auditoriumResourcePersonName">Resource Person Name:</label>
                 <input type="text" class="form-control" id="auditoriumResourcePersonName" name="auditoriumResourcePersonName" placeholder="Enter resource person name" required>
+                <div class="error-message resourcePersonNameError">Please enter the resource person name.</div>
+
               </div>
               <div class="form-group">
                 <label for="auditoriumResourcePersonDetail">Resource Person Detail:</label>
                 <textarea class="form-control" id="auditoriumResourcePersonDetail" name="auditoriumResourcePersonDetail" placeholder="Enter resource person details" required></textarea>
+                <div class="error-message resourcePersonDetailError">Please enter the resource person details.</div>
+
               </div>
               <div class="form-group">
                 <label for="auditoriumEmail">Event Coordinator's Email:</label>
                 <input type="email" class="form-control" id="auditoriumEmail" name="auditoriumEmail" placeholder="Enter your email" required>
+                <div class="error-message emailError">Please enter a valid email address.</div>
+
               </div>
               <div class="form-group">
                 <label for="auditoriumPhone">Event Coordinator's Phone Number:</label>
                 <input type="tel" class="form-control" id="auditoriumPhone" name="auditoriumPhone" placeholder="Enter your phone number" required>
+                <div class="error-message phoneError">Please enter a valid 10-digit phone number.</div>
+
               </div>
               <button type="submit" class="btn btn-primary" id="submitmain">Submit</button>
         </form>
@@ -1124,18 +1258,25 @@
             <option value="AIE">AIE - Amity Institute of Education</option>
             <option value="AIN">AIN - Amity Institute of Nanotechnology</option>
           </select>
+          <div class="error-message schoolNameError">Please select a school name.</div>
         </div>
         <div class="form-group">
           <label for="seminarFacultyName">Event Coordinator Name:</label>
           <input type="text" class="form-control" id="seminarFacultyName" name="seminarFacultyName" placeholder="Enter your name" required>
+          <div class="error-message facultyNameError">Please enter a valid name with letters only.</div>
+
         </div>
         <div class="form-group">
           <label for="seminarHodName">HOD/HOI/Director Name:</label>
           <input type="text" class="form-control" id="seminarHodName" name="seminarHodName" placeholder="Enter HOD/HOI/Director name" required>
+          <div class="error-message hodNameError">Please enter a valid name with letters only.</div>
+
         </div>
         <div class="form-group">
           <label for="seminarEventName">Event Name:</label>
           <input type="text" class="form-control" id="seminarEventName" name="seminarEventName" placeholder="Enter event name" required>
+          <div class="error-message eventNameError">Please enter the event name.</div>
+
         </div>
         <div class="form-group">
           <label for="seminarstartime">Start Time</label>
@@ -1169,26 +1310,37 @@
         <div class="form-group">
           <label for="seminardate">Date of Event:</label>
           <input type="date" class="form-control" id="seminardate" name="seminardate" required onchange="updateDayOfWeek('seminardate', 'seminarday'); updateCalendarColor('seminardate','seminarDuration')">
+          <div class="error-message dateError">Please select a date.</div>
+
         </div>
         <div class="form-group">
           <label for="seminarday">Day of Event:</label>
           <input type="text" class="form-control" id="seminarday" name="seminarday" readonly>
+       
         </div>
         <div class="form-group">
           <label for="seminarResourcePersonName">Resource Person Name:</label>
           <input type="text" class="form-control" id="seminarResourcePersonName" name="seminarResourcePersonName" placeholder="Enter resource person name" required>
+          <div class="error-message resourcePersonNameError">Please enter the resource person name.</div>
+
         </div>
         <div class="form-group">
           <label for="seminarResourcePersonDetail">Resource Person Detail:</label>
           <textarea class="form-control" id="seminarResourcePersonDetail" name="seminarResourcePersonDetail" placeholder="Enter resource person details" required></textarea>
+          <div class="error-message resourcePersonDetailError">Please enter the resource person details.</div>
+
         </div>
         <div class="form-group">
           <label for="seminarEmail">Event Coordinator's Email:</label>
           <input type="email" class="form-control" id="seminarEmail" name="seminarEmail" placeholder="Enter your email" required>
+          <div class="error-message emailError">Please enter a valid email address.</div>
+
         </div>
         <div class="form-group">
           <label for="seminarPhone">Event Coordinator's Phone Number:</label>
           <input type="tel" class="form-control" id="seminarPhone" name="seminarPhone" placeholder="Enter your phone number" required>
+          <div class="error-message phoneError">Please enter a valid 10-digit phone number.</div>
+
         </div>
         <button type="submit" class="btn btn-primary" id="submitmain">Submit</button>
   </form>
@@ -1301,18 +1453,25 @@
             <option value="AIE">AIE - Amity Institute of Education</option>
             <option value="AIN">AIN - Amity Institute of Nanotechnology</option>
           </select>
+          <div class="error-message schoolNameError">Please select a school name.</div>
         </div>
         <div class="form-group">
           <label for="room105FacultyName">Event Coordinator Name:</label>
           <input type="text" class="form-control" id="room105FacultyName" name="room105FacultyName" placeholder="Enter your name" required>
+          <div class="error-message facultyNameError">Please enter a valid name with letters only.</div>
+
         </div>
         <div class="form-group">
           <label for="room105HodName">HOD/HOI/Director Name:</label>
           <input type="text" class="form-control" id="room105HodName" name="room105HodName" placeholder="Enter HOD/HOI/Director name" required>
+          <div class="error-message hodNameError">Please enter a valid name with letters only.</div>
+
         </div>
         <div class="form-group">
           <label for="room105EventName">Event Name:</label>
           <input type="text" class="form-control" id="room105EventName" name="room105EventName" placeholder="Enter event name" required>
+          <div class="error-message eventNameError">Please enter the event name.</div>
+
         </div>
         <div class="form-group">
           <label for="room105startime">Start Time</label>
@@ -1346,6 +1505,8 @@
         <div class="form-group">
           <label for="room105date">Date of Event:</label>
           <input type="date" class="form-control" id="room105date" name="room105date" required onchange="updateDayOfWeek('room105date', 'room105day'); updateCalendarColor('room105date','room105Duration')">
+          <div class="error-message dateError">Please select a date.</div>
+
         </div>
         <div class="form-group">
           <label for="room105day">Day of Event:</label>
@@ -1354,18 +1515,26 @@
         <div class="form-group">
           <label for="room105ResourcePersonName">Resource Person Name:</label>
           <input type="text" class="form-control" id="room105ResourcePersonName" name="room105ResourcePersonName" placeholder="Enter resource person name" required>
+          <div class="error-message resourcePersonNameError">Please enter the resource person name.</div>
         </div>
         <div class="form-group">
           <label for="room105ResourcePersonDetail">Resource Person Detail:</label>
           <textarea class="form-control" id="room105ResourcePersonDetail" name="room105ResourcePersonDetail" placeholder="Enter resource person details" required></textarea>
+          
+          <div class="error-message resourcePersonDetailError">Please enter the resource person details.</div>
+
         </div>
         <div class="form-group">
           <label for="room105Email">Event Coordinator's Email:</label>
           <input type="email" class="form-control" id="room105Email" name="room105Email" placeholder="Enter your email" required>
+          <div class="error-message emailError">Please enter a valid email address.</div>
+
         </div>
         <div class="form-group">
           <label for="room105Phone">Event Coordinator's Phone Number:</label>
           <input type="tel" class="form-control" id="room105Phone" name="room105Phone" placeholder="Enter your phone number" required>
+          <div class="error-message phoneError">Please enter a valid 10-digit phone number.</div>
+
         </div>
         <button type="submit" class="btn btn-primary" id="submitmain">Submit</button>
   </form>
@@ -1479,18 +1648,25 @@
             <option value="AIE">AIE - Amity Institute of Education</option>
             <option value="AIN">AIN - Amity Institute of Nanotechnology</option>
           </select>
+          <div class="error-message schoolNameError">Please select a school name.</div>
         </div>
         <div class="form-group">
           <label for="crcFacultyName">Event Coordinator Name:</label>
           <input type="text" class="form-control" id="crcFacultyName" name="crcFacultyName" placeholder="Enter your name" required>
+          <div class="error-message facultyNameError">Please enter a valid name with letters only.</div>
+
         </div>
         <div class="form-group">
           <label for="crcHodName">HOD/HOI/Director Name:</label>
           <input type="text" class="form-control" id="crcHodName" name="crcHodName" placeholder="Enter HOD/HOI/Director name" required>
+          <div class="error-message hodNameError">Please enter a valid name with letters only.</div>
+
         </div>
         <div class="form-group">
           <label for="crcEventName">Event Name:</label>
           <input type="text" class="form-control" id="crcEventName" name="crcEventName" placeholder="Enter event name" required>
+          <div class="error-message eventNameError">Please enter the event name.</div>
+
         </div>
         <div class="form-group">
           <label for="crcstartime">Start Time</label>
@@ -1524,6 +1700,8 @@
         <div class="form-group">
           <label for="crcdate">Date of Event:</label>
           <input type="date" class="form-control" id="crcdate" name="crcdate" required onchange="updateDayOfWeek('crcdate', 'crcday'); updateCalendarColor('crcdate','crcDuration')">
+          <div class="error-message dateError">Please select a date.</div>
+
         </div>
         <div class="form-group">
           <label for="crcday">Day of Event:</label>
@@ -1532,18 +1710,26 @@
         <div class="form-group">
           <label for="crcResourcePersonName">Resource Person Name:</label>
           <input type="text" class="form-control" id="crcResourcePersonName" name="crcResourcePersonName" placeholder="Enter resource person name" required>
+          <div class="error-message resourcePersonNameError">Please enter the resource person name.</div>
+
         </div>
         <div class="form-group">
           <label for="crcResourcePersonDetail">Resource Person Detail:</label>
           <textarea class="form-control" id="crcResourcePersonDetail" name="crcResourcePersonDetail" placeholder="Enter resource person details" required></textarea>
+          <div class="error-message resourcePersonDetailError">Please enter the resource person details.</div>
+
         </div>
         <div class="form-group">
           <label for="crcEmail">Event Coordinator's Email:</label>
           <input type="email" class="form-control" id="crcEmail" name="crcEmail" placeholder="Enter your email" required>
+          <div class="error-message emailError">Please enter a valid email address.</div>
+
         </div>
         <div class="form-group">
           <label for="crcPhone">Event Coordinator's Phone Number:</label>
           <input type="tel" class="form-control" id="crcPhone" name="crcPhone" placeholder="Enter your phone number" required>
+          <div class="error-message phoneError">Please enter a valid 10-digit phone number.</div>
+
         </div>
         <button type="submit" class="btn btn-primary" id="submitmain">Submit</button>
   </form>
@@ -1659,18 +1845,25 @@
             <option value="AIE">AIE - Amity Institute of Education</option>
             <option value="AIN">AIN - Amity Institute of Nanotechnology</option>
           </select>
+          <div class="error-message schoolNameError">Please select a school name.</div>
         </div>
         <div class="form-group">
           <label for="RICSConferenceRoomFacultyName">Event Coordinator Name:</label>
           <input type="text" class="form-control" id="RICSConferenceRoomFacultyName" name="RICSConferenceRoomFacultyName" placeholder="Enter your name" required>
+          <div class="error-message facultyNameError">Please enter a valid name with letters only.</div>
+
         </div>
         <div class="form-group">
           <label for="RICSConferenceRoomHodName">HOD/HOI/Director Name:</label>
           <input type="text" class="form-control" id="RICSConferenceRoomHodName" name="RICSConferenceRoomHodName" placeholder="Enter HOD/HOI/Director name" required>
+          <div class="error-message hodNameError">Please enter a valid name with letters only.</div>
+
         </div>
         <div class="form-group">
           <label for="RICSConferenceRoomEventName">Event Name:</label>
           <input type="text" class="form-control" id="RICSConferenceRoomEventName" name="RICSConferenceRoomEventName" placeholder="Enter event name" required>
+          <div class="error-message eventNameError">Please enter the event name.</div>
+
         </div>
         <div class="form-group">
           <label for="RICSConferenceRoomstartime">Start Time</label>
@@ -1704,26 +1897,37 @@
         <div class="form-group">
           <label for="RICSConferenceRoomdate">Date of Event:</label>
           <input type="date" class="form-control" id="RICSConferenceRoomdate" name="RICSConferenceRoomdate" required onchange="updateDayOfWeek('RICSConferenceRoomdate', 'RICSConferenceRoomday'); updateCalendarColor('RICSConferenceRoomdate','RICSConferenceRoomDuration')">
+          <div class="error-message dateError">Please select a date.</div>
+
         </div>
         <div class="form-group">
           <label for="RICSConferenceRoomday">Day of Event:</label>
           <input type="text" class="form-control" id="RICSConferenceRoomday" name="RICSConferenceRoomday" readonly>
+       
         </div>
         <div class="form-group">
           <label for="RICSConferenceRoomResourcePersonName">Resource Person Name:</label>
           <input type="text" class="form-control" id="RICSConferenceRoomResourcePersonName" name="RICSConferenceRoomResourcePersonName" placeholder="Enter resource person name" required>
+          <div class="error-message resourcePersonNameError">Please enter the resource person name.</div>
+
         </div>
         <div class="form-group">
           <label for="RICSConferenceRoomResourcePersonDetail">Resource Person Detail:</label>
           <textarea class="form-control" id="RICSConferenceRoomResourcePersonDetail" name="RICSConferenceRoomResourcePersonDetail" placeholder="Enter resource person details" required></textarea>
+          <div class="error-message resourcePersonDetailError">Please enter the resource person details.</div>
+
         </div>
         <div class="form-group">
           <label for="RICSConferenceRoomEmail">Event Coordinator's Email:</label>
           <input type="email" class="form-control" id="RICSConferenceRoomEmail" name="RICSConferenceRoomEmail" placeholder="Enter your email" required>
+          <div class="error-message emailError">Please enter a valid email address.</div>
+
         </div>
         <div class="form-group">
           <label for="RICSConferenceRoomPhone">Event Coordinator's Phone Number:</label>
           <input type="tel" class="form-control" id="RICSConferenceRoomPhone" name="RICSConferenceRoomPhone" placeholder="Enter your phone number" required>
+          <div class="error-message phoneError">Please enter a valid 10-digit phone number.</div>
+
         </div>
         <button type="submit" class="btn btn-primary" id="submitmain">Submit</button>
   </form>
@@ -1840,18 +2044,26 @@
             <option value="AIE">AIE - Amity Institute of Education</option>
             <option value="AIN">AIN - Amity Institute of Nanotechnology</option>
           </select>
+          <div class="error-message schoolNameError">Please select a school name.</div>
         </div>
         <div class="form-group">
           <label for="AtriumFacultyName">Event Coordinator Name:</label>
           <input type="text" class="form-control" id="AtriumFacultyName" name="AtriumFacultyName" placeholder="Enter your name" required>
+          <div class="error-message facultyNameError">Please enter a valid name with letters only.</div>
+
         </div>
         <div class="form-group">
           <label for="AtriumHodName">HOD/HOI/Director Name:</label>
           <input type="text" class="form-control" id="AtriumHodName" name="AtriumHodName" placeholder="Enter HOD/HOI/Director name" required>
+          <div class="error-message hodNameError">Please enter a valid name with letters only.</div>
+
         </div>
         <div class="form-group">
           <label for="AtriumEventName">Event Name:</label>
           <input type="text" class="form-control" id="AtriumEventName" name="AtriumEventName" placeholder="Enter event name" required>
+          <div class="error-message eventNameError">Please enter the event name.</div>
+
+       
         </div>
         <div class="form-group">
           <label for="Atriumstartime">Start Time</label>
@@ -1885,26 +2097,37 @@
         <div class="form-group">
           <label for="Atriumdate">Date of Event:</label>
           <input type="date" class="form-control" id="Atriumdate" name="Atriumdate" required onchange="updateDayOfWeek('Atriumdate', 'Atriumday'); updateCalendarColor('Atriumdate','AtriumDuration')">
+          <div class="error-message dateError">Please select a date.</div>
+
         </div>
         <div class="form-group">
           <label for="Atriumday">Day of Event:</label>
           <input type="text" class="form-control" id="Atriumday" name="Atriumday" readonly>
+       
         </div>
         <div class="form-group">
           <label for="AtriumResourcePersonName">Resource Person Name:</label>
           <input type="text" class="form-control" id="AtriumResourcePersonName" name="AtriumResourcePersonName" placeholder="Enter resource person name" required>
+          <div class="error-message resourcePersonNameError">Please enter the resource person name.</div>
+
         </div>
         <div class="form-group">
           <label for="AtriumResourcePersonDetail">Resource Person Detail:</label>
           <textarea class="form-control" id="AtriumResourcePersonDetail" name="AtriumResourcePersonDetail" placeholder="Enter resource person details" required></textarea>
+          <div class="error-message resourcePersonDetailError">Please enter the resource person details.</div>
+
         </div>
         <div class="form-group">
           <label for="AtriumEmail">Event Coordinator's Email:</label>
           <input type="email" class="form-control" id="AtriumEmail" name="AtriumEmail" placeholder="Enter your email" required>
+          <div class="error-message emailError">Please enter a valid email address.</div>
+
         </div>
         <div class="form-group">
           <label for="AtriumPhone">Event Coordinator's Phone Number:</label>
           <input type="tel" class="form-control" id="AtriumPhone" name="AtriumPhone" placeholder="Enter your phone number" required>
+          <div class="error-message phoneError">Please enter a valid 10-digit phone number.</div>
+
         </div>
         <button type="submit" class="btn btn-primary" id="submitmain">Submit</button>
   </form>
@@ -2020,18 +2243,25 @@
             <option value="AIE">AIE - Amity Institute of Education</option>
             <option value="AIN">AIN - Amity Institute of Nanotechnology</option>
           </select>
+          <div class="error-message schoolNameError">Please select a school name.</div>
         </div>
         <div class="form-group">
           <label for="AIBConferenceroomFacultyName">Event Coordinator Name:</label>
           <input type="text" class="form-control" id="AIBConferenceroomFacultyName" name="AIBConferenceroomFacultyName" placeholder="Enter your name" required>
+          <div class="error-message facultyNameError">Please enter a valid name with letters only.</div>
+       
         </div>
         <div class="form-group">
           <label for="AIBConferenceroomHodName">HOD/HOI/Director Name:</label>
           <input type="text" class="form-control" id="AIBConferenceroomHodName" name="AIBConferenceroomHodName" placeholder="Enter HOD/HOI/Director name" required>
+          <div class="error-message hodNameError">Please enter a valid name with letters only.</div>
+
         </div>
         <div class="form-group">
           <label for="AIBConferenceroomEventName">Event Name:</label>
           <input type="text" class="form-control" id="AIBConferenceroomEventName" name="AIBConferenceroomEventName" placeholder="Enter event name" required>
+          <div class="error-message eventNameError">Please enter the event name.</div>
+
         </div>
         <div class="form-group">
           <label for="AIBConferenceroomstartime">Start Time</label>
@@ -2065,26 +2295,37 @@
         <div class="form-group">
           <label for="AIBConferenceroomdate">Date of Event:</label>
           <input type="date" class="form-control" id="AIBConferenceroomdate" name="AIBConferenceroomdate" required onchange="updateDayOfWeek('AIBConferenceroomdate', 'AIBConferenceroomday'); updateCalendarColor('AIBConferenceroomdate','AIBConferenceroomDuration')">
+          <div class="error-message dateError">Please select a date.</div>
+
         </div>
         <div class="form-group">
           <label for="AIBConferenceroomday">Day of Event:</label>
           <input type="text" class="form-control" id="AIBConferenceroomday" name="AIBConferenceroomday" readonly>
+       
         </div>
         <div class="form-group">
           <label for="AIBConferenceroomResourcePersonName">Resource Person Name:</label>
           <input type="text" class="form-control" id="AIBConferenceroomResourcePersonName" name="AIBConferenceroomResourcePersonName" placeholder="Enter resource person name" required>
+          <div class="error-message resourcePersonNameError">Please enter the resource person name.</div>
+
         </div>
         <div class="form-group">
           <label for="AIBConferenceroomResourcePersonDetail">Resource Person Detail:</label>
           <textarea class="form-control" id="AIBConferenceroomResourcePersonDetail" name="AIBConferenceroomResourcePersonDetail" placeholder="Enter resource person details" required></textarea>
+          <div class="error-message resourcePersonDetailError">Please enter the resource person details.</div>
+
         </div>
         <div class="form-group">
           <label for="AIBConferenceroomEmail">Event Coordinator's Email:</label>
           <input type="email" class="form-control" id="AIBConferenceroomEmail" name="AIBConferenceroomEmail" placeholder="Enter your email" required>
+          <div class="error-message emailError">Please enter a valid email address.</div>
+
         </div>
         <div class="form-group">
           <label for="AIBConferenceroomPhone">Event Coordinator's Phone Number:</label>
           <input type="tel" class="form-control" id="AIBConferenceroomPhone" name="AIBConferenceroomPhone" placeholder="Enter your phone number" required>
+          <div class="error-message phoneError">Please enter a valid 10-digit phone number.</div>
+
         </div>
         <button type="submit" class="btn btn-primary" id="submitmain">Submit</button>
   </form>
@@ -2174,6 +2415,9 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
+
+
+
 </script>
 
   <!-- js for 1st submition of all information  and 2nd day of week accoording to date -->
@@ -2204,10 +2448,136 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 
    
+  function updateDayOfWeek(dateInputId, dayOutputId) {
+    const dateInput = document.getElementById(dateInputId);
+    const dayOutput = document.getElementById(dayOutputId);
+
+    dateInput.addEventListener('change', function() {
+        const selectedDate = new Date(dateInput.value);
+        const daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+        const dayOfWeek = daysOfWeek[selectedDate.getUTCDay()];
+
+        dayOutput.value = dayOfWeek;
+    });
+}
+   
  
     </script>
     
-
+    <script>
+      function validateForm(event) {
+          event.preventDefault();
+          
+          const form = event.target;
+          
+          // Clear previous error messages
+          form.querySelectorAll('.error-message').forEach(function(el) {
+              el.style.display = 'none';
+          });
+      
+          let isValid = true;
+      
+          // Function to show error message
+          function showError(selector, errorMessage) {
+              const errorElement = form.querySelector(selector);
+              if (errorElement) {
+                  errorElement.style.display = 'block';
+                  errorElement.textContent = errorMessage;
+              }
+          }
+      
+          // Validate School Name
+          const schoolName = form.querySelector('[name$="SchoolName"]').value;
+          if (schoolName === '') {
+              showError('.schoolNameError', 'Please select a school name.');
+              isValid = false;
+          }
+      
+          // Validate Faculty Name
+          const facultyName = form.querySelector('[name$="FacultyName"]').value;
+          if (!/^[a-zA-Z\s]+$/.test(facultyName)) {
+              showError('.facultyNameError', 'Please enter a valid name with letters only.');
+              isValid = false;
+          }
+      
+          // Validate HOD Name
+          const hodName = form.querySelector('[name$="HodName"]').value;
+          if (!/^[a-zA-Z\s]+$/.test(hodName)) {
+              showError('.hodNameError', 'Please enter a valid name with letters only.');
+              isValid = false;
+          }
+      
+          // Validate Event Name
+          const eventName = form.querySelector('[name$="EventName"]').value;
+          if (eventName === '') {
+              showError('.eventNameError', 'Please enter the event name.');
+              isValid = false;
+          }
+      
+          // Validate Email
+          const email = form.querySelector('[name$="Email"]').value;
+          const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+          if (!emailPattern.test(email)) {
+              showError('.emailError', 'Please enter a valid email address.');
+              isValid = false;
+          }
+      
+          // Validate Phone Number
+          const phone = form.querySelector('[name$="Phone"]').value;
+          if (!/^\d{10}$/.test(phone)) {
+              showError('.phoneError', 'Please enter a valid 10-digit phone number.');
+              isValid = false;
+          }
+      
+          // Validate Date
+          const date = form.querySelector('[name$="date"]').value;
+          if (date === '') {
+              showError('.dateError', 'Please select a date.');
+              isValid = false;
+          }
+      
+          // Validate Start Time
+          const startTime = form.querySelector('[name$="startime"]').value;
+          if (startTime === '') {
+              showError('.startTimeError', 'Please select a start time.');
+              isValid = false;
+          }
+      
+          // Validate End Time
+          const endTime = form.querySelector('[name$="endtime"]').value;
+          if (endTime === '') {
+              showError('.endTimeError', 'Please select an end time.');
+              isValid = false;
+          }
+      
+          // Validate Resource Person Name
+          const resourcePersonName = form.querySelector('[name$="ResourcePersonName"]').value;
+          if (!/^[a-zA-Z\s]+$/.test(resourcePersonName)) {
+              showError('.resourcePersonNameError', 'Please enter a valid name with letters only.');
+              isValid = false;
+          }
+      
+          // Validate Resource Person Detail
+          const resourcePersonDetail = form.querySelector('[name$="ResourcePersonDetail"]').value;
+          if (resourcePersonDetail === '') {
+              showError('.resourcePersonDetailError', 'Please enter the resource person details.');
+              isValid = false;
+          }
+      
+          // If form is valid, submit it
+          if (isValid) {
+              form.submit();
+          }
+      }
+      
+      // Attach event listeners to forms
+      document.querySelectorAll('form').forEach(function(form) {
+          form.addEventListener('submit', validateForm);
+      });
+      
+      
+      
+  </script>
    
     <!-- Include jQuery and Bootstrap JS  and jQuery UI libraries-->
     
