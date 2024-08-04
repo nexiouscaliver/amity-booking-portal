@@ -139,91 +139,136 @@
       
         
       /* Hero Section */
+      /* Hero Section */
       .hero {
-   background: url('hero.jpg') no-repeat center center / cover;
-   color: white;
-   text-align: center;
-   padding: 100px 0; /* Default padding for large screens */
-   width: 100%;
-   box-sizing: border-box;
-}
-.bordered-letters {
- color: white; /* Set the text color to contrast with the border */
- text-shadow: 
-   -1px -1px 0 black,  
-    1px -1px 0 black,
-   -1px  1px 0 black,
-    1px  1px 0 black;
- margin: 10px 0; /* Adds some space above and below each element */
-}
-
-.hero h1 {
-   font-size: 50px; /* Default font size for large screens */
-   margin: 0;
-}
-
-.hero p {
-   font-size: 20px; /* Default font size for large screens */
-}
-
-/* Media queries for responsiveness */
-@media (max-width: 1200px) {
-   .hero {
-       padding: 80px 0; /* Adjust padding for large tablets and smaller desktops */
-   }
-
-   .hero h1 {
-       font-size: 40px; /* Adjust font size for large tablets and smaller desktops */
-   }
-
-   .hero p {
-       font-size: 18px; /* Adjust font size for large tablets and smaller desktops */
-   }
-}
-
-@media (max-width: 992px) {
-   .hero {
-       padding: 60px 0; /* Adjust padding for tablets */
-   }
-
-   .hero h1 {
-       font-size: 35px; /* Adjust font size for tablets */
-   }
-
-   .hero p {
-       font-size: 16px; /* Adjust font size for tablets */
-   }
-}
-
-@media (max-width: 768px) {
-   .hero {
-       padding: 40px 0; /* Adjust padding for small tablets and large phones */
-   }
-
-   .hero h1 {
-       font-size: 30px; /* Adjust font size for small tablets and large phones */
-   }
-
-   .hero p {
-       font-size: 14px; /* Adjust font size for small tablets and large phones */
-   }
-}
-
-@media (max-width: 576px) {
-   .hero {
-       padding: 20px 0; /* Adjust padding for mobile phones */
-   }
-
-   .hero h1 {
-       font-size: 25px; /* Adjust font size for mobile phones */
-   }
-
-   .hero p {
-       font-size: 12px; /* Adjust font size for mobile phones */
-   }
-}
-
-     
+        position: relative;
+        margin-top: 20px;
+        text-align: center;
+        padding: 100px 0;
+        overflow: hidden; /* Ensure the pseudo-element doesn't overflow */
+        color: blue; /* Text color for the hero section */
+      }
+      
+      .hero::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: url('hero.jpg') no-repeat center center / cover;
+        opacity: 0.7; /* Apply opacity to the background image */
+        z-index: 1; /* Ensure it's behind the text */
+      }
+      
+      .hero .container {
+        position: relative;
+        z-index: 2; /* Ensure the text is above the background */
+        width: 80%;
+        margin: 0 auto;
+        padding: 20px;
+      }
+      
+      .bordered-letters {
+        color:#01013e;/* Set the text color to contrast with the border */
+       /* text-shadow: 
+          -1px -1px 0 black,  
+           1px -1px 0 black,
+          -1px  1px 0 black,
+           1px  1px 0 black; */
+        margin: 10px 0; /* Adds some space above and below each element */
+      }
+      
+      .hero h1 {
+        font-size: 50px;
+        margin: 0;
+      }
+      
+      .hero p {
+        font-size: 20px;
+      }
+      
+      /* Responsive styles */
+      @media (min-width: 1200px) {
+        .hero {
+          padding: 100px 0;
+        }
+        
+        .bordered-letters {
+          font-size: 5rem; /* Increase font size for larger screens */
+        }
+      }
+      
+      @media (max-width: 1200px) {
+        .hero {
+          padding: 80px 0;
+        }
+        
+        .hero .container {
+          width: 85%; /* Adjust width for medium screens */
+        }
+        
+        .bordered-letters {
+          font-size: 2.5rem; /* Adjust font size for medium screens */
+        }
+      }
+      
+      @media (max-width: 992px) {
+        .hero {
+          padding: 60px 0;
+        }
+        
+        .hero .container {
+          width: 90%; /* Adjust width for smaller screens */
+        }
+        
+        .bordered-letters {
+          font-size: 2.25rem; /* Adjust font size for smaller screens */
+        }
+      }
+      
+      @media (max-width: 768px) {
+        .hero {
+          padding: 40px 0;
+        }
+        
+        .hero .container {
+          width: 95%; /* Adjust width for smaller screens */
+        }
+        
+        .bordered-letters {
+          font-size: 2rem; /* Adjust font size for smaller screens */
+        }
+      }
+      
+      @media (max-width: 576px) {
+        .hero {
+          padding: 30px 0;
+        }
+        
+        .hero .container {
+          width: 100%; /* Adjust width for smaller screens */
+        }
+        
+        .bordered-letters {
+          font-size: 1.75rem; /* Adjust font size for smaller screens */
+        }
+      }
+      
+      @media (max-width: 400px) {
+        .hero {
+          padding: 20px 0;
+        }
+        
+        .hero .container {
+          padding: 10px; /* Reduce padding for the smallest screens */
+        }
+        
+        .bordered-letters {
+          font-size: 1.5rem; /* Adjust font size for the smallest screens */
+        }
+      }
+      
      
    
 
