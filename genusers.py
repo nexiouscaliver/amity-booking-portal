@@ -1,6 +1,6 @@
 import secrets
 import string
-sc = ['ASET','ABS','AFS','AIBAS','AIB','ALIT','ALIA','AIP','AIT','AITT','ALS','ASAP','ASAS','ASCO','ASFT','ASL','CIIOL','RICS','ASFA','AIE','AIN']
+sc = ['ASET','ABS','AFS','AIBAS','AIB','AIIT','AILA','AIP','AIT','AITT','ALS','ASAP','ASAS','ASCO','ASFT','ASL','CIIOL','TUCSSBERICS','ASFA','AIE','AIN']
 def genpass():
     # al = string.ascii_letters + string.digits
     al = string.digits
@@ -12,5 +12,5 @@ def genpass():
 #     passwd = f"venue_{genpass()}"
 #     final[uname] = passwd
 # print(final)
-final = {'ASET_venue': 'venue_64871', 'ABS_venue': 'venue_42833', 'AFS_venue': 'venue_25858', 'AIBAS_venue': 'venue_70005', 'AIB_venue': 'venue_59460', 'ALIT_venue': 'venue_75586', 'ALIA_venue': 'venue_51953', 'AIP_venue': 'venue_36494', 'AIT_venue': 'venue_29146', 'AITT_venue': 'venue_08191', 'ALS_venue': 'venue_22092', 'ASAP_venue': 'venue_27502', 'ASAS_venue': 'venue_36607', 'ASCO_venue': 'venue_81334', 'ASFT_venue': 'venue_95570', 'ASL_venue': 'venue_76994', 'CIIOL_venue': 'venue_55920', 'RICS_venue': 'venue_39966', 'ASFA_venue': 'venue_74293', 'AIE_venue': 'venue_42924', 'AIN_venue': 'venue_68913','testdebug':'test'}
+final = {'ASET_venue': 'venue_00686', 'ABS_venue': 'venue_29395', 'AFS_venue': 'venue_19823', 'AIBAS_venue': 'venue_96499', 'AIB_venue': 'venue_37460', 'AIIT_venue': 'venue_97950', 'AILA_venue': 'venue_22533', 'AIP_venue': 'venue_86056', 'AIT_venue': 'venue_65254', 'AITT_venue': 'venue_03396', 'ALS_venue': 'venue_39540', 'ASAP_venue': 'venue_31726', 'ASAS_venue': 'venue_58037', 'ASCO_venue': 'venue_56366', 'ASFT_venue': 'venue_28042', 'ASL_venue': 'venue_10844', 'CIIOL_venue': 'venue_06932', 'TUCSSBERICS_venue': 'venue_40988', 'ASFA_venue': 'venue_02634', 'AIE_venue': 'venue_81354', 'AIN_venue': 'venue_82477'}
 admin = {'ADMIN_venue': 'venue_00000','ADMIN2_venue': 'venue_22222','ADMIN3_venue': 'venue_33333','ADMIN4_venue': 'venue_44444','testdebug':'test'}

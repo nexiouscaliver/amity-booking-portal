@@ -132,6 +132,37 @@ def get_sorted_status2():
     # app.logger.info(final2)
     return final2[::-1]  #reverse the order for latest first
 
+# cookie-username-function
+def getusername():
+    userdict = {'ASET':'ASET - Amity School of Engineering and Technology',
+                'ABS':'ABS - Amity Business School',
+                'AFS':'AFS - Amity Film School',
+                'AIBAS':'AIBAS - Amity Institute of Behavioural & Allied Sciences',
+                'AIB':'AIB - Amity Institute of Biotechnology',
+                'AIIT':'AIIT - Amity Institute of Information Technology',
+                'AILA':'AILA - Amity Institute of Liberal Arts',
+                'AIP':'AIP - Amity Institute of Pharmacy',
+                'AIT':'AIT - Amity Institute of Technology',
+                'AITT':'AITT - Amity Institute of Travel & Tourism',
+                'ALS':'ALS - Amity Law School',
+                'ASAP':'ASAP - Amity School of Architecture & Planning',
+                'ASAS':'ASAS - Amity School of Applied Sciences',
+                'ASCO':'ASCO - Amity School of Communication',
+                'ASFT':'ASFT - Amity School of Fashion Technolog',
+                'ASL':'ASL - Amity School of Languages',
+                'CIIOL':'CIIOL - CII Logistics',
+                'TUCSSBERICS':'RICS',
+                'ASFA':'ASFA - Amity School of Fine Arts',
+                'AIE':'AIE - Amity Institute of Education',
+                'AIN':'AIN - Amity Institute of Nanotechnology',
+                }
+    cook = session['username']
+    schoolname = cook.split("_")[0]
+    fullname = userdict[schoolname]
+    # print(fullname)
+    return fullname
+    pass
+
 # global code_list
 code_list = []
 
@@ -583,6 +614,8 @@ def index():
             cal = db.calender()
             app.logger.info("CAL:",cal)
             output = db.calendermain()
+            scname = getusername()
+            app.logger.info(scname)
             # app.logger.info(output)
             for i in output:
                 for j in i:
