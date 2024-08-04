@@ -11,96 +11,205 @@
             background-color: aliceblue;
             margin: 0;
             font-family: Arial, sans-serif;
-          }
-          
-          :root {
+            font-size: 16px;
+            line-height: 1.5;
+        }
+        
+        :root {
             --primary-color: #04172b;
             --secondary-color: #061b31;
             --white: #ffffff;
-            --gray: #6c757d;
-          }
-          
-          .navbar {
+            --gray: #6c757d;   
+        }
+        
+        .navbar {
             background-color: var(--primary-color);
             display: flex;
-            justify-content: space-evenly; /* maing the space evenly*/
             align-items: center;
             padding: 10px 20px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-          }
+            flex-wrap: nowrap;
+            justify-content: space-evenly; /* Space between logo and menu */
+        }
         
         .logo-container {
             display: flex;
             align-items: center;
+            flex: 0 1 auto; /* Prevent the logo from stretching */
+            margin-right: 0; /* Align logo container to the left */
         }
         
         .navbar .logo img {
-            height: 60px;
+            height: 50px;
             margin-right: 10px;
         }
         
         .navbar .name img {
-            height:50px;
+            height: 50px;
         }
         
         .navbar .menu {
-          display: flex;
-          gap: 20px;
-      }
-      
-      .navbar .menu a {
-          color: var(--white);
-          text-decoration: none;
-          padding: 10px 15px;
-          border-radius: 5px;
-          transition: background-color 0.3s, box-shadow 0.3s;
-          font-weight: bold;
-      }
-      
-      .navbar .menu a:hover {
-          background-color: var(--secondary-color);
-          transform: scale(1.05);
-          box-shadow: 0 0 0 2px aliceblue;
-      }
+            display: flex;
+            align-items: center;
+            flex-wrap: nowrap;
+            justify-content: space-evenly; /* Evenly space out menu items */
+            flex: 0 1 auto; /* Prevent the menu from stretching */
+            margin-left: 0; /* Align menu to the right */
+        }
         
-          
-          .navbar .icon {
+        .navbar .menu a {
+            color: var(--white);
+            text-decoration: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: background-color 0.3s, box-shadow 0.3s;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            white-space: nowrap; /* Prevent text wrapping */
+            text-align: center;
+            justify-content: center;
+            flex: 1;
+        }
+        
+        .navbar .menu a:hover {
+            background-color: var(--secondary-color);
+            transform: scale(1.05);
+            box-shadow: 0 0 0 2px aliceblue;
+        }
+        
+        .navbar .icon {
             font-size: 20px;
             color: var(--white);
             padding: 10px;
             cursor: pointer;
             font-weight: bold;
             position: relative;
+        }
+        
+        /* Responsive styles */
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 10px;
+            }
+        
+            .navbar .menu a {
+                padding: 8px 10px;
+                font-size: 12px;
+            }
+        }
+        
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .navbar .menu a {
+                padding: 10px;
+                font-size: 14px;
+            }
+        }
+        
+        @media (min-width: 1025px) {
+            .navbar {
+                justify-content: space-between; /* Maintain space-between on large screens */
+            }
+        
+            .logo-container {
+                margin-right: auto; /* Position logo container to the left */
+            }
+        
+            .navbar .menu {
+                margin-left: auto; /* Position menu to the right */
+            }
+        }
+          
+      
+      
+        
+        
+        /* Base styles (mobile-first) */
+      
+        .navbar {
+          flex-direction: column;
+          padding: 10px;
+        }
+      
+        .logo img, .name img {
+          height: auto;
+          max-width: 100%;
+        }
+        
+        /* Responsive adjustments */
+        @media (min-width: 600px) {
+          .navbar {
+            flex-direction: row;
           }
         
-        .calendar-container {
+         
+        }
+
+
+
+
+
+
+
+
+          .calendar-container {
             background: #e0f7fa; /* Aquatic theme background */
-            border-radius: 20px; /* Adjust the radius for a more curved appearance */
+            border-radius: 8px; /* Adjust the radius for a more curved appearance */
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            width: 70%; /* Adjust as needed */
-            margin: 0 auto; /* Center horizontally */
-            padding: 20px;
-            position: relative;
-            height: auto;
+            width: 60%; /* Adjust as needed */
+            max-width: 100%;
             margin: 20px auto; /* Center the container horizontally with margin auto */
+            padding: 10px;
+            align-content: center;
+            height: auto;
             position: absolute;
             top: 50%;
             left: 50%;
-            transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%); /* Center the container both horizontally and vertically */
+            z-index: 1000;
+            box-sizing: border-box; /* Ensure padding is included in the element's total width and height */
         }
         
-        .calendar-nav {
+          
+          /* For small devices (phones, less than 600px) */
+          @media only screen and (max-width: 600px) {
+            .calendar-container {
+              width: 90%;
+              top: 20%;
+              left: 50%;
+              transform: translate(-50%, 0);
+            }
+          }
+          
+          /* For medium devices (tablets, 600px to 768px) */
+          @media only screen and (min-width: 600px) and (max-width: 768px) {
+            .calendar-container {
+              width: 80%;
+              top: 50%;
+              left: 50%;
+              transform: translate(-50%, 0);
+            }
+          }
+          
+          .calendar-nav,
+          .calendar-header,
+          .calendar,
+          .legend {
+            user-select: none;
+          }
+          
+          .calendar-nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 10px 0;
             background: #23252D; /* Aquatic theme header */
             color: white; /* Office theme text color */
-            border-top-left-radius: 20px; /* Ensure corners are rounded */
-            border-top-right-radius: 20px;
-        }
-        
-        .calendar-nav button {
+            border-top-left-radius: 8px; /* Ensure corners are rounded */
+            border-top-right-radius: 8px;
+          }
+          
+          .calendar-nav button {
             background: none;
             border: none;
             color: white; /* Office theme button color */
@@ -108,69 +217,65 @@
             cursor: pointer;
             padding: 5px 10px;
             transition: background-color 0.3s;
-        }
-        
-        .calendar-nav button:hover {
+          }
+          
+          .calendar-nav button:hover {
             background-color: rgba(0, 0, 0, 0.1);
             border-radius: 4px;
-        }
-        
-        .calendar-nav span {
+          }
+          
+          .calendar-nav span {
             font-size: 18px;
             font-weight: bold;
-        }
-        
-        .calendar-header {
+          }
+          
+          .calendar-header {
             display: grid;
             grid-template-columns: repeat(7, 1fr);
+            gap: 1px;
             background: #23252D; /* Aquatic theme header */
             color: white; /* Office theme text color */
             text-align: center;
             padding: 10px 0;
             font-weight: bold;
-            border-bottom-left-radius: 20px; /* Ensure corners are rounded */
-            border-bottom-right-radius: 20px;
-        }
-        
-        .calendar {
+          }
+          
+          .calendar {
             display: grid;
             grid-template-columns: repeat(7, 1fr);
             gap: 1px;
             background: #e0f7fa; /* Aquatic theme body */
-            border-bottom-left-radius: 20px; /* Ensure corners are rounded */
-            border-bottom-right-radius: 20px;
-        }
-        
-        .calendar .day {
+          }
+          
+          .calendar .day {
             background: #b2dfdb; /* Aquatic theme day background */
             color: #004d40; /* Aquatic theme day text */
             padding: 10px;
             text-align: center;
             cursor: pointer;
             transition: background-color 0.3s;
-        }
-        
-        .calendar .day:hover {
+          }
+          
+          .calendar .day:hover {
             background-color: #80cbc4; /* Aquatic theme hover effect */
-        }
-        
-        .calendar .day.booked {
+          }
+          
+          .calendar .day.booked {
             background-color: lightcoral; /* Booked color */
             color: white;
-        }
-        
-        .calendar .day.pending {
+          }
+          
+          .calendar .day.pending {
             background-color: #fff176; /* Pending color */
             color: black;
-        }
-        
-        .calendar .day.not-booked {
+          }
+          
+          .calendar .day.not-booked {
             background-color: #68d391; /* Not booked color */
             color: black;
-        }
-        
-        
-        .day {
+          }
+          
+          .day {
             width: 100%;
             padding: 10px;
             box-sizing: border-box;
@@ -181,252 +286,362 @@
             cursor: pointer;
             background-color: white; /* Office theme background */
             color: #333; /* Office theme text color */
-            border-radius: 50%;  /* Changed to circle */
+            border-radius: 50%; /* Changed to circle */
             transition: box-shadow 0.3s, transform 0.3s;
-        }
-        
-        .day:hover {
+          }
+          
+          .day:hover {
             background-color: #e0e0e0; /* Darker shade on hover */
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            transform: scale(1.05);  /* Slight zoom effect */
-        }
-        
-        .day.hidden {
+            transform: scale(1.05); /* Slight zoom effect */
+          }
+          
+          .day.hidden {
             visibility: hidden;
-        }
-        
-        .event-info {
+          }
+          
+          .event-info {
             font-size: 12px;
             margin-top: 4px;
             text-align: center;
-        }
-        
-        @media (max-width: 640px) {
-            .calendar-header,
-            .calendar {
-                grid-template-columns: repeat(3, 1fr);
+          }
+          
+          @media (max-width: 640px) {
+            .calendar-header div,
+            .calendar .day {
+              font-size: 12px;
             }
-        
-            .day {
-                font-size: 14px;
-                padding: 5px;
+          }
+          
+          @media (max-width: 480px) {
+            .calendar-header div,
+            .calendar .day {
+              font-size: 10px;
             }
-        }
-        
-        @media (max-width: 480px) {
-            .calendar-header,
-            .calendar {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        
-            .day {
-                font-size: 12px;
-                padding: 3px;
-            }
-        }
-        
-
-
-
-        .legend {
+          }
+          
+          .legend {
             display: flex;
             justify-content: space-around;
             padding: 10px;
             margin-top: 20px;
             background-color: #23252D;
-            
             border-radius: 8px;
             width: 100%;
-            color:white;
-            
-        }
-    
-        
-        .legend-item {
+            color: white;
+          }
+          
+          .legend-item {
             display: flex;
             align-items: center;
-        }
-        
-        .legend-color {
+          }
+          
+          .legend-color {
             width: 20px;
             height: 20px;
             border-radius: 4px;
             margin-right: 8px;
-        }
-        
-        .full-booked-legend {
-            background-color: lightcoral;
-        }
-        
-        .not-booked-legend {
-            background-color: #68d391;
-        }
-        
-        .first-half-booked-legend {
-            background-color:  rgb(236, 236, 151);
-        }
-        
-     
-       
-
-
-
-
-
-
-
-
-        
-        
-        /*slots*/
-        .time-slot-popup {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background-color: #04172b; /* Dark blue background */
-            border: 1px solid #ccc;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            z-index: 1000;
-            color: white; 
-            max-width: 90%; 
-            max-height: 90%; 
+          }
           
-        }
-        
-        
-        
-        
-        .time-slot-content {
-            margin-top: 10px;
-        }
-        
-        .time-slot-chart {
-            display: flex;
-            align-items: center;
-            justify-content: space-between; /* Adjust  */
-            gap: 10px; /* Or use margin: 10px;*/
-            overflow-x: auto; /* Enable horizontal scrolling */
-            overflow-y: hidden; /* Disable vertical scrolling */
-        }
-        
-        .time-slot-time,
-        .time-slot-status {
-            padding: 10px;
-            border: 2px solid #ccc;
-            text-align: center;
-            flex: 1; /* Take up remaining space */
-            transition: transform 0.3s ease-out; /* Smooth transition for size change */
-        }
-        
-        .time-slot-time:hover,
-        .time-slot-status:hover {
-            transform: scale(1.1); /* Increase size on hover */
-        }
-         
-
-        
-        .status-data {
-            position: absolute;
-            top: -100%; /* Start from above the box */
-            left: 0;
-            width: auto;
-            height: auto;
-            background-color: transparent; /* Transparent initially */
-            animation: slideInDown 0.5s forwards; /* Animation for sliding in */
-            text-align: center;
+          .full-booked-legend {
+            background-color: lightcoral;
+          }
+          
+          .not-booked-legend {
+            background-color: #68d391;
+          }
+          
+          .pending-legend {
+            background-color: rgb(236, 236, 151);
+          }
+          
+          /* Close calendar button */
+          .calendarclose-button {
+            padding: 2px 4px;
+            background-color: #c53030; /* Red background color */
+            color: lightcoral; /* Gray text color */
+            border-radius: 4px;
+            font-size: 12px;
+            cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
-            transition: transform 0.3s ease-out; /* Smooth transition for size change */
-        }
-        
-        .status-data:hover {
-            transform: scale(1.2); /* Increase size on hover */
-        }
-        
-        @keyframes slideInDown {
+            transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition */
+          }
+          
+          .calendarclose-button:hover {
+            background-color: #a12828; /* Darker red on hover */
+            color: lightcoral; /* White text color on hover */
+          }
+          
+          .calendarclose-button .icon {
+            width: 12px;
+            height: 12px;
+          }
+          
+          .calendarclose-button .label {
+            display: none;
+          }
+          
+          .ml-auto {
+            margin-left: auto;
+          }
+          
+          /* Optional: Add fade-in and fade-out animations */
+          @keyframes fadeIn {
             from {
-                top: -100%; /* Start from above the box */
+              opacity: 0;
             }
             to {
-                top: 0; /* Slide in downwards */
+              opacity: 1;
             }
-        }
-        
-        
-        
-        .booked {
-            background-color: lightcoral; /* Light red background for booked slots */
-        }
-        
-        .pending {
-            background-color: rgb(236, 236, 151); /* Light yellow background for pending slots */
-            color: black;
-        }
-        
-        .free {
-            background-color: lightgreen; /* Green background for free slots */
-        }
-        
-        .close-button {
-            display: block;
-            margin: 10px auto;
-            padding: 5px 10px;
-            background-color: #f44336; /* Red close button */
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        
-        .close-button:hover {
-            background-color: #d32f2f; /* Darker red hover color */
-        }
-        
-        .time-slot-popup.disappear {
-            opacity: 0;
-        }
-        
-      
-        .nav-buttons {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 40px;
-        }
-        
-        .nav-buttons button {
-            background-color: transparent;
-            border: none;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-weight: bold;
-            color: white; /* Adjust text color as needed */
-            font-size: 1.2em; /* Adjust font size as needed */
-            padding: 5px 10px; /* Adjust padding as needed */
-        }
-        
-        .nav-buttons button:hover {
-            transform: scale(1.1);
-            color: #555; /* Adjust hover text color */
-        }
-        
-        .nav-buttons button:focus {
-            outline: none;
-        }
-        
-        .nav-buttons button:active {
-            transform: scale(0.9);
-        }
-        
+          }
+          
+          @keyframes fadeOut {
+            from {
+              opacity: 1;
+            }
+            to {
+              opacity: 0;
+            }
+          }
+          
+          .fade-in {
+            animation: fadeIn 0.3s ease-in-out;
+          }
+          
+          .fade-out {
+            animation: fadeOut 0.3s ease-in-out;
+          }
+          /* Container */
+/* Container */
+.responsive-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 0 auto;
+    width: 100%;
+    padding: 0 1rem;
+    box-sizing: border-box;
+}
+
+/* Select and Input */
+/* Container */
+.responsive-container {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 0.5rem; /* Space between elements */
+    margin: 0 auto;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    padding: 0 1rem; /* Padding for responsiveness */
+}
+
+/* Select and Input */
+.responsive-select {
+    flex: 1;
+    min-width: 100px;
+    padding: 0.5rem;
+    background-color: #374151; /* bg-gray-700 */
+    color: #9CA3AF; /* text-gray-400 */
+    border-radius: 0.375rem; /* rounded */
+    border: none; /* Remove default border */
+    box-sizing: border-box;
+}
+
+/* Media Queries for Responsive Design */
+@media (min-width: 768px) {
+    .responsive-select {
+        flex: 1 1 30%; /* Adjust size for medium screens */
+    }
+}
+
+@media (min-width: 1024px) {
+    .responsive-container {
+        max-width: 75%; /* Max width for larger screens */
+    }
+
+    .responsive-select {
+        flex: 1 1 32%; /* Adjust size for larger screens */
+    }
+}
 
 
 
-      /*  for submit button */
-      
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+            
+            
+            /*slots*/
+            .time-slot-popup {
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background-color: #04172b; /* Dark blue background */
+                border: 1px solid #ccc;
+                padding: 20px;
+                border-radius: 10px;
+                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+                z-index: 1000;
+                color: white; 
+                max-width: 90%; 
+                max-height: 90%; 
+              
+            }
+            
+            
+            
+            
+            .time-slot-content {
+                margin-top: 10px;
+            }
+            
+            .time-slot-chart {
+                display: flex;
+                align-items: center;
+                justify-content: space-between; /* Adjust  */
+                gap: 10px; /* Or use margin: 10px;*/
+                overflow-x: auto; /* Enable horizontal scrolling */
+                overflow-y: hidden; /* Disable vertical scrolling */
+            }
+            
+            .time-slot-time,
+            .time-slot-status {
+                padding: 10px;
+                border: 2px solid #ccc;
+                text-align: center;
+                flex: 1; /* Take up remaining space */
+                transition: transform 0.3s ease-out; /* Smooth transition for size change */
+            }
+            
+            .time-slot-time:hover,
+            .time-slot-status:hover {
+                transform: scale(1.1); /* Increase size on hover */
+            }
+             
+    
+            
+            .status-data {
+                position: absolute;
+                top: -100%; /* Start from above the box */
+                left: 0;
+                width: auto;
+                height: auto;
+                background-color: transparent; /* Transparent initially */
+                animation: slideInDown 0.5s forwards; /* Animation for sliding in */
+                text-align: center;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: white;
+                transition: transform 0.3s ease-out; /* Smooth transition for size change */
+            }
+            
+            .status-data:hover {
+                transform: scale(1.2); /* Increase size on hover */
+            }
+            
+            @keyframes slideInDown {
+                from {
+                    top: -100%; /* Start from above the box */
+                }
+                to {
+                    top: 0; /* Slide in downwards */
+                }
+            }
+            
+            
+            
+            .booked {
+                background-color: lightcoral; /* Light red background for booked slots */
+            }
+            
+            .pending {
+                background-color: rgb(236, 236, 151); /* Light yellow background for pending slots */
+                color: black;
+            }
+            
+            .free {
+                background-color: lightgreen; /* Green background for free slots */
+            }
+            
+            .close-button {
+                display: block;
+                margin: 10px auto;
+                padding: 5px 10px;
+                background-color: #f44336; /* Red close button */
+                color: white;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+            }
+            
+            .close-button:hover {
+                background-color: #d32f2f; /* Darker red hover color */
+            }
+            
+            .time-slot-popup.disappear {
+                opacity: 0;
+            }
+            
+          
+            .nav-buttons {
+                display: flex;
+                justify-content: space-between;
+                margin-top: 40px;
+            }
+            
+            .nav-buttons button {
+                background-color: transparent;
+                border: none;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                font-weight: bold;
+                color: white; /* Adjust text color as needed */
+                font-size: 1.2em; /* Adjust font size as needed */
+                padding: 5px 10px; /* Adjust padding as needed */
+            }
+            
+            .nav-buttons button:hover {
+                transform: scale(1.1);
+                color: #555; /* Adjust hover text color */
+            }
+            
+            .nav-buttons button:focus {
+                outline: none;
+            }
+            
+            .nav-buttons button:active {
+                transform: scale(0.9);
+            }
+            
+            /* for submit button */
+            
             
 .free:hover {
     background-color: #555;
@@ -512,9 +727,14 @@
     align-items: center;
     
   }
-    </style>
+        </style>
 </head>
 <body>
+
+
+    <header>
+   
+
     <header>
         <div class="navbar">
             <div class="logo-container">
@@ -526,17 +746,22 @@
                 </div>
             </div>
             <div class="menu">
-                <a href="{{url_for('admin')}}" class="menu-item">
+                <a href="{{url_for('admin')}}"="menu-item">
                     <i class="fas fa-home"></i> Home
                 </a>
-                <a href="{{url_for('adminnoti')}}" class="menu-item">
-                    <i class="fas fa-bell"></i> Hall Updates
+                <a href="{{url_for('adminnoti')}}"  class="menu-item">
+                    <i class="fas fa-bell"></i> Updates
                 </a>
                 <a href="{{url_for('adminbooking')}}" class="menu-item">All Booking</a>
-                <a href="{{url_for('home')}}" class="menu-item">Logout</a>
+                <a href="{{url_for('home')}}" class="menu-item"> <i class="fas fa-power-off"></i>Logout</a>
             </div>
         </div>
     </header>
+
+
+
+
+
 
     <div class="calendar-container">
         <div class="calendar-nav">

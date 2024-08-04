@@ -16,102 +16,248 @@
     <meta name="theme-color" content="#ffffff">
   <style>
     body {
-      background-color: aliceblue;
-      margin: 0;
-      font-family: Arial, sans-serif;
+        background-color: aliceblue;
+        margin: 0;
+        font-family: Arial, sans-serif;
+        font-size: 16px;
+        line-height: 1.5;
     }
     
     :root {
-      --primary-color: #04172b;
-      --secondary-color: #061b31;
-      --white: #ffffff;
-      --gray: #6c757d;
+        --primary-color: #04172b;
+        --secondary-color: #061b31;
+        --white: #ffffff;
+        --gray: #6c757d;   
+        --light-green: #90ee90;
+        --light-red: #ffcccb;
     }
     
     .navbar {
-      background-color: var(--primary-color);
-      display: flex;
-      justify-content: space-evenly; /* maing the space evenly*/
-      align-items: center;
-      padding: 10px 20px;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        background-color: var(--primary-color);
+        display: flex;
+        align-items: center;
+        padding: 10px 20px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        flex-wrap: nowrap;
+        justify-content: space-evenly; /* Space between logo and menu */
+    }
+    
+    .logo-container {
+        display: flex;
+        align-items: center;
+        flex: 0 1 auto; /* Prevent the logo from stretching */
+        margin-right: 0; /* Align logo container to the left */
+    }
+    
+    .navbar .logo img {
+        height: 50px;
+        margin-right: 10px;
+    }
+    
+    .navbar .name img {
+        height: 50px;
+    }
+    
+    .navbar .menu {
+        display: flex;
+        align-items: center;
+        flex-wrap: nowrap;
+        justify-content: space-evenly; /* Evenly space out menu items */
+        flex: 0 1 auto; /* Prevent the menu from stretching */
+        margin-left: 0; /* Align menu to the right */
+    }
+    
+    .navbar .menu a {
+        color: var(--white);
+        text-decoration: none;
+        padding: 10px 15px;
+        border-radius: 5px;
+        transition: background-color 0.3s, box-shadow 0.3s;
+        font-weight: bold;
+        display: flex;
+        align-items: center;
+        white-space: nowrap; /* Prevent text wrapping */
+        text-align: center;
+        justify-content: center;
+        flex: 1;
+    }
+    
+    .navbar .menu a:hover {
+        background-color: var(--secondary-color);
+        transform: scale(1.05);
+        box-shadow: 0 0 0 2px aliceblue;
+    }
+    
+    .navbar .icon {
+        font-size: 20px;
+        color: var(--white);
+        padding: 10px;
+        cursor: pointer;
+        font-weight: bold;
+        position: relative;
+    }
+    
+    /* Responsive styles */
+    @media (max-width: 768px) {
+        .navbar {
+            padding: 10px;
+        }
+    
+        .navbar .menu a {
+            padding: 8px 10px;
+            font-size: 12px;
+        }
+    }
+    
+    @media (min-width: 769px) and (max-width: 1024px) {
+        .navbar .menu a {
+            padding: 10px;
+            font-size: 14px;
+        }
+    }
+    
+    @media (min-width: 1025px) {
+        .navbar {
+            justify-content: space-between; /* Maintain space-between on large screens */
+        }
+    
+        .logo-container {
+            margin-right: auto; /* Position logo container to the left */
+        }
+    
+        .navbar .menu {
+            margin-left: auto; /* Position menu to the right */
+        }
+    }
+      
+  
+  
+    
+    
+    /* Base styles (mobile-first) */
+  
+    .navbar {
+      flex-direction: column;
+      padding: 10px;
     }
   
-  .logo-container {
-      display: flex;
-      align-items: center;
-  }
+    .logo img, .name img {
+      height: auto;
+      max-width: 100%;
+    }
+    
+    /* Responsive adjustments */
+    @media (min-width: 600px) {
+      .navbar {
+        flex-direction: row;
+      }
+    
+     
+    }
   
-  .navbar .logo img {
-    height: 60px;
-    margin-right: 10px;
-}
+    
 
-.navbar .name img {
-    height:50px;
-}
-  
-  .navbar .menu {
-    display: flex;
-    gap: 20px;
-}
 
-.navbar .menu a {
-    color: var(--white);
-    text-decoration: none;
-    padding: 10px 15px;
-    border-radius: 5px;
-    transition: background-color 0.3s, box-shadow 0.3s;
-    font-weight: bold;
-}
 
-.navbar .menu a:hover {
-    background-color: var(--secondary-color);
-    transform: scale(1.05);
-    box-shadow: 0 0 0 2px aliceblue;
-}
-  
-          
-          .navbar .icon {
-            font-size: 20px;
-            color: var(--white);
-            padding: 10px;
-            cursor: pointer;
-            font-weight: bold;
-            position: relative;
-          }
+
+
+
+    
+    .container {
+        width: 80%;
+        margin: 0 auto;
+        margin-top: 50px;
+        overflow-x: auto; /* Enables horizontal scrolling */
+        
+    }
+    
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+        min-width: 600px; /* Ensures the table has a minimum width */
+       
+    }
+    
+    table, th, td {
+        background-color: whitesmoke;
+        border: 1px solid #ddd;
+    }
+    
+    th, td {
+        padding: 10px;
+        text-align: left;
+    }
+    
+    th {
+        background-image: linear-gradient(to right, #04172b 0%, #243a73 100%);
+        color: white;
+    }
+    
+    .search-bar {
+        margin-bottom: 20px;
+    }
+    
+    .search-bar input {
+        width: 100%;
+        padding: 10px;
+        font-size: 16px;
+        border: 1px solid #ddd;
+    }
+    
+    /* Responsive Design */
+    @media (max-width: 1024px) {
         .container {
-            width: 80%;
-            margin: 0 auto;
-            margin-top: 50px;
+            width: 90%;
         }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 20px;
-        }
-        table, th, td {
-            background-color: whitesmoke;
-            border: 1px solid ;
-        }
+    
         th, td {
-            padding: 10px;
-            text-align: left;
+            padding: 8px;
+            font-size: 14px;
         }
-        th {
-            background-color: #04172b;
-            color: white;
-        }
-      
-        .search-bar {
-            margin-bottom: 20px;
-        }
+    
         .search-bar input {
-            width: 100%;
-            padding: 10px;
-            font-size: 16px;
-            border: 1px solid #ddd;
+            padding: 8px;
+            font-size: 14px;
         }
+    }
+    
+    @media (max-width: 768px) {
+        .container {
+            width: 95%;
+        }
+    
+        th, td {
+            padding: 6px;
+            font-size: 12px;
+        }
+    
+        .search-bar input {
+            padding: 6px;
+            font-size: 12px;
+        }
+    }
+    
+    @media (max-width: 480px) {
+        .container {
+            width: 100%;
+        }
+    
+        th, td {
+            padding: 4px;
+            font-size: 10px;
+        }
+    
+        .search-bar input {
+            padding: 4px;
+            font-size: 10px;
+        }
+    }
+    h1 {
+        text-align: center;
+    }
+    
+    
     </style>
 </head>
 <body>
@@ -139,30 +285,33 @@
             </div>
         </div>
     </header>
-    <div class="container">
+    <div class="maicontainer">
         <h1>Other Events Booking Information</h1>
-        <div class="search-bar">
-            <input type="text" id="searchInput" placeholder="Search for bookings...">
+        <div class="container">
+            
+            <div class="search-bar">
+                <input type="text" id="searchInput" placeholder="Search for bookings...">
+            </div>
+            <table id="bookingTable">
+                <thead>
+                    <tr>
+                        <th>Booking ID</th>
+                        <th>School Name</th>
+                        <th>Event Name</th>
+                        <th>Venue</th>
+                        <th>Event Date</th>
+                        <th>Starttime</th>
+                        <th>Endtime</th>
+                        <th>Resource Person Name</th>
+                        <th>Resource Person Details</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Data will be inserted here dynamically -->
+                </tbody>
+            </table>
         </div>
-        <table id="bookingTable">
-            <thead>
-                <tr>
-                    <th>Booking ID</th>
-                    <th>School Name</th>
-                    <th>Event Name</th>
-                    <th>Venue</th>
-                    <th>Event Date</th>
-                    <th>Starttime</th>
-                    <th>Endtime</th>
-                    <th>Resource Person Name</th>
-                    <th>Resource Person Details</th>
-                    <th>Status</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- Data will be inserted here dynamically -->
-            </tbody>
-        </table>
     </div>
     <script>
         const bookings = [

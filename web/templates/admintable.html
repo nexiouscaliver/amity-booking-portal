@@ -18,69 +18,152 @@
       background-color: aliceblue;
       margin: 0;
       font-family: Arial, sans-serif;
-    }
-    
-    :root {
+      font-size: 16px;
+      line-height: 1.5;
+  }
+  
+  :root {
       --primary-color: #04172b;
       --secondary-color: #061b31;
       --white: #ffffff;
-      --gray: #6c757d;
+      --gray: #6c757d;   
       --light-green: #90ee90;
       --light-red: #ffcccb;
-    }
-    
-    .navbar {
+  }
+  
+  .navbar {
       background-color: var(--primary-color);
       display: flex;
-      justify-content: space-between;
       align-items: center;
       padding: 10px 20px;
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    }
+      flex-wrap: nowrap;
+      justify-content: space-evenly; /* Space between logo and menu */
+  }
   
   .logo-container {
       display: flex;
       align-items: center;
+      flex: 0 1 auto; /* Prevent the logo from stretching */
+      margin-right: 0; /* Align logo container to the left */
   }
   
   .navbar .logo img {
-    height: 60px;
-    margin-right: 10px;
-}
-
-.navbar .name img {
-    height:50px;
-}
+      height: 50px;
+      margin-right: 10px;
+  }
+  
+  .navbar .name img {
+      height: 50px;
+  }
   
   .navbar .menu {
-    display: flex;
-    gap: 20px;
-}
-
-.navbar .menu a {
-    color: var(--white);
-    text-decoration: none;
-    padding: 10px 15px;
-    border-radius: 5px;
-    transition: background-color 0.3s, box-shadow 0.3s;
-    font-weight: bold;
-}
-
-.navbar .menu a:hover {
-    background-color: var(--secondary-color);
-    transform: scale(1.05);
-    box-shadow: 0 0 0 2px aliceblue;
-}
+      display: flex;
+      align-items: center;
+      flex-wrap: nowrap;
+      justify-content: space-evenly; /* Evenly space out menu items */
+      flex: 0 1 auto; /* Prevent the menu from stretching */
+      margin-left: 0; /* Align menu to the right */
+  }
   
-    
-    .navbar .icon {
+  .navbar .menu a {
+      color: var(--white);
+      text-decoration: none;
+      padding: 10px 15px;
+      border-radius: 5px;
+      transition: background-color 0.3s, box-shadow 0.3s;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      white-space: nowrap; /* Prevent text wrapping */
+      text-align: center;
+      justify-content: center;
+      flex: 1;
+  }
+  
+  .navbar .menu a:hover {
+      background-color: var(--secondary-color);
+      transform: scale(1.05);
+      box-shadow: 0 0 0 2px aliceblue;
+  }
+  
+  .navbar .icon {
       font-size: 20px;
       color: var(--white);
       padding: 10px;
       cursor: pointer;
       font-weight: bold;
       position: relative;
+  }
+  
+  /* Responsive styles */
+  @media (max-width: 768px) {
+      .navbar {
+          padding: 10px;
+      }
+  
+      .navbar .menu a {
+          padding: 8px 10px;
+          font-size: 12px;
+      }
+  }
+  
+  @media (min-width: 769px) and (max-width: 1024px) {
+      .navbar .menu a {
+          padding: 10px;
+          font-size: 14px;
+      }
+  }
+  
+  @media (min-width: 1025px) {
+      .navbar {
+          justify-content: space-between; /* Maintain space-between on large screens */
+      }
+  
+      .logo-container {
+          margin-right: auto; /* Position logo container to the left */
+      }
+  
+      .navbar .menu {
+          margin-left: auto; /* Position menu to the right */
+      }
+  }
+    
+
+
+  
+  
+  /* Base styles (mobile-first) */
+
+  .navbar {
+    flex-direction: column;
+    padding: 10px;
+  }
+
+  .logo img, .name img {
+    height: auto;
+    max-width: 100%;
+  }
+  
+  /* Responsive adjustments */
+  @media (min-width: 600px) {
+    .navbar {
+      flex-direction: row;
     }
+  
+   
+  }
+  
+  
+
+
+
+
+
+
+    /*container*/
+
+    
     .container {
       margin: auto;
       background: #fff;
@@ -98,42 +181,66 @@
         opacity: 1;
       }
     }
-
     table {
-      background-color: white;
-      width: 100%;
-      border-collapse: collapse;
-      margin-bottom: 20px;
-      animation: tableSlideIn 1s ease-in-out;
-    }
-
-    @keyframes tableSlideIn {
-      from {
-        transform: translateX(-100px);
+        background-color: white;
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+        animation: tableSlideIn 1s ease-in-out;
       }
-      to {
-        transform: translateX(0);
+      
+      @keyframes tableSlideIn {
+        from {
+          transform: translateX(-100px);
+        }
+        to {
+          transform: translateX(0);
+        }
       }
-    }
+      
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+      }
+      
+      th, td {
+        border: 1px solid #ccc;
+        padding: 12px;
+        text-align: left;
+      }
+      
+      th {
+        background-image: linear-gradient(to right, #04172b 0%, #243a73 100%);
+        color: #fff;
+      }
+      
+      /* Responsive Styles */
+      @media (max-width: 768px) {
+        table th, table td {
+          padding: 8px;
+        }
+      }
+      
+      @media (max-width: 480px) {
+        table {
+          display: block;
+          overflow-x: auto;
+          white-space: nowrap;
+        }
+      
+        table th, table td {
+          padding: 6px;
+          font-size: 14px;
+        }
+      }
+      
+      
+    
 
-    * Table Styles */
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-bottom: 20px;
-    }
-    
-    th, td {
-      border: 1px solid #ccc;
-      padding: 12px;
-      text-align: left;
-    }
-    
-    th {
-      background-image: linear-gradient(to right, #04172b 0%, #243a73 100%);
-      color: #fff;
-    }
-    
+
+
+
     /* Form Styles */
     .form-group {
       margin-bottom: 20px;
@@ -192,24 +299,123 @@
       justify-content: space-between;
       align-items: center;
     }
+
+
+
     
-    #scheduleFormContainer {
-      background-color: #f0f8ff;
-      padding: 20px;
-      border-radius: 8px;
-      
-      width:60%;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-      display: none;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 100;
-    max-width: 90%; /* Adjust as needed */
-    max-height: 85%; /* Adjust as needed */
-    overflow: auto; /* Enable scrolling if the form exceeds the screen size */
-    }
+    
+#scheduleFormContainer {
+  background-color: #f0f8ff;
+  padding: 20px; /* Increased padding */
+  border-radius: 8px;
+  width: 50%; /* Adjusted width */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  display: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 100;
+  max-width: 80%; /* Adjusted max-width */
+  max-height: 90%; /* Increased max-height */
+  overflow: auto; /* Enable scrolling if the form exceeds the screen size */
+}
+
+/* Responsive Styles */
+@media (max-width: 1024px) {
+  #scheduleFormContainer {
+    width: 60%;
+    max-height: 85%; /* Adjusted max-height for medium screens */
+  }
+}
+
+@media (max-width: 768px) {
+  #scheduleFormContainer {
+    width: 70%;
+    padding: 15px; /* Adjusted padding */
+    max-height: 80%; /* Adjusted max-height for tablets */
+  }
+}
+
+@media (max-width: 480px) {
+  #scheduleFormContainer {
+    width: 80%;
+    padding: 10px; /* Reduced padding */
+    max-height: 75%; /* Adjusted max-height for smaller screens */
+  }
+}
+
+@media (max-height: 700px) {
+  #scheduleFormContainer {
+    top: auto;
+    bottom: 10px;
+    transform: translate(-50%, 0);
+  }
+}
+
+@media (max-width: 480px) and (max-height: 700px) {
+  #scheduleFormContainer {
+    width: 80%;
+    padding: 8px; /* Further reduced padding */
+    max-height: 70%; /* Adjusted max-height for small screens */
+    top: 20%;
+    bottom: 10px;
+    transform: translate(-50%, 0);
+  }
+}
+
+form {
+  width: 100%; /* Full width of the container */
+}
+
+.form-group {
+  margin-bottom: 15px; /* Reduced margin */
+}
+
+label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px; /* Adjusted margin */
+  color: #333;
+}
+
+input[type="text"],
+input[type="date"],
+select {
+  width: 100%; /* Full width of form-group */
+  padding: 8px; /* Reduced padding */
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-size: 14px; /* Reduced font size */
+}
+
+button.schedule-button {
+  background-image: linear-gradient(to right, #04172b 0%, #243a73 100%);
+  color: #fff;
+  border: none;
+  padding: 8px 16px; /* Reduced padding */
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 14px; /* Reduced font size */
+  transition: background-color 0.3s ease;
+}
+
+button.schedule-button:hover {
+  transform: scale(1.05); /* Slightly increase the size */
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15); /* Enhance the shadow */
+}
+
+.button-group {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+
+
+
 
 
 
@@ -295,38 +501,120 @@
         width: 1.5em;
         height: 1.5em;
         vertical-align: middle;
-      }
-      
+       }
 
 
+
+
+
+
+
+
+       .container {
+        padding: 20px;
+        margin: 0 auto;
+        max-width: 1200px;
+        border: 1px solid #ccc;
+        background-color: #f9f9f9;
+    }
+    
+    .search-bar {
+        margin-bottom: 20px;
+    }
+    
+    .table-container {
+        overflow-x: auto;
+    }
+    
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+    
+    table, th, td {
+        border: 1px solid #ddd;
+    }
+    
+    th, td {
+        padding: 8px;
+        text-align: left;
+    }
+    
+    th {
+        background-color: #f2f2f2;
+    }
+    
+    .schedule-button {
+        background-color: #4CAF50; /* Green */
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        margin: 4px 2px;
+        cursor: pointer;
+        border-radius: 16px;
+    }
+    
+    .close-button {
+        background-color: lightcoral;
+        border: none;
+        cursor: pointer;
+        float: right;
+    }
+    
+    .form-group {
+        margin-bottom: 15px;
+    }
+    
+    .form-group label {
+        display: block;
+        margin-bottom: 5px;
+    }
+    
+    .form-group input, 
+    .form-group select {
+        width: 100%;
+        padding: 8px;
+        box-sizing: border-box;
+    }
+    
+    .button-group {
+        display: flex;
+        justify-content: space-between;
+    }
+    
+    .scheduleFormContainer {
+        display: none;
+    }
+    
 </style>
 </head>
 <body>
   <header>
     <div class="navbar">
-      <div class="logo-container">
-          <div class="logo">
-            <img src="{{ url_for('static',filename='L1.png') }}" alt="Logo">
-          </div>
-          <div class="name">
+        <div class="logo-container">
+            <div class="logo">
+              <img src="{{ url_for('static',filename='L1.png') }}" alt="Logo">
+            </div>
+            <div class="name">
               <img src="{{ url_for('static',filename='L2.png')}}" alt="Name Logo">
-          </div>
-      </div>
-      <div class="menu">
-        <a href="{{url_for('admincalender')}}" class="menu-item">
-          <i class="fas fa-calendar-alt"></i> <!-- Calendar icon -->
-          Calendar
-        </a>
-        <a href="{{url_for('adminnoti')}}" class="menu-item">
-          <i class="fas fa-bell"></i> <!-- Notification icon -->
-          Hall Updates
+            </div>
+        </div>
+        <div class="menu">
+          <a href="{{url_for('admincalender')}}" class="menu-item">
+                <i class="fas fa-calendar-alt"></i> Calendar
+            </a>
+            <a href="{{url_for('adminnoti')}}" class="menu-item">
+                <i class="fas fa-bell"></i> Updates
+            </a>
             <a href="{{url_for('adminbooking')}}">All Booking</a>
-            <a href="{{url_for('home')}}">Logout</a>
-          </div>
-        </a>
-      </div>
+            <a href="{{url_for('home')}}" class="menu-item">
+              <i class="fas fa-power-off"></i>Logout</a>
+        </div>
     </div>
-  </header>
+</header>
 <div class="container">
     <h2>Pending Event Details</h2>
 
