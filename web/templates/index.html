@@ -47,12 +47,11 @@
 
        
     .logo-container {
-        display: flex;
-        align-items: center; /* Vertically center the logo */
-        justify-content: center; /* Horizontally center the logo container */
-        flex: 0 1 auto; /* Prevent the logo from stretching */
-        margin: 0 auto; /* Center the logo container within its parent */
-    }
+      display: flex;
+      align-items: center;
+      flex: 0 1 auto; /* Prevent the logo from stretching */
+      margin-right: 0; /* Align logo container to the left */
+  }
     
     .navbar .logo img {
         height: 50px;
@@ -66,10 +65,10 @@
     .navbar .menu {
       display: flex;
       align-items: center;
-      justify-content: center; /* Center the menu items horizontally */
-      flex-wrap: nowrap; /* Prevent wrapping of menu items */
+      flex-wrap: nowrap;
+      justify-content: space-evenly; /* Evenly space out menu items */
       flex: 0 1 auto; /* Prevent the menu from stretching */
-      margin: 0 auto; /* Center the menu container within its parent */
+      margin-left: 0; /* Align menu to the right */
   }
     
     .navbar .menu a {
