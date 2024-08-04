@@ -10,143 +10,219 @@
     <link rel="manifest" href="{{ url_for('static',filename='site.webmanifest') }}">
     <meta name="msapplication-TileColor" content="#da532c">
     <meta name="theme-color" content="#ffffff">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
   <style>
     @keyframes fadeIn {
       0% { opacity: 0; }
       100% { opacity: 1; }
     }
-
+    
     body {
       font-family: 'Roboto', sans-serif;
-      background-color: aliceblue; /* Light blue background */
+      background-color: aliceblue;
       display: flex;
-      justify-content: center; /* Center the container horizontally */
-      align-items: center; /* Center the container vertically */
-      height: 100vh; /* Full height */
-      margin: 0; /* Remove default margin */
-      animation: fadeIn 1s ease-in-out; /* Apply fade-in animation */
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      animation: fadeIn 1s ease-in-out;
+      padding: 0 20px; /* Add padding to the body to ensure space on sides */
     }
-
+    
     .container {
-      background: #fff; /* White background */
-      border: 1px solid #ddd; /* Light gray border */
+      background: #fff;
+      border: 1px solid #ddd;
       border-radius: 10px;
-      box-shadow: 0 0 20px rgba(0, 0, 0, 0.2); /* Increased shadow for depth */
-      display: flex; /* Make container a flexbox */
-      flex-direction: column; /* Stack elements vertically */
-      width: 80%; /* Set container width to 80% */
-      max-width: 500px; /* Max width for large screens */
-      padding: 20px;
-      animation: fadeIn 1s ease-in-out; /* Apply fade-in animation */
-      overflow: hidden; /* Ensure no overflow */
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      max-width: 500px; /* Increased max-width for larger screens */
+      padding: 20px; /* Increased padding for better spacing */
+      animation: fadeIn 1s ease-in-out;
+      overflow: hidden;
     }
-
+    
     .header {
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 20px;
-      background-color: #04172b; /* Dark blue background */
+      padding: 15px;
+      background-color: #04172b;
       color: white;
-      font-size: 1.5em;
-    }
-
-    .header {
+      font-size: 1.2em;
       width: 100%;
-      display: flex;
-      align-items: center;
     }
     
     .header img {
-      max-height: 60px; /* Adjust the height as needed */
+      max-height: 50px;
     }
     
     .header img:first-child {
-      max-height: 80px; /* Make the first logo bigger */
+      max-height: 60px;
     }
     
     .login-form {
       width: 100%;
-      margin-top: 20px;
+      margin-top: 15px;
     }
-
+    
     .form-group {
-      margin-bottom: 15px;
-      width: 100%; /* Full width for form group */
+      margin-bottom: 15px; /* Increased margin for better spacing */
+      width: 100%;
     }
-
+    
     label {
       display: block;
       margin-bottom: 5px;
-      color: #04172b; /* Dark blue for labels */
-      text-align: left; /* Align labels to the left */
-      width: 100%; /* Full width for labels */
+      color: #04172b;
+      text-align: left;
+      width: 100%;
     }
-
+    
     input, button {
       width: 100%;
-      padding: 15px;
-      border: 1px solid #ccc; /* Light gray border */
-      border-radius: 5px; /* Rounded corners */
-      transition: 0.4s ease; /* Smoother transitions */
+      padding: 12px; /* Increased padding for better touch target */
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      transition: 0.4s ease;
     }
-
+    
     input:focus, button:focus {
-      outline: none; /* Remove default focus outline */
-      border-color: #243a73; /* Darker blue border on focus */
+      outline: none;
+      border-color: #243a73;
     }
-
+    
     button {
       background-image: linear-gradient(to right, #04172b 0%, #243a73 100%);
       color: white;
       cursor: pointer;
     }
-
+    
     button:hover {
       background-image: linear-gradient(to right, #243a73 0%, #3f51b5 100%);
     }
-
+    
     .form-actions {
-      display: flex; /* Arrange buttons and link horizontally */
-      justify-content: space-between; /* Distribute elements evenly */
-      align-items: center; /* Center align items vertically */
-      margin-top: 15px;
-      width: 100%; /* Full width for form actions */
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 15px; /* Increased margin for better spacing */
+      width: 100%;
     }
-
+    
     #login-link, #signup-link {
-        color: #04172b; /* Dark blue for links */
-        text-decoration: none; /* Remove underline */
-        transition: 0.3s ease; /* Smoother hover effect */
-      }
-  
-      #login-link:hover, #signup-link:hover {
-        color: #243a73; /* Slightly lighter blue on link hover */
-      }
-  
-      .signup-container {
-        display: flex;
-        justify-content: center; /* Center align the text in the signup link */
-        width: 100%;
-        margin-top: 15px;
-      }
-
-      /* CSS to align links inline and underline them */
-      .auth-links {
-        text-align: center;
+      color: #04172b;
+      text-decoration: none;
+      transition: 0.3s ease;
     }
+    
+    #login-link:hover, #signup-link:hover {
+      color: #243a73;
+    }
+    
+    .signup-container {
+      display: flex;
+      justify-content: center;
+      width: 100%;
+      margin-top: 15px; /* Increased margin for better spacing */
+    }
+    
+    .auth-links {
+      text-align: center;
+    }
+    
     .auth-links a {
-        display: inline-block;
-        margin-right: 20px; /* Adjust spacing between links as needed */
-        text-decoration: none;
-        border-bottom: 1px solid transparent; 
+      display: inline-block;
+      margin-right: 15px;
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
     }
-
+    
     .auth-links a:hover {
-        border-color: #333; 
+      border-color: #333;
     }
-    </style>
+    
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .container {
+        width: 100%;
+        max-width: 90%; /* Ensure space on sides for medium screens */
+        padding: 15px;
+      }
+    
+      .header {
+        font-size: 1em;
+        padding: 12px;
+      }
+    
+      input, button {
+        padding: 10px;
+      }
+    
+      .form-actions {
+        flex-direction: column;
+        gap: 10px;
+      }
+    
+      .auth-links a {
+        margin-right: 10px;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .container {
+        width: 100%;
+        max-width: 90%; /* Ensure space on sides for small screens */
+        padding: 10px;
+      }
+    
+      .header {
+        font-size: 0.9em;
+        padding: 10px;
+      }
+    
+      input, button {
+        padding: 8px;
+      }
+    
+      .form-actions {
+        flex-direction: column;
+        gap: 10px;
+      }
+    
+      .auth-links a {
+        margin-right: 5px;
+      }
+    }
+    .password-container {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+  
+    .toggle-password {
+      position: absolute;
+      right: 10px;
+      cursor: pointer;
+    }
+    /* Ensure all form inputs have consistent width */
+.form-group input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box; /* Ensures padding and border are included in the total width */
+}
+
+/* Optional: Add some margin between form groups */
+.form-group {
+  margin-bottom: 15px;
+}
+
+    
+  </style>
   </head>
   <body>
     <div class="container">
@@ -163,36 +239,62 @@
         </script>
         {% endif %}
         <form id="userLoginForm" method="post" onsubmit="return validatePassword()">
-            <div class="form-group">
-              <label for="user-username">Username:</label>
-              <input type="text" id="user-username" name="user-username" >
-            </div>
-            <div class="form-group">
-              <label for="old-password">Old Password:</label>
+          <div class="form-group">
+            <label for="user-username">Username:</label>
+            <input type="text" id="user-username" name="user-username">
+          </div>
+          <div class="form-group">
+            <label for="old-password">Old Password:</label>
+            <div class="password-container">
               <input type="password" id="old-password" name="old-password" required>
+              <i class="fas fa-eye toggle-password" data-toggle="#old-password"></i>
             </div>
-            <div class="form-group">
-              <label for="new-password">New Password:</label>
+          </div>
+          <div class="form-group">
+            <label for="new-password">New Password:</label>
+            <div class="password-container">
               <input type="password" id="new-password" name="new-password" required>
-              <small id="passwordHelp" style="display: none; color: red;">
-                Password must contain at least 7 characters, including an uppercase letter, a lowercase letter, a number, and a special character.
-              </small>
+              <i class="fas fa-eye toggle-password" data-toggle="#new-password"></i>
             </div>
-            <div class="form-group">
-              <label for="confirm-new-password">Confirm New Password:</label>
+            <small id="passwordHelp" style="display: none; color: red;">
+              Password must contain at least 7 characters, including an uppercase letter, a lowercase letter, a number, and a special character.
+            </small>
+          </div>
+          <div class="form-group">
+            <label for="confirm-new-password">Confirm New Password:</label>
+            <div class="password-container">
               <input type="password" id="confirm-new-password" name="confirm-new-password" required>
+              <i class="fas fa-eye toggle-password" data-toggle="#confirm-new-password"></i>
             </div>
-            <div class="form-actions">
-              <button type="submit" >Update Password</button>
-            </div>
-            <div class="auth-links">
-                <a id="Login-page-link" href="{{url_for('userlogin')}}">Back to User-Login</a>
-              </div>
-          </form>
-
-
+          </div>
+          <div class="form-actions">
+            <button type="submit">Update Password</button>
+          </div>
+          <div class="auth-links">
+            <a id="Login-page-link" href="{{ url_for('userlogin') }}">Back to User-Login</a>
+          </div>
+        </form>
       </div>
     </div>
+        
+    <script>
+      document.querySelectorAll('.toggle-password').forEach(item => {
+        item.addEventListener('click', function() {
+          const input = document.querySelector(this.getAttribute('data-toggle'));
+          if (input.type === 'password') {
+            input.type = 'text';
+            this.classList.remove('fa-eye');
+            this.classList.add('fa-eye-slash');
+          } else {
+            input.type = 'password';
+            this.classList.remove('fa-eye-slash');
+            this.classList.add('fa-eye');
+          }
+        });
+      });
+    
+     
+    </script>
     <script>
         function validatePassword() {
           const newPassword = document.getElementById('new-password').value;

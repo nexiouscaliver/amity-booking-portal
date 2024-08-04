@@ -37,42 +37,45 @@
       align-items: center;
       padding: 10px 20px;
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      position: relative;
     }
-  
-  .logo-container {
+    
+    .logo-container {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
       display: flex;
       align-items: center;
-  }
-  
-  .navbar .logo img {
-    height: 60px;
-    margin-right: 10px;
-}
-
-.navbar .name img {
-    height:50px;
-}
-  
-  .navbar .menu {
-    display: flex;
-    gap: 20px;
-}
-
-.navbar .menu a {
-    color: var(--white);
-    text-decoration: none;
-    padding: 10px 15px;
-    border-radius: 5px;
-    transition: background-color 0.3s, box-shadow 0.3s;
-    font-weight: bold;
-}
-
-.navbar .menu a:hover {
-    background-color: var(--secondary-color);
-    transform: scale(1.05);
-    box-shadow: 0 0 0 2px aliceblue;
-}
-  
+    }
+    
+    .navbar .logo img {
+      height: 60px;
+      margin-right: 10px;
+    }
+    
+    .navbar .name img {
+      height: 50px;
+    }
+    
+    .navbar .menu {
+      display: flex;
+      gap: 20px;
+    }
+    
+    .navbar .menu a {
+      color: var(--white);
+      text-decoration: none;
+      padding: 10px 15px;
+      border-radius: 5px;
+      transition: background-color 0.3s, box-shadow 0.3s;
+      font-weight: bold;
+    }
+    
+    .navbar .menu a:hover {
+      background-color: var(--secondary-color);
+      transform: scale(1.05);
+      box-shadow: 0 0 0 2px aliceblue;
+    }
     
     .navbar .icon {
       font-size: 20px;
@@ -82,19 +85,11 @@
       font-weight: bold;
       position: relative;
     }
-    .navbar .icon {
-      font-size: 20px;
-      color: var(--white);
-      padding: 10px;
-      cursor: pointer;
-      font-weight: bold;
-      position: relative;
-    }
-
+    
     .navbar .icon:hover .dropdown {
       display: block;
     }
-
+    
     .dropdown {
       display: none;
       position: absolute;
@@ -107,7 +102,7 @@
       min-width: 150px;
       overflow: hidden;
     }
-
+    
     .dropdown a {
       color: var(--white);
       padding: 10px 15px;
@@ -115,11 +110,11 @@
       display: block;
       transition: background-color 0.3s;
     }
-
+    
     .dropdown a:hover {
       background-color: var(--secondary-color);
     }
-
+    
     /* Boxes Container */
     .boxes-container {
       display: flex;
@@ -128,8 +123,9 @@
       height: calc(100vh - 60px); /* Adjusted for the height of the navbar */
       gap: 20px;
       padding: 20px;
+      flex-wrap: wrap; /* Added for responsive wrapping */
     }
-
+    
     .box {
       background-color: var(--white);
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -138,13 +134,14 @@
       text-align: center;
       transition: transform 0.3s, box-shadow 0.3s;
       width: 300px;
+      margin: 10px; /* Added for spacing in flex wrap */
     }
-
+    
     .box:hover {
       transform: translateY(-10px);
       box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
     }
-
+    
     .box img {
       width: 100px;
       height: 100px;
@@ -152,13 +149,13 @@
       border-radius: 50%;
       object-fit: cover;
     }
-
+    
     .box h2 {
       font-size: 24px;
       margin-bottom: 20px;
       color: var(--primary-color);
     }
-
+    
     .box button {
       padding: 10px 20px;
       font-size: 16px;
@@ -170,11 +167,64 @@
       cursor: pointer;
       transition: background-color 0.3s, box-shadow 0.3s;
     }
-
+    
     .box button:hover {
       background-color: var(--hover-color);
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     }
+    
+    /* Responsive adjustments */
+    @media (max-width: 1200px) {
+      .box {
+        width: 250px; /* Adjusted for medium screens */
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .navbar {
+        flex-direction: column;
+        align-items: center;
+      }
+    
+      .navbar .menu {
+        flex-direction: column;
+        gap: 10px;
+      }
+    
+      .boxes-container {
+        flex-direction: column;
+      }
+    
+      .box {
+        width: 80%; /* Adjusted for smaller screens */
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .navbar {
+        padding: 10px;
+      }
+    
+      .navbar .menu a {
+        padding: 8px 10px;
+        font-size: 14px;
+      }
+    
+      .box {
+        width: 90%; /* Adjusted for small screens */
+        padding: 20px; /* Adjusted padding for small screens */
+      }
+    
+      .box h2 {
+        font-size: 20px;
+      }
+    
+      .box button {
+        padding: 8px 15px;
+        font-size: 14px;
+      }
+    }
+    
   </style>
 </head>
 
