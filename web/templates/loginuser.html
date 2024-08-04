@@ -11,12 +11,14 @@
     <meta name="msapplication-TileColor" content="#da532c">
     <meta name="theme-color" content="#ffffff">
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
   <style>
     @keyframes fadeIn {
       0% { opacity: 0; }
       100% { opacity: 1; }
     }
-
+    
     body {
       font-family: 'Roboto', sans-serif;
       background-color: aliceblue; /* Light blue background */
@@ -27,7 +29,7 @@
       margin: 0; /* Remove default margin */
       animation: fadeIn 1s ease-in-out; /* Apply fade-in animation */
     }
-
+    
     .container {
       background: #fff; /* White background */
       border: 1px solid #ddd; /* Light gray border */
@@ -35,13 +37,13 @@
       box-shadow: 0 0 20px rgba(0, 0, 0, 0.2); /* Increased shadow for depth */
       display: flex; /* Make container a flexbox */
       flex-direction: column; /* Stack elements vertically */
-      width: 80%; /* Set container width to 80% */
+      width: 90%; /* Set container width to 90% */
       max-width: 500px; /* Max width for large screens */
       padding: 20px;
       animation: fadeIn 1s ease-in-out; /* Apply fade-in animation */
       overflow: hidden; /* Ensure no overflow */
     }
-
+    
     .header {
       display: flex;
       align-items: center;
@@ -50,12 +52,7 @@
       background-color: #04172b; /* Dark blue background */
       color: white;
       font-size: 1.5em;
-    }
-
-    .header {
       width: 100%;
-      display: flex;
-      align-items: center;
     }
     
     .header img {
@@ -70,12 +67,12 @@
       width: 100%;
       margin-top: 20px;
     }
-
+    
     .form-group {
       margin-bottom: 15px;
       width: 100%; /* Full width for form group */
     }
-
+    
     label {
       display: block;
       margin-bottom: 5px;
@@ -83,30 +80,31 @@
       text-align: left; /* Align labels to the left */
       width: 100%; /* Full width for labels */
     }
-
+    
     input, button {
       width: 100%;
       padding: 15px;
       border: 1px solid #ccc; /* Light gray border */
       border-radius: 5px; /* Rounded corners */
       transition: 0.4s ease; /* Smoother transitions */
+      box-sizing: border-box; /* Include padding and border in the element's total width and height */
     }
-
+    
     input:focus, button:focus {
       outline: none; /* Remove default focus outline */
       border-color: #243a73; /* Darker blue border on focus */
     }
-
+    
     button {
       background-image: linear-gradient(to right, #04172b 0%, #243a73 100%);
       color: white;
       cursor: pointer;
     }
-
+    
     button:hover {
       background-image: linear-gradient(to right, #243a73 0%, #3f51b5 100%);
     }
-
+    
     .form-actions {
       display: flex; /* Arrange buttons and link horizontally */
       justify-content: space-between; /* Distribute elements evenly */
@@ -114,38 +112,115 @@
       margin-top: 15px;
       width: 100%; /* Full width for form actions */
     }
-
+    
     #login-link, #signup-link {
-        color: #04172b; /* Dark blue for links */
-        text-decoration: none; /* Remove underline */
-        transition: 0.3s ease; /* Smoother hover effect */
-      }
-  
-      #login-link:hover, #signup-link:hover {
-        color: #243a73; /* Slightly lighter blue on link hover */
-      }
-  
-      .signup-container {
-        display: flex;
-        justify-content: center; /* Center align the text in the signup link */
-        width: 100%;
-        margin-top: 15px;
-      }
-
-      /* CSS to align links inline and underline them */
-      .auth-links {
-        text-align: center;
+      color: #04172b; /* Dark blue for links */
+      text-decoration: none; /* Remove underline */
+      transition: 0.3s ease; /* Smoother hover effect */
     }
+    
+    #login-link:hover, #signup-link:hover {
+      color: #243a73; /* Slightly lighter blue on link hover */
+    }
+    
+    .signup-container {
+      display: flex;
+      justify-content: center; /* Center align the text in the signup link */
+      width: 100%;
+      margin-top: 15px;
+    }
+    
+    /* CSS to align links inline and underline them */
+    .auth-links {
+      text-align: center;
+    }
+    
     .auth-links a {
-        display: inline-block;
-        margin-right: 20px; /* Adjust spacing between links as needed */
-        text-decoration: none;
-        border-bottom: 1px solid transparent; 
+      display: inline-block;
+      margin-right: 20px; /* Adjust spacing between links as needed */
+      text-decoration: none;
+      border-bottom: 1px solid transparent; 
     }
-
+    
     .auth-links a:hover {
-        border-color: #333; 
+      border-color: #333; 
     }
+    
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .container {
+        width: 90%;
+        padding: 15px;
+        margin: 0 10px; /* Add margin for left and right spacing */
+      }
+    
+      .header {
+        font-size: 1.2em;
+        padding: 15px;
+      }
+    
+      input, button {
+        padding: 12px;
+      }
+    
+      .form-actions {
+        flex-direction: column;
+        gap: 10px;
+      }
+    
+      .auth-links a {
+        margin-right: 15px;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .container {
+        width: calc(100% - 20px); /* Subtract padding to add space */
+        padding: 10px;
+        margin: 0 10px; /* Add margin for left and right spacing */
+      }
+    
+      .header {
+        font-size: 1em;
+        padding: 10px;
+      }
+    
+      input, button {
+        padding: 10px;
+      }
+    
+      .form-actions {
+        flex-direction: column;
+        gap: 10px;
+      }
+    
+      .auth-links a {
+        margin-right: 10px;
+      }
+    }
+    
+    .password-container {
+      position: relative; /* Positioning context for the toggle icon */
+    }
+    
+    .password-container input {
+      width: 100%; /* Full width for the input field */
+    }
+    
+    .password-container i {
+      position: absolute; /* Position icon over the input */
+      right: 10px; /* Adjust as needed */
+      top: 50%;
+      transform: translateY(-50%);
+      cursor: pointer;
+      font-size: 1.2em; /* Adjust size as needed */
+      color: #04172b; /* Dark blue color for icon */
+    }
+    
+    .password-container i:hover {
+      color: #243a73; /* Slightly lighter blue on hover */
+    }
+    
     </style>
   </head>
   <body>
@@ -162,28 +237,45 @@
           alert("Incorrect username/password. Please Try again.")
         </script>
         {% endif %}
-        <form id="userLoginForm" method="post">
+        <form id="adminLoginForm" method="post">
           <div class="form-group">
-            <label for="user-username">Username:</label>
-            <input type="text" id="user-username" name="user-username" required>
+            <label for="admin-username">Username:</label>
+            <input type="text" id="admin-username" name="admin-username" required>
           </div>
           <div class="form-group">
-            <label for="user-password">Password:</label>
-            <input type="password" id="user-password" name="user-password" required>
+            <label for="admin-password">Password:</label>
+            <div class="password-container">
+              <input type="password" id="admin-password" name="admin-password" required>
+              <i class="fas fa-eye toggle-password" data-toggle="#admin-password"></i>
+            </div>
           </div>
           <div class="form-actions">
             <button type="submit">Login</button>
-            
           </div>
-          
           <div class="auth-links">
-            <a id="login-link" href="{{url_for('resetuser')}}">Reset Password</a>
-            <!-- <a id="signup-link" href="{{url_for('usersignup')}}">Sign Up</a> -->
-            <!-- <a id="login-link" href="{{url_for('adminlogin')}}">Admin Login</a> -->
-        </div>
+            <a id="login-link" href="{{ url_for('resetadmin') }}">Reset Password</a>
+          </div>
         </form>
       </div>
     </div>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+      document.querySelectorAll('.toggle-password').forEach(function(icon) {
+        icon.addEventListener('click', function() {
+          const input = document.querySelector(icon.getAttribute('data-toggle'));
+          if (input.type === 'password') {
+            input.type = 'text';
+            icon.classList.remove('fa-eye');
+            icon.classList.add('fa-eye-slash');
+          } else {
+            input.type = 'password';
+            icon.classList.remove('fa-eye-slash');
+            icon.classList.add('fa-eye');
+          }
+        });
+      });
+    });
+    </script>
   </body>
   </html>
   
