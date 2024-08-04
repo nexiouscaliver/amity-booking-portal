@@ -683,18 +683,18 @@ def index():
                         if (send_mail(final[3],hallname(hid),final[4],final[5],final[6],final[0],final[2],final[9],final[10],final[8],final[1],final[7],bid)):
                             
                             error = "Your Request Is Successfully Sent for Approval!"
-                            return render_template("index.html",error=error,cal=cal,output=output)
+                            return render_template("index.html",error=error,cal=cal,output=output,scname=scname)
                         else:
                             error=f"Email not sent to Admin due to server issue. But request is sent please send an email manually to {admin_email}."
-                            return render_template("index.html",error=error,cal=cal,output=output)
+                            return render_template("index.html",error=error,cal=cal,output=output,scname=scname)
                     else:
                         error = "The Time or Date Entered Is Incorrect. Please Enter Correct Time and Date."
-                        return render_template("index.html",error=error,cal=cal,output=output)
+                        return render_template("index.html",error=error,cal=cal,output=output,scname=scname)
                 else:
                     error = "Hall Not Available At given Date and Time."
-                    return render_template("index.html",error=error,cal=cal,output=output)
+                    return render_template("index.html",error=error,cal=cal,output=output,scname=scname)
             
-            return render_template("index.html",error=error,cal=cal,output=output)
+            return render_template("index.html",error=error,cal=cal,output=output,scname=scname)
         else:
             return redirect(url_for('userlogin'))
     except Exception as e:
@@ -1270,19 +1270,19 @@ def calenderform(hallname2,date,startTime,endTime,day):
                     # return redirect(url_for("index",error=error,cal=cal,output=output))
                     return render_template("notitab2.html",error=error)
             if hallname2=="Auditorium":
-                return render_template("audi.form.html",error=error,cal=cal,output=output,date=date,startTime=startTime,endTime=endTime,day=day)
+                return render_template("audi.form.html",scname=scname,error=error,cal=cal,output=output,date=date,startTime=startTime,endTime=endTime,day=day)
             elif hallname2=="SeminarHall":
-                return render_template("seminar.html",error=error,cal=cal,output=output,date=date,startTime=startTime,endTime=endTime,day=day)
+                return render_template("seminar.html",scname=scname,error=error,cal=cal,output=output,date=date,startTime=startTime,endTime=endTime,day=day)
             elif hallname2=="Room105":
-                return render_template("room105.html",error=error,cal=cal,output=output,date=date,startTime=startTime,endTime=endTime,day=day)
+                return render_template("room105.html",scname=scname,error=error,cal=cal,output=output,date=date,startTime=startTime,endTime=endTime,day=day)
             elif hallname2=="CRCConferenceRoom":
-                return render_template("crc.html",error=error,cal=cal,output=output,date=date,startTime=startTime,endTime=endTime,day=day)
+                return render_template("crc.html",scname=scname,error=error,cal=cal,output=output,date=date,startTime=startTime,endTime=endTime,day=day)
             elif hallname2=="AIITConferenceRoom":
-                return render_template("AIB.HTML",error=error,cal=cal,output=output,date=date,startTime=startTime,endTime=endTime,day=day)
+                return render_template("AIB.HTML",scname=scname,error=error,cal=cal,output=output,date=date,startTime=startTime,endTime=endTime,day=day)
             elif hallname2=="RICSConferenceRoom":
-                return render_template("RICS.html",error=error,cal=cal,output=output,date=date,startTime=startTime,endTime=endTime,day=day)
+                return render_template("RICS.html",scname=scname,error=error,cal=cal,output=output,date=date,startTime=startTime,endTime=endTime,day=day)
             elif hallname2=="Atrium":
-                return render_template("Atrium.html",error=error,cal=cal,output=output,date=date,startTime=startTime,endTime=endTime,day=day)
+                return render_template("Atrium.html",scname=scname,error=error,cal=cal,output=output,date=date,startTime=startTime,endTime=endTime,day=day)
             #return render_template("index.html",error=error,cal=cal,output=output)
         else:
             return redirect(url_for('userlogin'))
