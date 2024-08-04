@@ -714,7 +714,8 @@
                   <form method="post" id="AtriumForm" novalidate>
                     <div class="form-group">
                       <label for="AtriumSchoolName">School Name:</label>
-                      <select class="form-control" id="AtriumSchoolName" name="AtriumSchoolName" required>
+                      <input type="text" class="form-control" id="AtriumSchoolName" name="AtriumSchoolName" value="{{scname}}" readonly>
+                      <!-- <select class="form-control" id="AtriumSchoolName" name="AtriumSchoolName" required>
                         <option value="">Select School Name</option>
                         <option value="ABS">ABS - Amity Business School</option>
                         <option value="AFS">AFS - Amity Film School</option>
@@ -737,7 +738,7 @@
                         <option value="ASFA">ASFA - Amity School of Fine Arts</option>
                         <option value="AIE">AIE - Amity Institute of Education</option>
                         <option value="AIN">AIN - Amity Institute of Nanotechnology</option>
-                      </select>
+                      </select> -->
                       <div class="error-message schoolNameError">Please select a school name.</div>
                     </div>
                     <div class="form-group">
