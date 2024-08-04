@@ -1184,6 +1184,7 @@ def debug(token):
 def calenderform(hallname2,date,startTime,endTime,day):
     error = None
     try:
+    # if True:
         if session:
             uname = session['username']
             app.logger.info(uname)
@@ -1210,7 +1211,7 @@ def calenderform(hallname2,date,startTime,endTime,day):
             
             if request.method == 'POST':
                 
-                hall = ['auditorium','seminar','room105','crc','AIITConferenceroom','RICSConferenceRoom','Atrium']
+                hall = ['auditorium','seminar','room105','crc','AIBConferenceroom','RICSConferenceRoom','Atrium']
                 place = ['SchoolName','FacultyName','HodName','EventName','date','startime','endtime','Email','Phone','ResourcePersonName','ResourcePersonDetail']
                 final=[]
                 loc = ''
