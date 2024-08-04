@@ -3,7 +3,8 @@
 # Description: This file contains the main code for the AmiEventHub application.# -*- coding: utf-8 -*-
 import os
 import random
-from datetime import date , datetime
+from datetime import date as dt
+from datetime import datetime
 from datetime import timedelta
 import threading
 from flask import *
@@ -131,6 +132,37 @@ def get_sorted_status2():
         final2.append([o,status])
     # app.logger.info(final2)
     return final2[::-1]  #reverse the order for latest first
+
+# cookie-username-function
+def getusername():
+    userdict = {'ASET':'ASET - Amity School of Engineering and Technology',
+                'ABS':'ABS - Amity Business School',
+                'AFS':'AFS - Amity Film School',
+                'AIBAS':'AIBAS - Amity Institute of Behavioural & Allied Sciences',
+                'AIB':'AIB - Amity Institute of Biotechnology',
+                'AIIT':'AIIT - Amity Institute of Information Technology',
+                'AILA':'AILA - Amity Institute of Liberal Arts',
+                'AIP':'AIP - Amity Institute of Pharmacy',
+                'AIT':'AIT - Amity Institute of Technology',
+                'AITT':'AITT - Amity Institute of Travel & Tourism',
+                'ALS':'ALS - Amity Law School',
+                'ASAP':'ASAP - Amity School of Architecture & Planning',
+                'ASAS':'ASAS - Amity School of Applied Sciences',
+                'ASCO':'ASCO - Amity School of Communication',
+                'ASFT':'ASFT - Amity School of Fashion Technolog',
+                'ASL':'ASL - Amity School of Languages',
+                'CIIOL':'CIIOL - CII Logistics',
+                'TUCSSBERICS':'RICS',
+                'ASFA':'ASFA - Amity School of Fine Arts',
+                'AIE':'AIE - Amity Institute of Education',
+                'AIN':'AIN - Amity Institute of Nanotechnology',
+                }
+    cook = session['username']
+    schoolname = cook.split("_")[0]
+    fullname = userdict[schoolname]
+    # print(fullname)
+    return fullname
+    pass
 
 # global code_list
 code_list = []
@@ -581,8 +613,10 @@ def index():
             uname = session['username']
             app.logger.info(uname)
             cal = db.calender()
-            app.logger.info("CAL:",cal)
+            app.logger.info(f"CAL: {cal}")
             output = db.calendermain()
+            scname = getusername()
+            app.logger.info(scname)
             # app.logger.info(output)
             for i in output:
                 for j in i:
@@ -635,9 +669,9 @@ def index():
                     year = final[4][:4]
                     month = final[4][5:7]
                     day = final[4][8:]
-                    today = date.today()
+                    today = dt.today()
                     # today = datetime.date.today() && and given>=today
-                    given = date(int(year),int(month),int(day))
+                    given = dt(int(year),int(month),int(day))
                     app.logger.info(f'today {today} and given {given}')
                     if final[6] > final[5] and given>=today:
                         app.logger.info("PASS")
@@ -683,7 +717,7 @@ def status():
                 end_time = request.form['end_time']
                 event_name = request.form['ename']
                 school_name = request.form['sname']
-                app.logger.info(bid,status)
+                app.logger.info(f'{bid},{status}')
                 if db.reject_app(bid=int(bid),status=status):
                     error = "Venue hall request Cancelled Successfully."
                     send_mail5(event_name,event_venue,event_date,start_time,end_time,school_name,status,bid)
@@ -1147,8 +1181,10 @@ def calenderform(hallname2,date,startTime,endTime,day):
             uname = session['username']
             app.logger.info(uname)
             cal = db.calender()
-            app.logger.info("CAL:",cal)
+            app.logger.info(f"CAL: {cal}")
             output = db.calendermain()
+            scname = getusername()
+            app.logger.info(scname)
             # app.logger.info(output)
             for i in output:
                 for j in i:
@@ -1196,19 +1232,31 @@ def calenderform(hallname2,date,startTime,endTime,day):
                 hid = hallid(loc)
                 
                 # app.logger.info(final)
-                app.logger.info('location = ',hallid(loc))
+                app.logger.info(f'location = {hallid(loc)}')
                 if db.check_hall(hid,final[4],final[5],final[6]):
-                    bid = db.request_hall(hid,final[0],final[4],final[5],final[6],final[3],uname)
-                    db.info_dump(bookid=bid, hallid=hid , school=final[0], fname=final[1], hod=final[2], email=final[7] , phone=final[8] , date=final[4] , stime=final[5] , etime=final[6] , event=final[3],rpname=final[9],rpdetail=final[10])
-                    #db.info_dump(bid, hid , sfinal[0], final[1], final[2],final[7] , final[8] , final[4] , final[5] , final[6] , final[3])
-                    if (send_mail(final[3],hallname(hid),final[4],final[5],final[6],final[0],final[2],final[9],final[10],final[8],final[1],final[7],bid)):
-                        
-                        error = "Your Request Is Successfully Sent for Approval!"
-                        # return redirect(url_for("index",error=error,cal=cal,output=output))
-                        return render_template("notitab2.html",error=error)
+                    year = final[4][:4]
+                    month = final[4][5:7]
+                    day = final[4][8:]
+                    today = dt.today()
+                    # today = datetime.date.today() && and given>=today
+                    given = dt(int(year),int(month),int(day))
+                    app.logger.info(f'today {today} and given {given}')
+                    if final[6] > final[5] and given>=today:
+                        app.logger.info("PASS")
+                        bid = db.request_hall(hid,final[0],final[4],final[5],final[6],final[3],uname)
+                        db.info_dump(bookid=bid, hallid=hid , school=final[0], fname=final[1], hod=final[2], email=final[7] , phone=final[8] , date=final[4] , stime=final[5] , etime=final[6] , event=final[3],rpname=final[9],rpdetail=final[10])
+                        #db.info_dump(bid, hid , sfinal[0], final[1], final[2],final[7] , final[8] , final[4] , final[5] , final[6] , final[3])
+                        if (send_mail(final[3],hallname(hid),final[4],final[5],final[6],final[0],final[2],final[9],final[10],final[8],final[1],final[7],bid)):
+                            
+                            error = "Your Request Is Successfully Sent for Approval!"
+                            # return redirect(url_for("index",error=error,cal=cal,output=output))
+                            return render_template("notitab2.html",error=error)
+                        else:
+                            error=f"Email not sent to Admin due to server issue. But request is sent please send an email manually to {admin_email}."
+                            # return redirect(url_for("index",error=error,cal=cal,output=output))
+                            return render_template("notitab2.html",error=error)
                     else:
-                        error=f"Email not sent to Admin due to server issue. But request is sent please send an email manually to {admin_email}."
-                        # return redirect(url_for("index",error=error,cal=cal,output=output))
+                        error = "The Time or Date Entered Is Incorrect. Please Enter Correct Time and Date."
                         return render_template("notitab2.html",error=error)
                 else:
                     error = "Hall Not Available At given Date and Time."
@@ -1243,7 +1291,7 @@ def test():
         app.logger.info("METHOD ACTIVATE")
         bid = request.form["booking_id"]
         status = request.form["status"]
-        app.logger.info(bid,status)
+        app.logger.info(f'{bid},{status}')
     if session['username']:
         username = session['username']
         output = db.check_request(username)
@@ -1268,7 +1316,7 @@ def resetuser():
         username = request.form["user-username"]
         oldpass = request.form["old-password"]
         newpass = request.form["new-password"]
-        app.logger.info(username,oldpass,newpass)
+        app.logger.info(f'{username},{oldpass},{newpass}')
         if login.resetpassuser(username,oldpass,newpass):
             return render_template('notitab3.html',error="Password Reset Successfully.")
         else:
@@ -1285,7 +1333,7 @@ def resetadmin():
         username = request.form["user-username"]
         oldpass = request.form["old-password"]
         newpass = request.form["new-password"]
-        app.logger.info(username,oldpass,newpass)
+        app.logger.info(f'{username},{oldpass},{newpass}')
         if login.resetpassadmin(username,oldpass,newpass):
             return render_template('notitab4.html',error="Password Reset Successfully.")
         else:
