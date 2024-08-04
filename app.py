@@ -1066,6 +1066,13 @@ def admincalender():
     # app.logger.info(output)
     return render_template('calenderadmin.html',output=output)
 
+@app.route('/server/periodic',methods=['GET'])
+def periodic():
+    a = db.all_status()
+    b = login.seeall()
+    return jsonify(a,b)
+    
+
 @app.route('/user/calender',methods=['GET'])
 def usercalender():
     output = db.calendermain()
