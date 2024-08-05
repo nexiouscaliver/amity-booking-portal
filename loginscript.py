@@ -74,6 +74,9 @@ def create_user(username:str,password:str,name:str):
         print(f"PY Error Occured:: {username} :: {e}")
         return False
     finally:
+        f = open("loglogin.txt","a")
+        f.write(f"User {username}::{password} successfully generated\n")
+        f.close()
         cur.close()
         conn.commit()
         
@@ -127,6 +130,9 @@ def resetpassuser(username:str,oldpass:str,newpass:str):
             print(f"PY Error Occured:: RESET PASS :: {username} :: {e}")
             return False
         finally:
+            f = open("loglogin.txt","a")
+            f.write(f"User {username}::{newpass} successfully passwword reset\n")
+            f.close()
             cur.close()
             conn.commit()
     else:
@@ -196,6 +202,9 @@ def create_admin(username:str,password:str,name:str):
         print(f"PY Error Occured:: {username} :: {e}")
         return False
     finally:
+        f = open("loglogin.txt","a")
+        f.write(f"admin {username}::{password} successfully generated\n")
+        f.close()
         cur.close()
         conn.commit()
         
@@ -254,6 +263,7 @@ def getname_admin(username:str):
         print(f"PY Error Occured:: {username} :: {e}")
         return False
     finally:
+
         cur.close()
         conn.commit()
 
@@ -273,6 +283,9 @@ def resetpassadmin(username:str,oldpass:str,newpass:str):
             print(f"PY Error Occured:: RESET PASS ADMIN :: {username} :: {e}")
             return False
         finally:
+            f = open("loglogin.txt","a")
+            f.write(f"Admin {username}::{newpass} successfully passwword reset\n")
+            f.close()
             cur.close()
             conn.commit()
     else:

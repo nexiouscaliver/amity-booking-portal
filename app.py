@@ -36,6 +36,7 @@ it_email = 'amieventhub@gmail.com'  # Replace with the admin's email
 admin2_mail = 'amieventhub@gmail.com' # Replace with the admin2's email
 mail = Mail(app)
 server_link = "http://127.0.0.1:8000" #replace with production server initial routing address.
+#server_link = "http://10.5.2.29" #replace with production server initial routing address.
 #server_link = "https://786gkd71-8000.inc1.devtunnels.ms/" #replace with production server initial routing address.
 
 
