@@ -40,11 +40,11 @@
         }
         .navbar .logo img {
             height: 50px;
-            margin-right: 10px;
+            margin-right: 2px;
         }
-        
+      
         .navbar .name img {
-            height: 50px;
+            height: 40px;
         }
         
         .navbar .menu {
@@ -185,7 +185,7 @@
           @media only screen and (min-width: 600px) and (max-width: 768px) {
             .calendar-container {
               width: 80%;
-              top: 50%;
+              top: 20%;
               left: 50%;
               transform: translate(-50%, 0);
             }
@@ -761,20 +761,20 @@
             <span id="monthYear"></span>
             <button id="nextMonth">&gt;</button>
         </div>
-        <div class="flex justify-center mb-4">
-            <select id="hallDropdown" name="hallDropdown" class="mx-2 p-2 bg-gray-700 text-gray-400 rounded">
+        <div class="responsive-container">
+            <select id="hallDropdown" name="hallDropdown" class="responsive-select">
                 <option value="Auditorium">Auditorium</option>
                 <option value="SeminarHall">Seminar Hall</option>
                 <option value="Room105">Room 105</option>
                 <option value="CRCConferenceRoom">CRC Conference Room</option>
                 <option value="AIITConferenceRoom">AIB Conference Room</option>
-                <option value="RICSConferenceRoom">RICS  Conference Room</option>
+                <option value="RICSConferenceRoom">RICS Conference Room</option>
                 <option value="Atrium">Atrium</option>
             </select>
-            <select id="monthSelect" class="mx-2 p-2 bg-gray-700 text-gray-400 rounded readonly ">
+            <select id="monthSelect" class="responsive-select readonly">
                 <!-- Options will be populated by JavaScript -->
             </select>
-            <input type="date" id="dateSearch" class="p-2 bg-gray-700 text-gray-400 rounded">
+            <input type="date" id="dateSearch" class="responsive-input">
         </div>
         <div class="calendar-header">
             <div>Sun</div>
