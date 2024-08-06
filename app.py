@@ -1090,6 +1090,9 @@ def periodic():
     b = login.seeall()
     return jsonify(a,b)
     
+@app.route('/creators',methods=['GET', 'POST'])
+def creators():
+    return jsonify({'created by':'Shahil Kadia & Sundaram Singh','Year':'2024','Sem & Branch':'sem - 5(summer internship) & B.TECH(CSE)','College':'Amity University Mumbai','contact':'8128455494 & 8976413161','email':'shahilkadia@gmail.com'})
 
 @app.route('/user/calender',methods=['GET'])
 def usercalender():
