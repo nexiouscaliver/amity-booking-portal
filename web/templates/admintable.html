@@ -14,8 +14,8 @@
     <meta name="msapplication-TileColor" content="#da532c">
     <meta name="theme-color" content="#ffffff">
   <style>
-      <style>
    
+    
     body {
       background-color: aliceblue;
       margin: 0;
@@ -58,6 +58,7 @@
 .navbar .name img {
     height: 40px;
 }
+ 
   
   .navbar .menu {
       display: flex;
@@ -594,135 +595,146 @@ button.schedule-button:hover {
 </style>
 </head>
 <body>
+
+
  
 
-
-<header>
-  <div class="navbar">
-      <div class="logo-container">
-          <div class="logo">
-            <img src="{{ url_for('static',filename='L1.png') }}" alt="Logo">
+    <header>
+      <div class="navbar">
+          <div class="logo-container">
+              <div class="logo">
+                <img src="{{ url_for('static',filename='L1.png') }}" alt="Logo">
+              </div>
+              <div class="name">
+                <img src="{{ url_for('static',filename='L2.png')}}" alt="Name Logo">
+              </div>
           </div>
-          <div class="name">
-            <img src="{{ url_for('static',filename='L2.png')}}" alt="Name Logo">
+          <div class="menu">
+              <a href="{{url_for('admincalender')}}" class="menu-item">
+                  <i class="fas fa-calendar-alt"></i> Calendar
+              </a>
+              <a href="{{url_for('adminnoti')}}"class="menu-item">
+                  <i class="fas fa-bell"></i> Updates
+              </a>
+              <a href="{{url_for('adminbooking')}}"> All Booking</a>
+              <a href="{{url_for('home')}}" class="menu-item">
+                <i class="fas fa-power-off"></i>Logout</a>
           </div>
       </div>
-      <div class="menu">
-          <a href="{{url_for('admincalender')}}" class="menu-item">
-              <i class="fas fa-calendar-alt"></i> Calendar
-          </a>
-          <a href="{{url_for('adminnoti')}}"class="menu-item">
-              <i class="fas fa-bell"></i> Updates
-          </a>
-          <a href="{{url_for('adminbooking')}}"> All Booking</a>
-          <a href="{{url_for('home')}}" class="menu-item">
-            <i class="fas fa-power-off"></i> Logout</a>
+  </header>
+
+
+
+ 
+
+    <div class="container">
+      <h2>Pending Event Details</h2>
+  
+      <div class="search-bar">
+          <input type="text" id="searchInput" placeholder="Search requests">
+      </div>
+      
+      <div class="table-container">
+          <table>
+              <thead>
+                  <tr>
+                      <th>Booking ID</th>
+                      <th>School Name</th>
+                      <th>Event Name</th>
+                      <th>Venue</th>
+                      <th>Date</th>
+                      <th>Start Time</th> 
+                      <th>End Time</th> 
+                      <th>Resource Person Name</th>
+                      <th>Action</th>
+                  </tr>
+              </thead>
+              <tbody id="appointmentTable">
+                  {% for i in output %}
+                  <tr>
+                      <td>{{ i[0] }}</td>
+                      <td>{{ i[2] }}</td>
+                      <td>{{ i[5] }}</td>
+                      <td>{{ hallname(i[1]) }}</td>
+                      <td>{{ i[6] }}</td>
+                      <td>{{ make_time(i[7]) }}</td>
+                      <td>{{ make_time(i[8]) }}</td>
+                      <td>{{ i[11] }}</td>
+                      <td>
+                          <button onclick="openScheduleForm('{{ i[0] }}', '{{ i[2] }}', '{{ i[5] }}', '{{ hallname(i[1]) }}', '{{ i[6] }}', '{{ make_time(i[7]) }}', '{{ make_time(i[8]) }}', '{{ i[11] }}', '{{ i[12] }}', '{{ i[9] }}', this)" class="schedule-button">Schedule</button>
+                      </td>
+                  </tr>
+                  
+                  {% endfor %}
+              </tbody>
+          </table>
+      </div>
+  
+      <div id="scheduleFormContainer">
+          <h3>Schedule the Event</h3>
+          <button type="button" class="close-button" onclick="closeScheduleForm()">
+              <!-- Assuming you're using an SVG close icon -->
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+                  <path fill="currentColor" d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+              </svg>
+          </button>
+  
+          <form id="scheduleForm" method="post">
+              <div class="form-group">
+                  <label for="bookingId">Booking ID:</label>
+                  <input type="text" id="bookingId" name="bookingId" readonly>
+              </div>
+              <div class="form-group">
+                  <label for="schoolName">School Name:</label>
+                  <input type="text" id="schoolName" name="schoolName" readonly>
+              </div>
+              <div class="form-group">
+                  <label for="eventName">Event Name:</label>
+                  <input type="text" id="eventName" name="eventName" readonly>
+              </div>
+              <div class="form-group">
+                  <label for="venue">Venue:</label>
+                  <input type="text" id="venue" name="venue" readonly>
+              </div>
+              <div class="form-group">
+                  <label for="eventDate">Date of Event:</label>
+                  <input type="date" id="eventDate" name="eventDate" readonly>
+              </div>  
+              <div class="form-group">
+                  <label for="durationofevent">Start Time of event:</label>
+                  <input type="text" id="stime" name="stime" readonly>
+              </div>
+              <div class="form-group">
+                  <label for="durationofevent">End Time of event:</label>
+                  <input type="text" id="etime" name="etime" readonly>
+              </div>
+              <div class="form-group">
+                  <label for="resourcePersonName">Resource Person Name:</label>
+                  <input type="text" id="resourcePersonName" name="resourcePersonName" readonly>
+              </div>
+              <div class="form-group">
+                  <label for="resourcePersonDetail">Resource Person Detail:</label>
+                  <input type="text" id="resourcePersonDetail" name="resourcePersonDetail" readonly>
+              </div>
+              <div class="form-group">
+                  <label for="facultyEmail">Faculty Email:</label>
+                  <input type="text" id="facultyEmail" name="facultyEmail" readonly>
+              </div>
+              <div class="form-group">
+                  <label for="confirmEvent">Confirm Event:</label>
+                  <select id="confirmEvent" name="confirmEvent" required onchange="changeSelectColor(this)">
+                      <option value="ACCEPT">Accept Event</option>
+                      <option value="REJECT">Reject Event</option>
+                  </select>
+              </div>
+              <div class="button-group">
+                  <button type="submit" class="schedule-button">Submit</button>
+                  <button type="button" class="schedule-button" onclick="closeScheduleForm()">Close Form</button>
+              </div>
+          </form>
       </div>
   </div>
-</header>
-
-<div class="container">
-    <h2>Pending Event Details</h2>
-
-    <div class="search-bar">
-        <input type="text" id="searchInput" placeholder="Search requests">
-    </div>
-    
-<table>
-<thead>
-    <tr>
-        <th>Booking ID</th>
-        <th>School Name</th>
-        <th>Event Name</th>
-        <th>Venue</th>
-        <th>Date</th>
-        <th>Start Time</th> 
-        <th>End Time</th> 
-        <th>Resource Person Name</th>
-        <th>Action</th>
-    </tr>
-</thead>
-<tbody id="appointmentTable">
-  {%for i in output%}
   
-    <tr>
-        <td>{{ i[0] }}</td> 
-        <td>{{ i[2] }}</td> 
-        <td>{{ i[5] }}</td> 
-        <td>{{ hallname(i[1]) }}</td> 
-        <td>{{ i[6] }}</td> 
-        <td>{{ make_time(i[7]) }}</td>
-        <td>{{ make_time(i[8]) }}</td> 
-        <td>{{ i[11] }}</td> 
-        <td><button onclick="openScheduleForm('{{ i[0] }}', '{{ i[2] }}', '{{ i[5] }}', '{{ hallname(i[1]) }}', '{{ i[6] }}', '{{ make_time(i[7]) }}', '{{ make_time(i[8]) }}', '{{ i[11] }}', '{{ i[12] }}', '{{ i[9] }}', this)" class="schedule-button">Schedule</button></td>
-    </tr>
-  {%endfor%}
-</tbody>
-</table>
-
-<div id="scheduleFormContainer">
-<h3>Schedule the Event</h3>
-<button type="button" class="close-button" onclick="closeScheduleForm()">
-  <!-- Assuming you're using an SVG close icon -->
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
-    <path fill="currentColor" d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
-  </svg>
-</button>
-
-<form id="scheduleForm" method="post">
-    <div class="form-group">
-        <label for="bookingId">Booking ID:</label>
-        <input type="text" id="bookingId" name="bookingId" readonly>
-    </div>
-    <div class="form-group">
-        <label for="schoolName">School Name:</label>
-        <input type="text" id="schoolName" name="schoolName" readonly>
-    </div>
-    <div class="form-group">
-        <label for="eventName">Event Name:</label>
-        <input type="text" id="eventName" name="eventName" readonly>
-    </div>
-    <div class="form-group">
-        <label for="venue">Venue:</label>
-        <input type="text" id="venue" name="venue" readonly>
-    </div>
-    <div class="form-group">
-        <label for="eventDate">Date of Event:</label>
-        <input type="date" id="eventDate" name="eventDate" readonly>
-    </div>  
-    <div class="form-group">
-        <label for="durationofevent">Start Time of event:</label>
-        <input type="text" id="stime" name="stime" readonly>
-    </div>
-    <div class="form-group">
-        <label for="durationofevent">End Time of event:</label>
-        <input type="text" id="etime" name="etime" readonly>
-    </div>
-    <div class="form-group">
-        <label for="resourcePersonName">Resource Person Name:</label>
-        <input type="text" id="resourcePersonName" name="resourcePersonName" readonly>
-    </div>
-    <div class="form-group">
-        <label for="resourcePersonDetail">Resource Person Detail:</label>
-        <input type="text" id="resourcePersonDetail" name="resourcePersonDetail" readonly>
-    </div>
-    <div class="form-group">
-        <label for="facultyEmail">Faculty Email:</label>
-        <input type="text" id="facultyEmail" name="facultyEmail" readonly>
-    </div>
-    <div class="form-group">
-        <label for="confirmEvent">Confirm Event:</label>
-        <select id="confirmEvent" name="confirmEvent" required onchange="changeSelectColor(this)">
-            <option value="ACCEPT">Accept Event</option>
-            <option value="REJECT">Reject Event</option>
-        </select>
-    </div>
-    <div class="button-group">
-        <button type="submit" class="schedule-button">Submit</button>
-        <button type="button" class="schedule-button" onclick="closeScheduleForm()">Close Form</button>
-    </div>
-</form>
-</div>
 
 <script>
 function formatDate(dateStr) {
