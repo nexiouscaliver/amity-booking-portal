@@ -1,0 +1,225 @@
+
+            
+    Ami-Scheduler Link : http://10.5.2.29/
+    School Name : ASET - Amity School of Engineering and Technology
+    UserID : ASET_venue
+    Password : venue_00686
+            
+
+    
+            
+    Ami-Scheduler Link : http://10.5.2.29/
+    School Name : ABS - Amity Business School
+    UserID : ABS_venue
+    Password : venue_29395
+            
+
+    
+            
+    Ami-Scheduler Link : http://10.5.2.29/
+    School Name : AFS - Amity Film School
+    UserID : AFS_venue
+    Password : venue_19823
+            
+
+    
+            
+    Ami-Scheduler Link : http://10.5.2.29/
+    School Name : AIBAS - Amity Institute of Behavioural & Allied Sciences
+    UserID : AIBAS_venue
+    Password : venue_96499
+            
+
+    
+            
+    Ami-Scheduler Link : http://10.5.2.29/
+    School Name : AIB - Amity Institute of Biotechnology
+    UserID : AIB_venue
+    Password : venue_37460
+            
+
+    
+            
+    Ami-Scheduler Link : http://10.5.2.29/
+    School Name : AIIT - Amity Institute of Information Technology
+    UserID : AIIT_venue
+    Password : venue_97950
+            
+
+    
+            
+    Ami-Scheduler Link : http://10.5.2.29/
+    School Name : AILA - Amity Institute of Liberal Arts
+    UserID : AILA_venue
+    Password : venue_22533
+            
+
+    
+            
+    Ami-Scheduler Link : http://10.5.2.29/
+    School Name : AIP - Amity Institute of Pharmacy
+    UserID : AIP_venue
+    Password : venue_86056
+            
+
+    
+            
+    Ami-Scheduler Link : http://10.5.2.29/
+    School Name : AIT - Amity Institute of Technology
+    UserID : AIT_venue
+    Password : venue_65254
+            
+
+    
+            
+    Ami-Scheduler Link : http://10.5.2.29/
+    School Name : AITT - Amity Institute of Travel & Tourism
+    UserID : AITT_venue
+    Password : venue_03396
+            
+
+    
+            
+    Ami-Scheduler Link : http://10.5.2.29/
+    School Name : ALS - Amity Law School
+    UserID : ALS_venue
+    Password : venue_39540
+            
+
+    
+            
+    Ami-Scheduler Link : http://10.5.2.29/
+    School Name : ASAP - Amity School of Architecture & Planning
+    UserID : ASAP_venue
+    Password : venue_31726
+            
+
+    
+            
+    Ami-Scheduler Link : http://10.5.2.29/
+    School Name : ASAS - Amity School of Applied Sciences
+    UserID : ASAS_venue
+    Password : venue_58037
+            
+
+    
+            
+    Ami-Scheduler Link : http://10.5.2.29/
+    School Name : ASCO - Amity School of Communication
+    UserID : ASCO_venue
+    Password : venue_56366
+            
+
+    
+            
+    Ami-Scheduler Link : http://10.5.2.29/
+    School Name : ASFT - Amity School of Fashion Technolog
+    UserID : ASFT_venue
+    Password : venue_28042
+            
+
+    
+            
+    Ami-Scheduler Link : http://10.5.2.29/
+    School Name : ASL - Amity School of Languages
+    UserID : ASL_venue
+    Password : venue_10844
+            
+
+    
+            
+    Ami-Scheduler Link : http://10.5.2.29/
+    School Name : CIIOL - CII Logistics
+    UserID : CIIOL_venue
+    Password : venue_06932
+            
+
+    
+            
+    Ami-Scheduler Link : http://10.5.2.29/
+    School Name : RICS
+    UserID : TUCSSBERICS_venue
+    Password : venue_40988
+            
+
+    
+            
+    Ami-Scheduler Link : http://10.5.2.29/
+    School Name : ASFA - Amity School of Fine Arts
+    UserID : ASFA_venue
+    Password : venue_02634
+            
+
+    
+            
+    Ami-Scheduler Link : http://10.5.2.29/
+    School Name : AIE - Amity Institute of Education
+    UserID : AIE_venue
+    Password : venue_81354
+            
+
+    
+            
+    Ami-Scheduler Link : http://10.5.2.29/
+    School Name : AIN - Amity Institute of Nanotechnology
+    UserID : AIN_venue
+    Password : venue_82477
+            
+
+    
+            
+    Ami-Scheduler Link : http://10.5.2.29/
+    School Name : Director_Admin_1
+    UserID : Director_Admin_1
+    Password : venue_22223
+            
+
+    
+            
+    Ami-Scheduler Link : http://10.5.2.29/
+    School Name : Director_Admin_2
+    UserID : Director_Admin_2
+    Password : venue_33334
+            
+
+    
+            
+    Ami-Scheduler Link : http://10.5.2.29/
+    School Name : CRC_Dept
+    UserID : CRC_Dept
+    Password : venue_44445
+            
+
+    
+            
+    Ami-Scheduler Link : http://10.5.2.29/
+    School Name : HR_Dept
+    UserID : HR_Dept
+    Password : venue_55556
+            
+
+    
+            
+    Ami-Scheduler Link : http://10.5.2.29/
+    School Name : Hostel_Security_Dept
+    UserID : Hostel_Security_Dept
+    Password : venue_66667
+            
+
+    
+            
+    Ami-Scheduler Link : http://10.5.2.29/
+    School Name : Admissions_Dept
+    UserID : Admissions_Dept
+    Password : venue_77778
+            
+
+    
+            
+    Ami-Scheduler Link : http://10.5.2.29/
+    School Name : Examinations_Dept
+    UserID : Examinations_Dept
+    Password : venue_88889
+            
+
+    

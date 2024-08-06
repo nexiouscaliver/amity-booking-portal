@@ -157,9 +157,26 @@ def getusername():
                 'ASFA':'ASFA - Amity School of Fine Arts',
                 'AIE':'AIE - Amity Institute of Education',
                 'AIN':'AIN - Amity Institute of Nanotechnology',
+                'Administrator':'Administrator',
+                'Director_Admin_1':'Director_Admin_1',
+                'Director_Admin_2':'Director_Admin_2',
+                'CRC_Dept':'CRC_Dept',
+                'HR_Dept':'HR_Dept',
+                'Hostel_Security_Dept':'Hostel_Security_Dept',
+                'Admissions_Dept':'Admissions_Dept',
+                'Examinations_Dept':'Examinations_Dept',
+                'testdebug':'testdebug'
                 }
     cook = session['username']
-    schoolname = cook.split("_")[0]
+    if cook == "Director_Admin_1": schoolname = "Director_Admin_1"
+    elif cook == "Director_Admin_2": schoolname = "Director_Admin_2"
+    elif cook == "CRC_Dept": schoolname = "CRC_Dept"
+    elif cook == "HR_Dept": schoolname = "HR_Dept"
+    elif cook == "Hostel_Security_Dept": schoolname = "Hostel_Security_Dept"
+    elif cook == "Admissions_Dept": schoolname = "Admissions_Dept"
+    elif cook == "Examinations_Dept": schoolname = "Examinations_Dept"
+    else:
+        schoolname = cook.split("_")[0]
     fullname = userdict[schoolname]
     # print(fullname)
     return fullname
