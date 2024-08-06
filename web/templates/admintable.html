@@ -596,35 +596,28 @@ button.schedule-button:hover {
 </head>
 <body>
 
-
- 
-
-    <header>
-      <div class="navbar">
-          <div class="logo-container">
-              <div class="logo">
-                <img src="{{ url_for('static',filename='L1.png') }}" alt="Logo">
-              </div>
-              <div class="name">
-                <img src="{{ url_for('static',filename='L2.png')}}" alt="Name Logo">
-              </div>
-          </div>
-          <div class="menu">
-              <a href="{{url_for('admincalender')}}" class="menu-item">
-                  <i class="fas fa-calendar-alt"></i> Calendar
-              </a>
-              <a href="{{url_for('adminnoti')}}"class="menu-item">
-                  <i class="fas fa-bell"></i> Updates
-              </a>
-              <a href="{{url_for('adminbooking')}}"> All Booking</a>
-              <a href="{{url_for('home')}}" class="menu-item">
-                <i class="fas fa-power-off"></i>Logout</a>
-          </div>
-      </div>
-  </header>
-
-
-
+  <header>
+    <div class="navbar">
+        <div class="logo-container">
+            <div class="logo">
+              <img src="{{ url_for('static',filename='L1.png') }}" alt="Logo">
+            </div>
+            <div class="name">
+              <img src="{{ url_for('static',filename='L2.png') }}" alt="Name Logo">
+            </div>
+        </div>
+        <div class="menu">
+            <a href="{{url_for('admincalender')}}"  class="menu-item">
+                <i class="fas fa-calendar-alt"></i> Calendar
+            </a>
+            <a href="{{url_for('adminnoti')}}" class="menu-item">
+                <i class="fas fa-bell"></i> Updates
+            </a>
+            <a href="{{url_for('adminbooking')}}"> All Booking</a>
+            <a href="{{url_for('home')}}" class="menu-item"> <i class="fas fa-power-off"></i>Logout</a>
+        </div>
+    </div>
+</header>
  
 
     <div class="container">
