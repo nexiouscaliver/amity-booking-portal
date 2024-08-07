@@ -692,7 +692,7 @@ def index():
                     given = dt(int(year),int(month),int(day))
                     app.logger.info(f'today {today} and given {given}')
                     app.logger.info(f'final[6] {final[6]} and final[5] {final[5]}')
-                    if final[6] > final[5] and given>=today:
+                    if int(final[6]) > int(final[5]) and given>=today:
                         app.logger.info("PASS")
                         # pass
                         
