@@ -68,17 +68,17 @@ def init():  #server
     c = conn.cursor(buffered=True)
     sql = "create table if not exists halls(hallid integer primary key AUTO_INCREMENT,hallname varchar(35));"
     c.execute(sql)
-    sql = "create table if not exists book(bookid integer primary key AUTO_INCREMENT , hallid integer, school varchar(50) , date varchar(20) , stime integer, etime integer , event varchar(100));"
+    sql = "create table if not exists book(bookid integer primary key AUTO_INCREMENT , hallid integer, school varchar(350) , date varchar(20) , stime integer, etime integer , event varchar(350));"
     c.execute(sql)
-    sql = "create table if not exists confirm(bookid integer primary key , hallid integer, school varchar(50) , date varchar(20) , stime integer, etime integer , event varchar(100));"
+    sql = "create table if not exists confirm(bookid integer primary key , hallid integer, school varchar(350) , date varchar(20) , stime integer, etime integer , event varchar(350));"
     c.execute(sql)
-    sql = "create table if not exists reject(bookid integer primary key , hallid integer, school varchar(50) , date varchar(20) , stime integer, etime integer , event varchar(100));"
+    sql = "create table if not exists reject(bookid integer primary key , hallid integer, school varchar(350) , date varchar(20) , stime integer, etime integer , event varchar(350));"
     c.execute(sql)
     sql = "create table if not exists userreq(userid integer primary key AUTO_INCREMENT , username varchar(100) , bookid integer);"
     c.execute(sql)
     sql = "create table if not exists status(bookid integer primary key , state varchar(15));"
     c.execute(sql)
-    sql = "create table if not exists info(bookid integer primary key, hallid integer , schoolname varchar(100) , fname varchar(100) , hod varchar(100) , eventname varchar(100) ,date varchar(100) , stime varchar(100) , etime varchar(100), email varchar(100) , phone varchar(100) , rpname varchar(100) , rpdetail varchar(100));"
+    sql = "create table if not exists info(bookid integer primary key, hallid integer , schoolname varchar(350) , fname varchar(100) , hod varchar(100) , eventname varchar(350) ,date varchar(100) , stime varchar(100) , etime varchar(100), email varchar(100) , phone varchar(100) , rpname varchar(100) , rpdetail varchar(350));"
     c.execute(sql)
     try:
         sql='select * from halls;'
