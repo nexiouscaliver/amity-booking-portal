@@ -1102,7 +1102,7 @@ def admincalender():
 
 @app.route('/server/periodic',methods=['GET'])
 def periodic():
-    a = db.all_status()
+    a = db.seeall()
     b = login.seeall()
     return jsonify(a,b)
     
