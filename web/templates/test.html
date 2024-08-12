@@ -1,88 +1,432 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hall Management System</title>
+  <title>Admin - Hall Management System</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-  <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-  <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static',filename='apple-touch-icon.png') }}">
-    <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static',filename='favicon-32x32.png') }}">
-    <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static',filename='favicon-16x16.png') }}">
-    <link rel="manifest" href="{{ url_for('static',filename='site.webmanifest') }}">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
     <meta name="msapplication-TileColor" content="#da532c">
     <meta name="theme-color" content="#ffffff">
   <style>
+   
+    
     body {
       background-color: aliceblue;
       margin: 0;
       font-family: Arial, sans-serif;
-    }
-    
-    :root {
+      font-size: 16px;
+      line-height: 1.5;
+  }
+  
+  :root {
       --primary-color: #04172b;
       --secondary-color: #061b31;
       --white: #ffffff;
-      --gray: #6c757d;
-    }
-    
-    .navbar {
+      --gray: #6c757d;   
+      --light-green: #90ee90;
+      --light-red: #ffcccb;
+  }
+  
+  .navbar {
       background-color: var(--primary-color);
       display: flex;
-      justify-content: space-between;
       align-items: center;
       padding: 10px 20px;
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    }
+      flex-wrap: nowrap;
+      justify-content: space-evenly; /* Space between logo and menu */
+  }
   
   .logo-container {
       display: flex;
       align-items: center;
+      flex: 0 1 auto; /* Prevent the logo from stretching */
+      margin-right: 0; /* Align logo container to the left */
   }
   
   .navbar .logo img {
-      height: 50px;
-      margin-right: 10px;
-  }
-  
-  .navbar .name img {
-      height: 40px;
-  }
+    height: 50px;
+    margin-right: 2px;
+}
+
+.navbar .name img {
+    height: 40px;
+}
+ 
   
   .navbar .menu {
-    display: flex;
-    gap: 20px;
-}
-
-.navbar .menu a {
-    color: var(--white);
-    text-decoration: none;
-    padding: 10px 15px;
-    border-radius: 5px;
-    transition: background-color 0.3s, box-shadow 0.3s;
-    font-weight: bold;
-}
-
-.navbar .menu a:hover {
-    background-color: var(--secondary-color);
-    transform: scale(1.05);
-    box-shadow: 0 0 0 2px aliceblue;
-}
+      display: flex;
+      align-items: center;
+      flex-wrap: nowrap;
+      justify-content: space-evenly; /* Evenly space out menu items */
+      flex: 0 1 auto; /* Prevent the menu from stretching */
+      margin-left: 0; /* Align menu to the right */
+  }
   
-
-    .navbar .icon {
+  .navbar .menu a {
+      color: var(--white);
+      text-decoration: none;
+      padding: 10px 15px;
+      border-radius: 5px;
+      transition: background-color 0.3s, box-shadow 0.3s;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      white-space: nowrap; /* Prevent text wrapping */
+      text-align: center;
+      justify-content: center;
+      flex: 1;
+  }
+  
+  .navbar .menu a:hover {
+      background-color: var(--secondary-color);
+      transform: scale(1.05);
+      box-shadow: 0 0 0 2px aliceblue;
+  }
+  
+  .navbar .icon {
       font-size: 20px;
       color: var(--white);
       padding: 10px;
       cursor: pointer;
       font-weight: bold;
       position: relative;
+  }
+  
+  /* Responsive styles */
+  @media (max-width: 768px) {
+      .navbar {
+          padding: 10px;
+      }
+  
+      .navbar .menu a {
+          padding: 8px 10px;
+          font-size: 12px;
+      }
+  }
+  
+  @media (min-width: 769px) and (max-width: 1024px) {
+      .navbar .menu a {
+          padding: 10px;
+          font-size: 14px;
+      }
+  }
+  
+  @media (min-width: 1025px) {
+      .navbar {
+          justify-content: space-between; /* Maintain space-between on large screens */
+      }
+  
+      .logo-container {
+          margin-right: auto; /* Position logo container to the left */
+      }
+  
+      .navbar .menu {
+          margin-left: auto; /* Position menu to the right */
+      }
+  }
+    
+
+
+  
+  
+  /* Base styles (mobile-first) */
+
+  .navbar {
+    flex-direction: column;
+    padding: 10px;
+  }
+
+  .logo img, .name img {
+    height: auto;
+    max-width: 100%;
+  }
+  
+  /* Responsive adjustments */
+  @media (min-width: 600px) {
+    .navbar {
+      flex-direction: row;
+    }
+  
+   
+  }
+  
+  
+
+
+
+
+
+
+    /*container*/
+
+    
+    .container {
+      margin: auto;
+      background: #fff;
+      padding: 20px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      border-radius: 5px;
+      animation: fadeIn 2s ease-in-out;
     }
 
-    .navbar .icon:hover .dropdown {
-      display: block;
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+    table {
+        background-color: white;
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+        animation: tableSlideIn 1s ease-in-out;
+      }
+      
+      @keyframes tableSlideIn {
+        from {
+          transform: translateX(-100px);
+        }
+        to {
+          transform: translateX(0);
+        }
+      }
+      
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+      }
+      
+      th, td {
+        border: 1px solid #ccc;
+        padding: 12px;
+        text-align: left;
+      }
+      
+      th {
+        background-image: linear-gradient(to right, #04172b 0%, #243a73 100%);
+        color: #fff;
+      }
+      
+      /* Responsive Styles */
+      @media (max-width: 768px) {
+        table th, table td {
+          padding: 8px;
+        }
+      }
+      
+      @media (max-width: 480px) {
+        table {
+          display: block;
+          overflow-x: auto;
+          white-space: nowrap;
+        }
+      
+        table th, table td {
+          padding: 6px;
+          font-size: 14px;
+        }
+      }
+      
+      
+    
+
+
+
+
+    /* Form Styles */
+    .form-group {
+      margin-bottom: 20px;
+    }
+    
+    label {
+      font-weight: bold;
+      color: #333;
+    }
+    
+    input[type="text"],
+    input[type="date"],
+    select,
+    textarea {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+      font-size: 16px;
+      margin-top: 5px;
+    }
+    
+    select {
+      appearance: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      background-color: #fff;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M6 9.5L0 3h12L6 9.5z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position-x: calc(100% - 12px);
+      background-position-y: center;
+      padding-right: 40px;
+    }
+    
+    button {
+      background-image: linear-gradient(to right, #04172b 0%, #243a73 100%);
+      color: #fff;
+      border: none;
+      padding: 12px 20px;
+      cursor: pointer;
+      border-radius: 4px;
+      font-size: 16px;
+      transition: background-color 0.3s ease;
+    }
+    
+    button:hover {
+      
+        transform: scale(1.05); /* Slightly increase the size */
+        box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15); /* Enhance the shadow */
+      }
+    
+    
+    .button-group {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+
+
+    
+    
+#scheduleFormContainer {
+  background-color: #f0f8ff;
+  padding: 20px; /* Increased padding */
+  border-radius: 8px;
+  width: 50%; /* Adjusted width */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  display: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 100;
+  max-width: 80%; /* Adjusted max-width */
+  max-height: 90%; /* Increased max-height */
+  overflow: auto; /* Enable scrolling if the form exceeds the screen size */
+}
+
+/* Responsive Styles */
+@media (max-width: 1024px) {
+  #scheduleFormContainer {
+    width: 60%;
+    max-height: 85%; /* Adjusted max-height for medium screens */
+  }
+}
+
+@media (max-width: 768px) {
+  #scheduleFormContainer {
+    width: 70%;
+    padding: 15px; /* Adjusted padding */
+    max-height: 80%; /* Adjusted max-height for tablets */
+  }
+}
+
+@media (max-width: 480px) {
+  #scheduleFormContainer {
+    width: 80%;
+    padding: 10px; /* Reduced padding */
+    max-height: 75%; /* Adjusted max-height for smaller screens */
+  }
+}
+
+@media (max-height: 700px) {
+  #scheduleFormContainer {
+    top: auto;
+    bottom: 10px;
+    transform: translate(-50%, 0);
+  }
+}
+
+@media (max-width: 480px) and (max-height: 700px) {
+  #scheduleFormContainer {
+    width: 80%;
+    padding: 8px; /* Further reduced padding */
+    max-height: 70%; /* Adjusted max-height for small screens */
+    top: 20%;
+    bottom: 10px;
+    transform: translate(-50%, 0);
+  }
+}
+
+form {
+  width: 100%; /* Full width of the container */
+}
+
+.form-group {
+  margin-bottom: 15px; /* Reduced margin */
+}
+
+label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px; /* Adjusted margin */
+  color: #333;
+}
+
+input[type="text"],
+input[type="date"],
+select {
+  width: 100%; /* Full width of form-group */
+  padding: 8px; /* Reduced padding */
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-size: 14px; /* Reduced font size */
+}
+
+button.schedule-button {
+  background-image: linear-gradient(to right, #04172b 0%, #243a73 100%);
+  color: #fff;
+  border: none;
+  padding: 8px 16px; /* Reduced padding */
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 14px; /* Reduced font size */
+  transition: background-color 0.3s ease;
+}
+
+button.schedule-button:hover {
+  transform: scale(1.05); /* Slightly increase the size */
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15); /* Enhance the shadow */
+}
+
+.button-group {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+
+
+
+
+
+
+    .search-bar {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 10px;
     }
 
     .dropdown {
@@ -114,304 +458,378 @@
       border-bottom: none;
     }
 
-    /* Main Content */
-    .main-content {
-      padding: 50px 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+    .dropdown a {
+      display: block;
     }
 
-    .main-content h1 {
-      margin-bottom: 20px;
-      font-size: 28px;
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: var(--primary-color);
+      min-width: 160px;
+      box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+      z-index: 1;
     }
 
-    .booking-list {
-      width: 80%;
-      background-color: #fff;
-      border-radius: 5px;
-      padding: 20px;
-      margin-bottom: 20px;
-    }
-
-        .booking-list table {
-      width: 100%;
-      border-collapse: collapse;
-    }
-
-    .booking-list th,
-    .booking-list td {
-      padding: 10px;
-      border: 1px solid #ddd;
-      text-align: left;
-    }
-
-    .booking-list th {
-      background-color: #04172b;
+    .dropdown-content a {
       color: var(--white);
-      font-weight: bold;
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
     }
 
-    .booking-list tr:nth-child(even) {
-      background-color: #f2f2f2;
+    .dropdown-content a:hover {
+      background-color: var(--secondary-color);
     }
-    .cancel-button {
-      background-color: #ff4d4d;
-      color: white;
-      border: none;
-      padding: 5px 10px;
-      border-radius: 5px;
-      cursor: pointer;
-      transition: background-color 0.3s;
-  }
 
-  .cancel-button:hover {
-      background-color: #e60000;
-      transform: scale(1.05);  /* Slight zoom effect */
-}
-  
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
 
-
-  .popup {
-      display: none;
-      position: fixed;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%);
-      padding: 30px;
-      border: 2px solid #04172b;
-      background-color: #fff;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-      border-radius: 10px;
-      z-index: 1000;
-      text-align: center;
-  }
-
-  .popup p {
-      margin: 20px 0;
-      font-size: 16px;
-      color: #333;
-      font-weight: bold;
-  }
-
-  .popup .confirm, .popup .cancel {
-      margin: 10px;
-      padding: 10px 20px;
-      cursor: pointer;
-      border: none;
-      border-radius: 5px;
-      color: white;
-      font-size: 14px;
-      transition: background-color 0.3s;
+    .select {
+        transition: background-color 0.3s, color 0.3s;
+      }
+      .close-button {
+        position: absolute;
+        top: 10px; /* Adjust as needed */
+        right: 10px; /* Adjust as needed */
+        background: none;
+        border: none;
+        padding: 0;
+        cursor: pointer;
+        background-color: lightcoral;
+        color:white;
+      }
       
-  }
+      .close-button svg {
+        width: 1.5em;
+        height: 1.5em;
+        vertical-align: middle;
+       }
 
 
-  .popup .confirm {
-      background-color: #4CAF50;
-  }
-
-  .popup .confirm:hover {
-      background-color: #45a049;
-      transform: scale(1.05);  
-  }
-
-  .popup .cancel {
-      background-color: #ff4d4d;
-      
-  }
-
-  .popup .cancel:hover {
-      background-color: #e60000;
-      transform: scale(1.05);  
-  }
-
-  .overlay {
-      display: none;
-      position: fixed;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.5);
-      z-index: 999;
-  }
-  
-        .overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            z-index: 1000;
-        }
 
 
-        .popup-content {
-            text-align: center;
-        }
 
-        .popup-content ul {
-            list-style-type: none;
-            padding: 0;
-        }
 
-        .popup-content ul li {
-            margin-bottom: 10px;
-        }
-    </style>
+
+
+       .container {
+        padding: 20px;
+        margin: 0 auto;
+        max-width: 1200px;
+        border: 1px solid #ccc;
+        background-color: #f9f9f9;
+    }
+    
+    .search-bar {
+        margin-bottom: 20px;
+    }
+    
+    .table-container {
+        overflow-x: auto;
+    }
+    
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+    
+    table, th, td {
+        border: 1px solid #ddd;
+    }
+    
+    th, td {
+        padding: 8px;
+        text-align: left;
+    }
+    
+    th {
+        background-color: #f2f2f2;
+    }
+    
+    .schedule-button {
+        background-color: #4CAF50; /* Green */
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        margin: 4px 2px;
+        cursor: pointer;
+        border-radius: 16px;
+    }
+    
+    .close-button {
+        background-color: lightcoral;
+        border: none;
+        cursor: pointer;
+        float: right;
+    }
+    
+    .form-group {
+        margin-bottom: 15px;
+    }
+    
+    .form-group label {
+        display: block;
+        margin-bottom: 5px;
+    }
+    
+    .form-group input, 
+    .form-group select {
+        width: 100%;
+        padding: 8px;
+        box-sizing: border-box;
+    }
+    
+    .button-group {
+        display: flex;
+        justify-content: space-between;
+    }
+    
+    .scheduleFormContainer {
+        display: none;
+    }
+    
+</style>
 </head>
 <body>
-    <header>
-        <div class="navbar">
-            <div class="logo-container">
-                <div class="logo">
-                    <img src="Amity-logo.png" alt="Logo">
-                </div>
-                <div class="name">
-                    <img src="name.2.png" alt="Name Logo">
-                </div>
+
+  <header>
+    <div class="navbar">
+        <div class="logo-container">
+            <div class="logo">
+              <img src="/L1.png" alt="Logo">
             </div>
-            <div class="menu">
-                <a href="{{url_for('usercalender')}}" class="menu-item">
-                    <i class="fas fa-calendar-alt"></i> Calendar
-                </a>
-                <a href="{{url_for('usernoti')}}" class="menu-item">
-                    <i class="fas fa-bell"></i> Hall Updates
-                </a>
-              
-                <a href="{{url_for('home')}}" class="menu-item">Logout</a>
+            <div class="name">
+              <img src="/L2.png" alt="Name Logo">
             </div>
         </div>
-    </header>
+        <div class="menu">
+            <a href="/admin/calender"  class="menu-item">
+                <i class="fas fa-calendar-alt"></i> Calendar
+            </a>
+            <a href="/admin/notification" class="menu-item">
+                <i class="fas fa-bell"></i> Updates
+            </a>
+            <a href="/admin/bookings"> All Booking</a>
+            <a href="/" class="menu-item"> <i class="fas fa-power-off"></i> Logout</a>
+        </div>
+    </div>
+</header>
+ 
+
+    <div class="container">
+      <h2>Pending Event Details</h2>
+  
+      <div class="search-bar">
+          <input type="text" id="searchInput" placeholder="Search requests">
+      </div>
+      
+      <div class="table-container">
+          <table>
+              <thead>
+                  <tr>
+                      <th>Booking ID</th>
+                      <th>School Name</th>
+                      <th>Event Name</th>
+                      <th>Venue</th>
+                      <th>Date</th>
+                      <th>Start Time</th> 
+                      <th>End Time</th> 
+                      <th>Resource Person Name</th>
+                      <th>Action</th>
+                  </tr>
+              </thead>
+              <tbody id="appointmentTable">
+                  
+                  <tr>
+                      <td>17</td>
+                      <td>HR_Dept</td>
+                      <td>Teaching PBAS Evaluation for July &#39;24 cycle</td>
+                      <td>CRC Conference Room</td>
+                      <td>2024-08-14</td>
+                      <td>10:00</td>
+                      <td>16:00</td>
+                      <td>Hiresh</td>
+                      <td>
+                          <button onclick="openScheduleForm('17', 'HR_Dept', 'Teaching PBAS Evaluation for July  cycle', 'CRC Conference Room', '2024-08-14', '10:00', '16:00', 'Hiresh', 'HR Coordinator', 'sbaliu@mum.amity.edu', this)" class="schedule-button">Schedule</button>
+                      </td>
+                  </tr>
+                  
+                  
+                  <tr>
+                      <td>18</td>
+                      <td>ASET - Amity School of Engineering and Technology</td>
+                      <td>test</td>
+                      <td>Seminar Hall</td>
+                      <td>2024-08-20</td>
+                      <td>14:00</td>
+                      <td>15:00</td>
+                      <td>test</td>
+                      <td>
+                          <button onclick="openScheduleForm('18', 'ASET - Amity School of Engineering and Technology', 'test', 'Seminar Hall', '2024-08-20', '14:00', '15:00', 'test', 'test', 'shahilkadia@gmail.com', this)" class="schedule-button">Schedule</button>
+                      </td>
+                  </tr>
+                  
+                  
+              </tbody>
+          </table>
+      </div>
+  
+      <div id="scheduleFormContainer">
+          <h3>Schedule the Event</h3>
+          <button type="button" class="close-button" onclick="closeScheduleForm()">
+              <!-- Assuming you're using an SVG close icon -->
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+                  <path fill="currentColor" d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+              </svg>
+          </button>
+  
+          <form id="scheduleForm" method="post">
+              <div class="form-group">
+                  <label for="bookingId">Booking ID:</label>
+                  <input type="text" id="bookingId" name="bookingId" readonly>
+              </div>
+              <div class="form-group">
+                  <label for="schoolName">School Name:</label>
+                  <input type="text" id="schoolName" name="schoolName" readonly>
+              </div>
+              <div class="form-group">
+                  <label for="eventName">Event Name:</label>
+                  <input type="text" id="eventName" name="eventName" readonly>
+              </div>
+              <div class="form-group">
+                  <label for="venue">Venue:</label>
+                  <input type="text" id="venue" name="venue" readonly>
+              </div>
+              <div class="form-group">
+                  <label for="eventDate">Date of Event:</label>
+                  <input type="date" id="eventDate" name="eventDate" readonly>
+              </div>  
+              <div class="form-group">
+                  <label for="durationofevent">Start Time of event:</label>
+                  <input type="text" id="stime" name="stime" readonly>
+              </div>
+              <div class="form-group">
+                  <label for="durationofevent">End Time of event:</label>
+                  <input type="text" id="etime" name="etime" readonly>
+              </div>
+              <div class="form-group">
+                  <label for="resourcePersonName">Resource Person Name:</label>
+                  <input type="text" id="resourcePersonName" name="resourcePersonName" readonly>
+              </div>
+              <div class="form-group">
+                  <label for="resourcePersonDetail">Resource Person Detail:</label>
+                  <input type="text" id="resourcePersonDetail" name="resourcePersonDetail" readonly>
+              </div>
+              <div class="form-group">
+                  <label for="facultyEmail">Faculty Email:</label>
+                  <input type="text" id="facultyEmail" name="facultyEmail" readonly>
+              </div>
+              <div class="form-group">
+                  <label for="confirmEvent">Confirm Event:</label>
+                  <select id="confirmEvent" name="confirmEvent" required onchange="changeSelectColor(this)">
+                      <option value="ACCEPT">Accept Event</option>
+                      <option value="REJECT">Reject Event</option>
+                  </select>
+              </div>
+              <div class="button-group">
+                  <button type="submit" class="schedule-button">Submit</button>
+                  <button type="button" class="schedule-button" onclick="closeScheduleForm()">Close Form</button>
+              </div>
+          </form>
+      </div>
+  </div>
+  
+
+<script>
+function formatDate(dateStr) {
+    const date = new Date(dateStr);
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+}
+
+function openScheduleForm(bookingId, schoolName, eventName, venue, eventDate, stime, etime, resourcePersonName, resourcePersonDetail, facultyEmail, button) {
+    const formContainer = document.getElementById('scheduleFormContainer');
+    document.getElementById('bookingId').value = bookingId;
+    document.getElementById('schoolName').value = schoolName;
+    document.getElementById('eventName').value = eventName;
+    document.getElementById('venue').value = venue;
+    document.getElementById('eventDate').value = eventDate;
+    document.getElementById('stime').value = stime;
+    document.getElementById('etime').value = etime;
+    document.getElementById('resourcePersonName').value = resourcePersonName;
+    document.getElementById('resourcePersonDetail').value = resourcePersonDetail;
+    document.getElementById('facultyEmail').value = facultyEmail;
     
-      <main>
-        {% if error %}
-    <script>
-        alert("{{error}}");
-    </script>
-    {% endif %}
-          <div class="main-content">
-              <h1>Booking Status</h1>
-      
-              <div class="booking-list">
-                  <form id="cancel-booking-form"  method="post">
-                      
-                      <table>
-                          <thead>
-                              <tr>
-                                  <th>Booking ID</th>
-                                  <th>Hall Name</th>
-                                  <th>Date</th>
-                                  <th>School</th>
-                                  <th>Event Name</th>
-                                  <th>Start Time</th>
-                                  <th>End Time</th>
-                                  <th>Status</th>
-                                  <th>Edit</th>
-                              </tr>
-                          </thead>
-                          <tbody>
-                              <!-- <tr>
-                                  <td>1</td>
-                                  <td>Auditorium</td>
-                                  <td>2024-07-20</td>
-                                  <td>School of Science</td>
-                                  <td>Science Fair</td>
-                                  <td>9 am</td>
-                                  <td>5 pm</td>
-                                  <td>Pending</td>
-                                  <td><button type="button" class="cancel-button" onclick="showPopup(event)">Cancel</button></td>
-                              </tr> -->
-                              {% for i in output %}
-                              <tr>
-                                  <td>{{ i[0] }}</td>
-                                  <td>{{ hallname(i[1]) }}</td>
-                                  <td>{{ i[3] }}</td>
-                                  <td>{{ i[2] }}</td>
-                                  <td>{{ i[4] }}</td>
-                                  <td>{{ i[7] }}</td>
-                                  <td>{{ i[5] }}</td>
-                                  <td>{{ i[6] }}</td>
-                                  {% if i[6] == "Pending" or i[6] == "Confirmed" %}
-                                  <td><button type="button" class="cancel-button" onclick="showPopup(event)">Cancel</button></td>
-                                  {% endif %}
-                              </tr>
-                              {% endfor %}
-                          </tbody>
-                      </table>
-                      <input type="hidden" name="booking_id" id="hidden-booking-id">
-                      <input type="hidden" name="hall_name" id="hidden-hall-name">
-                      <input type="hidden" name="date" id="hidden-date">
-                      <input type="hidden" name="start_time" id="hidden-start-time">
-                      <input type="hidden" name="end_time" id="hidden-end-time">
-                      <input type="hidden" name="status" id="hidden-status">
-                  </form>
-              </div>
-          </div>
-          <div class="overlay" onclick="closePopup()"></div>
-          <div class="popup">
-              <div class="popup-content">
-                  <p>Are you sure you want to cancel this booking?</p>
-                  <ul>
-                      <li><strong>Booking ID:</strong> <span id="popup-booking-id"></span></li>
-                      <li><strong>Hall Name:</strong> <span id="popup-hall-name"></span></li>
-                      <li><strong>Date:</strong> <span id="popup-date"></span></li>
-                      <li><strong>Start Time:</strong> <span id="popup-start-time"></span></li>
-                      <li><strong>End Time:</strong> <span id="popup-end-time"></span></li>
-                      <li><strong>Status:</strong> <span id="popup-status"></span></li>
-                  </ul>
-                  <button class="confirm" onclick="confirmCancellation()">Yes</button>
-                  <button class="cancel" onclick="closePopup()">No</button>
-              </div>
-          </div>
-      </main>
-      
-      <script>
-          function showPopup(event) {
-              event.preventDefault();
-              const row = event.target.closest('tr');
-              const bookingId = row.querySelector('td:nth-child(1)').innerText;
-              const hallName = row.querySelector('td:nth-child(2)').innerText;
-              const date = row.querySelector('td:nth-child(3)').innerText;
-              const startTime = row.querySelector('td:nth-child(6)').innerText;
-              const endTime = row.querySelector('td:nth-child(7)').innerText;
-              const status = row.querySelector('td:nth-child(8)').innerText;
-      
-              document.getElementById('popup-booking-id').innerText = bookingId;
-              document.getElementById('popup-hall-name').innerText = hallName;
-              document.getElementById('popup-date').innerText = date;
-              document.getElementById('popup-start-time').innerText = startTime;
-              document.getElementById('popup-end-time').innerText = endTime;
-              document.getElementById('popup-status').innerText = status;
-      
-              document.getElementById('hidden-booking-id').value = bookingId;
-              document.getElementById('hidden-hall-name').value = hallName;
-              document.getElementById('hidden-date').value = date;
-              document.getElementById('hidden-start-time').value = startTime;
-              document.getElementById('hidden-end-time').value = endTime;
-              document.getElementById('hidden-status').value = status;
-      
-              const overlay = document.querySelector('.overlay');
-              const popup = document.querySelector('.popup');
-              overlay.style.display = 'block';
-              popup.style.display = 'block';
-          }
-      
-          function confirmCancellation() {
-              const form = document.getElementById('cancel-booking-form');
-              form.submit();
-          }
-      
-          function closePopup() {
-              const overlay = document.querySelector('.overlay');
-              const popup = document.querySelector('.popup');
-              overlay.style.display = 'none';
-              popup.style.display = 'none';
-          }
-      </script>
-      </body>
-      </html>
+    formContainer.style.display = 'block';
+    
+    // Insert formContainer after the clicked button's row
+    button.closest('tr').after(formContainer);
+
+    // Add dimmed background
+    const dimmedBackground = document.createElement('div');
+    dimmedBackground.className = 'dimmed';
+    document.body.appendChild(dimmedBackground);
+    
+    // Close form when clicking outside
+    dimmedBackground.addEventListener('click', closeScheduleForm);
+}
+
+function closeScheduleForm() {
+    const formContainer = document.getElementById('scheduleFormContainer');
+    formContainer.style.display = 'none';
+    
+    // Remove dimmed background
+    const dimmedBackground = document.querySelector('.dimmed');
+    if (dimmedBackground) {
+        document.body.removeChild(dimmedBackground);
+    }
+}
+
+document.getElementById('searchInput').addEventListener('keyup', function() {
+    const filter = this.value.toUpperCase();
+    const table = document.getElementById('appointmentTable');
+    const tr = table.getElementsByTagName('tr');
+    for (let i = 0; i < tr.length; i++) {
+        const td = tr[i].getElementsByTagName('td');
+        let txtValue = '';
+        for (let j = 0; j < td.length; j++) {
+            if (td[j]) {
+                txtValue += td[j].textContent || td[j].innerText;
+            }
+        }
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            tr[i].style.display = '';
+        } else {
+            tr[i].style.display = 'none';
+        }
+    }
+});
+
+function changeSelectColor(select) {
+  if (select.value === 'ACCEPT') {
+    select.style.backgroundColor = 'var(--light-green)';
+    select.style.color = 'var(--primary-color)';
+  } else if (select.value === 'REJECT') {
+    select.style.backgroundColor = 'var(--light-red)';
+    select.style.color = 'var(--primary-color)';
+  } else {
+    select.style.backgroundColor = '';
+    select.style.color = '';
+  }
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+    const select = document.getElementById('confirmEvent');
+    changeSelectColor(select);
+});
+</script>
+</body>
+
+</html>
