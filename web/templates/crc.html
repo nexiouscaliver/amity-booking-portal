@@ -930,35 +930,41 @@
             if (schoolName === '') {
                 showError('.schoolNameError', 'Please select a school name.');
                 isValid = false;
+            } else if (schoolName.length > 300) {
+                showError('.schoolNameError', 'School name must be up to 300 characters.');
+                isValid = false;
             }
         
             // Validate Faculty Name
             const facultyName = form.querySelector('[name$="FacultyName"]').value;
-            if (!/^[a-zA-Z\s]+$/.test(facultyName)) {
-                showError('.facultyNameError', 'Please enter a valid name with letters only.');
+            if (!/^[a-zA-Z\s]+$/.test(facultyName) || facultyName.length > 95) {
+                showError('.facultyNameError', 'Please enter a valid name with alphabets only and up to 95 characters.');
                 isValid = false;
-            }
+            } 
         
             // Validate HOD Name
             const hodName = form.querySelector('[name$="HodName"]').value;
-            if (!/^[a-zA-Z\s]+$/.test(hodName)) {
-                showError('.hodNameError', 'Please enter a valid name with letters only.');
+            if (!/^[a-zA-Z\s]+$/.test(hodName) || hodName.length > 95) {
+                showError('.hodNameError', 'Please enter a valid name with alphabets only and up to 95 characters.');
                 isValid = false;
             }
         
             // Validate Event Name
             const eventName = form.querySelector('[name$="EventName"]').value;
-            if (eventName === '') {
-                showError('.eventNameError', 'Please enter the event name.');
+            if (!/^[a-zA-Z\s]+$/.test(eventName)) {
+                showError('.eventNameError', 'Please enter the event name with alphabets only.');
+                isValid = false;
+            } else if (eventName.length > 300) {
+                showError('.eventNameError', 'Event name must be up to 300 characters.');
                 isValid = false;
             }
         
             // Validate Email
             const email = form.querySelector('[name$="Email"]').value;
             const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
-            if (!emailPattern.test(email)) {
-                showError('.emailError', 'Please enter a valid email address.');
-                isValid = false;
+            if (!emailPattern.test(email) || email.length > 95) {
+                showError('.emailError');
+                isValid = false; 
             }
         
             // Validate Phone Number
@@ -991,17 +997,20 @@
         
             // Validate Resource Person Name
             const resourcePersonName = form.querySelector('[name$="ResourcePersonName"]').value;
-            if (!/^[a-zA-Z\s]+$/.test(resourcePersonName)) {
-                showError('.resourcePersonNameError', 'Please enter a valid name with letters only.');
+            if (!/^[a-zA-Z0-9. ]*$/.test(resourcePersonName) || resourcePersonName.length > 95) {
+                showError('.resourcePersonNameError', 'Please enter a valid name with alphabets and numbers only and up to 95 characters.');
                 isValid = false;
-            }
+            } 
         
             // Validate Resource Person Detail
             const resourcePersonDetail = form.querySelector('[name$="ResourcePersonDetail"]').value;
-            if (resourcePersonDetail === '') {
-                showError('.resourcePersonDetailError', 'Please enter the resource person details.');
+            const validPattern = /^[a-zA-Z0-9. ]*$/;
+            
+            if (resourcePersonDetail === '' || resourcePersonDetail.length > 300 || !validPattern.test(resourcePersonDetail)) {
+                showError('.resourcePersonDetailError', 'Resource person detail must be up to 300 characters and only contain alphabets and  numbers');
                 isValid = false;
             }
+            
         
             // If form is valid, submit it
             if (isValid) {
@@ -1013,10 +1022,8 @@
         document.querySelectorAll('form').forEach(function(form) {
             form.addEventListener('submit', validateForm);
         });
-        
-        
-        
-    </script>
+      </script>
+      
      
       <!-- Include jQuery and Bootstrap JS  and jQuery UI libraries-->
       
