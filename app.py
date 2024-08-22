@@ -617,7 +617,7 @@ def home():
     #session['username'] = "TEST"
     return render_template("front.html")
 
-@app.route('/reconnect',methods=['GET'])
+@app.route('/checkconn',methods=['GET'])
 def reconnect():
     a = db.checkconn()
     return a
