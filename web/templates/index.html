@@ -2585,7 +2585,7 @@ document.addEventListener('DOMContentLoaded', function() {
       
           // Validate Event Name
           const eventName = form.querySelector('[name$="EventName"]').value;
-          if (!/^[a-zA-Z\s]+$/.test(eventName)) {
+          if (!/^[a-zA-Z0-9\s]+$/.test(eventName)) {
               showError('.eventNameError', 'Please enter the event name with alphabets only.');
               isValid = false;
           } else if (eventName.length > 300) {
