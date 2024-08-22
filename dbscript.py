@@ -37,8 +37,47 @@ conn = mysql.connector.connect(
     database = "amievent"
     )
 
+def close(conn):       #idle-de-bugging
+    conn.commit()
+    conn.close()
+
+def checkconn(conn):       #idle-de-bugging
+    if conn.is_connected():
+        return ("Connected to server")
+        # return conn
+    else:
+        return("Not connected to server")
+        # try:
+        #     conn.reconnect()
+        #     if conn.is_connected():
+        #         print ("Reconnected to server")
+        #         return conn
+        #     else:
+        #         print ("Failed to reconnect to server")
+        #         close(conn)
+        #         conn = mysql.connector.connect(
+        #             host=hostname,
+        #             user=username,
+        #             password=passwd,
+        #             port = portnum,
+        #             database = "amievent"
+        #             )
+        #         return conn
+        # except Exception as e:
+        #     print (f"Error during reconnection: {e}")
+        #     close(conn)
+        #     conn = mysql.connector.connect(
+        #         host=hostname,
+        #         user=username,
+        #         password=passwd,
+        #         port = portnum,
+        #         database = "amievent"
+        #         )
+        #     return conn
+
 
 def cmd(s):       #idle-de-bugging
+    if not conn.is_connected(): conn.reconnect()
     c = conn.cursor(buffered=True)
     c.execute(s)
     b=c.fetchall()
@@ -48,11 +87,10 @@ def cmd(s):       #idle-de-bugging
     conn.commit()
     return {"DATABASE" :"maindb","Command" :s,"data": b,"type" :str(type(b)),"len" :len(b)}
 
-def close():
-    conn.commit()
-    conn.close()
+
 
 def see(table):       #idle-de-bugging
+    if not conn.is_connected(): conn.reconnect()
     c = conn.cursor(buffered=True)
     c.execute(f'select * from {table};')
     b=c.fetchall()
@@ -100,6 +138,7 @@ def init():  #server
 #admin flow -> check_pending:confirm_hall:reject_hall
 
 def request_hall(hallid:int , school:str , date:str , stime:int , etime:int , event:str , username:str):  #user  
+    if not conn.is_connected(): conn.reconnect()
     c = conn.cursor(buffered=True)
     sql=f'insert into book(hallid,school,date,stime,etime,event) values({hallid},"{school}","{date}",{stime},{etime},"{event}");'
     c.execute(sql)
@@ -117,6 +156,7 @@ def request_hall(hallid:int , school:str , date:str , stime:int , etime:int , ev
     return bid
 
 def info_dump(bookid:int, hallid:int , school:str, fname:str, hod:str, email:str , phone:str , date:str , stime:int , etime:int , event:str ,rpname:str , rpdetail:str):
+    if not conn.is_connected(): conn.reconnect()
     c = conn.cursor(buffered=True)
     sql=f'insert into info values({bookid}, {hallid} , "{school}", "{fname}", "{hod}", "{event}","{date}", "{stime}", "{etime}", "{email}", "{phone}", "{rpname}", "{rpdetail}")'
     c.execute(sql)
@@ -124,6 +164,7 @@ def info_dump(bookid:int, hallid:int , school:str, fname:str, hod:str, email:str
     
 
 def info_fetch(bookid:int):
+    if not conn.is_connected(): conn.reconnect()
     c = conn.cursor(buffered=True)
     sql = f'select * from info where bookid={bookid};'
     c.execute(sql)
@@ -133,6 +174,7 @@ def info_fetch(bookid:int):
     return o
 
 def check_request(username:str):   #user
+    if not conn.is_connected(): conn.reconnect()
     c = conn.cursor(buffered=True)
     sql=f'select * from userreq where username="{username}"'
     c.execute(sql)
@@ -168,6 +210,7 @@ def check_request(username:str):   #user
     
 
 def check_hall(hallid:int , date:str , stime:int , etime:int):   #user
+    if not conn.is_connected(): conn.reconnect()
     c = conn.cursor(buffered=True)
     final=[]
     flag=True
@@ -194,6 +237,7 @@ def check_hall(hallid:int , date:str , stime:int , etime:int):   #user
     return flag
 
 def all_accept_and_pending():
+    if not conn.is_connected(): conn.reconnect()
     c = conn.cursor(buffered=True)
     sql='select * from status where state="confirm" or state="pending";'
     c.execute(sql)
@@ -203,6 +247,7 @@ def all_accept_and_pending():
     return o
 
 def calender():
+    if not conn.is_connected(): conn.reconnect()
     c = conn.cursor(buffered=True)
     # sql='select * from status where state="confirm" or state="pending";'
     sql='select * from status where state="confirm";'
@@ -236,6 +281,7 @@ def calender():
     return final
 
 def seeall():
+    if not conn.is_connected(): conn.reconnect()
     c = conn.cursor(buffered=True)
     x = ['book','confirm','reject','userreq','info','status']
     d = {}
@@ -252,6 +298,7 @@ def seeall():
         # print(f"====={i}::TABLE::END=======")
     return d
 def calendermain():
+    if not conn.is_connected(): conn.reconnect()
     c = conn.cursor(buffered=True)
     sql='select * from status where state="confirm" or state="pending";'
     # sql='select * from status where state="confirm";'
@@ -342,6 +389,7 @@ def calendermain():
     return final2
 
 def reject_app(bid:int , status:str):
+    if not conn.is_connected(): conn.reconnect()
     if status == "Confirmed":
         c = conn.cursor(buffered=True)
         sql=f'delete from confirm where bookid={bid};'
@@ -372,6 +420,7 @@ def reject_app(bid:int , status:str):
     return False
 
 def all_status():
+    if not conn.is_connected(): conn.reconnect()
     c = conn.cursor(buffered=True)
     sql='select * from status;'
     c.execute(sql)
@@ -381,6 +430,7 @@ def all_status():
     return o
 
 def check_pending():    #admin
+    if not conn.is_connected(): conn.reconnect()
     c = conn.cursor(buffered=True)
     sql='select * from book;'
     c.execute(sql)
@@ -390,6 +440,7 @@ def check_pending():    #admin
     return o
 
 def reject_hall(bookid:int):      #admin
+    if not conn.is_connected(): conn.reconnect()
     try:
         
         c = conn.cursor(buffered=True)
@@ -417,6 +468,7 @@ def reject_hall(bookid:int):      #admin
         return False
 
 def confirm_hall(bookid:int):   #admin
+    if not conn.is_connected(): conn.reconnect()
     try:
         
         c = conn.cursor(buffered=True)

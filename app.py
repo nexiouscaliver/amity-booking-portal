@@ -1,5 +1,5 @@
 ##main flask app :: Shahil kadia 
-#Set-ExecutionPolicy Unrestricted CurrentUser;.\.venv\Scripts\activate;
+#Set-ExecutionPolicy Unrestricted CurrentUser;.\.venue\Scripts\activate;
 # Description: This file contains the main code for the AmiEventHub application.# -*- coding: utf-8 -*-
 import os
 import random
@@ -616,6 +616,11 @@ def make_session_permanent():
 def home():
     #session['username'] = "TEST"
     return render_template("front.html")
+
+@app.route('/reconnect',methods=['GET'])
+def reconnect():
+    a = db.checkconn()
+    return a
 
 @app.route('/alert')
 def alert():
