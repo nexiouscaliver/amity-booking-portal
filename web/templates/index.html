@@ -2282,7 +2282,7 @@
 
 <!-- 7 vvip room  -->
 
-<div class="modal fade" id="VVIPModal" tabindex="-1" role="dialog" aria-labelledby="VVIPModal">
+<div class="modal fade" id="VVIPModal" tabindex="-1" role="dialog" aria-labelledby="VVIPModalLabel">
   <div class="modal-dialog" role="document">
       <div class="modal-content">
           <div class="modal-header flex items-center justify-between">
@@ -2805,7 +2805,7 @@ document.addEventListener('DOMContentLoaded', function() {
           const email = form.querySelector('[name$="Email"]').value;
           const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
           if (!emailPattern.test(email) || email.length > 95) {
-              showError('.emailError');
+              showError('.emailError','Please enter a valid email address.');
               isValid = false; 
           }
       
@@ -2839,10 +2839,11 @@ document.addEventListener('DOMContentLoaded', function() {
       
           // Validate Resource Person Name
           const resourcePersonName = form.querySelector('[name$="ResourcePersonName"]').value;
-          if (!/^[a-zA-Z0-9. ]*$/.test(resourcePersonName) || resourcePersonName.length > 95) {
-              showError('.resourcePersonNameError', 'Please enter a valid name with alphabets and numbers only and up to 95 characters.');
+          if (!/^[a-zA-Z0-9]+(?: [a-zA-Z0-9]+)*$/.test(resourcePersonName) || resourcePersonName.length > 95) {
+              showError('.resourcePersonNameError', 'Please enter a valid name with alphabets and numbers only, and up to 95 characters.');
               isValid = false;
-          } 
+          }
+          
       
           // Validate Resource Person Detail
           const resourcePersonDetail = form.querySelector('[name$="ResourcePersonDetail"]').value;

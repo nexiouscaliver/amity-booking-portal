@@ -770,6 +770,7 @@
                 <option value="AIITConferenceRoom">AIB Conference Room</option>
                 <option value="RICSConferenceRoom">RICS Conference Room</option>
                 <option value="Atrium">Atrium</option>
+                <option value="VVIP">VVIP room</option>
             </select>
             <select id="monthSelect" class="responsive-select readonly">
                 <!-- Options will be populated by JavaScript -->
@@ -878,7 +879,12 @@
                     {%endfor%} 
                     // '2024-07-08': [{ starttime: '9', endtime: '10', status: 'booked', school: 'School H', event: 'Event H',eventcordinator: 'Event C' }],
                     // '2024-07-09': [{ starttime: '9', endtime: '12', status: 'booked', school: 'School I', event: 'Event I',eventcordinator: 'Event C' }],
-                }
+                },
+                VVIP: {
+                   
+                    '2024-09-08': [{ starttime: '9', endtime: '10', status: 'booked', school: 'School H', event: 'Event H',eventcordinator: 'Event C' }],
+                    '2024-09-09': [{ starttime: '9', endtime: '12', status: 'booked', school: 'School I', event: 'Event I',eventcordinator: 'Event C' }],
+                 }
             };
         
             const timeSlots = [
