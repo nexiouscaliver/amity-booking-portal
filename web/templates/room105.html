@@ -958,7 +958,7 @@
             const email = form.querySelector('[name$="Email"]').value;
             const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
             if (!emailPattern.test(email) || email.length > 95) {
-                showError('.emailError');
+                showError('.emailError','Please enter a valid email address.');
                 isValid = false; 
             }
         
@@ -992,10 +992,11 @@
         
             // Validate Resource Person Name
             const resourcePersonName = form.querySelector('[name$="ResourcePersonName"]').value;
-            if (!/^[a-zA-Z0-9. ]*$/.test(resourcePersonName) || resourcePersonName.length > 95) {
-                showError('.resourcePersonNameError', 'Please enter a valid name with alphabets and numbers only and up to 95 characters.');
+            if (!/^[a-zA-Z0-9]+(?: [a-zA-Z0-9]+)*$/.test(resourcePersonName) || resourcePersonName.length > 95) {
+                showError('.resourcePersonNameError', 'Please enter a valid name with alphabets and numbers only, and up to 95 characters.');
                 isValid = false;
-            } 
+            }
+            
         
             // Validate Resource Person Detail
             const resourcePersonDetail = form.querySelector('[name$="ResourcePersonDetail"]').value;

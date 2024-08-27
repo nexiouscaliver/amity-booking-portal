@@ -705,17 +705,16 @@
             <div class="modal-content">
                 <div class="modal-header flex items-center justify-between">
                     <div class="flex items-center">
-                        
-                        <h4 class="modal-title" id="auditoriumModalLabel">Auditorium Hall Booking</h4>
+                          <h4 class="modal-title" id="VVIPModalLabel">VVIP Room Booking</h4>
                     </div>
                     
                 </div>
                 <div class="modal-body">
-                  <form method="post" id="auditoriumForm" novalidate>
+                  <form method="post" id="VVIPForm" novalidate>
                     <div class="form-group">
-                      <label for="auditoriumSchoolName">School Name:</label>
-                      <input type="text" class="form-control" id="auditoriumSchoolName" name="auditoriumSchoolName" value="{{scname}}" readonly>
-                      <!-- <select class="form-control" id="auditoriumSchoolName" name="auditoriumSchoolName" required>
+                      <label for="VVIPSchoolName">School Name:</label>
+                      <input type="text" class="form-control" id="VVIPSchoolName" name="VVIPSchoolName" value="{{scname}}" readonly>
+                      <!-- <select class="form-control" id="VVIPSchoolName" name="VVIPSchoolName" required>
                         <option value="">Select School Name</option>
                         <option value="ABS">ABS - Amity Business School</option>
                         <option value="AFS">AFS - Amity Film School</option>
@@ -742,26 +741,26 @@
                       <div class="error-message schoolNameError">Please select a school name.</div>
                     </div>
                     <div class="form-group">
-                      <label for="auditoriumFacultyName">Event Coordinator Name:</label>
-                      <input type="text" class="form-control" id="auditoriumFacultyName" name="auditoriumFacultyName" placeholder="Enter your name" required>
+                      <label for="VVIPFacultyName">Event Coordinator Name:</label>
+                      <input type="text" class="form-control" id="VVIPFacultyName" name="VVIPFacultyName" placeholder="Enter your name" required>
                       <div class="error-message facultyNameError">Please enter a valid name with letters only.</div>
       
                     </div>
                     <div class="form-group">
-                      <label for="auditoriumHodName">HOD/HOI/Director Name:</label>
-                      <input type="text" class="form-control" id="auditoriumHodName" name="auditoriumHodName" placeholder="Enter HOD/HOI/Director name" required>
+                      <label for="VVIPHodName">HOD/HOI/Director Name:</label>
+                      <input type="text" class="form-control" id="VVIPHodName" name="VVIPHodName" placeholder="Enter HOD/HOI/Director name" required>
                       <div class="error-message hodNameError">Please enter a valid name with letters only.</div>
       
                     </div>
                     <div class="form-group">
-                      <label for="auditoriumEventName">Event Name:</label>
-                      <input type="text" class="form-control" id="auditoriumEventName" name="auditoriumEventName" placeholder="Enter event name" maxlength="300" required>
+                      <label for="VVIPEventName">Event Name:</label>
+                      <input type="text" class="form-control" id="VVIPEventName" name="VVIPEventName" placeholder="Enter event name" maxlength="300" required>
                       <div class="error-message eventNameError">Please enter the event name.</div>
       
                     </div>
                     <div class="form-group">
-                      <label for="auditoriumstartime">Start Time</label>
-                      <select class="form-control" id="auditoriumstartime" name="auditoriumstartime" required>
+                      <label for="VVIPstartime">Start Time</label>
+                      <select class="form-control" id="VVIPstartime" name="VVIPstartime" required>
                         <option value="900">09:00 am</option>
                         <option value="1000">10:00 am</option>
                         <option value="1100">11:00 am</option>
@@ -774,9 +773,9 @@
                       </select>
                     </div>
                     <div class="form-group">
-                      <label for="auditoriumendtime">End Time</label>
+                      <label for="VVIPendtime">End Time</label>
       
-                      <select class="form-control" id="auditoriumendtime" name="auditoriumendtime" required>
+                      <select class="form-control" id="VVIPendtime" name="VVIPendtime" required>
                         <option value="1000">10:00 am</option>
                         <option value="1100">11:00 am</option>
                         <option value="1200">12:00 pm</option>
@@ -790,37 +789,37 @@
       
                     </div>
                     <div class="form-group">
-                      <label for="auditoriumdate">Date of Event:</label>
-                      <input type="date" class="form-control" id="auditoriumdate" name="auditoriumdate" required onchange="updateDayOfWeek('auditoriumdate', 'auditoriumday'); updateCalendarColor('auditoriumdate','auditoriumDuration')">
+                      <label for="VVIPdate">Date of Event:</label>
+                      <input type="date" class="form-control" id="VVIPdate" name="VVIPdate" required onchange="updateDayOfWeek('VVIPdate', 'VVIPday'); updateCalendarColor('VVIPdate','VVIPDuration')">
                       <div class="error-message dateError">Please select a date.</div>
       
                     </div>
                     <div class="form-group">
-                      <label for="auditoriumday">Day of Event:</label>
-                      <input type="text" class="form-control" id="auditoriumday" name="auditoriumday" readonly>
+                      <label for="VVIPday">Day of Event:</label>
+                      <input type="text" class="form-control" id="VVIPday" name="VVIPday" readonly>
                   
                     </div>
                     <div class="form-group">
-                      <label for="auditoriumResourcePersonName">Resource Person Name:</label>
-                      <input type="text" class="form-control" id="auditoriumResourcePersonName" name="auditoriumResourcePersonName" placeholder="Enter resource person name" required>
+                      <label for="VVIPResourcePersonName">Resource Person Name:</label>
+                      <input type="text" class="form-control" id="VVIPResourcePersonName" name="VVIPResourcePersonName" placeholder="Enter resource person name" required>
                       <div class="error-message resourcePersonNameError">Please enter the resource person name.</div>
       
                     </div>
                     <div class="form-group">
-                      <label for="auditoriumResourcePersonDetail">Resource Person Detail:</label>
-                      <textarea class="form-control" id="auditoriumResourcePersonDetail" name="auditoriumResourcePersonDetail" placeholder="Enter resource person details" maxlength="300" required></textarea>
+                      <label for="VVIPResourcePersonDetail">Resource Person Detail:</label>
+                      <textarea class="form-control" id="VVIPResourcePersonDetail" name="VVIPResourcePersonDetail" placeholder="Enter resource person details" maxlength="300" required></textarea>
                       <div class="error-message resourcePersonDetailError">Please enter the resource person details.</div>
       
                     </div>
                     <div class="form-group">
-                      <label for="auditoriumEmail">Event Coordinator's Email:</label>
-                      <input type="email" class="form-control" id="auditoriumEmail" name="auditoriumEmail" placeholder="Enter your email" required>
+                      <label for="VVIPEmail">Event Coordinator's Email:</label>
+                      <input type="email" class="form-control" id="VVIPEmail" name="VVIPEmail" placeholder="Enter your email" required>
                       <div class="error-message emailError">Please enter a valid email address.</div>
       
                     </div>
                     <div class="form-group">
-                      <label for="auditoriumPhone">Event Coordinator's Phone Number:</label>
-                      <input type="tel" class="form-control" id="auditoriumPhone" name="auditoriumPhone" placeholder="Enter your phone number" required>
+                      <label for="VVIPPhone">Event Coordinator's Phone Number:</label>
+                      <input type="tel" class="form-control" id="VVIPPhone" name="VVIPPhone" placeholder="Enter your phone number" required>
                       <div class="error-message phoneError">Please enter a valid 10-digit phone number.</div>
       
                     </div>
@@ -856,10 +855,10 @@
 
   // Update the form fields with fetched data
   function updateForm(data) {
-    document.getElementById('auditoriumdate').value = data.date;
-    document.getElementById('auditoriumstartime').value = data.startTime;
-    document.getElementById('auditoriumendtime').value = data.endTime;
-    document.getElementById('auditoriumday').value = data.day;
+    document.getElementById('VVIPdate').value = data.date;
+    document.getElementById('VVIPstartime').value = data.startTime;
+    document.getElementById('VVIPendtime').value = data.endTime;
+    document.getElementById('VVIPday').value = data.day;
   
   }
 
@@ -1024,7 +1023,6 @@
             form.addEventListener('submit', validateForm);
         });
       </script>
-      
       
   
      
