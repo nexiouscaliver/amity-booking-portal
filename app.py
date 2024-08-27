@@ -624,6 +624,11 @@ def reconnect():
     a = db.checkconn()
     return a
 
+@app.route('/reconn',methods=['GET'])
+def reconnect():
+    a = db.reconnect()
+    return a
+
 @app.route('/alert')
 def alert():
     #error="Your Request has been successfully sent!"

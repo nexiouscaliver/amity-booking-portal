@@ -41,6 +41,9 @@ def close(conn):       #idle-de-bugging
     conn.commit()
     conn.close()
 
+def reconnect():       #idle-de-bugging
+    conn.reconnect()
+
 def checkconn(conn):       #idle-de-bugging
     if conn.is_connected():
         return ("Connected to server")
