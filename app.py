@@ -1509,7 +1509,8 @@ def calenderform(hallname2,date,startTime,endTime,day):
                     # today = datetime.date.today() && and given>=today
                     given = dt(int(year),int(month),int(day))
                     app.logger.info(f'today {today} and given {given}')
-                    if final[6] > final[5] and given>=today:
+                    app.logger.info(f'final[6] {final[6]} and final[5] {final[5]}')
+                    if int(final[6]) > int(final[5]) and given>=today:
                         app.logger.info("PASS")
                         bid = db.request_hall(hid,final[0],final[4],final[5],final[6],final[3],uname)
                         db.info_dump(bookid=bid, hallid=hid , school=final[0], fname=final[1], hod=final[2], email=final[7] , phone=final[8] , date=final[4] , stime=final[5] , etime=final[6] , event=final[3],rpname=final[9],rpdetail=final[10])
