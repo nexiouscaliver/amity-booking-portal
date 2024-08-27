@@ -809,24 +809,20 @@
         
             const hallData = {
                 Auditorium: {
-    //                 '2024-07-01': [
+                    // '2024-07-01': [
     //   { starttime: '9 am', endtime: '11 am', status: 'booked', school: 'Amity shool of enginering and science', event: 'Event A',eventcordinator: 'Eventtttttttttttttttttt' },
     //   { starttime: '12 pm', endtime: '1 pm', status: 'booked', school: 'School A', event: 'Event A',eventcordinator: 'Eventtttttttttttttttttttt' },
     //   { starttime: '2 pm', endtime: '4 pm', status: 'pending', school: 'School A', event: 'Event A',eventcordinator: 'Event ttttttttttttttttt' },
-                 // Add more data here
+                // Add more data here
     // ],           
-                    {%for i in output[0]%}
-                  '{{i[0]}}' : [{ starttime: '{{(i[4])}}', endtime: '{{(i[1])}}', status: '{{(i[7])}}', school: '{{i[2]}}', event: '{{i[6]}}' , eventcordinator: '{{i[5]}}'}],
-                    {%endfor%}
+                   
                     // '2024-07-03': [{ starttime: '9', endtime: '12', status: 'booked', school: 'School C', event: 'Event C' , eventcordinator: 'Event C'}],
                     // '2024-07-04': [{ starttime: '9', endtime: '12', status: 'booked', school: 'School D', event: 'Event D' ,eventcordinator: 'Event C'}],
                     // '2024-07-07': [{ starttime: '9', endtime: '10', status: 'pending', school: 'School J', event: 'Event J' ,eventcordinator: 'Event C'}],
                 },
 
                 SeminarHall: {
-                    {%for i in output[1]%}
-                    '{{i[0]}}' : [{ starttime: '{{(i[4])}}', endtime: '{{(i[1])}}', status: '{{(i[7])}}', school: '{{i[2]}}', event: '{{i[6]}}' , eventcordinator: '{{i[5]}}'}],
-                    {%endfor%}
+                    
                     // '2024-06-01': [{ starttime: '1 pm', endtime: '2 pm', status: 'booked', school: 'ABI', event: 'AS' , eventcordinator: 'AS'}],
                     // '2024-07-22': [{ starttime: '1 pm', endtime: '9 am', status: 'booked', school: 'hi', event: 'AS2' , eventcordinator: 'AS'}],
                     // '2024-07-26': [{ starttime: '1 pm', endtime: '9 am', status: 'booked', school: 'ABI', event: 'AS2' , eventcordinator: 'AS'}],
@@ -834,46 +830,166 @@
                    
                 },
                 Room105: {
-                    {%for i in output[2]%}
-                    '{{i[0]}}' : [{ starttime: '{{(i[4])}}', endtime: '{{(i[1])}}', status: '{{(i[7])}}', school: '{{i[2]}}', event: '{{i[6]}}' , eventcordinator: '{{i[5]}}'}],
-                    {%endfor%}
+                    
                     // '2024-07-06': [{ starttime: '9', endtime: '10', status: 'booked', school: 'School F', event: 'Event F',eventcordinator: 'Event C' }],
                     // '2024-07-07': [{ starttime: '9', endtime: '12', status: 'booked', school: 'School G', event: 'Event G' ,eventcordinator: 'Event C'}],
                 },
                 CRCConferenceRoom: {
-                    {%for i in output[3]%}
-                    '{{i[0]}}' : [{ starttime: '{{(i[4])}}', endtime: '{{(i[1])}}', status: '{{(i[7])}}', school: '{{i[2]}}', event: '{{i[6]}}' , eventcordinator: '{{i[5]}}'}],
-                    {%endfor%}
+                    
                     // '2024-07-08': [{ starttime: '9', endtime: '10', status: 'booked', school: 'School H', event: 'Event H',eventcordinator: 'Event C' }],
                     // '2024-07-09': [{ starttime: '9', endtime: '12', status: 'booked', school: 'School I', event: 'Event I',eventcordinator: 'Event C' }],
                 },
-                AIITConferenceRoom: {
-                    {%for i in output[4]%}
-                    '{{i[0]}}' : [{ starttime: '{{(i[4])}}', endtime: '{{(i[1])}}', status: '{{(i[7])}}', school: '{{i[2]}}', event: '{{i[6]}}' , eventcordinator: '{{i[5]}}'}],
-                    {%endfor%}
+                AIBConferenceRoom: {
+                    
                     // '2024-07-08': [{ starttime: '9', endtime: '10', status: 'booked', school: 'School H', event: 'Event H',eventcordinator: 'Event C' }],
                     // '2024-07-09': [{ starttime: '9', endtime: '12', status: 'booked', school: 'School I', event: 'Event I',eventcordinator: 'Event C' }],
                 },
                 RICSConferenceRoom: {
-                    {%for i in output[5]%}
-                    '{{i[0]}}' : [{ starttime: '{{(i[4])}}', endtime: '{{(i[1])}}', status: '{{(i[7])}}', school: '{{i[2]}}', event: '{{i[6]}}' , eventcordinator: '{{i[5]}}'}],
-                    {%endfor%}
+                    
                     // '2024-07-08': [{ starttime: '9', endtime: '10', status: 'booked', school: 'School H', event: 'Event H',eventcordinator: 'Event C' }],
                     // '2024-07-09': [{ starttime: '9', endtime: '12', status: 'booked', school: 'School I', event: 'Event I',eventcordinator: 'Event C' }],
                 },
                 Atrium: {
-                    {%for i in output[6]%}
-                    '{{i[0]}}' : [{ starttime: '{{(i[4])}}', endtime: '{{(i[1])}}', status: '{{(i[7])}}', school: '{{i[2]}}', event: '{{i[6]}}' , eventcordinator: '{{i[5]}}'}],
-                    {%endfor%}
+                    
                     // '2024-07-08': [{ starttime: '9', endtime: '10', status: 'booked', school: 'School H', event: 'Event H',eventcordinator: 'Event C' }],
                     // '2024-07-09': [{ starttime: '9', endtime: '12', status: 'booked', school: 'School I', event: 'Event I',eventcordinator: 'Event C' }],
                 },
                 VVIP: {
-                   
-                  '2024-09-08': [{ starttime: '9', endtime: '10', status: 'booked', school: 'School H', event: 'Event H',eventcordinator: 'Event C' }],
-                  '2024-09-09': [{ starttime: '9', endtime: '12', status: 'booked', school: 'School I', event: 'Event I',eventcordinator: 'Event C' }],
+                  
+                  // '2024-08-08': [{ starttime: '9', endtime: '10', status: 'booked', school: 'School H', event: 'Event H',eventcordinator: 'Event C' }],
+                  // '2024-08-09': [{ starttime: '9', endtime: '12', status: 'booked', school: 'School I', event: 'Event I',eventcordinator: 'Event C' }],
                }
             };
+
+            {% for i in output[0] %}
+        var date = '{{ i[0] }}';
+        var event = {
+            starttime: '{{ i[4] }}',
+            endtime: '{{ i[1] }}',
+            status: '{{ i[7] }}',
+            school: '{{ i[2] }}',
+            event: '{{ i[6] }}',
+            eventcordinator: '{{ i[5] }}'
+        };
+
+        if (!hallData.Auditorium[date]) {
+            hallData.Auditorium[date] = [];
+        }
+        hallData.Auditorium[date].push(event);
+    {% endfor %}
+            {% for i in output[1] %}
+        var date2 = '{{ i[0] }}';
+        var event = {
+            starttime: '{{ i[4] }}',
+            endtime: '{{ i[1] }}',
+            status: '{{ i[7] }}',
+            school: '{{ i[2] }}',
+            event: '{{ i[6] }}',
+            eventcordinator: '{{ i[5] }}'
+        };
+
+        if (!hallData.SeminarHall[date2]) {
+            hallData.SeminarHall[date2] = [];
+        }
+        hallData.SeminarHall[date2].push(event);
+    {% endfor %}
+            {% for i in output[2] %}
+        var date3 = '{{ i[0] }}';
+        var event = {
+            starttime: '{{ i[4] }}',
+            endtime: '{{ i[1] }}',
+            status: '{{ i[7] }}',
+            school: '{{ i[2] }}',
+            event: '{{ i[6] }}',
+            eventcordinator: '{{ i[5] }}'
+        };
+
+        if (!hallData.Room105[date3]) {
+            hallData.Room105[date3] = [];
+        }
+        hallData.Room105[date3].push(event);
+    {% endfor %}
+            {% for i in output[3] %}
+        var date4 = '{{ i[0] }}';
+        var event = {
+            starttime: '{{ i[4] }}',
+            endtime: '{{ i[1] }}',
+            status: '{{ i[7] }}',
+            school: '{{ i[2] }}',
+            event: '{{ i[6] }}',
+            eventcordinator: '{{ i[5] }}'
+        };
+
+        if (!hallData.CRCConferenceRoom[date4]) {
+            hallData.CRCConferenceRoom[date4] = [];
+        }
+        hallData.CRCConferenceRoom[date4].push(event);
+    {% endfor %}
+
+            {% for i in output[4] %}
+        var date5 = '{{ i[0] }}';
+        var event = {
+            starttime: '{{ i[4] }}',
+            endtime: '{{ i[1] }}',
+            status: '{{ i[7] }}',
+            school: '{{ i[2] }}',
+            event: '{{ i[6] }}',
+            eventcordinator: '{{ i[5] }}'
+        };
+
+        if (!hallData.AIITConferenceRoom[date5]) {
+            hallData.AIITConferenceRoom[date5] = [];
+        }
+        hallData.AIITConferenceRoom[date5].push(event);
+    {% endfor %}
+        {% for i in output[5] %}
+        var date6 = '{{ i[0] }}';
+        var event = {
+            starttime: '{{ i[4] }}',
+            endtime: '{{ i[1] }}',
+            status: '{{ i[7] }}',
+            school: '{{ i[2] }}',
+            event: '{{ i[6] }}',
+            eventcordinator: '{{ i[5] }}'
+        };
+
+        if (!hallData.RICSConferenceRoom[date6]) {
+            hallData.RICSConferenceRoom[date6] = [];
+        }
+        hallData.RICSConferenceRoom[date6].push(event);
+    {% endfor %}
+    {% for i in output[6] %}
+        var date7 = '{{ i[0] }}';
+        var event = {
+            starttime: '{{ i[4] }}',
+            endtime: '{{ i[1] }}',
+            status: '{{ i[7] }}',
+            school: '{{ i[2] }}',
+            event: '{{ i[6] }}',
+            eventcordinator: '{{ i[5] }}'
+        };
+
+        if (!hallData.Atrium[date7]) {
+            hallData.Atrium[date7] = [];
+        }
+        hallData.Atrium[date7].push(event);
+    {% endfor %}
+    {% for i in output[7] %}
+        var date8 = '{{ i[0] }}';
+        var event = {
+            starttime: '{{ i[4] }}',
+            endtime: '{{ i[1] }}',
+            status: '{{ i[7] }}',
+            school: '{{ i[2] }}',
+            event: '{{ i[6] }}',
+            eventcordinator: '{{ i[5] }}'
+        };
+
+        if (!hallData.VVIP[date8]) {
+            hallData.VVIP[date8] = [];
+        }
+        hallData.VVIP[date8].push(event);
+    {% endfor %}
         
             const timeSlots = [
             '9 am - 10 am', '10 am - 11 am', '11 am - 12 pm', '12 pm - 1 pm',
