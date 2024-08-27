@@ -66,12 +66,12 @@ app.logger.info("STARTING APPLICATION AND LOGGING...")
 
 #task-related functions
 def hallname(hallid:int):
-    l = [0,"Auditorium Hall","Seminar Hall","Room No. 105, A2 Building","CRC Conference Room","AIB Conference Room","RICS Conference Room","Atrium"]
+    l = [0,"Auditorium Hall","Seminar Hall","Room No. 105, A2 Building","CRC Conference Room","AIB Conference Room","RICS Conference Room","Atrium","VVIP Room"]
     #l = [0,'auditorium','seminar','room105','crc']
     return (l[hallid])
 
 def hallid(hallname:str):
-    l = [0,'auditorium','seminar','room105','crc','AIBConferenceroom','RICSConferenceRoom','Atrium']
+    l = [0,'auditorium','seminar','room105','crc','AIBConferenceroom','RICSConferenceRoom','Atrium','VVIP']
     return (l.index(hallname))
 
 def trimtime(time:str):
@@ -355,6 +355,7 @@ def send_mail2(event_name,event_venue,event_date,start_time,end_time,school_name
         app.logger.error(e)
         return False
 
+#cc mails
 def send_mail4(event_name,event_venue,event_date,start_time,end_time,school_name,resource_person_name,resource_person_details,status,user_email,bid):
     
     html = f"""<pre>
@@ -402,7 +403,7 @@ def send_mail4(event_name,event_venue,event_date,start_time,end_time,school_name
             <td>    </td>
             <td>{end_time}</td>
             <td>    </td>
-            <td>Pending</td>
+            <td>{status}</td>
             <td>    </td>
             
         </tr>
@@ -450,6 +451,7 @@ def send_mail4(event_name,event_venue,event_date,start_time,end_time,school_name
         app.logger.error(e)
         return False
 
+#cancellatoin email to emaillist
 def send_mail5(event_name,event_venue,event_date,start_time,end_time,school_name,status,bid,emaillist):
     
     html = f"""<pre>
@@ -539,6 +541,7 @@ def send_mail5(event_name,event_venue,event_date,start_time,end_time,school_name
         app.logger.error(e)
         return False
 
+#email-verification mail(experimental)  
 def send_mail3(user_email,code):
     html = f"""
     <pre>
@@ -602,7 +605,7 @@ def utility_processor():
 @app.context_processor
 def utility_processor():
     def hallname(hallid:int):
-        l = [0,"Auditorium Hall","Seminar Hall","Room No. 105, A2 Building","CRC Conference Room","AIIT Conference Room","RICS Conference Room","Atrium"]
+        l = [0,"Auditorium Hall","Seminar Hall","Room No. 105, A2 Building","CRC Conference Room","AIIT Conference Room","RICS Conference Room","Atrium","VVIP Room"]
         #l = [0,'auditorium','seminar','room105','crc']
         return (l[hallid])
     return dict(hallname=hallname)
@@ -625,7 +628,7 @@ def reconnect():
     return a
 
 @app.route('/reconn',methods=['GET'])
-def reconnect():
+def reconnect2():
     a = db.reconnect()
     return a
 
@@ -648,7 +651,7 @@ def index():
             output = db.calendermain()
             scname = getusername()
             app.logger.info(scname)
-            # app.logger.info(output)
+            app.logger.info(output)
             for i in output:
                 for j in i:
                     st = maketime(j[1])
@@ -666,7 +669,7 @@ def index():
             
             if request.method == 'POST':
                 
-                hall = ['auditorium','seminar','room105','crc','AIBConferenceroom','RICSConferenceRoom','Atrium']
+                hall = ['auditorium','seminar','room105','crc','AIBConferenceroom','RICSConferenceRoom','Atrium','VVIP']
                 place = ['SchoolName','FacultyName','HodName','EventName','date','startime','endtime','Email','Phone','ResourcePersonName','ResourcePersonDetail']
                 final=[]
                 loc = ''
@@ -1263,7 +1266,7 @@ def calenderform(hallname2,date,startTime,endTime,day):
             
             if request.method == 'POST':
                 
-                hall = ['auditorium','seminar','room105','crc','AIBConferenceroom','RICSConferenceRoom','Atrium']
+                hall = ['auditorium','seminar','room105','crc','AIBConferenceroom','RICSConferenceRoom','Atrium','VVIP']
                 place = ['SchoolName','FacultyName','HodName','EventName','date','startime','endtime','Email','Phone','ResourcePersonName','ResourcePersonDetail']
                 final=[]
                 loc = ''
@@ -1336,10 +1339,15 @@ def calenderform(hallname2,date,startTime,endTime,day):
                 return render_template("RICS.html",scname=scname,error=error,cal=cal,output=output,date=date,startTime=startTime,endTime=endTime,day=day)
             elif hallname2=="Atrium":
                 return render_template("Atrium.html",scname=scname,error=error,cal=cal,output=output,date=date,startTime=startTime,endTime=endTime,day=day)
+            elif hallname2=="VVIP":
+                return render_template("vvip.form.html",scname=scname,error=error,cal=cal,output=output,date=date,startTime=startTime,endTime=endTime,day=day)
+            
             #return render_template("index.html",error=error,cal=cal,output=output)
         else:
             return redirect(url_for('userlogin'))
-    except Exception as e:
+    # except Exception as e:
+
+    except NameError as e:
         app.logger.info(e)
         app.logger.error(e)
         return redirect(url_for('userlogin'))
