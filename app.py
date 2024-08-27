@@ -44,6 +44,8 @@ server_link = "http://127.0.0.1:8000" #replace with production server initial ro
 # dirmails = ['diradmin1@mum.amity.edu' , 'diradmin@mum.amity.edu']
 # itmails = ['acghatge@it.amity.edu', 'itmum@amity.edu']
 # vcofficemails = ['vcoffice@mum.amity.edu']
+# comb1 = vcmail + dirmails + itmails + vcofficemails #upon confirmed rejection
+
 
 vcmail = ['amieventhub@gmail.com']
 dirmails = ['amitydirector01@gmail.com' , 'amitydirector01@gmail.com']
