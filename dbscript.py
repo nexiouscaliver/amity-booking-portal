@@ -344,6 +344,8 @@ def calendermain():
             i[3]="RICS Conference Room"
         elif i[3]==7 or i[3]=="7":
             i[3]="Atrium"
+        elif i[3]==8 or i[3]=="8":
+            i[3]="VVIP Room"
     for i in final:
         for j in (final[final.index(i):]):
             if(i[0]==j[0] and i[3]==j[3]):
@@ -360,6 +362,7 @@ def calendermain():
     d = []
     e = []
     f = []
+    g = []
     for i in final:
         if i[3] == "Auditorium":
             a.append(i)
@@ -375,6 +378,8 @@ def calendermain():
             e.append(i)
         if i[3] == "Atrium":
             f.append(i)
+        if i[3] == "VVIP Room":
+            g.append(i)
     final2 = []
     final2.append(a)
     final2.append(s)
@@ -383,12 +388,29 @@ def calendermain():
     final2.append(d)
     final2.append(e)
     final2.append(f)
+    final2.append(g)
     # for i in final2:
     #     for j in i:
     #         print(j)
     #         # print(i) 1 ,4
     conn.commit()
     
+    obj = []
+
+    # for i in final2:
+    #     l = []
+    #     idx = []
+    #     for j in i:
+    #         now = j[0]
+    #         l.append(now)
+    #     for i in range(0,len(l)):
+    #         now = l[i]
+    #         next = l[i+1]
+    #         if now == next:
+    #             idx.append([i,i+1])
+         
+                
+
     return final2
 
 def reject_app(bid:int , status:str):
