@@ -303,7 +303,7 @@
                         <th>Starttime</th>
                         <th>Endtime</th>
                         <th>Resource Person Name</th>
-                        <th>Resource Person Details</th>
+                        
                         <th>Status</th>
                     </tr>
                 </thead>
@@ -325,11 +325,11 @@
                 starttime: '{{make_time(i[0][0][7])}}',
                 endtime: '{{make_time(i[0][0][8])}}',
                 resourcePersonName: '{{i[0][0][11]}}',
-                resourcePersonDetail: '{{i[0][0][12]}}',
+                
                 status: '{{i[1]}}'
             },
             {%endfor%} 
-            // {
+            // {resourcePersonDetail: '{{i[0][0][12]}}',<th>Resource Person Details</th>
             //     bookingId: '3',
             //     schoolName: 'Aset',
             //     eventName: 'Event X',
