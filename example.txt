@@ -335,3 +335,59 @@
             
 
     
+            
+    Ami-Scheduler Link : http://10.5.2.29/
+    School Name : Director_Admin_1
+    UserID : Director_Admin_1
+    Password : venue_22223
+            
+
+    
+            
+    Ami-Scheduler Link : http://10.5.2.29/
+    School Name : Director_Admin_2
+    UserID : Director_Admin_2
+    Password : venue_33334
+            
+
+    
+            
+    Ami-Scheduler Link : http://10.5.2.29/
+    School Name : CRC_Dept
+    UserID : CRC_Dept
+    Password : venue_44445
+            
+
+    
+            
+    Ami-Scheduler Link : http://10.5.2.29/
+    School Name : HR_Dept
+    UserID : HR_Dept
+    Password : venue_55556
+            
+
+    
+            
+    Ami-Scheduler Link : http://10.5.2.29/
+    School Name : Hostel_Security_Dept
+    UserID : Hostel_Security_Dept
+    Password : venue_66667
+            
+
+    
+            
+    Ami-Scheduler Link : http://10.5.2.29/
+    School Name : Admissions_Dept
+    UserID : Admissions_Dept
+    Password : venue_77778
+            
+
+    
+            
+    Ami-Scheduler Link : http://10.5.2.29/
+    School Name : Examinations_Dept
+    UserID : Examinations_Dept
+    Password : venue_88889
+            
+
+    

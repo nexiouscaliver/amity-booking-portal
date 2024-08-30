@@ -179,7 +179,8 @@ def getusername():
                 'Admissions_Dept':'Admissions Department',
                 'Examinations_Dept':'Examinations Department',
                 'testdebug':'testdebug',
-                'IT_Dept':'IT Department'
+                'IT_Dept':'IT Department',
+                'Registrar' : 'Registrar',
                 }
     cook = session['username']
     if cook == "Director_Admin_1": schoolname = "Director_Admin_1"
