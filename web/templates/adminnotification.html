@@ -304,7 +304,7 @@
                         <th>Starttime</th>
                         <th>Endtime</th>
                         <th>Resource Person Name</th>
-                        <th>Resource Person Details</th>
+                        <!-- <th>Resource Person Details</th> -->
                         <th>Status</th>
                     </tr>
                 </thead>
@@ -326,7 +326,7 @@
                 starttime: '{{make_time(i[0][0][7])}}',
                 endtime: '{{make_time(i[0][0][8])}}',
                 resourcePersonName: '{{i[0][0][11]}}',
-                resourcePersonDetail: '{{i[0][0][12]}}',
+                
                 status: '{{i[1]}}'
             },
             {%endfor%} 
@@ -369,7 +369,7 @@
                     <td>${booking.starttime}</td>
                     <td>${booking.endtime}</td>
                     <td>${booking.resourcePersonName}</td>
-                    <td>${booking.resourcePersonDetail}</td>
+                    
                     <td>${booking.status}</td>
                 `;
                 tableBody.appendChild(row);
