@@ -771,6 +771,7 @@
                 <option value="RICSConferenceRoom">RICS Conference Room</option>
                 <option value="Atrium">Atrium</option>
                 <option value="VVIP">VVIP room</option>
+                <option value="Seminarvip">Seminar VIP room</option>
             </select>
             <select id="monthSelect" class="responsive-select readonly">
                 <!-- Options will be populated by JavaScript -->
@@ -870,7 +871,12 @@
                   
                   // '2024-08-08': [{ starttime: '9', endtime: '10', status: 'booked', school: 'School H', event: 'Event H',eventcordinator: 'Event C' }],
                   // '2024-08-09': [{ starttime: '9', endtime: '12', status: 'booked', school: 'School I', event: 'Event I',eventcordinator: 'Event C' }],
-               }
+               },
+               Seminarvip: {
+                  
+                // '2024-08-08': [{ starttime: '9', endtime: '10', status: 'booked', school: 'School H', event: 'Event H',eventcordinator: 'Event C' }],
+                // '2024-08-09': [{ starttime: '9', endtime: '12', status: 'booked', school: 'School I', event: 'Event I',eventcordinator: 'Event C' }],
+             }
             };
 
             {% for i in output[0] %}
