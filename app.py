@@ -40,11 +40,11 @@ server_link = "http://127.0.0.1:8000" #replace with production server initial ro
 #server_link = "http://10.5.2.29" #replace with production server initial routing address.
 #server_link = "https://786gkd71-8000.inc1.devtunnels.ms/" #replace with production server initial routing address.
 
-# vcmail = ['vcaum@mum.amity.edu']
-# dirmails = ['diradmin1@mum.amity.edu' , 'diradmin@mum.amity.edu']
-# itmails = ['acghatge@it.amity.edu', 'itmum@amity.edu']
-# vcofficemails = ['vcoffice@mum.amity.edu']
-# comb1 = vcmail + dirmails + itmails + vcofficemails #upon confirmed rejection
+#vcmail = ['vcaum@mum.amity.edu']
+#dirmails = ['diradmin1@mum.amity.edu' , 'diradmin@mum.amity.edu']
+#itmails = ['acghatge@it.amity.edu', 'itmum@amity.edu']
+#vcofficemails = ['vcoffice@mum.amity.edu']
+#comb1 = vcmail + dirmails + itmails + vcofficemails #upon confirmed rejection
 
 
 vcmail = ['amieventhub@gmail.com']
@@ -1107,6 +1107,7 @@ def userlogin():
         #app.logger.info(username,passwd)
         if login.load_user(username,passwd) == True:
             session['username'] = username
+            app.logger.info(f"USER :: {username} :: {passwd}")
             return redirect(url_for('index'))
         else:
             if login.load_user(username,passwd) == "verify":
@@ -1155,7 +1156,7 @@ def adminlogin():
         if login.load_admin(username,passwd):
             adname = "ADMIN+"+username
             session['admin_username'] = adname
-            # app.logger.info("here")
+            app.logger.info(f"ADMIN :: {username} :: {passwd}")
             return redirect(url_for('admin'))
         else:
             error = "Incorrect Credentials!"
