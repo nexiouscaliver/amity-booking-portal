@@ -230,13 +230,22 @@ def check_hall(hallid:int , date:str , stime:int , etime:int):   #user
     for i in o:
         final.append(i)
 
+    arrive = []
+    for i in range(stime,etime+100,100):
+        arrive.append(i)
+
     for i in final:
         endtime = i[5]
         starttime = i[4]
-        if(int(endtime)>int(stime)):
-            if(int(etime)<int(starttime)):
-                flag=True
-            flag=False
+        for j in range(starttime,endtime+100,100):
+            if j in arrive:
+                flag=False
+                break
+        
+        # if(int(endtime)>int(stime)):    old logic
+        #     if(int(etime)<int(starttime)):
+        #         flag=True
+        #     flag=False
 
     conn.commit()
     
