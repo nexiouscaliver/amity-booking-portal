@@ -232,7 +232,10 @@ def check_hall(hallid:int , date:str , stime:int , etime:int):   #user
 
     for i in final:
         endtime = i[5]
+        starttime = i[4]
         if(int(endtime)>int(stime)):
+            if(int(etime)<int(starttime)):
+                flag=True
             flag=False
 
     conn.commit()
