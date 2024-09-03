@@ -1562,10 +1562,11 @@ def calenderform(hallname2,date,startTime,endTime,day):
             return redirect(url_for('userlogin'))
     # except Exception as e:
 
-    except NameError as e:
+    except Exception as e:
         app.logger.info(e)
         app.logger.error(e)
-        return redirect(url_for('userlogin'))
+        return render_template("notitab6.html",error="Error in URL. Please use only http://amischeduler.aum.amity.edu.in. Redirecting to Login Page.")
+        # return redirect(url_for('userlogin'))
     
 
 @app.route('/test',methods=['GET','POST'])
