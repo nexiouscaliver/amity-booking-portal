@@ -943,10 +943,10 @@
             eventcordinator: '{{ i[5] }}'
         };
 
-        if (!hallData.AIITConferenceRoom[date5]) {
-            hallData.AIITConferenceRoom[date5] = [];
+        if (!hallData.Seminarvip[date5]) {
+            hallData.Seminarvip[date5] = [];
         }
-        hallData.AIITConferenceRoom[date5].push(event);
+        hallData.Seminarvip[date5].push(event);
     {% endfor %}
         {% for i in output[5] %}
         var date6 = '{{ i[0] }}';

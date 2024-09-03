@@ -78,12 +78,12 @@ app.logger.info("STARTING APPLICATION AND LOGGING...")
 
 #task-related functions
 def hallname(hallid:int):
-    l = [0,"Auditorium Hall","Seminar Hall","Room No. 105, A2 Building","CRC Conference Room","AIB Conference Room","RICS Conference Room","Atrium","VVIP Room"]
+    l = [0,"Auditorium Hall","Seminar Hall","Room No. 105, A2 Building","CRC Conference Room","Seminar VIP Hall","RICS Conference Room","Atrium","VVIP Room"]
     #l = [0,'auditorium','seminar','room105','crc']
     return (l[hallid])
 
 def hallid(hallname:str):
-    l = [0,'auditorium','seminar','room105','crc','AIBConferenceroom','RICSConferenceRoom','Atrium','VVIP']
+    l = [0,'auditorium','seminar','room105','crc','Seminarvip','RICSConferenceRoom','Atrium','VVIP']
     return (l.index(hallname))
 
 def trimtime(time:str):
@@ -804,7 +804,7 @@ def utility_processor():
 @app.context_processor
 def utility_processor():
     def hallname(hallid:int):
-        l = [0,"Auditorium Hall","Seminar Hall","Room No. 105, A2 Building","CRC Conference Room","AIIT Conference Room","RICS Conference Room","Atrium","VVIP Room"]
+        l = [0,"Auditorium Hall","Seminar Hall","Room No. 105, A2 Building","CRC Conference Room","Seminar VIP Hall","RICS Conference Room","Atrium","VVIP Room"]
         #l = [0,'auditorium','seminar','room105','crc']
         return (l[hallid])
     return dict(hallname=hallname)
@@ -868,7 +868,7 @@ def index():
             
             if request.method == 'POST':
                 
-                hall = ['auditorium','seminar','room105','crc','AIBConferenceroom','RICSConferenceRoom','Atrium','VVIP']
+                hall = ['auditorium','seminar','room105','crc','Seminarvip','RICSConferenceRoom','Atrium','VVIP']
                 place = ['SchoolName','FacultyName','HodName','EventName','date','startime','endtime','Email','Phone','ResourcePersonName','ResourcePersonDetail']
                 final=[]
                 loc = ''
@@ -1473,7 +1473,7 @@ def calenderform(hallname2,date,startTime,endTime,day):
             
             if request.method == 'POST':
                 
-                hall = ['auditorium','seminar','room105','crc','AIBConferenceroom','RICSConferenceRoom','Atrium','VVIP']
+                hall = ['auditorium','seminar','room105','crc','Seminarvip','RICSConferenceRoom','Atrium','VVIP']
                 place = ['SchoolName','FacultyName','HodName','EventName','date','startime','endtime','Email','Phone','ResourcePersonName','ResourcePersonDetail']
                 final=[]
                 loc = ''
@@ -1541,8 +1541,8 @@ def calenderform(hallname2,date,startTime,endTime,day):
                 return render_template("room105.html",scname=scname,error=error,cal=cal,output=output,date=date,startTime=startTime,endTime=endTime,day=day)
             elif hallname2=="CRCConferenceRoom":
                 return render_template("crc.html",scname=scname,error=error,cal=cal,output=output,date=date,startTime=startTime,endTime=endTime,day=day)
-            elif hallname2=="AIITConferenceRoom":
-                return render_template("AIB.HTML",scname=scname,error=error,cal=cal,output=output,date=date,startTime=startTime,endTime=endTime,day=day)
+            elif hallname2=="Seminarvip":
+                return render_template("Seminar.VIP.html",scname=scname,error=error,cal=cal,output=output,date=date,startTime=startTime,endTime=endTime,day=day)
             elif hallname2=="RICSConferenceRoom":
                 return render_template("RICS.html",scname=scname,error=error,cal=cal,output=output,date=date,startTime=startTime,endTime=endTime,day=day)
             elif hallname2=="Atrium":

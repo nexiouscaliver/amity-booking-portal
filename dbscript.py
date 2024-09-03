@@ -351,7 +351,7 @@ def calendermain():
         elif i[3]==4 or i[3]=="4":
             i[3]="CRC Conference Room"
         elif i[3]==5 or i[3]=="5":
-            i[3]="AIIT Conference Room"
+            i[3]="Seminar VIP Hall"
         elif i[3]==6 or i[3]=="6":
             i[3]="RICS Conference Room"
         elif i[3]==7 or i[3]=="7":
@@ -384,7 +384,7 @@ def calendermain():
             r.append(i)
         if i[3] == "CRC Conference Room":
             c.append(i)
-        if i[3] == "AIIT Conference Roomm":
+        if i[3] == "Seminar VIP Hall":
             d.append(i)
         if i[3] == "RICS Conference Room":
             e.append(i)
