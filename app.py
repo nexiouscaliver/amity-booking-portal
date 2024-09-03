@@ -897,6 +897,10 @@ def index():
                 hid = hallid(loc)
                 # app.logger.info(final)
                 #app.logger.info('location = ',hallid(loc))
+                app.logger.info(f'index FINAL  = {final}')
+                app.logger.info(f'location = {hallid(loc)}')
+                app.logger.info(f'CHECK : location = {hallid(loc)} , date = {final[4]} ,final[6] = {final[6]} and final[5] = {final[5]}')
+                app.logger.info(f'function details : {hid},{final[4]},{final[5]},{final[6]}')
                 if db.check_hall(hid,final[4],final[5],final[6]):
                     
                     year = final[4][:4]
@@ -1501,8 +1505,10 @@ def calenderform(hallname2,date,startTime,endTime,day):
 
                 hid = hallid(loc)
                 
-                # app.logger.info(final)
+                app.logger.info(f'FINAL  = {final}')
                 app.logger.info(f'location = {hallid(loc)}')
+                app.logger.info(f'CHECK : location = {hallid(loc)} , date = {final[4]} ,final[6] = {final[6]} and final[5] = {final[5]}')
+                app.logger.info(f'function details : {hid},{final[4]},{final[5]},{final[6]}')
                 if db.check_hall(hid,final[4],final[5],final[6]):
                     year = final[4][:4]
                     month = final[4][5:7]
@@ -1530,6 +1536,7 @@ def calenderform(hallname2,date,startTime,endTime,day):
                         error = "The Time or Date Entered Is Incorrect. Please Enter Correct Time and Date."
                         return render_template("notitab2.html",error=error)
                 else:
+                    app.logger.info("Check Failed!")
                     error = "Hall Not Available At given Date and Time."
                     # return redirect(url_for("index",error=error,cal=cal,output=output))
                     return render_template("notitab2.html",error=error)

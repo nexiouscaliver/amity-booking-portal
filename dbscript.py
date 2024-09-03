@@ -231,14 +231,18 @@ def check_hall(hallid:int , date:str , stime:int , etime:int):   #user
         final.append(i)
 
     arrive = []
-    for i in range(int(stime),int(etime)+100,100):
+    for i in range(int(stime),int(etime),100):
         arrive.append(i)
+    print('arrive : ',arrive)
 
     for i in final:
         endtime = int(i[5])
         starttime = int(i[4])
-        for j in range(starttime,endtime+100,100):
+        print(f' i = {i} , start={starttime} , end = {endtime}')
+        for j in range(starttime,endtime,100):
+            print(f'j = {j}')
             if j in arrive:
+                print('HIT')
                 flag=False
                 break
         
