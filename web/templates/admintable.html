@@ -730,6 +730,12 @@ button.schedule-button:hover {
   
 
 <script>
+  function decodeHtmlEntities(str) {
+    const txt = document.createElement("textarea");
+    txt.innerHTML = str;
+    return txt.value;
+}
+
 function formatDate(dateStr) {
     const date = new Date(dateStr);
     const year = date.getFullYear();
@@ -740,17 +746,20 @@ function formatDate(dateStr) {
 
 function openScheduleForm(bookingId, schoolName, eventName, venue, eventDate, stime, etime, resourcePersonName, resourcePersonDetail, facultyEmail, button) {
     const formContainer = document.getElementById('scheduleFormContainer');
-    document.getElementById('bookingId').value = bookingId;
-    document.getElementById('schoolName').value = schoolName;
-    document.getElementById('eventName').value = eventName;
-    document.getElementById('venue').value = venue;
-    document.getElementById('eventDate').value = eventDate;
-    document.getElementById('stime').value = stime;
-    document.getElementById('etime').value = etime;
-    document.getElementById('resourcePersonName').value = resourcePersonName;
-    document.getElementById('resourcePersonDetail').value = resourcePersonDetail;
-    document.getElementById('facultyEmail').value = facultyEmail;
     
+    // Decode HTML entities
+    document.getElementById('bookingId').value = decodeHtmlEntities(bookingId || '');
+    document.getElementById('schoolName').value = decodeHtmlEntities(schoolName || '');
+    document.getElementById('eventName').value = decodeHtmlEntities(eventName || '');
+    document.getElementById('venue').value = decodeHtmlEntities(venue || '');
+    document.getElementById('eventDate').value = formatDate(decodeHtmlEntities(eventDate || ''));
+    document.getElementById('stime').value = decodeHtmlEntities(stime || '');
+    document.getElementById('etime').value = decodeHtmlEntities(etime || '');
+    document.getElementById('resourcePersonName').value = decodeHtmlEntities(resourcePersonName || '');
+    document.getElementById('resourcePersonDetail').value = decodeHtmlEntities(resourcePersonDetail || '');
+    document.getElementById('facultyEmail').value = decodeHtmlEntities(facultyEmail || '');
+    
+    // Display form container
     formContainer.style.display = 'block';
     
     // Insert formContainer after the clicked button's row
@@ -763,7 +772,7 @@ function openScheduleForm(bookingId, schoolName, eventName, venue, eventDate, st
     
     // Close form when clicking outside
     dimmedBackground.addEventListener('click', closeScheduleForm);
-}
+} 
 
 function closeScheduleForm() {
     const formContainer = document.getElementById('scheduleFormContainer');
