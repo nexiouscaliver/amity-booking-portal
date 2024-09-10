@@ -594,6 +594,13 @@ button.schedule-button:hover {
     
 </style>
 </head>
+<script>
+   function decodeHtmlEntities(str) {
+    const txt = document.createElement("textarea");
+    txt.innerHTML = str;
+    return txt.value;
+}
+</script>
 <body>
 
   <header>
@@ -618,7 +625,7 @@ button.schedule-button:hover {
         </div>
     </div>
 </header>
- 
+
 
     <div class="container">
       <h2>Pending Event Details</h2>
@@ -654,7 +661,8 @@ button.schedule-button:hover {
                       <td>{{ make_time(i[8]) }}</td>
                       <td>{{ i[11] }}</td>
                       <td>
-                          <button onclick="openScheduleForm('{{ i[0] }}', '{{ i[2] }}', '{{ i[5] }}', '{{ hallname(i[1]) }}', '{{ i[6] }}', '{{ make_time(i[7]) }}', '{{ make_time(i[8]) }}', '{{ i[11] }}', '{{ i[12] }}', '{{ i[9] }}', this)" class="schedule-button">Schedule</button>
+                        <script>console.log(`${(decodeHtmlEntities('{{ i[0] }}'))}, ${decodeHtmlEntities('{{ i[2] }}')}, ${decodeHtmlEntities('{{ i[5] }}')}, ${decodeHtmlEntities('{{ hallname(i[1]) }}')}, ${decodeHtmlEntities('{{ i[6] }}')}, ${decodeHtmlEntities('{{ make_time(i[7]) }}')}, ${decodeHtmlEntities('{{ make_time(i[8]) }}')}, ${decodeHtmlEntities('{{ i[11] }}')}, ${decodeHtmlEntities('{{ i[12] }}')}, ${decodeHtmlEntities('{{ i[9] }}')}`)</script>  
+                        <button onclick="openScheduleForm(decodeHtmlEntities('{{ i[0] }}'), decodeHtmlEntities('{{ i[2] }}'), decodeHtmlEntities('{{ i[5] }}'), decodeHtmlEntities('{{ hallname(i[1]) }}'), decodeHtmlEntities('{{ i[6] }}'), decodeHtmlEntities('{{ make_time(i[7]) }}'), decodeHtmlEntities('{{ make_time(i[8]) }}'), decodeHtmlEntities('{{ i[11] }}'), decodeHtmlEntities('{{ i[12] }}'), decodeHtmlEntities('{{ i[9] }}'), this)" class="schedule-button">Schedule</button>
                       </td>
                   </tr>
                   
