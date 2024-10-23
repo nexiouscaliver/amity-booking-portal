@@ -16,6 +16,4 @@ currently being supported with security updates.
 
 To report a vulnerability create a issue on this repository or send an email to author at shahilkadia@gmail.com with appropriate subject and body to represent the vulnerability
 
-Tell them where to go, how often they can expect to get an update on a
-reported vulnerability, what to expect if the vulnerability is accepted or
-declined, etc.
+You can expect to get an update on a reported vulnerability in 2-3 working weeks and for updates and urgent updates report email to author at shahilkadia@gmail.com .
