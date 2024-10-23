@@ -662,7 +662,7 @@ button.schedule-button:hover {
                       <td>{{ i[11] }}</td>
                       <td>
                         <script>console.log(`${(decodeHtmlEntities('{{ i[0] }}'))}, ${decodeHtmlEntities('{{ i[2] }}')}, ${decodeHtmlEntities('{{ i[5] }}')}, ${decodeHtmlEntities('{{ hallname(i[1]) }}')}, ${decodeHtmlEntities('{{ i[6] }}')}, ${decodeHtmlEntities('{{ make_time(i[7]) }}')}, ${decodeHtmlEntities('{{ make_time(i[8]) }}')}, ${decodeHtmlEntities('{{ i[11] }}')}, ${decodeHtmlEntities('{{ i[12] }}')}, ${decodeHtmlEntities('{{ i[9] }}')}`)</script>  
-                        <button onclick="openScheduleForm(decodeHtmlEntities('{{ i[0] }}'), decodeHtmlEntities('{{ i[2] }}'), decodeHtmlEntities('{{ i[5] }}'), decodeHtmlEntities('{{ hallname(i[1]) }}'), decodeHtmlEntities('{{ i[6] }}'), decodeHtmlEntities('{{ make_time(i[7]) }}'), decodeHtmlEntities('{{ make_time(i[8]) }}'), decodeHtmlEntities('{{ i[11] }}'), decodeHtmlEntities('{{ i[12] }}'), decodeHtmlEntities('{{ i[9] }}'), this)" class="schedule-button">Schedule</button>
+                        <button onclick="openScheduleForm(decodeHtmlEntities('{{ i[0]|safe }}'), decodeHtmlEntities('{{ i[2]|safe }}'), decodeHtmlEntities('{{ i[5]|safe }}'), decodeHtmlEntities('{{ hallname(i[1])|safe }}'), decodeHtmlEntities('{{ i[6]|safe }}'), decodeHtmlEntities('{{ make_time(i[7])|safe }}'), decodeHtmlEntities('{{ make_time(i[8])|safe }}'), decodeHtmlEntities('{{ i[11]|safe }}'), decodeHtmlEntities('{{ i[12]|safe }}'), decodeHtmlEntities('{{ i[9]|safe }}'), this)" class="schedule-button">Schedule</button>
                       </td>
                   </tr>
                   
