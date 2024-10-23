@@ -894,126 +894,129 @@
      
    
       </script>
-      <script>
-        function validateForm(event) {
-            event.preventDefault();
+          <script>
+            function validateForm(event) {
+                event.preventDefault();
+                
+                const form = event.target;
+                
+                // Clear previous error messages
+                form.querySelectorAll('.error-message').forEach(function(el) {
+                    el.style.display = 'none';
+                });
             
-            const form = event.target;
+                let isValid = true;
             
-            // Clear previous error messages
-            form.querySelectorAll('.error-message').forEach(function(el) {
-                el.style.display = 'none';
-            });
-        
-            let isValid = true;
-        
-            // Function to show error message
-            function showError(selector, errorMessage) {
-                const errorElement = form.querySelector(selector);
-                if (errorElement) {
-                    errorElement.style.display = 'block';
-                    errorElement.textContent = errorMessage;
+                // Function to show error message
+                function showError(selector, errorMessage) {
+                    const errorElement = form.querySelector(selector);
+                    if (errorElement) {
+                        errorElement.style.display = 'block';
+                        errorElement.textContent = errorMessage;
+                    }
+                }
+            
+                // Validate School Name
+                const schoolName = form.querySelector('[name$="SchoolName"]').value;
+                if (schoolName === '') {
+                    showError('.schoolNameError', 'Please select a school name.');
+                    isValid = false;
+                } else if (schoolName.length > 300) {
+                    showError('.schoolNameError', 'School name must be up to 300 characters.');
+                    isValid = false;
+                }
+            
+                // Validate Faculty Name
+                const facultyName = form.querySelector('[name$="FacultyName"]').value;
+                if (!/^[a-zA-Z\s.,@&-]+$/.test(facultyName) || facultyName.length > 95) {
+                    showError('.facultyNameError', 'Please enter a valid name with alphabets, spaces, and special characters (. , @ & -) up to 95 characters.');
+                    isValid = false;
+                } 
+            
+                // Validate HOD Name
+                const hodName = form.querySelector('[name$="HodName"]').value;
+                if (!/^[a-zA-Z\s.,@&-]+$/.test(hodName) || hodName.length > 95) {
+                    showError('.hodNameError', 'Please enter a valid name with alphabets, spaces, and special characters (. , @ & -) up to 95 characters.');
+                    isValid = false;
+                }
+            
+                // Validate Event Name
+                const eventName = form.querySelector('[name$="EventName"]').value;
+                if (!/^[a-zA-Z0-9\s.,@&-]+$/.test(eventName)) {
+                    showError('.eventNameError', 'Please enter a valid event name with alphabets, numbers, spaces, and special characters (. , @ & -).');
+                    isValid = false;
+                } else if (eventName.length > 300) {
+                    showError('.eventNameError', 'Event name must be up to 300 characters.');
+                    isValid = false;
+                }
+            
+                // Validate Email
+                const email = form.querySelector('[name$="Email"]').value;
+                const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+                if (!emailPattern.test(email) || email.length > 95) {
+                    showError('.emailError','Please enter a valid email address.');
+                    isValid = false; 
+                }
+            
+                // Validate Phone Number
+                const phone = form.querySelector('[name$="Phone"]').value;
+                if (!/^\d{10}$/.test(phone)) {
+                    showError('.phoneError', 'Please enter a valid 10-digit phone number.');
+                    isValid = false;
+                }
+            
+                // Validate Date
+                const date = form.querySelector('[name$="date"]').value;
+                if (date === '') {
+                    showError('.dateError', 'Please select a date.');
+                    isValid = false;
+                }
+            
+                // Validate Start Time
+                const startTime = form.querySelector('[name$="startime"]').value;
+                if (startTime === '') {
+                    showError('.startTimeError', 'Please select a start time.');
+                    isValid = false;
+                }
+            
+                // Validate End Time
+                const endTime = form.querySelector('[name$="endtime"]').value;
+                if (endTime === '') {
+                    showError('.endTimeError', 'Please select an end time.');
+                    isValid = false;
+                }
+            
+                // Validate Resource Person Name
+                const resourcePersonName = form.querySelector('[name$="ResourcePersonName"]').value;
+                if (!/^[a-zA-Z0-9\s.,@&-]+$/.test(resourcePersonName) || resourcePersonName.length > 95) {
+                    showError('.resourcePersonNameError', 'Please enter a valid name with allowed alphabets, numbers, spaces, and special characters (. , @ & -) up to 95 characters.');
+                    isValid = false;
+                }
+                
+                
+            
+                // Validate Resource Person Detail
+                const resourcePersonDetail = form.querySelector('[name$="ResourcePersonDetail"]').value;
+                const validPattern = /^[a-zA-Z0-9.,@&-]*$/;
+                
+                if (resourcePersonDetail === '' || resourcePersonDetail.length > 300 || !validPattern.test(resourcePersonDetail)) {
+                    showError('.resourcePersonDetailError', 'Resource person detail must be up to 300 characters and can only contain alphabets, numbers, and special characters (. , @ & -).');
+                    isValid = false;
+                }
+                
+            
+                // If form is valid, submit it
+                if (isValid) {
+                    form.submit();
                 }
             }
-        
-            // Validate School Name
-            const schoolName = form.querySelector('[name$="SchoolName"]').value;
-            if (schoolName === '') {
-                showError('.schoolNameError', 'Please select a school name.');
-                isValid = false;
-            } else if (schoolName.length > 300) {
-                showError('.schoolNameError', 'School name must be up to 300 characters.');
-                isValid = false;
-            }
-        
-            // Validate Faculty Name
-            const facultyName = form.querySelector('[name$="FacultyName"]').value;
-            if (!/^[a-zA-Z\s]+$/.test(facultyName) || facultyName.length > 95) {
-                showError('.facultyNameError', 'Please enter a valid name with alphabets only and up to 95 characters.');
-                isValid = false;
-            } 
-        
-            // Validate HOD Name
-            const hodName = form.querySelector('[name$="HodName"]').value;
-            if (!/^[a-zA-Z\s]+$/.test(hodName) || hodName.length > 95) {
-                showError('.hodNameError', 'Please enter a valid name with alphabets only and up to 95 characters.');
-                isValid = false;
-            }
-        
-            // Validate Event Name
-            const eventName = form.querySelector('[name$="EventName"]').value;
-            if (!/^[a-zA-Z0-9\s]+$/.test(eventName)) {
-                showError('.eventNameError', 'Please enter the event name with alphabets only.');
-                isValid = false;
-            } else if (eventName.length > 300) {
-                showError('.eventNameError', 'Event name must be up to 300 characters.');
-                isValid = false;
-            }
-        
-            // Validate Email
-            const email = form.querySelector('[name$="Email"]').value;
-            const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
-            if (!emailPattern.test(email) || email.length > 95) {
-                showError('.emailError');
-                isValid = false; 
-            }
-        
-            // Validate Phone Number
-            const phone = form.querySelector('[name$="Phone"]').value;
-            if (!/^\d{10}$/.test(phone)) {
-                showError('.phoneError', 'Please enter a valid 10-digit phone number.');
-                isValid = false;
-            }
-        
-            // Validate Date
-            const date = form.querySelector('[name$="date"]').value;
-            if (date === '') {
-                showError('.dateError', 'Please select a date.');
-                isValid = false;
-            }
-        
-            // Validate Start Time
-            const startTime = form.querySelector('[name$="startime"]').value;
-            if (startTime === '') {
-                showError('.startTimeError', 'Please select a start time.');
-                isValid = false;
-            }
-        
-            // Validate End Time
-            const endTime = form.querySelector('[name$="endtime"]').value;
-            if (endTime === '') {
-                showError('.endTimeError', 'Please select an end time.');
-                isValid = false;
-            }
-        
-            // Validate Resource Person Name
-            const resourcePersonName = form.querySelector('[name$="ResourcePersonName"]').value;
-            if (!/^[a-zA-Z0-9. ]*$/.test(resourcePersonName) || resourcePersonName.length > 95) {
-                showError('.resourcePersonNameError', 'Please enter a valid name with alphabets and numbers only and up to 95 characters.');
-                isValid = false;
-            } 
-        
-            // Validate Resource Person Detail
-            const resourcePersonDetail = form.querySelector('[name$="ResourcePersonDetail"]').value;
-            const validPattern = /^[a-zA-Z0-9. ]*$/;
             
-            if (resourcePersonDetail === '' || resourcePersonDetail.length > 300 || !validPattern.test(resourcePersonDetail)) {
-                showError('.resourcePersonDetailError', 'Resource person detail must be up to 300 characters and only contain alphabets and  numbers');
-                isValid = false;
-            }
-            
-        
-            // If form is valid, submit it
-            if (isValid) {
-                form.submit();
-            }
-        }
-        
-        // Attach event listeners to forms
-        document.querySelectorAll('form').forEach(function(form) {
-            form.addEventListener('submit', validateForm);
-        });
-      </script>
+            // Attach event listeners to forms
+            document.querySelectorAll('form').forEach(function(form) {
+                form.addEventListener('submit', validateForm);
+            });
+          </script>
+          
       
      
       <!-- Include jQuery and Bootstrap JS  and jQuery UI libraries-->

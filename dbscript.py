@@ -41,6 +41,9 @@ def close(conn):       #idle-de-bugging
     conn.commit()
     conn.close()
 
+def reconnect():       #idle-de-bugging
+    conn.reconnect()
+
 def checkconn(conn):       #idle-de-bugging
     if conn.is_connected():
         return ("Connected to server")
@@ -227,10 +230,26 @@ def check_hall(hallid:int , date:str , stime:int , etime:int):   #user
     for i in o:
         final.append(i)
 
+    arrive = []
+    for i in range(int(stime),int(etime),100):
+        arrive.append(i)
+    print('arrive : ',arrive)
+
     for i in final:
-        endtime = i[5]
-        if(int(endtime)>int(stime)):
-            flag=False
+        endtime = int(i[5])
+        starttime = int(i[4])
+        print(f' i = {i} , start={starttime} , end = {endtime}')
+        for j in range(starttime,endtime,100):
+            print(f'j = {j}')
+            if j in arrive:
+                print('HIT')
+                flag=False
+                break
+        
+        # if(int(endtime)>int(stime)):    old logic
+        #     if(int(etime)<int(starttime)):
+        #         flag=True
+        #     flag=False
 
     conn.commit()
     
@@ -336,11 +355,13 @@ def calendermain():
         elif i[3]==4 or i[3]=="4":
             i[3]="CRC Conference Room"
         elif i[3]==5 or i[3]=="5":
-            i[3]="AIIT Conference Room"
+            i[3]="Seminar VIP Hall"
         elif i[3]==6 or i[3]=="6":
             i[3]="RICS Conference Room"
         elif i[3]==7 or i[3]=="7":
             i[3]="Atrium"
+        elif i[3]==8 or i[3]=="8":
+            i[3]="VVIP Room"
     for i in final:
         for j in (final[final.index(i):]):
             if(i[0]==j[0] and i[3]==j[3]):
@@ -357,6 +378,7 @@ def calendermain():
     d = []
     e = []
     f = []
+    g = []
     for i in final:
         if i[3] == "Auditorium":
             a.append(i)
@@ -366,12 +388,14 @@ def calendermain():
             r.append(i)
         if i[3] == "CRC Conference Room":
             c.append(i)
-        if i[3] == "AIIT Conference Roomm":
+        if i[3] == "Seminar VIP Hall":
             d.append(i)
         if i[3] == "RICS Conference Room":
             e.append(i)
         if i[3] == "Atrium":
             f.append(i)
+        if i[3] == "VVIP Room":
+            g.append(i)
     final2 = []
     final2.append(a)
     final2.append(s)
@@ -380,12 +404,29 @@ def calendermain():
     final2.append(d)
     final2.append(e)
     final2.append(f)
+    final2.append(g)
     # for i in final2:
     #     for j in i:
     #         print(j)
     #         # print(i) 1 ,4
     conn.commit()
     
+    obj = []
+
+    # for i in final2:
+    #     l = []
+    #     idx = []
+    #     for j in i:
+    #         now = j[0]
+    #         l.append(now)
+    #     for i in range(0,len(l)):
+    #         now = l[i]
+    #         next = l[i+1]
+    #         if now == next:
+    #             idx.append([i,i+1])
+         
+                
+
     return final2
 
 def reject_app(bid:int , status:str):

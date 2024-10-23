@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Atrium Booking</title>
+  <title>VVIP Hall Booking</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -42,13 +42,13 @@
       flex-wrap: nowrap;
       justify-content: space-evenly; /* Space between logo and menu */
   }
+  
   .logo-container {
     display: flex;
     align-items: center;
     flex: 0 1 auto; /* Prevent the logo from stretching */
     margin-right: 0; /* Align logo container to the left */
 }
-  
 .navbar .logo img {
   height: 50px;
   margin-right: 2px;
@@ -57,7 +57,7 @@
 .navbar .name img {
   height: 40px;
 }
-
+  
   .navbar .menu {
     display: flex;
     align-items: center;
@@ -663,7 +663,6 @@
 
 
 
-
   </style>
 </head>
 
@@ -706,17 +705,16 @@
             <div class="modal-content">
                 <div class="modal-header flex items-center justify-between">
                     <div class="flex items-center">
-                        
-                        <h4 class="modal-title" id="AtriumModalLabel">Atrium Booking</h4>
+                          <h4 class="modal-title" id="VVIPModalLabel">VVIP Room Booking</h4>
                     </div>
                     
                 </div>
                 <div class="modal-body">
-                  <form method="post" id="AtriumForm" novalidate>
+                  <form method="post" id="VVIPForm" novalidate>
                     <div class="form-group">
-                      <label for="AtriumSchoolName">School Name:</label>
-                      <input type="text" class="form-control" id="AtriumSchoolName" name="AtriumSchoolName" value="{{scname}}" readonly>
-                      <!-- <select class="form-control" id="AtriumSchoolName" name="AtriumSchoolName" required>
+                      <label for="VVIPSchoolName">School Name:</label>
+                      <input type="text" class="form-control" id="VVIPSchoolName" name="VVIPSchoolName" value="{{scname}}" readonly>
+                      <!-- <select class="form-control" id="VVIPSchoolName" name="VVIPSchoolName" required>
                         <option value="">Select School Name</option>
                         <option value="ABS">ABS - Amity Business School</option>
                         <option value="AFS">AFS - Amity Film School</option>
@@ -743,27 +741,26 @@
                       <div class="error-message schoolNameError">Please select a school name.</div>
                     </div>
                     <div class="form-group">
-                      <label for="AtriumFacultyName">Event Coordinator Name:</label>
-                      <input type="text" class="form-control" id="AtriumFacultyName" name="AtriumFacultyName" placeholder="Enter your name" required>
+                      <label for="VVIPFacultyName">Event Coordinator Name:</label>
+                      <input type="text" class="form-control" id="VVIPFacultyName" name="VVIPFacultyName" placeholder="Enter your name" required>
                       <div class="error-message facultyNameError">Please enter a valid name with letters only.</div>
-            
+      
                     </div>
                     <div class="form-group">
-                      <label for="AtriumHodName">HOD/HOI/Director Name:</label>
-                      <input type="text" class="form-control" id="AtriumHodName" name="AtriumHodName" placeholder="Enter HOD/HOI/Director name" required>
+                      <label for="VVIPHodName">HOD/HOI/Director Name:</label>
+                      <input type="text" class="form-control" id="VVIPHodName" name="VVIPHodName" placeholder="Enter HOD/HOI/Director name" required>
                       <div class="error-message hodNameError">Please enter a valid name with letters only.</div>
-            
+      
                     </div>
                     <div class="form-group">
-                      <label for="AtriumEventName">Event Name:</label>
-                      <input type="text" class="form-control" id="AtriumEventName" name="AtriumEventName" placeholder="Enter event name" required>
+                      <label for="VVIPEventName">Event Name:</label>
+                      <input type="text" class="form-control" id="VVIPEventName" name="VVIPEventName" placeholder="Enter event name" maxlength="300" required>
                       <div class="error-message eventNameError">Please enter the event name.</div>
-            
-                   
+      
                     </div>
                     <div class="form-group">
-                      <label for="Atriumstartime">Start Time</label>
-                      <select class="form-control" id="Atriumstartime" name="Atriumstartime" required>
+                      <label for="VVIPstartime">Start Time</label>
+                      <select class="form-control" id="VVIPstartime" name="VVIPstartime" required>
                         <option value="900">09:00 am</option>
                         <option value="1000">10:00 am</option>
                         <option value="1100">11:00 am</option>
@@ -776,9 +773,9 @@
                       </select>
                     </div>
                     <div class="form-group">
-                      <label for="Atriumendtime">End Time</label>
-            
-                      <select class="form-control" id="Atriumendtime" name="Atriumendtime" required>
+                      <label for="VVIPendtime">End Time</label>
+      
+                      <select class="form-control" id="VVIPendtime" name="VVIPendtime" required>
                         <option value="1000">10:00 am</option>
                         <option value="1100">11:00 am</option>
                         <option value="1200">12:00 pm</option>
@@ -789,49 +786,51 @@
                          <option value="1700">05:00 pm</option>
                          <option value="1800">06:00 pm</option>
                       </select>
+      
                     </div>
                     <div class="form-group">
-                      <label for="Atriumdate">Date of Event:</label>
-                      <input type="date" class="form-control" id="Atriumdate" name="Atriumdate" required onchange="updateDayOfWeek('Atriumdate', 'Atriumday'); updateCalendarColor('Atriumdate','AtriumDuration')">
+                      <label for="VVIPdate">Date of Event:</label>
+                      <input type="date" class="form-control" id="VVIPdate" name="VVIPdate" required onchange="updateDayOfWeek('VVIPdate', 'VVIPday'); updateCalendarColor('VVIPdate','VVIPDuration')">
                       <div class="error-message dateError">Please select a date.</div>
-            
+      
                     </div>
                     <div class="form-group">
-                      <label for="Atriumday">Day of Event:</label>
-                      <input type="text" class="form-control" id="Atriumday" name="Atriumday" readonly>
-                   
+                      <label for="VVIPday">Day of Event:</label>
+                      <input type="text" class="form-control" id="VVIPday" name="VVIPday" readonly>
+                  
                     </div>
                     <div class="form-group">
-                      <label for="AtriumResourcePersonName">Resource Person Name:</label>
-                      <input type="text" class="form-control" id="AtriumResourcePersonName" name="AtriumResourcePersonName" placeholder="Enter resource person name" required>
+                      <label for="VVIPResourcePersonName">Resource Person Name:</label>
+                      <input type="text" class="form-control" id="VVIPResourcePersonName" name="VVIPResourcePersonName" placeholder="Enter resource person name" required>
                       <div class="error-message resourcePersonNameError">Please enter the resource person name.</div>
-            
+      
                     </div>
                     <div class="form-group">
-                      <label for="AtriumResourcePersonDetail">Resource Person Detail:</label>
-                      <textarea class="form-control" id="AtriumResourcePersonDetail" name="AtriumResourcePersonDetail" placeholder="Enter resource person details" required></textarea>
+                      <label for="VVIPResourcePersonDetail">Resource Person Detail:</label>
+                      <textarea class="form-control" id="VVIPResourcePersonDetail" name="VVIPResourcePersonDetail" placeholder="Enter resource person details" maxlength="300" required></textarea>
                       <div class="error-message resourcePersonDetailError">Please enter the resource person details.</div>
-            
+      
                     </div>
                     <div class="form-group">
-                      <label for="AtriumEmail">Event Coordinator's Email:</label>
-                      <input type="email" class="form-control" id="AtriumEmail" name="AtriumEmail" placeholder="Enter your email" required>
+                      <label for="VVIPEmail">Event Coordinator's Email:</label>
+                      <input type="email" class="form-control" id="VVIPEmail" name="VVIPEmail" placeholder="Enter your email" required>
                       <div class="error-message emailError">Please enter a valid email address.</div>
-            
+      
                     </div>
                     <div class="form-group">
-                      <label for="AtriumPhone">Event Coordinator's Phone Number:</label>
-                      <input type="tel" class="form-control" id="AtriumPhone" name="AtriumPhone" placeholder="Enter your phone number" required>
+                      <label for="VVIPPhone">Event Coordinator's Phone Number:</label>
+                      <input type="tel" class="form-control" id="VVIPPhone" name="VVIPPhone" placeholder="Enter your phone number" required>
                       <div class="error-message phoneError">Please enter a valid 10-digit phone number.</div>
-            
+      
                     </div>
                     <button type="submit" class="btn btn-primary" id="submitmain">Submit</button>
               </form>
+      
+
 
 </div>
   </div>
 </div>
-
 
 
 </main>
@@ -856,10 +855,10 @@
 
   // Update the form fields with fetched data
   function updateForm(data) {
-    document.getElementById('Atriumdate').value = data.date;
-    document.getElementById('Atriumstartime').value = data.startTime;
-    document.getElementById('Atriumendtime').value = data.endTime;
-    document.getElementById('Atriumday').value = data.day;
+    document.getElementById('VVIPdate').value = data.date;
+    document.getElementById('VVIPstartime').value = data.startTime;
+    document.getElementById('VVIPendtime').value = data.endTime;
+    document.getElementById('VVIPday').value = data.day;
   
   }
 
@@ -1026,7 +1025,6 @@
             });
           </script>
           
-      
   
      
       <!-- Include jQuery and Bootstrap JS  and jQuery UI libraries-->
