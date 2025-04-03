@@ -1,9 +1,9 @@
 import mysql.connector
 
-hostname = "127.0.0.1"
-username="root"
-passwd = "3388"
-portnum = "3388"
+hostname = '127.0.0.1'
+username = 'dead'
+passwd = '1234'
+portnum = '3306'
 
 try:
     conn = mysql.connector.connect(

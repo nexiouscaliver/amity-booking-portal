@@ -35,23 +35,23 @@ admin_email = 'amieventhub@gmail.com'  # Replace with the admin's email
 it_email = 'itamitymumbai@gmail.com'  # Replace with the admin's email
 admin2_mail = 'amitydirector01@gmail.com' # Replace with the admin2's email
 mail = Mail(app)
-#server_link = "http://amischeduler.aum.amity.edu.in" #replace with production server initial routing address.
-server_link = "http://127.0.0.1:8000" #replace with production server initial routing address.
+server_link = "http://amischeduler.aum.amity.edu.in" #replace with production server initial routing address.
+#server_link = "http://127.0.0.1:8000" #replace with production server initial routing address.
 #server_link = "http://10.5.2.29" #replace with production server initial routing address.
 #server_link = "https://786gkd71-8000.inc1.devtunnels.ms/" #replace with production server initial routing address.
 
-#vcmail = ['vcaum@mum.amity.edu']
-#dirmails = ['diradmin1@mum.amity.edu' , 'diradmin@mum.amity.edu']
-#itmails = ['acghatge@it.amity.edu', 'itmum@amity.edu']
-#vcofficemails = ['vcoffice@mum.amity.edu']
-#comb1 = vcmail + dirmails + itmails + vcofficemails #upon confirmed rejection
-
-
-vcmail = ['amieventhub@gmail.com']
-dirmails = ['amitydirector01@gmail.com' , 'amitydirector01@gmail.com']
-itmails = ['itamitymumbai@gmail.com', 'itamitymumbai@gmail.com']
-vcofficemails = ['amieventhub@gmail.com']
+vcmail = ['vcaum@mum.amity.edu']
+dirmails = ['diradmin1@mum.amity.edu' , 'diradmin@mum.amity.edu']
+itmails = ['acghatge@it.amity.edu', 'itmum@amity.edu']
+vcofficemails = ['vcoffice@mum.amity.edu']
 comb1 = vcmail + dirmails + itmails + vcofficemails #upon confirmed rejection
+
+
+#vcmail = ['amieventhub@gmail.com']
+#dirmails = ['amitydirector01@gmail.com' , 'amitydirector01@gmail.com']
+#itmails = ['itamitymumbai@gmail.com', 'itamitymumbai@gmail.com']
+#vcofficemails = ['amieventhub@gmail.com']
+#comb1 = vcmail + dirmails + itmails + vcofficemails #upon confirmed rejection
 
 dictConfig(
     {
@@ -181,6 +181,8 @@ def getusername():
                 'testdebug':'testdebug',
                 'IT_Dept':'IT Department',
                 'Registrar' : 'Registrar',
+		'Accounts' : 'Accounts',
+                'Accounts_Dept' : 'Accounts Department',
                 }
     cook = session['username']
     if cook == "Director_Admin_1": schoolname = "Director_Admin_1"
@@ -191,6 +193,8 @@ def getusername():
     elif cook == "Admissions_Dept": schoolname = "Admissions_Dept"
     elif cook == "Examinations_Dept": schoolname = "Examinations_Dept"
     elif cook == "IT_dept": schoolname = "IT_Dept"
+    elif cook == "Accounts": schoolname = "Accounts"
+    elif cook == "Accounts_Dept": schoolname = "Accounts_Dept"
     else:
         schoolname = cook.split("_")[0]
     fullname = userdict[schoolname]
@@ -936,8 +940,11 @@ def index():
         else:
             return redirect(url_for('userlogin'))
     except Exception as e:
+        import traceback
+        print("ERROR OCCURED HERE : ",traceback.format_exc())
         app.logger.info(e)
         app.logger.error(e)
+        app.logger.exception("ERROR OCCURED HERE : ",e)
         return redirect(url_for('userlogin'))
 
 @app.route('/requeststatus' ,methods=['GET', 'POST'])
