@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>VVIP Hall Booking</title>
+  <title>ALS602 Hall Booking</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -49,6 +49,7 @@
     flex: 0 1 auto; /* Prevent the logo from stretching */
     margin-right: 0; /* Align logo container to the left */
 }
+  
 .navbar .logo img {
   height: 50px;
   margin-right: 2px;
@@ -705,16 +706,17 @@
             <div class="modal-content">
                 <div class="modal-header flex items-center justify-between">
                     <div class="flex items-center">
-                          <h4 class="modal-title" id="VVIPModalLabel">VVIP Room Booking</h4>
+                        
+                        <h4 class="modal-title" id="ALS602ModalLabel">ALS602 Hall Booking</h4>
                     </div>
                     
                 </div>
                 <div class="modal-body">
-                  <form method="post" id="VVIPForm" novalidate>
+                  <form method="post" id="ALS602Form" novalidate>
                     <div class="form-group">
-                      <label for="VVIPSchoolName">School Name:</label>
-                      <input type="text" class="form-control" id="VVIPSchoolName" name="VVIPSchoolName" value="{{scname}}" readonly>
-                      <!-- <select class="form-control" id="VVIPSchoolName" name="VVIPSchoolName" required>
+                      <label for="ALS602SchoolName">School Name:</label>
+                      <input type="text" class="form-control" id="ALS602SchoolName" name="ALS602SchoolName" value="{{scname}}" readonly>
+                      <!-- <select class="form-control" id="ALS602SchoolName" name="ALS602SchoolName" required>
                         <option value="">Select School Name</option>
                         <option value="ABS">ABS - Amity Business School</option>
                         <option value="AFS">AFS - Amity Film School</option>
@@ -741,26 +743,26 @@
                       <div class="error-message schoolNameError">Please select a school name.</div>
                     </div>
                     <div class="form-group">
-                      <label for="VVIPFacultyName">Event Coordinator Name:</label>
-                      <input type="text" class="form-control" id="VVIPFacultyName" name="VVIPFacultyName" placeholder="Enter your name" required>
+                      <label for="ALS602FacultyName">Event Coordinator Name:</label>
+                      <input type="text" class="form-control" id="ALS602FacultyName" name="ALS602FacultyName" placeholder="Enter your name" required>
                       <div class="error-message facultyNameError">Please enter a valid name with letters only.</div>
-      
+            
                     </div>
                     <div class="form-group">
-                      <label for="VVIPHodName">HOD/HOI/Director Name:</label>
-                      <input type="text" class="form-control" id="VVIPHodName" name="VVIPHodName" placeholder="Enter HOD/HOI/Director name" required>
+                      <label for="ALS602HodName">HOD/HOI/Director Name:</label>
+                      <input type="text" class="form-control" id="ALS602HodName" name="ALS602HodName" placeholder="Enter HOD/HOI/Director name" required>
                       <div class="error-message hodNameError">Please enter a valid name with letters only.</div>
-      
+            
                     </div>
                     <div class="form-group">
-                      <label for="VVIPEventName">Event Name:</label>
-                      <input type="text" class="form-control" id="VVIPEventName" name="VVIPEventName" placeholder="Enter event name" maxlength="300" required>
+                      <label for="ALS602EventName">Event Name:</label>
+                      <input type="text" class="form-control" id="ALS602EventName" name="ALS602EventName" placeholder="Enter event name" maxlength="300" required>
                       <div class="error-message eventNameError">Please enter the event name.</div>
-      
+            
                     </div>
                     <div class="form-group">
-                      <label for="VVIPstartime">Start Time</label>
-                      <select class="form-control" id="VVIPstartime" name="VVIPstartime" required>
+                      <label for="ALS602startime">Start Time</label>
+                      <select class="form-control" id="ALS602startime" name="ALS602startime" required>
                         <option value="900">09:00 am</option>
                         <option value="1000">10:00 am</option>
                         <option value="1100">11:00 am</option>
@@ -773,9 +775,9 @@
                       </select>
                     </div>
                     <div class="form-group">
-                      <label for="VVIPendtime">End Time</label>
-      
-                      <select class="form-control" id="VVIPendtime" name="VVIPendtime" required>
+                      <label for="ALS602endtime">End Time</label>
+            
+                      <select class="form-control" id="ALS602endtime" name="ALS602endtime" required>
                         <option value="1000">10:00 am</option>
                         <option value="1100">11:00 am</option>
                         <option value="1200">12:00 pm</option>
@@ -786,51 +788,49 @@
                          <option value="1700">05:00 pm</option>
                          <option value="1800">06:00 pm</option>
                       </select>
-      
                     </div>
                     <div class="form-group">
-                      <label for="VVIPdate">Date of Event:</label>
-                      <input type="date" class="form-control" id="VVIPdate" name="VVIPdate" required onchange="updateDayOfWeek('VVIPdate', 'VVIPday'); updateCalendarColor('VVIPdate','VVIPDuration')">
+                      <label for="ALS602date">Date of Event:</label>
+                      <input type="date" class="form-control" id="ALS602date" name="ALS602date" required onchange="updateDayOfWeek('ALS602date', 'ALS602day'); updateCalendarColor('ALS602date','ALS602Duration')">
                       <div class="error-message dateError">Please select a date.</div>
-      
+            
                     </div>
                     <div class="form-group">
-                      <label for="VVIPday">Day of Event:</label>
-                      <input type="text" class="form-control" id="VVIPday" name="VVIPday" readonly>
-                  
+                      <label for="ALS602day">Day of Event:</label>
+                      <input type="text" class="form-control" id="ALS602day" name="ALS602day" readonly>
                     </div>
                     <div class="form-group">
-                      <label for="VVIPResourcePersonName">Resource Person Name:</label>
-                      <input type="text" class="form-control" id="VVIPResourcePersonName" name="VVIPResourcePersonName" placeholder="Enter resource person name" required>
+                      <label for="ALS602ResourcePersonName">Resource Person Name:</label>
+                      <input type="text" class="form-control" id="ALS602ResourcePersonName" name="ALS602ResourcePersonName" placeholder="Enter resource person name" required>
                       <div class="error-message resourcePersonNameError">Please enter the resource person name.</div>
-      
+            
                     </div>
                     <div class="form-group">
-                      <label for="VVIPResourcePersonDetail">Resource Person Detail:</label>
-                      <textarea class="form-control" id="VVIPResourcePersonDetail" name="VVIPResourcePersonDetail" placeholder="Enter resource person details" maxlength="300" required></textarea>
+                      <label for="ALS602ResourcePersonDetail">Resource Person Detail:</label>
+                      <textarea class="form-control" id="ALS602ResourcePersonDetail" name="ALS602ResourcePersonDetail" placeholder="Enter resource person details" maxlength="300" required></textarea>
                       <div class="error-message resourcePersonDetailError">Please enter the resource person details.</div>
-      
+            
                     </div>
                     <div class="form-group">
-                      <label for="VVIPEmail">Event Coordinator's Email:</label>
-                      <input type="email" class="form-control" id="VVIPEmail" name="VVIPEmail" placeholder="Enter your email" required>
+                      <label for="ALS602Email">Event Coordinator's Email:</label>
+                      <input type="email" class="form-control" id="ALS602Email" name="ALS602Email" placeholder="Enter your email" required>
                       <div class="error-message emailError">Please enter a valid email address.</div>
-      
+            
                     </div>
                     <div class="form-group">
-                      <label for="VVIPPhone">Event Coordinator's Phone Number:</label>
-                      <input type="tel" class="form-control" id="VVIPPhone" name="VVIPPhone" placeholder="Enter your phone number" required>
+                      <label for="ALS602Phone">Event Coordinator's Phone Number:</label>
+                      <input type="tel" class="form-control" id="ALS602Phone" name="ALS602Phone" placeholder="Enter your phone number" required>
                       <div class="error-message phoneError">Please enter a valid 10-digit phone number.</div>
-      
+            
                     </div>
                     <button type="submit" class="btn btn-primary" id="submitmain">Submit</button>
               </form>
-      
-
+           
 
 </div>
   </div>
 </div>
+
 
 
 </main>
@@ -855,10 +855,10 @@
 
   // Update the form fields with fetched data
   function updateForm(data) {
-    document.getElementById('VVIPdate').value = data.date;
-    document.getElementById('VVIPstartime').value = data.startTime;
-    document.getElementById('VVIPendtime').value = data.endTime;
-    document.getElementById('VVIPday').value = data.day;
+    document.getElementById('ALS602date').value = data.date;
+    document.getElementById('ALS602startime').value = data.startTime;
+    document.getElementById('ALS602endtime').value = data.endTime;
+    document.getElementById('ALS602day').value = data.day;
   
   }
 
@@ -902,130 +902,130 @@
      
    
       </script>
-          <script>
-            function validateForm(event) {
-                event.preventDefault();
-                
-                const form = event.target;
-                
-                // Clear previous error messages
-                form.querySelectorAll('.error-message').forEach(function(el) {
-                    el.style.display = 'none';
-                });
+      
+      <script>
+        function validateForm(event) {
+            event.preventDefault();
             
-                let isValid = true;
+            const form = event.target;
             
-                // Function to show error message
-                function showError(selector, errorMessage) {
-                    const errorElement = form.querySelector(selector);
-                    if (errorElement) {
-                        errorElement.style.display = 'block';
-                        errorElement.textContent = errorMessage;
-                    }
-                }
-            
-                // Validate School Name
-                const schoolName = form.querySelector('[name$="SchoolName"]').value;
-                if (schoolName === '') {
-                    showError('.schoolNameError', 'Please select a school name.');
-                    isValid = false;
-                } else if (schoolName.length > 300) {
-                    showError('.schoolNameError', 'School name must be up to 300 characters.');
-                    isValid = false;
-                }
-            
-                // Validate Faculty Name
-                const facultyName = form.querySelector('[name$="FacultyName"]').value;
-                if (!/^[a-zA-Z\s.,@&-]+$/.test(facultyName) || facultyName.length > 95) {
-                    showError('.facultyNameError', 'Please enter a valid name with alphabets, spaces, and special characters (. , @ & -) up to 95 characters.');
-                    isValid = false;
-                } 
-            
-                // Validate HOD Name
-                const hodName = form.querySelector('[name$="HodName"]').value;
-                if (!/^[a-zA-Z\s.,@&-]+$/.test(hodName) || hodName.length > 95) {
-                    showError('.hodNameError', 'Please enter a valid name with alphabets, spaces, and special characters (. , @ & -) up to 95 characters.');
-                    isValid = false;
-                }
-            
-                // Validate Event Name
-                const eventName = form.querySelector('[name$="EventName"]').value;
-                if (!/^[a-zA-Z0-9\s.,@&-]+$/.test(eventName)) {
-                    showError('.eventNameError', 'Please enter a valid event name with alphabets, numbers, spaces, and special characters (. , @ & -).');
-                    isValid = false;
-                } else if (eventName.length > 300) {
-                    showError('.eventNameError', 'Event name must be up to 300 characters.');
-                    isValid = false;
-                }
-            
-                // Validate Email
-                const email = form.querySelector('[name$="Email"]').value;
-                const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
-                if (!emailPattern.test(email) || email.length > 95) {
-                    showError('.emailError','Please enter a valid email address.');
-                    isValid = false; 
-                }
-            
-                // Validate Phone Number
-                const phone = form.querySelector('[name$="Phone"]').value;
-                if (!/^\d{10}$/.test(phone)) {
-                    showError('.phoneError', 'Please enter a valid 10-digit phone number.');
-                    isValid = false;
-                }
-            
-                // Validate Date
-                const date = form.querySelector('[name$="date"]').value;
-                if (date === '') {
-                    showError('.dateError', 'Please select a date.');
-                    isValid = false;
-                }
-            
-                // Validate Start Time
-                const startTime = form.querySelector('[name$="startime"]').value;
-                if (startTime === '') {
-                    showError('.startTimeError', 'Please select a start time.');
-                    isValid = false;
-                }
-            
-                // Validate End Time
-                const endTime = form.querySelector('[name$="endtime"]').value;
-                if (endTime === '') {
-                    showError('.endTimeError', 'Please select an end time.');
-                    isValid = false;
-                }
-            
-                // Validate Resource Person Name
-                const resourcePersonName = form.querySelector('[name$="ResourcePersonName"]').value;
-                if (!/^[a-zA-Z0-9\s.,@&-]+$/.test(resourcePersonName) || resourcePersonName.length > 95) {
-                    showError('.resourcePersonNameError', 'Please enter a valid name with allowed alphabets, numbers, spaces, and special characters (. , @ & -) up to 95 characters.');
-                    isValid = false;
-                }
-                
-                
-            
-                // Validate Resource Person Detail
-                const resourcePersonDetail = form.querySelector('[name$="ResourcePersonDetail"]').value;
-                const validPattern = /^[a-zA-Z0-9.,@&-]*$/;
-                
-                if (resourcePersonDetail === '' || resourcePersonDetail.length > 300 || !validPattern.test(resourcePersonDetail)) {
-                    showError('.resourcePersonDetailError', 'Resource person detail must be up to 300 characters and can only contain alphabets, numbers, and special characters (. , @ & -).');
-                    isValid = false;
-                }
-                
-            
-                // If form is valid, submit it
-                if (isValid) {
-                    form.submit();
+            // Clear previous error messages
+            form.querySelectorAll('.error-message').forEach(function(el) {
+                el.style.display = 'none';
+            });
+        
+            let isValid = true;
+        
+            // Function to show error message
+            function showError(selector, errorMessage) {
+                const errorElement = form.querySelector(selector);
+                if (errorElement) {
+                    errorElement.style.display = 'block';
+                    errorElement.textContent = errorMessage;
                 }
             }
+        
+            // Validate School Name
+            const schoolName = form.querySelector('[name$="SchoolName"]').value;
+            if (schoolName === '') {
+                showError('.schoolNameError', 'Please select a school name.');
+                isValid = false;
+            } else if (schoolName.length > 300) {
+                showError('.schoolNameError', 'School name must be up to 300 characters.');
+                isValid = false;
+            }
+        
+            // Validate Faculty Name
+            const facultyName = form.querySelector('[name$="FacultyName"]').value;
+            if (!/^[a-zA-Z\s.,@&-]+$/.test(facultyName) || facultyName.length > 95) {
+                showError('.facultyNameError', 'Please enter a valid name with alphabets, spaces, and special characters (. , @ & -) up to 95 characters.');
+                isValid = false;
+            } 
+        
+            // Validate HOD Name
+            const hodName = form.querySelector('[name$="HodName"]').value;
+            if (!/^[a-zA-Z\s.,@&-]+$/.test(hodName) || hodName.length > 95) {
+                showError('.hodNameError', 'Please enter a valid name with alphabets, spaces, and special characters (. , @ & -) up to 95 characters.');
+                isValid = false;
+            }
+        
+            // Validate Event Name
+            const eventName = form.querySelector('[name$="EventName"]').value;
+            if (!/^[a-zA-Z0-9\s.,@&-]+$/.test(eventName)) {
+                showError('.eventNameError', 'Please enter a valid event name with alphabets, numbers, spaces, and special characters (. , @ & -).');
+                isValid = false;
+            } else if (eventName.length > 300) {
+                showError('.eventNameError', 'Event name must be up to 300 characters.');
+                isValid = false;
+            }
+        
+            // Validate Email
+            const email = form.querySelector('[name$="Email"]').value;
+            const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+            if (!emailPattern.test(email) || email.length > 95) {
+                showError('.emailError','Please enter a valid email address.');
+                isValid = false; 
+            }
+        
+            // Validate Phone Number
+            const phone = form.querySelector('[name$="Phone"]').value;
+            if (!/^\d{10}$/.test(phone)) {
+                showError('.phoneError', 'Please enter a valid 10-digit phone number.');
+                isValid = false;
+            }
+        
+            // Validate Date
+            const date = form.querySelector('[name$="date"]').value;
+            if (date === '') {
+                showError('.dateError', 'Please select a date.');
+                isValid = false;
+            }
+        
+            // Validate Start Time
+            const startTime = form.querySelector('[name$="startime"]').value;
+            if (startTime === '') {
+                showError('.startTimeError', 'Please select a start time.');
+                isValid = false;
+            }
+        
+            // Validate End Time
+            const endTime = form.querySelector('[name$="endtime"]').value;
+            if (endTime === '') {
+                showError('.endTimeError', 'Please select an end time.');
+                isValid = false;
+            }
+        
+            // Validate Resource Person Name
+            const resourcePersonName = form.querySelector('[name$="ResourcePersonName"]').value;
+            if (!/^[a-zA-Z0-9\s.,@&-]+$/.test(resourcePersonName) || resourcePersonName.length > 95) {
+                showError('.resourcePersonNameError', 'Please enter a valid name with allowed alphabets, numbers, spaces, and special characters (. , @ & -) up to 95 characters.');
+                isValid = false;
+            }
             
-            // Attach event listeners to forms
-            document.querySelectorAll('form').forEach(function(form) {
-                form.addEventListener('submit', validateForm);
-            });
-          </script>
-          
-  
+            
+        
+            // Validate Resource Person Detail
+            const resourcePersonDetail = form.querySelector('[name$="ResourcePersonDetail"]').value;
+            const validPattern = /^[a-zA-Z0-9.,@&-]*$/;
+            
+            if (resourcePersonDetail === '' || resourcePersonDetail.length > 300 || !validPattern.test(resourcePersonDetail)) {
+                showError('.resourcePersonDetailError', 'Resource person detail must be up to 300 characters and can only contain alphabets, numbers, and special characters (. , @ & -).');
+                isValid = false;
+            }
+            
+        
+            // If form is valid, submit it
+            if (isValid) {
+                form.submit();
+            }
+        }
+        
+        // Attach event listeners to forms
+        document.querySelectorAll('form').forEach(function(form) {
+            form.addEventListener('submit', validateForm);
+        });
+      </script>
+      
      
       <!-- Include jQuery and Bootstrap JS  and jQuery UI libraries-->
       
