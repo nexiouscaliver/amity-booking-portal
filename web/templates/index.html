@@ -1098,6 +1098,56 @@
             </div>
           </div>
 
+          <div class="col-md-4">
+            <div class="hall" data-toggle="modal" data-target="#AIB206Modal">
+              <img src="vviproom.png" alt="AIB Conference Room">
+              <h3>AIB A2 Block,206</h3>
+              <p> Exclusive and luxurious, the VVIP Room is ideal for private meetings and special events.
+               </p>
+              <button type="button" class="btn btn-primary">Select</button>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="hall" data-toggle="modal" data-target="#ABS304Modal">
+              <img src="vviproom.png" alt="ABS Conference Room">
+              <h3>ABS A1 block,304</h3>
+              <p> Exclusive and luxurious, the VVIP Room is ideal for private meetings and special events.
+               </p>
+              <button type="button" class="btn btn-primary">Select</button>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="hall" data-toggle="modal" data-target="#AIBAS504Modal">
+              <img src="vviproom.png" alt="VVIP Conference Room">
+              <h3>AIBAS A1 BLOCK,504</h3>
+              <p> Exclusive and luxurious, the VVIP Room is ideal for private meetings and special events.
+               </p>
+              <button type="button" class="btn btn-primary">Select</button>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="hall" data-toggle="modal" data-target="#ASET123Modal">
+              <img src="vviproom.png" alt="VVIP Conference Room">
+              <h3>ASET A2 BLOCK,123</h3>
+              <p> Exclusive and luxurious, the VVIP Room is ideal for private meetings and special events.
+               </p>
+              <button type="button" class="btn btn-primary">Select</button>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="hall" data-toggle="modal" data-target="#ALS602Modal">
+              <img src="vviproom.png" alt="VVIP Conference Room">
+              <h3>ALS A1 BLOCK,602</h3>
+              <p> Exclusive and luxurious, the VVIP Room is ideal for private meetings and special events.
+               </p>
+              <button type="button" class="btn btn-primary">Select</button>
+            </div>
+          </div>
+
         </div>
       </div>
     </section>
@@ -2686,6 +2736,970 @@
 
 
 
+<!-- 8.AIB206-->
+
+<div class="modal fade" id="AIB206Modal" tabindex="-1" role="dialog" aria-labelledby="AIB206ModalLabel">
+  <div class="modal-dialog" role="document">
+      <div class="modal-content">
+          <div class="modal-header flex items-center justify-between">
+              <div class="flex items-center">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                  </button>
+                  <h4 class="modal-title" id="AIB206ModalLabel">AIB206 Hall Booking</h4>
+              </div>
+              <div class="relative">
+                  <i id="calendar-icon" class="far fa-calendar-alt cursor-pointer" data-target="AIB206Form" onclick="toggleCalendar(this)"> Hall Calendar </i>
+              </div>
+          </div>
+          <div class="modal-body">
+              <form method="post" id="AIB206Form" novalidate>
+        <div class="form-group">
+          <label for="AIB206SchoolName">School Name:</label>
+          <input type="text" class="form-control" id="AIB206SchoolName" name="AIB206SchoolName" value="{{scname}}" readonly>
+          <!-- <select class="form-control" id="AIB206SchoolName" name="AIB206SchoolName" required>
+            <option value="">Select School Name</option>
+            <option value="ABS">ABS - Amity Business School</option>
+            <option value="AFS">AFS - Amity Film School</option>
+            <option value="AIBAS">AIBAS - Amity Institute of Behavioural & Allied Sciences</option>
+            <option value="AIB">AIB - Amity Institute of Biotechnology</option>
+            <option value="AIIT">AIIT - Amity Institute of Information Technology</option>
+            <option value="AILA">AILA - Amity Institute of Liberal Arts</option>
+            <option value="AIP">AIP - Amity Institute of Pharmacy</option>
+            <option value="AIT">AIT - Amity Institute of Technology</option>
+            <option value="AITT">AITT - Amity Institute of Travel & Tourism</option>
+            <option value="ALS">ALS - Amity Law School</option>
+            <option value="ASAP">ASAP - Amity School of Architecture & Planning</option>
+            <option value="ASAS">ASAS - Amity School of Applied Sciences</option>
+            <option value="ASCO">ASCO - Amity School of Communication</option>
+            <option value="ASET">ASET - Amity School of Engineering & Technology</option>
+            <option value="ASFT">ASFT - Amity School of Fashion Technology</option>
+            <option value="ASL">ASL - Amity School of Languages</option>
+            <option value="CISOL">CIIOL - CII Logistics</option>
+            <option value="TUCSSBERICS"> RICS</option>
+            <option value="ASFA">ASFA - Amity School of Fine Arts</option>
+            <option value="AIE">AIE - Amity Institute of Education</option>
+            <option value="AIN">AIN - Amity Institute of Nanotechnology</option>
+          </select> -->
+          <div class="error-message schoolNameError">Please select a school name.</div>
+        </div>
+        <div class="form-group">
+          <label for="AIB206FacultyName">Event Coordinator Name:</label>
+          <input type="text" class="form-control" id="AIB206FacultyName" name="AIB206FacultyName" placeholder="Enter your name" required>
+          <div class="error-message facultyNameError">Please enter a valid name with letters only.</div>
+
+        </div>
+        <div class="form-group">
+          <label for="AIB206HodName">HOD/HOI/Director Name:</label>
+          <input type="text" class="form-control" id="AIB206HodName" name="AIB206HodName" placeholder="Enter HOD/HOI/Director name" required>
+          <div class="error-message hodNameError">Please enter a valid name with letters only.</div>
+
+        </div>
+        <div class="form-group">
+          <label for="AIB206EventName">Event Name:</label>
+          <input type="text" class="form-control" id="AIB206EventName" name="AIB206EventName" placeholder="Enter event name" maxlength="300" required>
+          <div class="error-message eventNameError">Please enter the event name.</div>
+
+        </div>
+        <div class="form-group">
+          <label for="AIB206startime">Start Time</label>
+          <select class="form-control" id="AIB206startime" name="AIB206startime" required>
+            <option value="900">09:00 am</option>
+            <option value="1000">10:00 am</option>
+            <option value="1100">11:00 am</option>
+            <option value="1200">12:00 pm</option>
+            <option value="1300">01:00 pm</option>
+            <option value="1400">02:00 pm</option>
+             <option value="1500">03:00 pm</option>
+             <option value="1600">04:00 pm</option>
+             <option value="1700">05:00 pm</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="AIB206endtime">End Time</label>
+
+          <select class="form-control" id="AIB206endtime" name="AIB206endtime" required>
+            <option value="1000">10:00 am</option>
+            <option value="1100">11:00 am</option>
+            <option value="1200">12:00 pm</option>
+            <option value="1300">01:00 pm</option>
+            <option value="1400">02:00 pm</option>
+             <option value="1500">03:00 pm</option>
+             <option value="1600">04:00 pm</option>
+             <option value="1700">05:00 pm</option>
+             <option value="1800">06:00 pm</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="AIB206date">Date of Event:</label>
+          <input type="date" class="form-control" id="AIB206date" name="AIB206date" required onchange="updateDayOfWeek('AIB206date', 'AIB206day'); updateCalendarColor('AIB206date','AIB206Duration')">
+          <div class="error-message dateError">Please select a date.</div>
+
+        </div>
+        <div class="form-group">
+          <label for="AIB206day">Day of Event:</label>
+          <input type="text" class="form-control" id="AIB206day" name="AIB206day" readonly>
+        </div>
+        <div class="form-group">
+          <label for="AIB206ResourcePersonName">Resource Person Name:</label>
+          <input type="text" class="form-control" id="AIB206ResourcePersonName" name="AIB206ResourcePersonName" placeholder="Enter resource person name" required>
+          <div class="error-message resourcePersonNameError">Please enter the resource person name.</div>
+
+        </div>
+        <div class="form-group">
+          <label for="AIB206ResourcePersonDetail">Resource Person Detail:</label>
+          <textarea class="form-control" id="AIB206ResourcePersonDetail" name="AIB206ResourcePersonDetail" laceholder="Enter resource person details" maxlength="300" required></textarea>
+          <div class="error-message resourcePersonDetailError">Please enter the resource person details.</div>
+
+        </div>
+        <div class="form-group">
+          <label for="AIB206Email">Event Coordinator's Email:</label>
+          <input type="email" class="form-control" id="AIB206Email" name="AIB206Email" placeholder="Enter your email" required>
+          <div class="error-message emailError">Please enter a valid email address.</div>
+
+        </div>
+        <div class="form-group">
+          <label for="AIB206Phone">Event Coordinator's Phone Number:</label>
+          <input type="tel" class="form-control" id="AIB206Phone" name="AIB206Phone" placeholder="Enter your phone number" required>
+          <div class="error-message phoneError">Please enter a valid 10-digit phone number.</div>
+
+        </div>
+        <button type="submit" class="btn btn-primary" id="submitmain">Submit</button>
+  </form>
+
+  <div id="calendar-container-AIB206Form" class="calendar-container hidden mt-2">
+    <div class="calendar-nav flex items-center justify-between mb-4">
+        <button id="prevMonth" class="p-2 bg-gray-700 text-gray-400 rounded">&lt;</button>
+        <span id="monthYear" class="text-lg font-semibold"></span>
+        <button id="nextMonth" class="p-2 bg-gray-700 text-gray-400 rounded">&gt;</button>
+        <button id="closeCalendar" class="calendarclose-button flex items-center" data-target="AIB206Form" onclick="toggleCalendar(this)">
+            <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+            <span class="label"></span>
+        </button>
+    </div>
+    <div class="flex justify-center mb-4">
+        <select id="hallDropdown" class="mx-2 p-2 bg-gray-700 text-gray-400 rounded">
+            <option value="Auditorium">Auditorium</option>
+            <option value="SeminarHall">Seminar Hall</option>
+            <option value="Room105">Room 105</option>
+            <option value="CRCConferenceRoom">CRC Conference Room</option>
+            <!-- <option value="AIBConferenceRoom">AIB Conference Room</option> -->
+            <option value="RICSConferenceRoom">RICS Conference Room</option>
+            <option value="Atrium">Atrium</option>
+            <option value="VVIP">VVIP room</option>
+            <option value="AIB206">Seminar VIP room</option>
+        </select>
+        <select id="monthSelect" class="mx-2 p-2 bg-gray-700 text-gray-400 rounded readonly">
+            <!-- Options will be populated by JavaScript -->
+        </select>
+        <input type="date" id="dateSearch" class="p-2 bg-gray-700 text-gray-400 rounded">
+    </div>
+    <div class="calendar-header grid grid-cols-7 gap-1">
+        <div class="text-center">Sun</div>
+        <div class="text-center">Mon</div>
+        <div class="text-center">Tue</div>
+        <div class="text-center">Wed</div>
+        <div class="text-center">Thu</div>
+        <div class="text-center">Fri</div>
+        <div class="text-center">Sat</div>
+    </div>
+    <div id="calendar" class="calendar grid grid-cols-7 gap-1"></div>
+    <div class="legend mt-4 grid grid-cols-3 gap-4">
+        <div class="legend-item flex items-center">
+            <div class="legend-color full-booked-legend w-4 h-4 mr-2 rounded-full"></div>
+            <span>Booked Slots</span>
+        </div>
+        <div class="legend-item flex items-center">
+            <div class="legend-color not-booked-legend w-4 h-4 mr-2 rounded-full"></div>
+            <span>Not Booked Slots</span>
+        </div>
+        <div class="legend-item flex items-center">
+            <div class="legend-color pending-legend w-4 h-4 mr-2 rounded-full"></div>
+            <span>Pending Slots</span>
+        </div>
+    </div>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- 10.ABS -->
+
+<div class="modal fade" id="ABS304Modal" tabindex="-1" role="dialog" aria-labelledby="ABS304ModalLabel">
+  <div class="modal-dialog" role="document">
+      <div class="modal-content">
+          <div class="modal-header flex items-center justify-between">
+              <div class="flex items-center">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                  </button>
+                  <h4 class="modal-title" id="ABS304ModalLabel">ABS304 Hall Booking</h4>
+              </div>
+              <div class="relative">
+                  <i id="calendar-icon" class="far fa-calendar-alt cursor-pointer" data-target="ABS304Form" onclick="toggleCalendar(this)"> Hall Calendar </i>
+              </div>
+          </div>
+          <div class="modal-body">
+              <form method="post" id="ABS304Form" novalidate>
+        <div class="form-group">
+          <label for="ABS304SchoolName">School Name:</label>
+          <input type="text" class="form-control" id="ABS304SchoolName" name="ABS304SchoolName" value="{{scname}}" readonly>
+          <!-- <select class="form-control" id="ABS304SchoolName" name="ABS304SchoolName" required>
+            <option value="">Select School Name</option>
+            <option value="ABS">ABS - Amity Business School</option>
+            <option value="AFS">AFS - Amity Film School</option>
+            <option value="AIBAS">AIBAS - Amity Institute of Behavioural & Allied Sciences</option>
+            <option value="AIB">AIB - Amity Institute of Biotechnology</option>
+            <option value="AIIT">AIIT - Amity Institute of Information Technology</option>
+            <option value="AILA">AILA - Amity Institute of Liberal Arts</option>
+            <option value="AIP">AIP - Amity Institute of Pharmacy</option>
+            <option value="AIT">AIT - Amity Institute of Technology</option>
+            <option value="AITT">AITT - Amity Institute of Travel & Tourism</option>
+            <option value="ALS">ALS - Amity Law School</option>
+            <option value="ASAP">ASAP - Amity School of Architecture & Planning</option>
+            <option value="ASAS">ASAS - Amity School of Applied Sciences</option>
+            <option value="ASCO">ASCO - Amity School of Communication</option>
+            <option value="ASET">ASET - Amity School of Engineering & Technology</option>
+            <option value="ASFT">ASFT - Amity School of Fashion Technology</option>
+            <option value="ASL">ASL - Amity School of Languages</option>
+            <option value="CISOL">CIIOL - CII Logistics</option>
+            <option value="TUCSSBERICS"> RICS</option>
+            <option value="ASFA">ASFA - Amity School of Fine Arts</option>
+            <option value="AIE">AIE - Amity Institute of Education</option>
+            <option value="AIN">AIN - Amity Institute of Nanotechnology</option>
+          </select> -->
+          <div class="error-message schoolNameError">Please select a school name.</div>
+        </div>
+        <div class="form-group">
+          <label for="ABS304FacultyName">Event Coordinator Name:</label>
+          <input type="text" class="form-control" id="ABS304FacultyName" name="ABS304FacultyName" placeholder="Enter your name" required>
+          <div class="error-message facultyNameError">Please enter a valid name with letters only.</div>
+
+        </div>
+        <div class="form-group">
+          <label for="ABS304HodName">HOD/HOI/Director Name:</label>
+          <input type="text" class="form-control" id="ABS304HodName" name="ABS304HodName" placeholder="Enter HOD/HOI/Director name" required>
+          <div class="error-message hodNameError">Please enter a valid name with letters only.</div>
+
+        </div>
+        <div class="form-group">
+          <label for="ABS304EventName">Event Name:</label>
+          <input type="text" class="form-control" id="ABS304EventName" name="ABS304EventName" placeholder="Enter event name" maxlength="300" required>
+          <div class="error-message eventNameError">Please enter the event name.</div>
+
+        </div>
+        <div class="form-group">
+          <label for="ABS304startime">Start Time</label>
+          <select class="form-control" id="ABS304startime" name="ABS304startime" required>
+            <option value="900">09:00 am</option>
+            <option value="1000">10:00 am</option>
+            <option value="1100">11:00 am</option>
+            <option value="1200">12:00 pm</option>
+            <option value="1300">01:00 pm</option>
+            <option value="1400">02:00 pm</option>
+             <option value="1500">03:00 pm</option>
+             <option value="1600">04:00 pm</option>
+             <option value="1700">05:00 pm</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="ABS304endtime">End Time</label>
+
+          <select class="form-control" id="ABS304endtime" name="ABS304endtime" required>
+            <option value="1000">10:00 am</option>
+            <option value="1100">11:00 am</option>
+            <option value="1200">12:00 pm</option>
+            <option value="1300">01:00 pm</option>
+            <option value="1400">02:00 pm</option>
+             <option value="1500">03:00 pm</option>
+             <option value="1600">04:00 pm</option>
+             <option value="1700">05:00 pm</option>
+             <option value="1800">06:00 pm</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="ABS304date">Date of Event:</label>
+          <input type="date" class="form-control" id="ABS304date" name="ABS304date" required onchange="updateDayOfWeek('ABS304date', 'ABS304day'); updateCalendarColor('ABS304date','ABS304Duration')">
+          <div class="error-message dateError">Please select a date.</div>
+
+        </div>
+        <div class="form-group">
+          <label for="ABS304day">Day of Event:</label>
+          <input type="text" class="form-control" id="ABS304day" name="ABS304day" readonly>
+        </div>
+        <div class="form-group">
+          <label for="ABS304ResourcePersonName">Resource Person Name:</label>
+          <input type="text" class="form-control" id="ABS304ResourcePersonName" name="ABS304ResourcePersonName" placeholder="Enter resource person name" required>
+          <div class="error-message resourcePersonNameError">Please enter the resource person name.</div>
+
+        </div>
+        <div class="form-group">
+          <label for="ABS304ResourcePersonDetail">Resource Person Detail:</label>
+          <textarea class="form-control" id="ABS304ResourcePersonDetail" name="ABS304ResourcePersonDetail" laceholder="Enter resource person details" maxlength="300" required></textarea>
+          <div class="error-message resourcePersonDetailError">Please enter the resource person details.</div>
+
+        </div>
+        <div class="form-group">
+          <label for="ABS304Email">Event Coordinator's Email:</label>
+          <input type="email" class="form-control" id="ABS304Email" name="ABS304Email" placeholder="Enter your email" required>
+          <div class="error-message emailError">Please enter a valid email address.</div>
+
+        </div>
+        <div class="form-group">
+          <label for="ABS304Phone">Event Coordinator's Phone Number:</label>
+          <input type="tel" class="form-control" id="ABS304Phone" name="ABS304Phone" placeholder="Enter your phone number" required>
+          <div class="error-message phoneError">Please enter a valid 10-digit phone number.</div>
+
+        </div>
+        <button type="submit" class="btn btn-primary" id="submitmain">Submit</button>
+  </form>
+
+  <div id="calendar-container-ABS304Form" class="calendar-container hidden mt-2">
+    <div class="calendar-nav flex items-center justify-between mb-4">
+        <button id="prevMonth" class="p-2 bg-gray-700 text-gray-400 rounded">&lt;</button>
+        <span id="monthYear" class="text-lg font-semibold"></span>
+        <button id="nextMonth" class="p-2 bg-gray-700 text-gray-400 rounded">&gt;</button>
+        <button id="closeCalendar" class="calendarclose-button flex items-center" data-target="ABS304Form" onclick="toggleCalendar(this)">
+            <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+            <span class="label"></span>
+        </button>
+    </div>
+    <div class="flex justify-center mb-4">
+        <select id="hallDropdown" class="mx-2 p-2 bg-gray-700 text-gray-400 rounded">
+            <option value="Auditorium">Auditorium</option>
+            <option value="SeminarHall">Seminar Hall</option>
+            <option value="Room105">Room 105</option>
+            <option value="CRCConferenceRoom">CRC Conference Room</option>
+            <!-- <option value="AIBConferenceRoom">AIB Conference Room</option> -->
+            <option value="RICSConferenceRoom">RICS Conference Room</option>
+            <option value="Atrium">Atrium</option>
+            <option value="VVIP">VVIP room</option>
+            <option value="ABS304">Seminar VIP room</option>
+        </select>
+        <select id="monthSelect" class="mx-2 p-2 bg-gray-700 text-gray-400 rounded readonly">
+            <!-- Options will be populated by JavaScript -->
+        </select>
+        <input type="date" id="dateSearch" class="p-2 bg-gray-700 text-gray-400 rounded">
+    </div>
+    <div class="calendar-header grid grid-cols-7 gap-1">
+        <div class="text-center">Sun</div>
+        <div class="text-center">Mon</div>
+        <div class="text-center">Tue</div>
+        <div class="text-center">Wed</div>
+        <div class="text-center">Thu</div>
+        <div class="text-center">Fri</div>
+        <div class="text-center">Sat</div>
+    </div>
+    <div id="calendar" class="calendar grid grid-cols-7 gap-1"></div>
+    <div class="legend mt-4 grid grid-cols-3 gap-4">
+        <div class="legend-item flex items-center">
+            <div class="legend-color full-booked-legend w-4 h-4 mr-2 rounded-full"></div>
+            <span>Booked Slots</span>
+        </div>
+        <div class="legend-item flex items-center">
+            <div class="legend-color not-booked-legend w-4 h-4 mr-2 rounded-full"></div>
+            <span>Not Booked Slots</span>
+        </div>
+        <div class="legend-item flex items-center">
+            <div class="legend-color pending-legend w-4 h-4 mr-2 rounded-full"></div>
+            <span>Pending Slots</span>
+        </div>
+    </div>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- 11.AIBAS504Modal -->
+
+<div class="modal fade" id="AIBAS504Modal" tabindex="-1" role="dialog" aria-labelledby="AIBAS504ModalLabel">
+  <div class="modal-dialog" role="document">
+      <div class="modal-content">
+          <div class="modal-header flex items-center justify-between">
+              <div class="flex items-center">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                  </button>
+                  <h4 class="modal-title" id="AIBAS504ModalLabel">AIBAS504 Hall Booking</h4>
+              </div>
+              <div class="relative">
+                  <i id="calendar-icon" class="far fa-calendar-alt cursor-pointer" data-target="AIBAS504Form" onclick="toggleCalendar(this)"> Hall Calendar </i>
+              </div>
+          </div>
+          <div class="modal-body">
+              <form method="post" id="AIBAS504Form" novalidate>
+        <div class="form-group">
+          <label for="AIBAS504SchoolName">School Name:</label>
+          <input type="text" class="form-control" id="AIBAS504SchoolName" name="AIBAS504SchoolName" value="{{scname}}" readonly>
+          <!-- <select class="form-control" id="AIBAS504SchoolName" name="AIBAS504SchoolName" required>
+            <option value="">Select School Name</option>
+            <option value="ABS">ABS - Amity Business School</option>
+            <option value="AFS">AFS - Amity Film School</option>
+            <option value="AIBAS">AIBAS - Amity Institute of Behavioural & Allied Sciences</option>
+            <option value="AIB">AIB - Amity Institute of Biotechnology</option>
+            <option value="AIIT">AIIT - Amity Institute of Information Technology</option>
+            <option value="AILA">AILA - Amity Institute of Liberal Arts</option>
+            <option value="AIP">AIP - Amity Institute of Pharmacy</option>
+            <option value="AIT">AIT - Amity Institute of Technology</option>
+            <option value="AITT">AITT - Amity Institute of Travel & Tourism</option>
+            <option value="ALS">ALS - Amity Law School</option>
+            <option value="ASAP">ASAP - Amity School of Architecture & Planning</option>
+            <option value="ASAS">ASAS - Amity School of Applied Sciences</option>
+            <option value="ASCO">ASCO - Amity School of Communication</option>
+            <option value="ASET">ASET - Amity School of Engineering & Technology</option>
+            <option value="ASFT">ASFT - Amity School of Fashion Technology</option>
+            <option value="ASL">ASL - Amity School of Languages</option>
+            <option value="CISOL">CIIOL - CII Logistics</option>
+            <option value="TUCSSBERICS"> RICS</option>
+            <option value="ASFA">ASFA - Amity School of Fine Arts</option>
+            <option value="AIE">AIE - Amity Institute of Education</option>
+            <option value="AIN">AIN - Amity Institute of Nanotechnology</option>
+          </select> -->
+          <div class="error-message schoolNameError">Please select a school name.</div>
+        </div>
+        <div class="form-group">
+          <label for="AIBAS504FacultyName">Event Coordinator Name:</label>
+          <input type="text" class="form-control" id="AIBAS504FacultyName" name="AIBAS504FacultyName" placeholder="Enter your name" required>
+          <div class="error-message facultyNameError">Please enter a valid name with letters only.</div>
+
+        </div>
+        <div class="form-group">
+          <label for="AIBAS504HodName">HOD/HOI/Director Name:</label>
+          <input type="text" class="form-control" id="AIBAS504HodName" name="AIBAS504HodName" placeholder="Enter HOD/HOI/Director name" required>
+          <div class="error-message hodNameError">Please enter a valid name with letters only.</div>
+
+        </div>
+        <div class="form-group">
+          <label for="AIBAS504EventName">Event Name:</label>
+          <input type="text" class="form-control" id="AIBAS504EventName" name="AIBAS504EventName" placeholder="Enter event name" maxlength="300" required>
+          <div class="error-message eventNameError">Please enter the event name.</div>
+
+        </div>
+        <div class="form-group">
+          <label for="AIBAS504startime">Start Time</label>
+          <select class="form-control" id="AIBAS504startime" name="AIBAS504startime" required>
+            <option value="900">09:00 am</option>
+            <option value="1000">10:00 am</option>
+            <option value="1100">11:00 am</option>
+            <option value="1200">12:00 pm</option>
+            <option value="1300">01:00 pm</option>
+            <option value="1400">02:00 pm</option>
+             <option value="1500">03:00 pm</option>
+             <option value="1600">04:00 pm</option>
+             <option value="1700">05:00 pm</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="AIBAS504endtime">End Time</label>
+
+          <select class="form-control" id="AIBAS504endtime" name="AIBAS504endtime" required>
+            <option value="1000">10:00 am</option>
+            <option value="1100">11:00 am</option>
+            <option value="1200">12:00 pm</option>
+            <option value="1300">01:00 pm</option>
+            <option value="1400">02:00 pm</option>
+             <option value="1500">03:00 pm</option>
+             <option value="1600">04:00 pm</option>
+             <option value="1700">05:00 pm</option>
+             <option value="1800">06:00 pm</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="AIBAS504date">Date of Event:</label>
+          <input type="date" class="form-control" id="AIBAS504date" name="AIBAS504date" required onchange="updateDayOfWeek('AIBAS504date', 'AIBAS504day'); updateCalendarColor('AIBAS504date','AIBAS504Duration')">
+          <div class="error-message dateError">Please select a date.</div>
+
+        </div>
+        <div class="form-group">
+          <label for="AIBAS504day">Day of Event:</label>
+          <input type="text" class="form-control" id="AIBAS504day" name="AIBAS504day" readonly>
+        </div>
+        <div class="form-group">
+          <label for="AIBAS504ResourcePersonName">Resource Person Name:</label>
+          <input type="text" class="form-control" id="AIBAS504ResourcePersonName" name="AIBAS504ResourcePersonName" placeholder="Enter resource person name" required>
+          <div class="error-message resourcePersonNameError">Please enter the resource person name.</div>
+
+        </div>
+        <div class="form-group">
+          <label for="AIBAS504ResourcePersonDetail">Resource Person Detail:</label>
+          <textarea class="form-control" id="AIBAS504ResourcePersonDetail" name="AIBAS504ResourcePersonDetail" laceholder="Enter resource person details" maxlength="300" required></textarea>
+          <div class="error-message resourcePersonDetailError">Please enter the resource person details.</div>
+
+        </div>
+        <div class="form-group">
+          <label for="AIBAS504Email">Event Coordinator's Email:</label>
+          <input type="email" class="form-control" id="AIBAS504Email" name="AIBAS504Email" placeholder="Enter your email" required>
+          <div class="error-message emailError">Please enter a valid email address.</div>
+
+        </div>
+        <div class="form-group">
+          <label for="AIBAS504Phone">Event Coordinator's Phone Number:</label>
+          <input type="tel" class="form-control" id="AIBAS504Phone" name="AIBAS504Phone" placeholder="Enter your phone number" required>
+          <div class="error-message phoneError">Please enter a valid 10-digit phone number.</div>
+
+        </div>
+        <button type="submit" class="btn btn-primary" id="submitmain">Submit</button>
+  </form>
+
+  <div id="calendar-container-AIBAS504Form" class="calendar-container hidden mt-2">
+    <div class="calendar-nav flex items-center justify-between mb-4">
+        <button id="prevMonth" class="p-2 bg-gray-700 text-gray-400 rounded">&lt;</button>
+        <span id="monthYear" class="text-lg font-semibold"></span>
+        <button id="nextMonth" class="p-2 bg-gray-700 text-gray-400 rounded">&gt;</button>
+        <button id="closeCalendar" class="calendarclose-button flex items-center" data-target="AIBAS504Form" onclick="toggleCalendar(this)">
+            <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+            <span class="label"></span>
+        </button>
+    </div>
+    <div class="flex justify-center mb-4">
+        <select id="hallDropdown" class="mx-2 p-2 bg-gray-700 text-gray-400 rounded">
+            <option value="Auditorium">Auditorium</option>
+            <option value="SeminarHall">Seminar Hall</option>
+            <option value="Room105">Room 105</option>
+            <option value="CRCConferenceRoom">CRC Conference Room</option>
+            <!-- <option value="AIBConferenceRoom">AIB Conference Room</option> -->
+            <option value="RICSConferenceRoom">RICS Conference Room</option>
+            <option value="Atrium">Atrium</option>
+            <option value="VVIP">VVIP room</option>
+            <option value="AIBAS504">Seminar VIP room</option>
+        </select>
+        <select id="monthSelect" class="mx-2 p-2 bg-gray-700 text-gray-400 rounded readonly">
+            <!-- Options will be populated by JavaScript -->
+        </select>
+        <input type="date" id="dateSearch" class="p-2 bg-gray-700 text-gray-400 rounded">
+    </div>
+    <div class="calendar-header grid grid-cols-7 gap-1">
+        <div class="text-center">Sun</div>
+        <div class="text-center">Mon</div>
+        <div class="text-center">Tue</div>
+        <div class="text-center">Wed</div>
+        <div class="text-center">Thu</div>
+        <div class="text-center">Fri</div>
+        <div class="text-center">Sat</div>
+    </div>
+    <div id="calendar" class="calendar grid grid-cols-7 gap-1"></div>
+    <div class="legend mt-4 grid grid-cols-3 gap-4">
+        <div class="legend-item flex items-center">
+            <div class="legend-color full-booked-legend w-4 h-4 mr-2 rounded-full"></div>
+            <span>Booked Slots</span>
+        </div>
+        <div class="legend-item flex items-center">
+            <div class="legend-color not-booked-legend w-4 h-4 mr-2 rounded-full"></div>
+            <span>Not Booked Slots</span>
+        </div>
+        <div class="legend-item flex items-center">
+            <div class="legend-color pending-legend w-4 h-4 mr-2 rounded-full"></div>
+            <span>Pending Slots</span>
+        </div>
+    </div>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- 12.ASET123Modal -->
+
+<div class="modal fade" id="ASET123Modal" tabindex="-1" role="dialog" aria-labelledby="ASET123ModalLabel">
+  <div class="modal-dialog" role="document">
+      <div class="modal-content">
+          <div class="modal-header flex items-center justify-between">
+              <div class="flex items-center">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                  </button>
+                  <h4 class="modal-title" id="ASET123ModalLabel">ASET123 Hall Booking</h4>
+              </div>
+              <div class="relative">
+                  <i id="calendar-icon" class="far fa-calendar-alt cursor-pointer" data-target="ASET123Form" onclick="toggleCalendar(this)"> Hall Calendar </i>
+              </div>
+          </div>
+          <div class="modal-body">
+              <form method="post" id="ASET123Form" novalidate>
+        <div class="form-group">
+          <label for="ASET123SchoolName">School Name:</label>
+          <input type="text" class="form-control" id="ASET123SchoolName" name="ASET123SchoolName" value="{{scname}}" readonly>
+          <!-- <select class="form-control" id="ASET123SchoolName" name="ASET123SchoolName" required>
+            <option value="">Select School Name</option>
+            <option value="ABS">ABS - Amity Business School</option>
+            <option value="AFS">AFS - Amity Film School</option>
+            <option value="AIBAS">AIBAS - Amity Institute of Behavioural & Allied Sciences</option>
+            <option value="AIB">AIB - Amity Institute of Biotechnology</option>
+            <option value="AIIT">AIIT - Amity Institute of Information Technology</option>
+            <option value="AILA">AILA - Amity Institute of Liberal Arts</option>
+            <option value="AIP">AIP - Amity Institute of Pharmacy</option>
+            <option value="AIT">AIT - Amity Institute of Technology</option>
+            <option value="AITT">AITT - Amity Institute of Travel & Tourism</option>
+            <option value="ALS">ALS - Amity Law School</option>
+            <option value="ASAP">ASAP - Amity School of Architecture & Planning</option>
+            <option value="ASAS">ASAS - Amity School of Applied Sciences</option>
+            <option value="ASCO">ASCO - Amity School of Communication</option>
+            <option value="ASET">ASET - Amity School of Engineering & Technology</option>
+            <option value="ASFT">ASFT - Amity School of Fashion Technology</option>
+            <option value="ASL">ASL - Amity School of Languages</option>
+            <option value="CISOL">CIIOL - CII Logistics</option>
+            <option value="TUCSSBERICS"> RICS</option>
+            <option value="ASFA">ASFA - Amity School of Fine Arts</option>
+            <option value="AIE">AIE - Amity Institute of Education</option>
+            <option value="AIN">AIN - Amity Institute of Nanotechnology</option>
+          </select> -->
+          <div class="error-message schoolNameError">Please select a school name.</div>
+        </div>
+        <div class="form-group">
+          <label for="ASET123FacultyName">Event Coordinator Name:</label>
+          <input type="text" class="form-control" id="ASET123FacultyName" name="ASET123FacultyName" placeholder="Enter your name" required>
+          <div class="error-message facultyNameError">Please enter a valid name with letters only.</div>
+
+        </div>
+        <div class="form-group">
+          <label for="ASET123HodName">HOD/HOI/Director Name:</label>
+          <input type="text" class="form-control" id="ASET123HodName" name="ASET123HodName" placeholder="Enter HOD/HOI/Director name" required>
+          <div class="error-message hodNameError">Please enter a valid name with letters only.</div>
+
+        </div>
+        <div class="form-group">
+          <label for="ASET123EventName">Event Name:</label>
+          <input type="text" class="form-control" id="ASET123EventName" name="ASET123EventName" placeholder="Enter event name" maxlength="300" required>
+          <div class="error-message eventNameError">Please enter the event name.</div>
+
+        </div>
+        <div class="form-group">
+          <label for="ASET123startime">Start Time</label>
+          <select class="form-control" id="ASET123startime" name="ASET123startime" required>
+            <option value="900">09:00 am</option>
+            <option value="1000">10:00 am</option>
+            <option value="1100">11:00 am</option>
+            <option value="1200">12:00 pm</option>
+            <option value="1300">01:00 pm</option>
+            <option value="1400">02:00 pm</option>
+             <option value="1500">03:00 pm</option>
+             <option value="1600">04:00 pm</option>
+             <option value="1700">05:00 pm</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="ASET123endtime">End Time</label>
+
+          <select class="form-control" id="ASET123endtime" name="ASET123endtime" required>
+            <option value="1000">10:00 am</option>
+            <option value="1100">11:00 am</option>
+            <option value="1200">12:00 pm</option>
+            <option value="1300">01:00 pm</option>
+            <option value="1400">02:00 pm</option>
+             <option value="1500">03:00 pm</option>
+             <option value="1600">04:00 pm</option>
+             <option value="1700">05:00 pm</option>
+             <option value="1800">06:00 pm</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="ASET123date">Date of Event:</label>
+          <input type="date" class="form-control" id="ASET123date" name="ASET123date" required onchange="updateDayOfWeek('ASET123date', 'ASET123day'); updateCalendarColor('ASET123date','ASET123Duration')">
+          <div class="error-message dateError">Please select a date.</div>
+
+        </div>
+        <div class="form-group">
+          <label for="ASET123day">Day of Event:</label>
+          <input type="text" class="form-control" id="ASET123day" name="ASET123day" readonly>
+        </div>
+        <div class="form-group">
+          <label for="ASET123ResourcePersonName">Resource Person Name:</label>
+          <input type="text" class="form-control" id="ASET123ResourcePersonName" name="ASET123ResourcePersonName" placeholder="Enter resource person name" required>
+          <div class="error-message resourcePersonNameError">Please enter the resource person name.</div>
+
+        </div>
+        <div class="form-group">
+          <label for="ASET123ResourcePersonDetail">Resource Person Detail:</label>
+          <textarea class="form-control" id="ASET123ResourcePersonDetail" name="ASET123ResourcePersonDetail" laceholder="Enter resource person details" maxlength="300" required></textarea>
+          <div class="error-message resourcePersonDetailError">Please enter the resource person details.</div>
+
+        </div>
+        <div class="form-group">
+          <label for="ASET123Email">Event Coordinator's Email:</label>
+          <input type="email" class="form-control" id="ASET123Email" name="ASET123Email" placeholder="Enter your email" required>
+          <div class="error-message emailError">Please enter a valid email address.</div>
+
+        </div>
+        <div class="form-group">
+          <label for="ASET123Phone">Event Coordinator's Phone Number:</label>
+          <input type="tel" class="form-control" id="ASET123Phone" name="ASET123Phone" placeholder="Enter your phone number" required>
+          <div class="error-message phoneError">Please enter a valid 10-digit phone number.</div>
+
+        </div>
+        <button type="submit" class="btn btn-primary" id="submitmain">Submit</button>
+  </form>
+
+  <div id="calendar-container-ASET123Form" class="calendar-container hidden mt-2">
+    <div class="calendar-nav flex items-center justify-between mb-4">
+        <button id="prevMonth" class="p-2 bg-gray-700 text-gray-400 rounded">&lt;</button>
+        <span id="monthYear" class="text-lg font-semibold"></span>
+        <button id="nextMonth" class="p-2 bg-gray-700 text-gray-400 rounded">&gt;</button>
+        <button id="closeCalendar" class="calendarclose-button flex items-center" data-target="ASET123Form" onclick="toggleCalendar(this)">
+            <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+            <span class="label"></span>
+        </button>
+    </div>
+    <div class="flex justify-center mb-4">
+        <select id="hallDropdown" class="mx-2 p-2 bg-gray-700 text-gray-400 rounded">
+            <option value="Auditorium">Auditorium</option>
+            <option value="SeminarHall">Seminar Hall</option>
+            <option value="Room105">Room 105</option>
+            <option value="CRCConferenceRoom">CRC Conference Room</option>
+            <!-- <option value="AIBConferenceRoom">AIB Conference Room</option> -->
+            <option value="RICSConferenceRoom">RICS Conference Room</option>
+            <option value="Atrium">Atrium</option>
+            <option value="VVIP">VVIP room</option>
+            <option value="ASET123">Seminar VIP room</option>
+        </select>
+        <select id="monthSelect" class="mx-2 p-2 bg-gray-700 text-gray-400 rounded readonly">
+            <!-- Options will be populated by JavaScript -->
+        </select>
+        <input type="date" id="dateSearch" class="p-2 bg-gray-700 text-gray-400 rounded">
+    </div>
+    <div class="calendar-header grid grid-cols-7 gap-1">
+        <div class="text-center">Sun</div>
+        <div class="text-center">Mon</div>
+        <div class="text-center">Tue</div>
+        <div class="text-center">Wed</div>
+        <div class="text-center">Thu</div>
+        <div class="text-center">Fri</div>
+        <div class="text-center">Sat</div>
+    </div>
+    <div id="calendar" class="calendar grid grid-cols-7 gap-1"></div>
+    <div class="legend mt-4 grid grid-cols-3 gap-4">
+        <div class="legend-item flex items-center">
+            <div class="legend-color full-booked-legend w-4 h-4 mr-2 rounded-full"></div>
+            <span>Booked Slots</span>
+        </div>
+        <div class="legend-item flex items-center">
+            <div class="legend-color not-booked-legend w-4 h-4 mr-2 rounded-full"></div>
+            <span>Not Booked Slots</span>
+        </div>
+        <div class="legend-item flex items-center">
+            <div class="legend-color pending-legend w-4 h-4 mr-2 rounded-full"></div>
+            <span>Pending Slots</span>
+        </div>
+    </div>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- 13 ALS602-->
+
+<div class="modal fade" id="ALS602Modal" tabindex="-1" role="dialog" aria-labelledby="ALS602ModalLabel">
+  <div class="modal-dialog" role="document">
+      <div class="modal-content">
+          <div class="modal-header flex items-center justify-between">
+              <div class="flex items-center">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                  </button>
+                  <h4 class="modal-title" id="ALS602ModalLabel">ALS602 Hall Booking</h4>
+              </div>
+              <div class="relative">
+                  <i id="calendar-icon" class="far fa-calendar-alt cursor-pointer" data-target="ALS602Form" onclick="toggleCalendar(this)"> Hall Calendar </i>
+              </div>
+          </div>
+          <div class="modal-body">
+              <form method="post" id="ALS602Form" novalidate>
+        <div class="form-group">
+          <label for="ALS602SchoolName">School Name:</label>
+          <input type="text" class="form-control" id="ALS602SchoolName" name="ALS602SchoolName" value="{{scname}}" readonly>
+          <!-- <select class="form-control" id="ALS602SchoolName" name="ALS602SchoolName" required>
+            <option value="">Select School Name</option>
+            <option value="ABS">ABS - Amity Business School</option>
+            <option value="AFS">AFS - Amity Film School</option>
+            <option value="AIBAS">AIBAS - Amity Institute of Behavioural & Allied Sciences</option>
+            <option value="AIB">AIB - Amity Institute of Biotechnology</option>
+            <option value="AIIT">AIIT - Amity Institute of Information Technology</option>
+            <option value="AILA">AILA - Amity Institute of Liberal Arts</option>
+            <option value="AIP">AIP - Amity Institute of Pharmacy</option>
+            <option value="AIT">AIT - Amity Institute of Technology</option>
+            <option value="AITT">AITT - Amity Institute of Travel & Tourism</option>
+            <option value="ALS">ALS - Amity Law School</option>
+            <option value="ASAP">ASAP - Amity School of Architecture & Planning</option>
+            <option value="ASAS">ASAS - Amity School of Applied Sciences</option>
+            <option value="ASCO">ASCO - Amity School of Communication</option>
+            <option value="ASET">ASET - Amity School of Engineering & Technology</option>
+            <option value="ASFT">ASFT - Amity School of Fashion Technology</option>
+            <option value="ASL">ASL - Amity School of Languages</option>
+            <option value="CISOL">CIIOL - CII Logistics</option>
+            <option value="TUCSSBERICS"> RICS</option>
+            <option value="ASFA">ASFA - Amity School of Fine Arts</option>
+            <option value="AIE">AIE - Amity Institute of Education</option>
+            <option value="AIN">AIN - Amity Institute of Nanotechnology</option>
+          </select> -->
+          <div class="error-message schoolNameError">Please select a school name.</div>
+        </div>
+        <div class="form-group">
+          <label for="ALS602FacultyName">Event Coordinator Name:</label>
+          <input type="text" class="form-control" id="ALS602FacultyName" name="ALS602FacultyName" placeholder="Enter your name" required>
+          <div class="error-message facultyNameError">Please enter a valid name with letters only.</div>
+
+        </div>
+        <div class="form-group">
+          <label for="ALS602HodName">HOD/HOI/Director Name:</label>
+          <input type="text" class="form-control" id="ALS602HodName" name="ALS602HodName" placeholder="Enter HOD/HOI/Director name" required>
+          <div class="error-message hodNameError">Please enter a valid name with letters only.</div>
+
+        </div>
+        <div class="form-group">
+          <label for="ALS602EventName">Event Name:</label>
+          <input type="text" class="form-control" id="ALS602EventName" name="ALS602EventName" placeholder="Enter event name" maxlength="300" required>
+          <div class="error-message eventNameError">Please enter the event name.</div>
+
+        </div>
+        <div class="form-group">
+          <label for="ALS602startime">Start Time</label>
+          <select class="form-control" id="ALS602startime" name="ALS602startime" required>
+            <option value="900">09:00 am</option>
+            <option value="1000">10:00 am</option>
+            <option value="1100">11:00 am</option>
+            <option value="1200">12:00 pm</option>
+            <option value="1300">01:00 pm</option>
+            <option value="1400">02:00 pm</option>
+             <option value="1500">03:00 pm</option>
+             <option value="1600">04:00 pm</option>
+             <option value="1700">05:00 pm</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="ALS602endtime">End Time</label>
+
+          <select class="form-control" id="ALS602endtime" name="ALS602endtime" required>
+            <option value="1000">10:00 am</option>
+            <option value="1100">11:00 am</option>
+            <option value="1200">12:00 pm</option>
+            <option value="1300">01:00 pm</option>
+            <option value="1400">02:00 pm</option>
+             <option value="1500">03:00 pm</option>
+             <option value="1600">04:00 pm</option>
+             <option value="1700">05:00 pm</option>
+             <option value="1800">06:00 pm</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="ALS602date">Date of Event:</label>
+          <input type="date" class="form-control" id="ALS602date" name="ALS602date" required onchange="updateDayOfWeek('ALS602date', 'ALS602day'); updateCalendarColor('ALS602date','ALS602Duration')">
+          <div class="error-message dateError">Please select a date.</div>
+
+        </div>
+        <div class="form-group">
+          <label for="ALS602day">Day of Event:</label>
+          <input type="text" class="form-control" id="ALS602day" name="ALS602day" readonly>
+        </div>
+        <div class="form-group">
+          <label for="ALS602ResourcePersonName">Resource Person Name:</label>
+          <input type="text" class="form-control" id="ALS602ResourcePersonName" name="ALS602ResourcePersonName" placeholder="Enter resource person name" required>
+          <div class="error-message resourcePersonNameError">Please enter the resource person name.</div>
+
+        </div>
+        <div class="form-group">
+          <label for="ALS602ResourcePersonDetail">Resource Person Detail:</label>
+          <textarea class="form-control" id="ALS602ResourcePersonDetail" name="ALS602ResourcePersonDetail" laceholder="Enter resource person details" maxlength="300" required></textarea>
+          <div class="error-message resourcePersonDetailError">Please enter the resource person details.</div>
+
+        </div>
+        <div class="form-group">
+          <label for="ALS602Email">Event Coordinator's Email:</label>
+          <input type="email" class="form-control" id="ALS602Email" name="ALS602Email" placeholder="Enter your email" required>
+          <div class="error-message emailError">Please enter a valid email address.</div>
+
+        </div>
+        <div class="form-group">
+          <label for="ALS602Phone">Event Coordinator's Phone Number:</label>
+          <input type="tel" class="form-control" id="ALS602Phone" name="ALS602Phone" placeholder="Enter your phone number" required>
+          <div class="error-message phoneError">Please enter a valid 10-digit phone number.</div>
+
+        </div>
+        <button type="submit" class="btn btn-primary" id="submitmain">Submit</button>
+  </form>
+
+  <div id="calendar-container-ALS602Form" class="calendar-container hidden mt-2">
+    <div class="calendar-nav flex items-center justify-between mb-4">
+        <button id="prevMonth" class="p-2 bg-gray-700 text-gray-400 rounded">&lt;</button>
+        <span id="monthYear" class="text-lg font-semibold"></span>
+        <button id="nextMonth" class="p-2 bg-gray-700 text-gray-400 rounded">&gt;</button>
+        <button id="closeCalendar" class="calendarclose-button flex items-center" data-target="ALS602Form" onclick="toggleCalendar(this)">
+            <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+            <span class="label"></span>
+        </button>
+    </div>
+    <div class="flex justify-center mb-4">
+        <select id="hallDropdown" class="mx-2 p-2 bg-gray-700 text-gray-400 rounded">
+            <option value="Auditorium">Auditorium</option>
+            <option value="SeminarHall">Seminar Hall</option>
+            <option value="Room105">Room 105</option>
+            <option value="CRCConferenceRoom">CRC Conference Room</option>
+            <!-- <option value="AIBConferenceRoom">AIB Conference Room</option> -->
+            <option value="RICSConferenceRoom">RICS Conference Room</option>
+            <option value="Atrium">Atrium</option>
+            <option value="VVIP">VVIP room</option>
+            <option value="ALS602">Seminar VIP room</option>
+        </select>
+        <select id="monthSelect" class="mx-2 p-2 bg-gray-700 text-gray-400 rounded readonly">
+            <!-- Options will be populated by JavaScript -->
+        </select>
+        <input type="date" id="dateSearch" class="p-2 bg-gray-700 text-gray-400 rounded">
+    </div>
+    <div class="calendar-header grid grid-cols-7 gap-1">
+        <div class="text-center">Sun</div>
+        <div class="text-center">Mon</div>
+        <div class="text-center">Tue</div>
+        <div class="text-center">Wed</div>
+        <div class="text-center">Thu</div>
+        <div class="text-center">Fri</div>
+        <div class="text-center">Sat</div>
+    </div>
+    <div id="calendar" class="calendar grid grid-cols-7 gap-1"></div>
+    <div class="legend mt-4 grid grid-cols-3 gap-4">
+        <div class="legend-item flex items-center">
+            <div class="legend-color full-booked-legend w-4 h-4 mr-2 rounded-full"></div>
+            <span>Booked Slots</span>
+        </div>
+        <div class="legend-item flex items-center">
+            <div class="legend-color not-booked-legend w-4 h-4 mr-2 rounded-full"></div>
+            <span>Not Booked Slots</span>
+        </div>
+        <div class="legend-item flex items-center">
+            <div class="legend-color pending-legend w-4 h-4 mr-2 rounded-full"></div>
+            <span>Pending Slots</span>
+        </div>
+    </div>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+
+
+
 
 <!--.none-->
 
@@ -2841,7 +3855,7 @@
             <option value="RICSConferenceRoom">RICS Conference Room</option>
             <option value="Atrium">Atrium</option>
             <option value="VVIP">VVIP room</option>
-            <option value="Seminarvip">Seminar VIP room</option>
+            <option value="ALS602">Seminar VIP room</option>
         </select>
         <select id="monthSelect" class="mx-2 p-2 bg-gray-700 text-gray-400 rounded readonly">
             <!-- Options will be populated by JavaScript -->
