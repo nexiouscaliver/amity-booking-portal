@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AIB206 Hall Booking</title>
+  <title>ABS304 Hall Booking</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -676,21 +676,21 @@
                 <img src="{{ url_for('static',filename='L1.png') }}" alt="Logo">
             </div>
             <div class="name">
-                <img src="{{ url_for('static',filename='L2.png') }}" alt="Name Logo">
+                <img src="{{ url_for('static',filename='L2.png') }}" alt="Name Logo">
             </div>
         </div>
         <div class="menu">
 
 
             <a href="{{url_for('index')}}" class="menu-item">
-                <i class="fas fa-home"></i> Home
+                <i class="fas fa-home"></i> Home
             </a>
             <a href="{{url_for('usercalender')}}" class="menu-item">
-                <i class="fas fa-calendar-alt"></i> Calendar
+                <i class="fas fa-calendar-alt"></i> Calendar
             </a>
            
            
-            <a href="{{url_for('home')}}" class="menu-item"><i class="fas fa-power-off"></i> Logout</a>
+            <a href="{{url_for('home')}}" class="menu-item"><i class="fas fa-power-off"></i> Logout</a>
         </div>
     </div>
 </header>
@@ -712,124 +712,101 @@
                     
                 </div>
                 <div class="modal-body">
-                  <form method="post" id="AIB206Form" novalidate>
-                    <div class="form-group">
-                      <label for="AIB206SchoolName">School Name:</label>
-                      <input type="text" class="form-control" id="AIB206SchoolName" name="AIB206SchoolName" value="{{scname}}" readonly>
-                      <!-- <select class="form-control" id="AIB206SchoolName" name="AIB206SchoolName" required>
-                        <option value="">Select School Name</option>
-                        <option value="ABS">ABS - Amity Business School</option>
-                        <option value="AFS">AFS - Amity Film School</option>
-                        <option value="AIBAS">AIBAS - Amity Institute of Behavioural & Allied Sciences</option>
-                        <option value="AIB">AIB - Amity Institute of Biotechnology</option>
-                        <option value="AIIT">AIIT - Amity Institute of Information Technology</option>
-                        <option value="AILA">AILA - Amity Institute of Liberal Arts</option>
-                        <option value="AIP">AIP - Amity Institute of Pharmacy</option>
-                        <option value="AIT">AIT - Amity Institute of Technology</option>
-                        <option value="AITT">AITT - Amity Institute of Travel & Tourism</option>
-                        <option value="ALS">ALS - Amity Law School</option>
-                        <option value="ASAP">ASAP - Amity School of Architecture & Planning</option>
-                        <option value="ASAS">ASAS - Amity School of Applied Sciences</option>
-                        <option value="ASCO">ASCO - Amity School of Communication</option>
-                        <option value="ASET">ASET - Amity School of Engineering & Technology</option>
-                        <option value="ASFT">ASFT - Amity School of Fashion Technology</option>
-                        <option value="ASL">ASL - Amity School of Languages</option>
-                        <option value="CISOL">CIIOL - CII Logistics</option>
-                        <option value="TUCSSBERICS"> RICS</option>
-                        <option value="ASFA">ASFA - Amity School of Fine Arts</option>
-                        <option value="AIE">AIE - Amity Institute of Education</option>
-                        <option value="AIN">AIN - Amity Institute of Nanotechnology</option>
-                      </select> -->
-                      <div class="error-message schoolNameError">Please select a school name.</div>
+                  <div id="ABS304" class="tab-content container">
+                    <div id="ABS304FormSection" class="form-section">
+                      <h2>ABS304 Form</h2>
+                      <form method="post" id="ABS304Form" novalidate>
+                        <div class="form-group">
+                          <label for="ABS304SchoolName">School Name:</label>
+                          <input type="text" class="form-control" id="ABS304SchoolName" name="ABS304SchoolName" value="{{scname}}" readonly>
+                          <div class="error-message schoolNameError">Please select a school name.</div>
+                        </div>
+                        <div class="form-group">
+                          <label for="ABS304FacultyName">Event Coordinator Name:</label>
+                          <input type="text" class="form-control" id="ABS304FacultyName" name="ABS304FacultyName" placeholder="Enter your name" required>
+                          <div class="error-message facultyNameError">Please enter a valid name with letters only.</div>
+                
+                        </div>
+                        <div class="form-group">
+                          <label for="ABS304HodName">HOD/HOI/Director Name:</label>
+                          <input type="text" class="form-control" id="ABS304HodName" name="ABS304HodName" placeholder="Enter HOD/HOI/Director name" required>
+                          <div class="error-message hodNameError">Please enter a valid name with letters only.</div>
+                
+                        </div>
+                        <div class="form-group">
+                          <label for="ABS304EventName">Event Name:</label>
+                          <input type="text" class="form-control" id="ABS304EventName" name="ABS304EventName" placeholder="Enter event name" maxlength="300" required>
+                          <div class="error-message eventNameError">Please enter the event name.</div>
+                
+                        </div>
+                        <div class="form-group">
+                          <label for="ABS304startime">Start Time</label>
+                          <select class="form-control" id="ABS304startime" name="ABS304startime" required>
+                            <option value="900">09:00 am</option>
+                            <option value="1000">10:00 am</option>
+                            <option value="1100">11:00 am</option>
+                            <option value="1200">12:00 pm</option>
+                            <option value="1300">01:00 pm</option>
+                            <option value="1400">02:00 pm</option>
+                             <option value="1500">03:00 pm</option>
+                             <option value="1600">04:00 pm</option>
+                             <option value="1700">05:00 pm</option>
+                          </select>
+                        </div>
+                        <div class="form-group">
+                          <label for="ABS304endtime">End Time</label>
+                
+                          <select class="form-control" id="ABS304endtime" name="ABS304endtime" required>
+                            <option value="1000">10:00 am</option>
+                            <option value="1100">11:00 am</option>
+                            <option value="1200">12:00 pm</option>
+                            <option value="1300">01:00 pm</option>
+                            <option value="1400">02:00 pm</option>
+                             <option value="1500">03:00 pm</option>
+                             <option value="1600">04:00 pm</option>
+                             <option value="1700">05:00 pm</option>
+                             <option value="1800">06:00 pm</option>
+                          </select>
+                        </div>
+                        <div class="form-group">
+                          <label for="ABS304date">Date of Event:</label>
+                          <input type="date" class="form-control" id="ABS304date" name="ABS304date" required onchange="updateDayOfWeek('ABS304date', 'ABS304day'); updateCalendarColor('ABS304date','ABS304Duration')">
+                          <div class="error-message dateError">Please select a date.</div>
+                
+                        </div>
+                        <div class="form-group">
+                          <label for="ABS304day">Day of Event:</label>
+                          <input type="text" class="form-control" id="ABS304day" name="ABS304day" readonly>
+                        </div>
+                        <div class="form-group">
+                          <label for="ABS304ResourcePersonName">Resource Person Name:</label>
+                          <input type="text" class="form-control" id="ABS304ResourcePersonName" name="ABS304ResourcePersonName" placeholder="Enter resource person name" required>
+                          <div class="error-message resourcePersonNameError">Please enter the resource person name.</div>
+                
+                        </div>
+                        <div class="form-group">
+                          <label for="ABS304ResourcePersonDetail">Resource Person Detail:</label>
+                          <textarea class="form-control" id="ABS304ResourcePersonDetail" name="ABS304ResourcePersonDetail" placeholder="Enter resource person details" maxlength="300" required></textarea>
+                          <div class="error-message resourcePersonDetailError">Please enter the resource person details.</div>
+                
+                        </div>
+                        <div class="form-group">
+                          <label for="ABS304Email">Event Coordinator's Email:</label>
+                          <input type="email" class="form-control" id="ABS304Email" name="ABS304Email" placeholder="Enter your email" required>
+                          <div class="error-message emailError">Please enter a valid email address.</div>
+                
+                        </div>
+                        <div class="form-group">
+                          <label for="ABS304Phone">Event Coordinator's Phone Number:</label>
+                          <input type="tel" class="form-control" id="ABS304Phone" name="ABS304Phone" placeholder="Enter your phone number" required>
+                          <div class="error-message phoneError">Please enter a valid 10-digit phone number.</div>
+                
+                        </div>
+                        <button type="submit" class="btn btn-primary" id="submitmain">Submit</button>
+                      </form>
                     </div>
-                    <div class="form-group">
-                      <label for="AIB206FacultyName">Event Coordinator Name:</label>
-                      <input type="text" class="form-control" id="AIB206FacultyName" name="AIB206FacultyName" placeholder="Enter your name" required>
-                      <div class="error-message facultyNameError">Please enter a valid name with letters only.</div>
-            
-                    </div>
-                    <div class="form-group">
-                      <label for="AIB206HodName">HOD/HOI/Director Name:</label>
-                      <input type="text" class="form-control" id="AIB206HodName" name="AIB206HodName" placeholder="Enter HOD/HOI/Director name" required>
-                      <div class="error-message hodNameError">Please enter a valid name with letters only.</div>
-            
-                    </div>
-                    <div class="form-group">
-                      <label for="AIB206EventName">Event Name:</label>
-                      <input type="text" class="form-control" id="AIB206EventName" name="AIB206EventName" placeholder="Enter event name" maxlength="300" required>
-                      <div class="error-message eventNameError">Please enter the event name.</div>
-            
-                    </div>
-                    <div class="form-group">
-                      <label for="AIB206startime">Start Time</label>
-                      <select class="form-control" id="AIB206startime" name="AIB206startime" required>
-                        <option value="900">09:00 am</option>
-                        <option value="1000">10:00 am</option>
-                        <option value="1100">11:00 am</option>
-                        <option value="1200">12:00 pm</option>
-                        <option value="1300">01:00 pm</option>
-                        <option value="1400">02:00 pm</option>
-                         <option value="1500">03:00 pm</option>
-                         <option value="1600">04:00 pm</option>
-                         <option value="1700">05:00 pm</option>
-                      </select>
-                    </div>
-                    <div class="form-group">
-                      <label for="AIB206endtime">End Time</label>
-            
-                      <select class="form-control" id="AIB206endtime" name="AIB206endtime" required>
-                        <option value="1000">10:00 am</option>
-                        <option value="1100">11:00 am</option>
-                        <option value="1200">12:00 pm</option>
-                        <option value="1300">01:00 pm</option>
-                        <option value="1400">02:00 pm</option>
-                         <option value="1500">03:00 pm</option>
-                         <option value="1600">04:00 pm</option>
-                         <option value="1700">05:00 pm</option>
-                         <option value="1800">06:00 pm</option>
-                      </select>
-                    </div>
-                    <div class="form-group">
-                      <label for="AIB206date">Date of Event:</label>
-                      <input type="date" class="form-control" id="AIB206date" name="AIB206date" required onchange="updateDayOfWeek('AIB206date', 'AIB206day'); updateCalendarColor('AIB206date','AIB206Duration')">
-                      <div class="error-message dateError">Please select a date.</div>
-            
-                    </div>
-                    <div class="form-group">
-                      <label for="AIB206day">Day of Event:</label>
-                      <input type="text" class="form-control" id="AIB206day" name="AIB206day" readonly>
-                    </div>
-                    <div class="form-group">
-                      <label for="AIB206ResourcePersonName">Resource Person Name:</label>
-                      <input type="text" class="form-control" id="AIB206ResourcePersonName" name="AIB206ResourcePersonName" placeholder="Enter resource person name" required>
-                      <div class="error-message resourcePersonNameError">Please enter the resource person name.</div>
-            
-                    </div>
-                    <div class="form-group">
-                      <label for="AIB206ResourcePersonDetail">Resource Person Detail:</label>
-                      <textarea class="form-control" id="AIB206ResourcePersonDetail" name="AIB206ResourcePersonDetail" placeholder="Enter resource person details" maxlength="300" required></textarea>
-                      <div class="error-message resourcePersonDetailError">Please enter the resource person details.</div>
-            
-                    </div>
-                    <div class="form-group">
-                      <label for="AIB206Email">Event Coordinator's Email:</label>
-                      <input type="email" class="form-control" id="AIB206Email" name="AIB206Email" placeholder="Enter your email" required>
-                      <div class="error-message emailError">Please enter a valid email address.</div>
-            
-                    </div>
-                    <div class="form-group">
-                      <label for="AIB206Phone">Event Coordinator's Phone Number:</label>
-                      <input type="tel" class="form-control" id="AIB206Phone" name="AIB206Phone" placeholder="Enter your phone number" required>
-                      <div class="error-message phoneError">Please enter a valid 10-digit phone number.</div>
-            
-                    </div>
-                    <button type="submit" class="btn btn-primary" id="submitmain">Submit</button>
-              </form>
-           
-
-</div>
-  </div>
-</div>
+                  </div>
+                </div>
 
 
 
@@ -855,10 +832,10 @@
 
   // Update the form fields with fetched data
   function updateForm(data) {
-    document.getElementById('AIB206date').value = data.date;
-    document.getElementById('AIB206startime').value = data.startTime;
-    document.getElementById('AIB206endtime').value = data.endTime;
-    document.getElementById('AIB206day').value = data.day;
+    document.getElementById('ABS304date').value = data.date;
+    document.getElementById('ABS304startime').value = data.startTime;
+    document.getElementById('ABS304endtime').value = data.endTime;
+    document.getElementById('ABS304day').value = data.day;
   
   }
 

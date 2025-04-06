@@ -125,11 +125,11 @@ def init():  #server
         sql='select * from halls;'
         c.execute(sql)
         o=c.fetchall()
-        s=[(1, 'audi'), (2, 'sem'), (3, 'a2'), (4, 'crc')]
+        s=[(1, 'audi'), (2, 'sem'), (3, 'a2'), (4, 'crc'), (5, 'Seminarvip'), (6, 'RICSConferenceRoom'), (7, 'Atrium'), (8, 'VVIP'), (9, 'AIB206'), (10, 'ABS304'), (11, 'AIBAS504'), (12, 'ASET123'), (13, 'ALS602')]
         if(o==s):
             pass
         else:
-            sql='insert into halls(hallname) values("audi"),("sem"),("a2"),("crc");'
+            sql='insert into halls(hallname) values("audi"),("sem"),("a2"),("crc"),("Seminarvip"),("RICSConferenceRoom"),("Atrium"),("VVIP"),("AIB206"),("ABS304"),("AIBAS504"),("ASET123"),("ALS602");'
             c.execute(sql)
     except:
         pass
@@ -362,6 +362,16 @@ def calendermain():
             i[3]="Atrium"
         elif i[3]==8 or i[3]=="8":
             i[3]="VVIP Room"
+        elif i[3]==9 or i[3]=="9":
+            i[3]="AIB Room 206"
+        elif i[3]==10 or i[3]=="10":
+            i[3]="ABS Room 304"
+        elif i[3]==11 or i[3]=="11":
+            i[3]="AIBAS Room 504"
+        elif i[3]==12 or i[3]=="12":
+            i[3]="ASET Room 123"
+        elif i[3]==13 or i[3]=="13":
+            i[3]="ALS Room 602"
     for i in final:
         for j in (final[final.index(i):]):
             if(i[0]==j[0] and i[3]==j[3]):
@@ -379,6 +389,11 @@ def calendermain():
     e = []
     f = []
     g = []
+    h = []
+    i2 = []
+    j = []
+    k = []
+    l = []
     for i in final:
         if i[3] == "Auditorium":
             a.append(i)
@@ -396,6 +411,16 @@ def calendermain():
             f.append(i)
         if i[3] == "VVIP Room":
             g.append(i)
+        if i[3] == "AIB Room 206":
+            h.append(i)
+        if i[3] == "ABS Room 304":
+            i2.append(i)
+        if i[3] == "AIBAS Room 504":
+            j.append(i)
+        if i[3] == "ASET Room 123":
+            k.append(i)
+        if i[3] == "ALS Room 602":
+            l.append(i)
     final2 = []
     final2.append(a)
     final2.append(s)
@@ -405,6 +430,11 @@ def calendermain():
     final2.append(e)
     final2.append(f)
     final2.append(g)
+    final2.append(h)
+    final2.append(i2)
+    final2.append(j)
+    final2.append(k)
+    final2.append(l)
     # for i in final2:
     #     for j in i:
     #         print(j)

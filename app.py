@@ -79,12 +79,12 @@ app.logger.info("STARTING APPLICATION AND LOGGING...")
 
 #task-related functions
 def hallname(hallid:int):
-    l = [0,"Auditorium Hall","Seminar Hall","Room No. 105, A2 Building","CRC Conference Room","Seminar VIP Hall","RICS Conference Room","Atrium","VVIP Room"]
+    l = [0,"Auditorium Hall","Seminar Hall","Room No. 105, A2 Building","CRC Conference Room","Seminar VIP Hall","RICS Conference Room","Atrium","VVIP Room","AIB Room 206","ABS Room 304","AIBAS Room 504","ASET Room 123","ALS Room 602"]
     #l = [0,'auditorium','seminar','room105','crc']
     return (l[hallid])
 
 def hallid(hallname:str):
-    l = [0,'auditorium','seminar','room105','crc','Seminarvip','RICSConferenceRoom','Atrium','VVIP']
+    l = [0,'auditorium','seminar','room105','crc','Seminarvip','RICSConferenceRoom','Atrium','VVIP','AIB206','ABS304','AIBAS504','ASET123','ALS602']
     return (l.index(hallname))
 
 def trimtime(time:str):
@@ -809,7 +809,7 @@ def utility_processor():
 @app.context_processor
 def utility_processor():
     def hallname(hallid:int):
-        l = [0,"Auditorium Hall","Seminar Hall","Room No. 105, A2 Building","CRC Conference Room","Seminar VIP Hall","RICS Conference Room","Atrium","VVIP Room"]
+        l = [0,"Auditorium Hall","Seminar Hall","Room No. 105, A2 Building","CRC Conference Room","Seminar VIP Hall","RICS Conference Room","Atrium","VVIP Room","AIB Room 206","ABS Room 304","AIBAS Room 504","ASET Room 123","ALS Room 602"]
         #l = [0,'auditorium','seminar','room105','crc']
         return (l[hallid])
     return dict(hallname=hallname)
@@ -873,7 +873,7 @@ def index():
             
             if request.method == 'POST':
                 
-                hall = ['auditorium','seminar','room105','crc','Seminarvip','RICSConferenceRoom','Atrium','VVIP']
+                hall = ['auditorium','seminar','room105','crc','Seminarvip','RICSConferenceRoom','Atrium','VVIP','AIB206','ABS304','AIBAS504','ASET123','ALS602']
                 place = ['SchoolName','FacultyName','HodName','EventName','date','startime','endtime','Email','Phone','ResourcePersonName','ResourcePersonDetail']
                 final=[]
                 loc = ''
@@ -1485,7 +1485,7 @@ def calenderform(hallname2,date,startTime,endTime,day):
             
             if request.method == 'POST':
                 
-                hall = ['auditorium','seminar','room105','crc','Seminarvip','RICSConferenceRoom','Atrium','VVIP']
+                hall = ['auditorium','seminar','room105','crc','Seminarvip','RICSConferenceRoom','Atrium','VVIP','AIB206','ABS304','AIBAS504','ASET123','ALS602']
                 place = ['SchoolName','FacultyName','HodName','EventName','date','startime','endtime','Email','Phone','ResourcePersonName','ResourcePersonDetail']
                 final=[]
                 loc = ''
@@ -1564,6 +1564,16 @@ def calenderform(hallname2,date,startTime,endTime,day):
                 return render_template("Atrium.html",scname=scname,error=error,cal=cal,output=output,date=date,startTime=startTime,endTime=endTime,day=day)
             elif hallname2=="VVIP":
                 return render_template("vvip.form.html",scname=scname,error=error,cal=cal,output=output,date=date,startTime=startTime,endTime=endTime,day=day)
+            elif hallname2=="AIB206":
+                return render_template("AIB206.html",scname=scname,error=error,cal=cal,output=output,date=date,startTime=startTime,endTime=endTime,day=day)
+            elif hallname2=="ABS304":
+                return render_template("ABS304.html",scname=scname,error=error,cal=cal,output=output,date=date,startTime=startTime,endTime=endTime,day=day)
+            elif hallname2=="AIBAS504":
+                return render_template("AIBAS504.html",scname=scname,error=error,cal=cal,output=output,date=date,startTime=startTime,endTime=endTime,day=day)
+            elif hallname2=="ASET123":
+                return render_template("ASET123.html",scname=scname,error=error,cal=cal,output=output,date=date,startTime=startTime,endTime=endTime,day=day)
+            elif hallname2=="ALS602":
+                return render_template("ALS602.html",scname=scname,error=error,cal=cal,output=output,date=date,startTime=startTime,endTime=endTime,day=day)
             
             #return render_template("index.html",error=error,cal=cal,output=output)
         else:
