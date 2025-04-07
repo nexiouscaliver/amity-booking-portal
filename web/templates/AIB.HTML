@@ -675,21 +675,21 @@
                 <img src="{{ url_for('static',filename='L1.png') }}" alt="Logo">
             </div>
             <div class="name">
-                <img src="{{ url_for('static',filename='L2.png') }}" alt="Name Logo">
+                <img src="{{ url_for('static',filename='L2.png') }}" alt="Name Logo">
             </div>
         </div>
         <div class="menu">
 
 
             <a href="{{url_for('index')}}" class="menu-item">
-                <i class="fas fa-home"></i> Home
+                <i class="fas fa-home"></i> Home
             </a>
             <a href="{{url_for('usercalender')}}" class="menu-item">
-                <i class="fas fa-calendar-alt"></i> Calendar
+                <i class="fas fa-calendar-alt"></i> Calendar
             </a>
            
            
-            <a href="{{url_for('home')}}" class="menu-item"><i class="fas fa-power-off"></i> Logout</a>
+            <a href="{{url_for('home')}}" class="menu-item"><i class="fas fa-power-off"></i> Logout</a>
         </div>
     </div>
 </header>
@@ -1006,7 +1006,7 @@
         
             // Validate Resource Person Detail
             const resourcePersonDetail = form.querySelector('[name$="ResourcePersonDetail"]').value;
-            const validPattern = /^[a-zA-Z0-9.,@&-]*$/;
+            const validPattern = /^[a-zA-Z0-9\s.,@&-]*$/;
             
             if (resourcePersonDetail === '' || resourcePersonDetail.length > 300 || !validPattern.test(resourcePersonDetail)) {
                 showError('.resourcePersonDetailError', 'Resource person detail must be up to 300 characters and can only contain alphabets, numbers, and special characters (. , @ & -).');

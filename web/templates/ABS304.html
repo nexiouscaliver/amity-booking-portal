@@ -983,7 +983,7 @@
         
             // Validate Resource Person Detail
             const resourcePersonDetail = form.querySelector('[name$="ResourcePersonDetail"]').value;
-            const validPattern = /^[a-zA-Z0-9.,@&-]*$/;
+            const validPattern = /^[a-zA-Z0-9\s.,@&-]*$/;
             
             if (resourcePersonDetail === '' || resourcePersonDetail.length > 300 || !validPattern.test(resourcePersonDetail)) {
                 showError('.resourcePersonDetailError', 'Resource person detail must be up to 300 characters and can only contain alphabets, numbers, and special characters (. , @ & -).');
