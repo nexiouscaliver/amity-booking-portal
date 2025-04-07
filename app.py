@@ -942,10 +942,10 @@ def index():
             return redirect(url_for('userlogin'))
     except Exception as e:
         import traceback
-        print("ERROR OCCURED HERE : ",traceback.format_exc())
+        print(f"ERROR OCCURED HERE : {traceback.format_exc()}")
         app.logger.info(e)
         app.logger.error(e)
-        app.logger.exception("ERROR OCCURED HERE : ",e)
+        app.logger.exception(f"ERROR OCCURED HERE : {e}")
         return redirect(url_for('userlogin'))
 
 @app.route('/requeststatus' ,methods=['GET', 'POST'])
