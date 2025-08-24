@@ -1067,15 +1067,15 @@
           </div>
 
 
-          <!-- <div class="col-md-4">
-            <div class="hall" data-toggle="modal" data-target="#AIBConferenceroomModal">
+           <div class="col-md-4">
+            <div class="hall" data-toggle="modal" data-target="#multipurposeroomModal">
               <img src="conference.jpg" alt="AIB Conference Room">
-              <h3>AIB Conference Room</h3>
-              <p> Modern conference room equipped with advanced audio-visual technology . Accommodates up to 50 people.
+              <h3>multipurposeroom Room A1</h3>
+              <p> Accommodates up to 50 people.
                </p>
               <button type="button" class="btn btn-primary">Select</button>
             </div>
-          </div> -->
+          </div> 
 
 
           <div class="col-md-4">
@@ -3696,6 +3696,197 @@
 </div>
 </div>
 
+<!-- 14 Multipurpose-->
+
+<div class="modal fade" id="multipurposeroomModal" tabindex="-1" role="dialog" aria-labelledby="multipurposeroomModalLabel">
+  <div class="modal-dialog" role="document">
+      <div class="modal-content">
+          <div class="modal-header flex items-center justify-between">
+              <div class="flex items-center">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                  </button>
+                  <h4 class="modal-title" id="multipurposeroomModalLabel">multipurposeroom Hall Booking</h4>
+              </div>
+              <div class="relative">
+                  <i id="calendar-icon" class="far fa-calendar-alt cursor-pointer" data-target="multipurposeroomForm" onclick="toggleCalendar(this)"> Hall Calendar </i>
+              </div>
+          </div>
+          <div class="modal-body">
+              <form method="post" id="multipurposeroomForm" novalidate>
+        <div class="form-group">
+          <label for="multipurposeroomSchoolName">School Name:</label>
+          <input type="text" class="form-control" id="multipurposeroomSchoolName" name="multipurposeroomSchoolName" value="{{scname}}" readonly>
+          <!-- <select class="form-control" id="multipurposeroomSchoolName" name="multipurposeroomSchoolName" required>
+            <option value="">Select School Name</option>
+            <option value="ABS">ABS - Amity Business School</option>
+            <option value="AFS">AFS - Amity Film School</option>
+            <option value="AIBAS">AIBAS - Amity Institute of Behavioural & Allied Sciences</option>
+            <option value="AIB">AIB - Amity Institute of Biotechnology</option>
+            <option value="AIIT">AIIT - Amity Institute of Information Technology</option>
+            <option value="AILA">AILA - Amity Institute of Liberal Arts</option>
+            <option value="AIP">AIP - Amity Institute of Pharmacy</option>
+            <option value="AIT">AIT - Amity Institute of Technology</option>
+            <option value="AITT">AITT - Amity Institute of Travel & Tourism</option>
+            <option value="ALS">ALS - Amity Law School</option>
+            <option value="ASAP">ASAP - Amity School of Architecture & Planning</option>
+            <option value="ASAS">ASAS - Amity School of Applied Sciences</option>
+            <option value="ASCO">ASCO - Amity School of Communication</option>
+            <option value="ASET">ASET - Amity School of Engineering & Technology</option>
+            <option value="ASFT">ASFT - Amity School of Fashion Technology</option>
+            <option value="ASL">ASL - Amity School of Languages</option>
+            <option value="CISOL">CIIOL - CII Logistics</option>
+            <option value="TUCSSBERICS"> RICS</option>
+            <option value="ASFA">ASFA - Amity School of Fine Arts</option>
+            <option value="AIE">AIE - Amity Institute of Education</option>
+            <option value="AIN">AIN - Amity Institute of Nanotechnology</option>
+          </select> -->
+          <div class="error-message schoolNameError">Please select a school name.</div>
+        </div>
+        <div class="form-group">
+          <label for="multipurposeroomFacultyName">Event Coordinator Name:</label>
+          <input type="text" class="form-control" id="multipurposeroomFacultyName" name="multipurposeroomFacultyName" placeholder="Enter your name" required>
+          <div class="error-message facultyNameError">Please enter a valid name with letters only.</div>
+
+        </div>
+        <div class="form-group">
+          <label for="multipurposeroomHodName">HOD/HOI/Director Name:</label>
+          <input type="text" class="form-control" id="multipurposeroomHodName" name="multipurposeroomHodName" placeholder="Enter HOD/HOI/Director name" required>
+          <div class="error-message hodNameError">Please enter a valid name with letters only.</div>
+
+        </div>
+        <div class="form-group">
+          <label for="multipurposeroomEventName">Event Name:</label>
+          <input type="text" class="form-control" id="multipurposeroomEventName" name="multipurposeroomEventName" placeholder="Enter event name" maxlength="300" required>
+          <div class="error-message eventNameError">Please enter the event name.</div>
+
+        </div>
+        <div class="form-group">
+          <label for="multipurposeroomstartime">Start Time</label>
+          <select class="form-control" id="multipurposeroomstartime" name="multipurposeroomstartime" required>
+            <option value="900">09:00 am</option>
+            <option value="1000">10:00 am</option>
+            <option value="1100">11:00 am</option>
+            <option value="1200">12:00 pm</option>
+            <option value="1300">01:00 pm</option>
+            <option value="1400">02:00 pm</option>
+             <option value="1500">03:00 pm</option>
+             <option value="1600">04:00 pm</option>
+             <option value="1700">05:00 pm</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="multipurposeroomendtime">End Time</label>
+
+          <select class="form-control" id="multipurposeroomendtime" name="multipurposeroomendtime" required>
+            <option value="1000">10:00 am</option>
+            <option value="1100">11:00 am</option>
+            <option value="1200">12:00 pm</option>
+            <option value="1300">01:00 pm</option>
+            <option value="1400">02:00 pm</option>
+             <option value="1500">03:00 pm</option>
+             <option value="1600">04:00 pm</option>
+             <option value="1700">05:00 pm</option>
+             <option value="1800">06:00 pm</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="multipurposeroomdate">Date of Event:</label>
+          <input type="date" class="form-control" id="multipurposeroomdate" name="multipurposeroomdate" required onchange="updateDayOfWeek('multipurposeroomdate', 'multipurposeroomday'); updateCalendarColor('multipurposeroomdate','multipurposeroomDuration')">
+          <div class="error-message dateError">Please select a date.</div>
+
+        </div>
+        <div class="form-group">
+          <label for="multipurposeroomday">Day of Event:</label>
+          <input type="text" class="form-control" id="multipurposeroomday" name="multipurposeroomday" readonly>
+        </div>
+        <div class="form-group">
+          <label for="multipurposeroomResourcePersonName">Resource Person Name:</label>
+          <input type="text" class="form-control" id="multipurposeroomResourcePersonName" name="multipurposeroomResourcePersonName" placeholder="Enter resource person name" required>
+          <div class="error-message resourcePersonNameError">Please enter the resource person name.</div>
+
+        </div>
+        <div class="form-group">
+          <label for="multipurposeroomResourcePersonDetail">Resource Person Detail:</label>
+          <textarea class="form-control" id="multipurposeroomResourcePersonDetail" name="multipurposeroomResourcePersonDetail" laceholder="Enter resource person details" maxlength="300" required></textarea>
+          <div class="error-message resourcePersonDetailError">Please enter the resource person details.</div>
+
+        </div>
+        <div class="form-group">
+          <label for="multipurposeroomEmail">Event Coordinator's Email:</label>
+          <input type="email" class="form-control" id="multipurposeroomEmail" name="multipurposeroomEmail" placeholder="Enter your email" required>
+          <div class="error-message emailError">Please enter a valid email address.</div>
+
+        </div>
+        <div class="form-group">
+          <label for="multipurposeroomPhone">Event Coordinator's Phone Number:</label>
+          <input type="tel" class="form-control" id="multipurposeroomPhone" name="multipurposeroomPhone" placeholder="Enter your phone number" required>
+          <div class="error-message phoneError">Please enter a valid 10-digit phone number.</div>
+
+        </div>
+        <button type="submit" class="btn btn-primary" id="submitmain">Submit</button>
+  </form>
+
+  <div id="calendar-container-multipurposeroomForm" class="calendar-container hidden mt-2">
+    <div class="calendar-nav flex items-center justify-between mb-4">
+        <button id="prevMonth" class="p-2 bg-gray-700 text-gray-400 rounded">&lt;</button>
+        <span id="monthYear" class="text-lg font-semibold"></span>
+        <button id="nextMonth" class="p-2 bg-gray-700 text-gray-400 rounded">&gt;</button>
+        <button id="closeCalendar" class="calendarclose-button flex items-center" data-target="multipurposeroomForm" onclick="toggleCalendar(this)">
+            <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+            <span class="label"></span>
+        </button>
+    </div>
+    <div class="flex justify-center mb-4">
+        <select id="hallDropdown" class="mx-2 p-2 bg-gray-700 text-gray-400 rounded">
+            <option value="Auditorium">Auditorium</option>
+            <option value="SeminarHall">Seminar Hall</option>
+            <option value="Room105">Room 105</option>
+            <option value="CRCConferenceRoom">CRC Conference Room</option>
+            <!-- <option value="AIBConferenceRoom">AIB Conference Room</option> -->
+            <option value="RICSConferenceRoom">RICS Conference Room</option>
+            <option value="Atrium">Atrium</option>
+            <option value="VVIP">VVIP room</option>
+            <option value="multipurposeroom">Seminar VIP room</option>
+        </select>
+        <select id="monthSelect" class="mx-2 p-2 bg-gray-700 text-gray-400 rounded readonly">
+            <!-- Options will be populated by JavaScript -->
+        </select>
+        <input type="date" id="dateSearch" class="p-2 bg-gray-700 text-gray-400 rounded">
+    </div>
+    <div class="calendar-header grid grid-cols-7 gap-1">
+        <div class="text-center">Sun</div>
+        <div class="text-center">Mon</div>
+        <div class="text-center">Tue</div>
+        <div class="text-center">Wed</div>
+        <div class="text-center">Thu</div>
+        <div class="text-center">Fri</div>
+        <div class="text-center">Sat</div>
+    </div>
+    <div id="calendar" class="calendar grid grid-cols-7 gap-1"></div>
+    <div class="legend mt-4 grid grid-cols-3 gap-4">
+        <div class="legend-item flex items-center">
+            <div class="legend-color full-booked-legend w-4 h-4 mr-2 rounded-full"></div>
+            <span>Booked Slots</span>
+        </div>
+        <div class="legend-item flex items-center">
+            <div class="legend-color not-booked-legend w-4 h-4 mr-2 rounded-full"></div>
+            <span>Not Booked Slots</span>
+        </div>
+        <div class="legend-item flex items-center">
+            <div class="legend-color pending-legend w-4 h-4 mr-2 rounded-full"></div>
+            <span>Pending Slots</span>
+        </div>
+    </div>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+</div>
 
 
 
