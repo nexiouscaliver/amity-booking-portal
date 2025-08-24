@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Multipurpose room Booking</title>
+  <title>Multipurpose Hall Booking</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -706,16 +706,16 @@
                 <div class="modal-header flex items-center justify-between">
                     <div class="flex items-center">
                         
-                        <h4 class="modal-title" id="multipurposeroomModalLabel">AIB Conference room Booking</h4>
+                        <h4 class="modal-title" id="multipurposeModalLabel">Multipurpose Hall Booking</h4>
                     </div>
                     
                 </div>
                 <div class="modal-body">
-                  <form method="post" id="multipurposeroomForm" novalidate>
+                  <form method="post" id="multipurposeForm" novalidate>
                     <div class="form-group">
-                      <label for="multipurposeroomSchoolName">School Name:</label>
-                      <input type="text" class="form-control" id="multipurposeroomSchoolName" name="multipurposeroomSchoolName" value="{{scname}}" readonly>
-                      <!-- <select class="form-control" id="multipurposeroomSchoolName" name="multipurposeroomSchoolName" required>
+                      <label for="multipurposeSchoolName">School Name:</label>
+                      <input type="text" class="form-control" id="multipurposeSchoolName" name="multipurposeSchoolName" value="{{scname}}" readonly>
+                      <!-- <select class="form-control" id="multipurposeSchoolName" name="multipurposeSchoolName" required>
                         <option value="">Select School Name</option>
                         <option value="ABS">ABS - Amity Business School</option>
                         <option value="AFS">AFS - Amity Film School</option>
@@ -742,26 +742,26 @@
                       <div class="error-message schoolNameError">Please select a school name.</div>
                     </div>
                     <div class="form-group">
-                      <label for="multipurposeroomFacultyName">Event Coordinator Name:</label>
-                      <input type="text" class="form-control" id="multipurposeroomFacultyName" name="multipurposeroomFacultyName" placeholder="Enter your name" required>
+                      <label for="multipurposeFacultyName">Event Coordinator Name:</label>
+                      <input type="text" class="form-control" id="multipurposeFacultyName" name="multipurposeFacultyName" placeholder="Enter your name" required>
                       <div class="error-message facultyNameError">Please enter a valid name with letters only.</div>
                    
                     </div>
                     <div class="form-group">
-                      <label for="multipurposeroomHodName">HOD/HOI/Director Name:</label>
-                      <input type="text" class="form-control" id="multipurposeroomHodName" name="multipurposeroomHodName" placeholder="Enter HOD/HOI/Director name" required>
+                      <label for="multipurposeHodName">HOD/HOI/Director Name:</label>
+                      <input type="text" class="form-control" id="multipurposeHodName" name="multipurposeHodName" placeholder="Enter HOD/HOI/Director name" required>
                       <div class="error-message hodNameError">Please enter a valid name with letters only.</div>
             
                     </div>
                     <div class="form-group">
-                      <label for="multipurposeroomEventName">Event Name:</label>
-                      <input type="text" class="form-control" id="multipurposeroomEventName" name="multipurposeroomEventName" placeholder="Enter event name" maxlength="300" required>
+                      <label for="multipurposeEventName">Event Name:</label>
+                      <input type="text" class="form-control" id="multipurposeEventName" name="multipurposeEventName" placeholder="Enter event name" maxlength="300" required>
                       <div class="error-message eventNameError">Please enter the event name.</div>
             
                     </div>
                     <div class="form-group">
-                      <label for="multipurposeroomstartime">Start Time</label>
-                      <select class="form-control" id="multipurposeroomstartime" name="multipurposeroomstartime" required>
+                      <label for="multipurposestartime">Start Time</label>
+                      <select class="form-control" id="multipurposestartime" name="multipurposestartime" required>
                         <option value="900">09:00 am</option>
                         <option value="1000">10:00 am</option>
                         <option value="1100">11:00 am</option>
@@ -774,9 +774,9 @@
                       </select>
                     </div>
                     <div class="form-group">
-                      <label for="multipurposeroomendtime">End Time</label>
+                      <label for="multipurposeendtime">End Time</label>
             
-                      <select class="form-control" id="multipurposeroomendtime" name="multipurposeroomendtime" required>
+                      <select class="form-control" id="multipurposeendtime" name="multipurposeendtime" required>
                         <option value="1000">10:00 am</option>
                         <option value="1100">11:00 am</option>
                         <option value="1200">12:00 pm</option>
@@ -789,37 +789,37 @@
                       </select>
                     </div>
                     <div class="form-group">
-                      <label for="multipurposeroomdate">Date of Event:</label>
-                      <input type="date" class="form-control" id="multipurposeroomdate" name="multipurposeroomdate" required onchange="updateDayOfWeek('multipurposeroomdate', 'multipurposeroomday'); updateCalendarColor('multipurposeroomdate','multipurposeroomDuration')">
+                      <label for="multipurposedate">Date of Event:</label>
+                      <input type="date" class="form-control" id="multipurposedate" name="multipurposedate" required onchange="updateDayOfWeek('multipurposedate', 'multipurposeday'); updateCalendarColor('multipurposedate','multipurposeDuration')">
                       <div class="error-message dateError">Please select a date.</div>
             
                     </div>
                     <div class="form-group">
-                      <label for="multipurposeroomday">Day of Event:</label>
-                      <input type="text" class="form-control" id="multipurposeroomday" name="multipurposeroomday" readonly>
+                      <label for="multipurposeday">Day of Event:</label>
+                      <input type="text" class="form-control" id="multipurposeday" name="multipurposeday" readonly>
                    
                     </div>
                     <div class="form-group">
-                      <label for="multipurposeroomResourcePersonName">Resource Person Name:</label>
-                      <input type="text" class="form-control" id="multipurposeroomResourcePersonName" name="multipurposeroomResourcePersonName" placeholder="Enter resource person name" required>
+                      <label for="multipurposeResourcePersonName">Resource Person Name:</label>
+                      <input type="text" class="form-control" id="multipurposeResourcePersonName" name="multipurposeResourcePersonName" placeholder="Enter resource person name" required>
                       <div class="error-message resourcePersonNameError">Please enter the resource person name.</div>
             
                     </div>
                     <div class="form-group">
-                      <label for="multipurposeroomResourcePersonDetail">Resource Person Detail:</label>
-                      <textarea class="form-control" id="multipurposeroomResourcePersonDetail" name="multipurposeroomResourcePersonDetail" placeholder="Enter resource person details" maxlength="300" required></textarea>
+                      <label for="multipurposeResourcePersonDetail">Resource Person Detail:</label>
+                      <textarea class="form-control" id="multipurposeResourcePersonDetail" name="multipurposeResourcePersonDetail" placeholder="Enter resource person details" maxlength="300" required></textarea>
                       <div class="error-message resourcePersonDetailError">Please enter the resource person details.</div>
             
                     </div>
                     <div class="form-group">
-                      <label for="multipurposeroomEmail">Event Coordinator's Email:</label>
-                      <input type="email" class="form-control" id="multipurposeroomEmail" name="multipurposeroomEmail" placeholder="Enter your email" required>
+                      <label for="multipurposeEmail">Event Coordinator's Email:</label>
+                      <input type="email" class="form-control" id="multipurposeEmail" name="multipurposeEmail" placeholder="Enter your email" required>
                       <div class="error-message emailError">Please enter a valid email address.</div>
             
                     </div>
                     <div class="form-group">
-                      <label for="multipurposeroomPhone">Event Coordinator's Phone Number:</label>
-                      <input type="tel" class="form-control" id="multipurposeroomPhone" name="multipurposeroomPhone" placeholder="Enter your phone number" required>
+                      <label for="multipurposePhone">Event Coordinator's Phone Number:</label>
+                      <input type="tel" class="form-control" id="multipurposePhone" name="multipurposePhone" placeholder="Enter your phone number" required>
                       <div class="error-message phoneError">Please enter a valid 10-digit phone number.</div>
             
                     </div>
@@ -854,10 +854,10 @@
 
   // Update the form fields with fetched data
   function updateForm(data) {
-    document.getElementById('multipurposeroomdate').value = data.date;
-    document.getElementById('multipurposeroomstartime').value = data.startTime;
-    document.getElementById('multipurposeroomendtime').value = data.endTime;
-    document.getElementById('multipurposeroomday').value = data.day;
+    document.getElementById('multipurposedate').value = data.date;
+    document.getElementById('multipurposestartime').value = data.startTime;
+    document.getElementById('multipurposeendtime').value = data.endTime;
+    document.getElementById('multipurposeday').value = data.day;
   
   }
 
