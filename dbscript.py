@@ -125,11 +125,11 @@ def init():  #server
         sql='select * from halls;'
         c.execute(sql)
         o=c.fetchall()
-        s=[(1, 'audi'), (2, 'sem'), (3, 'a2'), (4, 'crc'), (5, 'Seminarvip'), (6, 'RICSConferenceRoom'), (7, 'Atrium'), (8, 'VVIP'), (9, 'AIB206'), (10, 'ABS304'), (11, 'AIBAS504'), (12, 'ASET123'), (13, 'ALS602')]
+        s=[(1, 'audi'), (2, 'sem'), (3, 'a2'), (4, 'crc'), (5, 'Seminarvip'), (6, 'RICSConferenceRoom'), (7, 'Atrium'), (8, 'VVIP'), (9, 'AIB206'), (10, 'ABS304'), (11, 'AIBAS504'), (12, 'ASET123'), (13, 'ALS602'), (14, 'multipurpose')]
         if(o==s):
             pass
         else:
-            sql='insert into halls(hallname) values("audi"),("sem"),("a2"),("crc"),("Seminarvip"),("RICSConferenceRoom"),("Atrium"),("VVIP"),("AIB206"),("ABS304"),("AIBAS504"),("ASET123"),("ALS602");'
+            sql='insert into halls(hallname) values("audi"),("sem"),("a2"),("crc"),("Seminarvip"),("RICSConferenceRoom"),("Atrium"),("VVIP"),("AIB206"),("ABS304"),("AIBAS504"),("ASET123"),("ALS602"),("multipurpose");'
             c.execute(sql)
     except:
         pass
@@ -372,6 +372,8 @@ def calendermain():
             i[3]="ASET Room 123"
         elif i[3]==13 or i[3]=="13":
             i[3]="ALS Room 602"
+        elif i[3]==14 or i[3]=="14":
+            i[3]="Multipurpose Hall"
     for i in final:
         for j in (final[final.index(i):]):
             if(i[0]==j[0] and i[3]==j[3]):
@@ -394,6 +396,7 @@ def calendermain():
     j = []
     k = []
     l = []
+    m = []
     for i in final:
         if i[3] == "Auditorium":
             a.append(i)
@@ -421,6 +424,8 @@ def calendermain():
             k.append(i)
         if i[3] == "ALS Room 602":
             l.append(i)
+        if i[3] == "Multipurpose Hall":
+            m.append(i)
     final2 = []
     final2.append(a)
     final2.append(s)
@@ -435,6 +440,7 @@ def calendermain():
     final2.append(j)
     final2.append(k)
     final2.append(l)
+    final2.append(m)
     # for i in final2:
     #     for j in i:
     #         print(j)

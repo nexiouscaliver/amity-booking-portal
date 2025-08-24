@@ -764,6 +764,7 @@
               <option value="AIBAS504">AIBAS Room 504</option>
               <option value="ASET123">ASET Room 123</option>
               <option value="ALS602">ALS Room 602</option>
+              <option value="multipurpose">Multipurpose Hall</option>
           </select>
           <select id="monthSelect" class="responsive-select readonly">
               <!-- Options will be populated by JavaScript -->
@@ -825,7 +826,8 @@
                 ABS304: {},
                 AIBAS504: {},
                 ASET123: {},
-                ALS602: {}
+                ALS602: {},
+                multipurpose: {}
             };
 
             {% for i in output[0] %}
@@ -1041,6 +1043,24 @@
             hallData.ALS602[date13] = [];
         }
         hallData.ALS602[date13].push(event);
+    {% endfor %}
+
+    {% for i in output[13] %}
+        var date14 = '{{ i[0] }}';
+        var event = {
+            school: '{{ i[2] }}',
+            faculty: '{{ i[5] }}',
+            hall: '{{ i[3] }}',
+            eventName: '{{ i[6] }}',
+            startTime: '{{ i[1] }}',
+            endTime: '{{ i[4] }}',
+            status: '{{ i[7] }}'
+        };
+
+        if (!hallData.multipurpose[date14]) {
+            hallData.multipurpose[date14] = [];
+        }
+        hallData.multipurpose[date14].push(event);
     {% endfor %}
         
             const timeSlots = [
