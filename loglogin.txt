@@ -1,0 +1,9 @@
+User Director_Admin_1::Pratibha@2014 successfully passwword reset
+User AIIT_venue::Aiit2024# successfully passwword reset
+User ASFA_venue::Venue_2024 successfully passwword reset
+User ASFA_venue::ASFA_default123@ successfully passwword reset
+User ASAP_venue::Asap@0000 successfully passwword reset
+User ASFA_venue::SUDoMoDE000# successfully passwword reset
+User ASFA_venue::ASFA_default123@ successfully passwword reset
+User vcoffice::Vcoffice_2567 successfully generated
+User ALS_venue::Venue_0908 successfully passwword reset
