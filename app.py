@@ -184,6 +184,7 @@ def getusername():
                 'Registrar' : 'Registrar',
 		'Accounts' : 'Accounts',
                 'Accounts_Dept' : 'Accounts Department',
+                'vcoffice' : 'VC Office',
                 }
     cook = session['username']
     if cook == "Director_Admin_1": schoolname = "Director_Admin_1"
@@ -196,6 +197,7 @@ def getusername():
     elif cook == "IT_dept": schoolname = "IT_Dept"
     elif cook == "Accounts": schoolname = "Accounts"
     elif cook == "Accounts_Dept": schoolname = "Accounts_Dept"
+    elif cook == "vcoffice": schoolname = "vcoffice"
     else:
         schoolname = cook.split("_")[0]
     fullname = userdict[schoolname]
@@ -1343,6 +1345,15 @@ def periodic():
 @app.route('/creators',methods=['GET', 'POST'])
 def creators():
     return jsonify({'created by':'Shahil Kadia & Sundaram Singh','Year':'2024','Sem & Branch':'sem - 5(summer internship) & B.TECH(CSE)','College':'Amity University Mumbai','contact':'8128455494 & 8976413161','email':'shahilkadia@gmail.com'})
+
+@app.route('/author',methods=['GET', 'POST'])
+def author():
+    return jsonify({'created by':'Shahil Kadia & Sundaram Singh','Year':'2024','Sem & Branch':'sem - 5(summer internship) & B.TECH(CSE)','College':'Amity University Mumbai','contact':'8128455494 & 8976413161','email':'shahilkadia@gmail.com'})
+
+@app.route('/authors',methods=['GET', 'POST'])
+def authors():
+    return jsonify({'created by':'Shahil Kadia & Sundaram Singh','Year':'2024','Sem & Branch':'sem - 5(summer internship) & B.TECH(CSE)','College':'Amity University Mumbai','contact':'8128455494 & 8976413161','email':'shahilkadia@gmail.com'})
+
 
 @app.route('/user/calender',methods=['GET'])
 def usercalender():
