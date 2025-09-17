@@ -1338,9 +1338,17 @@ def admincalender():
 
 @app.route('/server/periodic',methods=['GET'])
 def periodic():
-    a = db.seeall()
-    b = login.seeall()
-    return jsonify(a,b)
+    try:
+        backup_filename = db.generate_sql_backup()
+        if backup_filename:
+            return send_from_directory('.', backup_filename, as_attachment=True, 
+                                     download_name=backup_filename, 
+                                     mimetype='application/sql')
+        else:
+            return jsonify({'error': 'Failed to generate backup'}), 500
+    except Exception as e:
+        app.logger.error(f"Error in periodic backup: {e}")
+        return jsonify({'error': str(e)}), 500
     
 @app.route('/creators',methods=['GET', 'POST'])
 def creators():

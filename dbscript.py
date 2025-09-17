@@ -585,4 +585,79 @@ def confirm_hall(bookid:int):   #admin
     except Exception as e:
         print(e)
         return False
+
+def generate_sql_backup():
+    import subprocess
+    from datetime import datetime
+    import os
+    
+    try:
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        backup_filename = f"backup_{timestamp}.sql"
+        
+        # Create combined backup file with both databases
+        with open(backup_filename, 'w') as backup_file:
+            # Write header comments
+            backup_file.write(f"-- MySQL Database Backup\n")
+            backup_file.write(f"-- Generated on: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
+            backup_file.write(f"-- Amity Event Booking Portal Database Backup\n")
+            backup_file.write(f"--\n")
+            backup_file.write(f"-- To restore this backup:\n")
+            backup_file.write(f"-- 1. Create databases: CREATE DATABASE IF NOT EXISTS amievent; CREATE DATABASE IF NOT EXISTS amilogin;\n")
+            backup_file.write(f"-- 2. Run: mysql -u dead -p < {backup_filename}\n")
+            backup_file.write(f"--\n\n")
+            
+            # Backup amievent database
+            backup_file.write("-- ========================================\n")
+            backup_file.write("-- AMIEVENT DATABASE BACKUP\n")
+            backup_file.write("-- ========================================\n\n")
+            backup_file.write("USE amievent;\n\n")
+            
+            amievent_result = subprocess.run([
+                'mysqldump', 
+                f'--host={hostname}',
+                f'--user={username}',
+                f'--password={passwd}',
+                f'--port={portnum}',
+                '--no-create-db',
+                '--routines',
+                '--triggers',
+                'amievent'
+            ], capture_output=True, text=True)
+            
+            if amievent_result.returncode == 0:
+                backup_file.write(amievent_result.stdout)
+            else:
+                backup_file.write(f"-- ERROR backing up amievent: {amievent_result.stderr}\n")
+            
+            # Backup amilogin database
+            backup_file.write("\n\n-- ========================================\n")
+            backup_file.write("-- AMILOGIN DATABASE BACKUP\n")
+            backup_file.write("-- ========================================\n\n")
+            backup_file.write("USE amilogin;\n\n")
+            
+            amilogin_result = subprocess.run([
+                'mysqldump',
+                f'--host={hostname}',
+                f'--user={username}',
+                f'--password={passwd}',
+                f'--port={portnum}',
+                '--no-create-db',
+                '--routines',
+                '--triggers',
+                'amilogin'
+            ], capture_output=True, text=True)
+            
+            if amilogin_result.returncode == 0:
+                backup_file.write(amilogin_result.stdout)
+            else:
+                backup_file.write(f"-- ERROR backing up amilogin: {amilogin_result.stderr}\n")
+            
+            backup_file.write(f"\n-- End of backup generated at {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
+        
+        return backup_filename
+        
+    except Exception as e:
+        print(f"Error generating backup: {e}")
+        return None
     
