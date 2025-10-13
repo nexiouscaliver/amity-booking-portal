@@ -1473,12 +1473,17 @@ def debug(token):
         return "<h1>Not Found</h1><p>The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.<p>"
     
 
-@app.route('/calender/form/<hallname2>/<date>/<startTime>/<endTime>/<day>',methods=['GET','POST'])
-def calenderform(hallname2,date,startTime,endTime,day):
+@app.route('/calender/form/<hallname2>/<date>/<startTime>/<endTime>/<day>/<eventType>/<eventName>',methods=['GET','POST'])
+def calenderform(hallname2,date,startTime,endTime,day,eventType,eventName):
     error = None
     try:
     # if True:
         if session:
+            # URL decode the event type and event name
+            from urllib.parse import unquote
+            eventType = unquote(eventType)
+            eventName = unquote(eventName)
+
             uname = session['username']
             app.logger.info(uname)
             cal = db.calender()
@@ -1551,8 +1556,8 @@ def calenderform(hallname2,date,startTime,endTime,day):
                         db.info_dump(bookid=bid, hallid=hid , school=final[0], fname=final[1], hod=final[2], email=final[7] , phone=final[8] , date=final[4] , stime=final[5] , etime=final[6] , event=final[3],rpname=final[9],rpdetail=final[10])
                         #db.info_dump(bid, hid , sfinal[0], final[1], final[2],final[7] , final[8] , final[4] , final[5] , final[6] , final[3])
                         if (send_mail(final[3],hallname(hid),final[4],final[5],final[6],final[0],final[2],final[9],final[10],final[8],final[1],final[7],bid)):
-                            
-                            error = "Your Request Is Successfully Sent for Approval!"
+
+                            error = f"Your Request for '{eventName}' ({eventType}) Is Successfully Sent for Approval!"
                             # return redirect(url_for("index",error=error,cal=cal,output=output))
                             return render_template("notitab2.html",error=error)
                         else:
@@ -1568,33 +1573,33 @@ def calenderform(hallname2,date,startTime,endTime,day):
                     # return redirect(url_for("index",error=error,cal=cal,output=output))
                     return render_template("notitab2.html",error=error)
             if hallname2=="Auditorium":
-                return render_template("audi.form.html",scname=scname,error=error,cal=cal,output=output,date=date,startTime=startTime,endTime=endTime,day=day)
+                return render_template("audi.form.html",scname=scname,error=error,cal=cal,output=output,date=date,startTime=startTime,endTime=endTime,day=day,eventType=eventType,eventName=eventName)
             elif hallname2=="SeminarHall":
-                return render_template("seminar.html",scname=scname,error=error,cal=cal,output=output,date=date,startTime=startTime,endTime=endTime,day=day)
+                return render_template("seminar.html",scname=scname,error=error,cal=cal,output=output,date=date,startTime=startTime,endTime=endTime,day=day,eventType=eventType,eventName=eventName)
             elif hallname2=="Room105":
-                return render_template("room105.html",scname=scname,error=error,cal=cal,output=output,date=date,startTime=startTime,endTime=endTime,day=day)
+                return render_template("room105.html",scname=scname,error=error,cal=cal,output=output,date=date,startTime=startTime,endTime=endTime,day=day,eventType=eventType,eventName=eventName)
             elif hallname2=="CRCConferenceRoom":
-                return render_template("crc.html",scname=scname,error=error,cal=cal,output=output,date=date,startTime=startTime,endTime=endTime,day=day)
+                return render_template("crc.html",scname=scname,error=error,cal=cal,output=output,date=date,startTime=startTime,endTime=endTime,day=day,eventType=eventType,eventName=eventName)
             elif hallname2=="Seminarvip":
-                return render_template("Seminar.VIP.html",scname=scname,error=error,cal=cal,output=output,date=date,startTime=startTime,endTime=endTime,day=day)
+                return render_template("Seminar.VIP.html",scname=scname,error=error,cal=cal,output=output,date=date,startTime=startTime,endTime=endTime,day=day,eventType=eventType,eventName=eventName)
             elif hallname2=="RICSConferenceRoom":
-                return render_template("RICS.html",scname=scname,error=error,cal=cal,output=output,date=date,startTime=startTime,endTime=endTime,day=day)
+                return render_template("RICS.html",scname=scname,error=error,cal=cal,output=output,date=date,startTime=startTime,endTime=endTime,day=day,eventType=eventType,eventName=eventName)
             elif hallname2=="Atrium":
-                return render_template("Atrium.html",scname=scname,error=error,cal=cal,output=output,date=date,startTime=startTime,endTime=endTime,day=day)
+                return render_template("Atrium.html",scname=scname,error=error,cal=cal,output=output,date=date,startTime=startTime,endTime=endTime,day=day,eventType=eventType,eventName=eventName)
             elif hallname2=="VVIP":
-                return render_template("vvip.form.html",scname=scname,error=error,cal=cal,output=output,date=date,startTime=startTime,endTime=endTime,day=day)
+                return render_template("vvip.form.html",scname=scname,error=error,cal=cal,output=output,date=date,startTime=startTime,endTime=endTime,day=day,eventType=eventType,eventName=eventName)
             elif hallname2=="AIB206":
-                return render_template("AIB206.html",scname=scname,error=error,cal=cal,output=output,date=date,startTime=startTime,endTime=endTime,day=day)
+                return render_template("AIB206.html",scname=scname,error=error,cal=cal,output=output,date=date,startTime=startTime,endTime=endTime,day=day,eventType=eventType,eventName=eventName)
             elif hallname2=="ABS304":
-                return render_template("ABS304.html",scname=scname,error=error,cal=cal,output=output,date=date,startTime=startTime,endTime=endTime,day=day)
+                return render_template("ABS304.html",scname=scname,error=error,cal=cal,output=output,date=date,startTime=startTime,endTime=endTime,day=day,eventType=eventType,eventName=eventName)
             elif hallname2=="AIBAS504":
-                return render_template("AIBAS504.html",scname=scname,error=error,cal=cal,output=output,date=date,startTime=startTime,endTime=endTime,day=day)
+                return render_template("AIBAS504.html",scname=scname,error=error,cal=cal,output=output,date=date,startTime=startTime,endTime=endTime,day=day,eventType=eventType,eventName=eventName)
             elif hallname2=="ASET123":
-                return render_template("ASET123.html",scname=scname,error=error,cal=cal,output=output,date=date,startTime=startTime,endTime=endTime,day=day)
+                return render_template("ASET123.html",scname=scname,error=error,cal=cal,output=output,date=date,startTime=startTime,endTime=endTime,day=day,eventType=eventType,eventName=eventName)
             elif hallname2=="ALS602":
-                return render_template("ALS602.html",scname=scname,error=error,cal=cal,output=output,date=date,startTime=startTime,endTime=endTime,day=day)
+                return render_template("ALS602.html",scname=scname,error=error,cal=cal,output=output,date=date,startTime=startTime,endTime=endTime,day=day,eventType=eventType,eventName=eventName)
             elif hallname2=="multipurpose":
-                return render_template("multipurpose.html",scname=scname,error=error,cal=cal,output=output,date=date,startTime=startTime,endTime=endTime,day=day)
+                return render_template("multipurpose.html",scname=scname,error=error,cal=cal,output=output,date=date,startTime=startTime,endTime=endTime,day=day,eventType=eventType,eventName=eventName)
             
             #return render_template("index.html",error=error,cal=cal,output=output)
         else:

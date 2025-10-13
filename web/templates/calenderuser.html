@@ -763,17 +763,20 @@
         </div>
         <div class="responsive-container">
             <select id="eventsDropdown" name="eventsDropdown" class="responsive-select">
-                <option value="">EVENTS</option>
-                <option value="Conference">Conference</option>
-                <option value="Workshop">Workshop</option>
-                <option value="Seminar">Seminar</option>
+                <option value="">Event Type</option>
+                <option value="Cultural Fest">Cultural Fest</option>
+                <option value="Technical Fest">Technical Fest</option>
+                <option value="Simulation Conference">Simulation Conference</option>
+                <option value="Club Events">Club Events</option>
+                <option value="Roundtable Conferences">Roundtable Conferences</option>
+                <option value="Educational & Technical Events">Educational & Technical Events</option>
+                <option value="Entrepreneurship Cell Events">Entrepreneurship Cell Events</option>
+                <option value="Workshop Events">Workshop Events</option>
+                <option value="Exhibition Events">Exhibition Events</option>
+                <option value="Competition Events">Competition Events</option>
+                <option value="Sustainable Development Goals (SDG) Events">Sustainable Development Goals (SDG) Events</option>
             </select>
-            <select id="namesDropdown" name="namesDropdown" class="responsive-select">
-                <option value="">NAMES</option>
-                <option value="John Smith">John Smith</option>
-                <option value="Sarah Johnson">Sarah Johnson</option>
-                <option value="Mike Davis">Mike Davis</option>
-            </select>
+            <input type="text" id="eventNamesInput" name="eventNamesInput" class="responsive-select" placeholder="Enter Event Name">
             <select id="hallDropdown" name="hallDropdown" class="responsive-select">
                 <option value="Auditorium">Auditorium</option>
                 <option value="SeminarHall">Seminar Hall</option>
@@ -1501,16 +1504,30 @@
 
 
 
-          //submiting 
+          //submiting
           const submitSelectedSlots = (dateKey) => {
             if (selectedSlots.length === 0) {
                 alert('No slots selected!');
                 return;
             }
-          
-     
-     
-     
+
+            // Validate Event Type and Event Name
+            const eventType = document.getElementById('eventsDropdown').value;
+            const eventName = document.getElementById('eventNamesInput').value.trim();
+
+            if (!eventType || eventType === '') {
+                alert('Please select an Event Type before submitting.');
+                return;
+            }
+
+            if (!eventName || eventName === '') {
+                alert('Please enter an Event Name before submitting.');
+                return;
+            }
+
+
+
+
             // Function to convert time slots to a comparable format
 function convertTo24Hour(time) {
   let [hour, period] = time.split(' ');
@@ -1579,9 +1596,12 @@ console.log(`End Time: ${endTimeSlot}`);
             });
           
             alert(`Submitted:\nDate: ${dateKey}\nStart Time: ${startTimeSlot}\nEnd Time: ${endTimeSlot}\nDay: ${dayOfWeek}`);
-          
+
             closePopup(); // Close the popup after submission
-            window.location.href = `{{server_link}}/calender/form/${hallName}/${dateKey}/${formStartTime}/${formEndTime}/${dayOfWeek}`;
+            // URL encode the event type and event name
+            const encodedEventType = encodeURIComponent(eventType);
+            const encodedEventName = encodeURIComponent(eventName);
+            window.location.href = `{{server_link}}/calender/form/${hallName}/${dateKey}/${formStartTime}/${formEndTime}/${dayOfWeek}/${encodedEventType}/${encodedEventName}`;
           };
           
           
