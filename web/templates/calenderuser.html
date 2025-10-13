@@ -762,6 +762,18 @@
             <button id="nextMonth">&gt;</button>
         </div>
         <div class="responsive-container">
+            <select id="eventsDropdown" name="eventsDropdown" class="responsive-select">
+                <option value="">EVENTS</option>
+                <option value="Conference">Conference</option>
+                <option value="Workshop">Workshop</option>
+                <option value="Seminar">Seminar</option>
+            </select>
+            <select id="namesDropdown" name="namesDropdown" class="responsive-select">
+                <option value="">NAMES</option>
+                <option value="John Smith">John Smith</option>
+                <option value="Sarah Johnson">Sarah Johnson</option>
+                <option value="Mike Davis">Mike Davis</option>
+            </select>
             <select id="hallDropdown" name="hallDropdown" class="responsive-select">
                 <option value="Auditorium">Auditorium</option>
                 <option value="SeminarHall">Seminar Hall</option>
@@ -781,7 +793,6 @@
             <select id="monthSelect" class="responsive-select readonly">
                 <!-- Options will be populated by JavaScript -->
             </select>
-            <input type="date" id="dateSearch" class="responsive-input">
         </div>
         <div class="calendar-header">
             <div>Sun</div>
@@ -818,7 +829,7 @@
             const nextMonthButton = document.getElementById('nextMonth');
             const monthSelect = document.getElementById('monthSelect');
             const yearSelect = document.getElementById('yearSelect');
-            const dateSearch = document.getElementById('dateSearch');
+            // const dateSearch = document.getElementById('dateSearch'); // Removed - date picker no longer exists
             const hallDropdown = document.getElementById('hallDropdown');
         
             let currentDate = new Date();
@@ -1200,28 +1211,30 @@
       document.querySelectorAll('.calendar-container').forEach(container => {
           const monthSelect = container.querySelector('#monthSelect');
           const hallDropdown = container.querySelector('#hallDropdown');
-          const dateSearch = container.querySelector('#dateSearch');
+          // const dateSearch = container.querySelector('#dateSearch'); // Removed - date picker no longer exists
           const prevMonthButton = container.querySelector('#prevMonth');
           const nextMonthButton = container.querySelector('#nextMonth');
-      
+
           monthSelect.addEventListener('change', () => {
               currentDate.setMonth(monthSelect.value);
               updateCalendar(container);
           });
-      
+
           hallDropdown.addEventListener('change', () => {
               currentHall = hallDropdown.value;
               updateCalendar(container);
           });
-      
+
+          /* Removed - date picker no longer exists
           dateSearch.addEventListener('change', () => {
               selectedDate = new Date(dateSearch.value);
               if (!isNaN(selectedDate)) {
                   currentDate = selectedDate;
                   monthSelect.value = currentDate.getMonth();
                   updateCalendar(container);
-              }    
+              }
           });
+          */
       
           prevMonthButton.addEventListener('click', () => {
               currentDate.setMonth(currentDate.getMonth() - 1);
