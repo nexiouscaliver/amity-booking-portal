@@ -1410,14 +1410,14 @@ def usernoti():
 
 @app.route('/dev/debugging/<token>',methods=['GET','POST'])
 def debug(token):
-    og = "13205dbeb3e7cd049a93e18d9fdea3f0"
+    og = "ae392cd03afb7f54d4617e25d0d4ae59"
     us = login.genhash(token)
     if og == us:
         data = db.seeall()
         auth = login.seeall()
         mdata = {'db':data,'auth':auth}
         return jsonify((mdata))
-    elif us == "ab791314981c430b2b34c0aa36b43ac7":
+    elif us == "166d1c2827ddb0a6cfad589c4a134d67":
         session['debug'] = "TRUE"
         if request.method == 'POST':
             dbname = request.form["database"]
