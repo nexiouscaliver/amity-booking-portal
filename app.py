@@ -1341,8 +1341,9 @@ def periodic():
     try:
         backup_filename = db.generate_sql_backup()
         if backup_filename:
-            return send_from_directory('.', backup_filename, as_attachment=True, 
-                                     download_name=backup_filename, 
+            backup_dir = '/home/amity/amischeduler/amity-booking-portal'
+            return send_from_directory(backup_dir, backup_filename, as_attachment=True,
+                                     download_name=backup_filename,
                                      mimetype='application/sql')
         else:
             return jsonify({'error': 'Failed to generate backup'}), 500

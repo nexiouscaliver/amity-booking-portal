@@ -590,13 +590,25 @@ def generate_sql_backup():
     import subprocess
     from datetime import datetime
     import os
-    
+    import logging
+
+    logger = logging.getLogger(__name__)
+
     try:
+        # Change to the correct working directory
+        original_dir = os.getcwd()
+        backup_dir = '/home/amity/amischeduler/amity-booking-portal'
+        os.chdir(backup_dir)
+        logger.info(f"[BACKUP] Changed working directory to: {backup_dir}")
+        print(f"[BACKUP] Changed working directory to: {backup_dir}")
+
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
         backup_filename = f"backup_{timestamp}.sql"
-        
+        backup_filepath = os.path.join(backup_dir, backup_filename)
+        print(f"[BACKUP] Creating backup file: {backup_filepath}")
+
         # Create combined backup file with both databases
-        with open(backup_filename, 'w') as backup_file:
+        with open(backup_filepath, 'w') as backup_file:
             # Write header comments
             backup_file.write(f"-- MySQL Database Backup\n")
             backup_file.write(f"-- Generated on: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
@@ -613,22 +625,24 @@ def generate_sql_backup():
             backup_file.write("-- ========================================\n\n")
             backup_file.write("USE amievent;\n\n")
             
-            amievent_result = subprocess.run([
-                'mysqldump', 
-                f'--host={hostname}',
-                f'--user={username}',
-                f'--password={passwd}',
-                f'--port={portnum}',
-                '--no-create-db',
-                '--routines',
-                '--triggers',
-                'amievent'
-            ], capture_output=True, text=True)
-            
+            logger.info(f"[BACKUP] Starting mysqldump for amievent database...")
+            print(f"[BACKUP] Starting mysqldump for amievent database...")
+
+            # Use full path to mysqldump since Flask worker PATH may not include /usr/bin
+            mysqldump_cmd = f"/usr/bin/mysqldump --host={hostname} --user={username} --password={passwd} --port={portnum} --no-create-db --routines --triggers amievent"
+            amievent_result = subprocess.run(mysqldump_cmd, shell=True, capture_output=True, text=True, timeout=120)
+
+            logger.info(f"[BACKUP] Mysqldump exit code: {amievent_result.returncode}")
+
             if amievent_result.returncode == 0:
                 backup_file.write(amievent_result.stdout)
+                logger.info(f"[BACKUP] Successfully dumped amievent database ({len(amievent_result.stdout)} bytes)")
+                print(f"[BACKUP] Successfully dumped amievent database ({len(amievent_result.stdout)} bytes)")
             else:
-                backup_file.write(f"-- ERROR backing up amievent: {amievent_result.stderr}\n")
+                error_msg = f"-- ERROR backing up amievent: {amievent_result.stderr}\n"
+                backup_file.write(error_msg)
+                logger.error(f"[BACKUP ERROR] Failed to dump amievent: {amievent_result.stderr}")
+                print(f"[BACKUP ERROR] Failed to dump amievent: {amievent_result.stderr}")
             
             # Backup amilogin database
             backup_file.write("\n\n-- ========================================\n")
@@ -636,28 +650,58 @@ def generate_sql_backup():
             backup_file.write("-- ========================================\n\n")
             backup_file.write("USE amilogin;\n\n")
             
-            amilogin_result = subprocess.run([
-                'mysqldump',
-                f'--host={hostname}',
-                f'--user={username}',
-                f'--password={passwd}',
-                f'--port={portnum}',
-                '--no-create-db',
-                '--routines',
-                '--triggers',
-                'amilogin'
-            ], capture_output=True, text=True)
-            
+            logger.info(f"[BACKUP] Starting mysqldump for amilogin database...")
+            print(f"[BACKUP] Starting mysqldump for amilogin database...")
+
+            # Use full path to mysqldump since Flask worker PATH may not include /usr/bin
+            mysqldump_cmd = f"/usr/bin/mysqldump --host={hostname} --user={username} --password={passwd} --port={portnum} --no-create-db --routines --triggers amilogin"
+            amilogin_result = subprocess.run(mysqldump_cmd, shell=True, capture_output=True, text=True, timeout=120)
+
+            logger.info(f"[BACKUP] Amilogin mysqldump exit code: {amilogin_result.returncode}")
+
             if amilogin_result.returncode == 0:
                 backup_file.write(amilogin_result.stdout)
+                logger.info(f"[BACKUP] Successfully dumped amilogin database ({len(amilogin_result.stdout)} bytes)")
+                print(f"[BACKUP] Successfully dumped amilogin database ({len(amilogin_result.stdout)} bytes)")
             else:
-                backup_file.write(f"-- ERROR backing up amilogin: {amilogin_result.stderr}\n")
-            
+                error_msg = f"-- ERROR backing up amilogin: {amilogin_result.stderr}\n"
+                backup_file.write(error_msg)
+                logger.error(f"[BACKUP ERROR] Failed to dump amilogin: {amilogin_result.stderr}")
+                print(f"[BACKUP ERROR] Failed to dump amilogin: {amilogin_result.stderr}")
+
             backup_file.write(f"\n-- End of backup generated at {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
-        
-        return backup_filename
-        
+
+        # Validate backup file was created and has reasonable size
+        if os.path.exists(backup_filepath):
+            file_size = os.path.getsize(backup_filepath)
+            print(f"[BACKUP] Backup file created: {backup_filepath} ({file_size} bytes)")
+
+            # A valid backup should be at least 1KB (1024 bytes)
+            if file_size < 1024:
+                print(f"[BACKUP ERROR] Backup file is too small ({file_size} bytes), likely incomplete")
+                os.remove(backup_filepath)
+                os.chdir(original_dir)
+                return None
+
+            print(f"[BACKUP] Backup completed successfully!")
+            os.chdir(original_dir)
+            return backup_filename
+        else:
+            print(f"[BACKUP ERROR] Backup file was not created at {backup_filepath}")
+            os.chdir(original_dir)
+            return None
+
+    except subprocess.TimeoutExpired as e:
+        print(f"[BACKUP ERROR] Mysqldump timeout: {e}")
+        os.chdir(original_dir)
+        return None
     except Exception as e:
-        print(f"Error generating backup: {e}")
+        print(f"[BACKUP ERROR] Exception during backup generation: {e}")
+        import traceback
+        traceback.print_exc()
+        try:
+            os.chdir(original_dir)
+        except:
+            pass
         return None
     
