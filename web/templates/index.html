@@ -960,10 +960,61 @@
           display: flex;
           justify-content: center;
           align-items: center;
-          
+
         }
-      
-      
+
+        /* Event Name Container - Event Type Dropdown + Event Name Input */
+        .event-name-container {
+          display: flex;
+          gap: 10px;
+          align-items: center;
+          width: 100%;
+        }
+
+        .event-type-select {
+          flex: 1;
+          min-width: 150px;
+          padding: 8px;
+          border: 1px solid #ccc;
+          border-radius: 4px;
+          font-size: 14px;
+          background-color: #fff;
+          transition: border-color 0.3s;
+        }
+
+        .event-type-select:focus {
+          border-color: #04172b;
+          outline: none;
+        }
+
+        .event-name-input {
+          flex: 2;
+          padding: 8px;
+          border: 1px solid #ccc;
+          border-radius: 4px;
+          font-size: 14px;
+          transition: border-color 0.3s;
+        }
+
+        .event-name-input:focus {
+          border-color: #04172b;
+          outline: none;
+        }
+
+        /* Responsive design for mobile devices */
+        @media (max-width: 768px) {
+          .event-name-container {
+            flex-direction: column;
+            gap: 15px;
+          }
+
+          .event-type-select,
+          .event-name-input {
+            width: 100%;
+            min-width: 100%;
+          }
+        }
+
         </style>
 </head>
 
@@ -1215,9 +1266,26 @@
 
               </div>
               <div class="form-group">
-                <label for="auditoriumEventName">Event Name:</label>
-                <input type="text" class="form-control" id="auditoriumEventName" name="auditoriumEventName" placeholder="Enter event name" maxlength="300" required>
-                <div class="error-message eventNameError">Please enter the event name.</div>
+                <label for="auditoriumEventType">Event Type & Name:</label>
+                <div class="event-name-container">
+                  <select class="event-type-select" id="auditoriumEventType" name="auditoriumEventType" required>
+                    <option value="">Select Event Type</option>
+                    <option value="Cultural Fest">Cultural Fest</option>
+                    <option value="Technical Fest">Technical Fest</option>
+                    <option value="Simulation Conference">Simulation Conference</option>
+                    <option value="Club Events">Club Events</option>
+                    <option value="Roundtable Conferences">Roundtable Conferences</option>
+                    <option value="Educational & Technical Events">Educational & Technical Events</option>
+                    <option value="Entrepreneurship Cell Events">Entrepreneurship Cell Events</option>
+                    <option value="Workshop Events">Workshop Events</option>
+                    <option value="Exhibition Events">Exhibition Events</option>
+                    <option value="Competition Events">Competition Events</option>
+                    <option value="SDG Events">SDG Events</option>
+                    <option value="Other">Other</option>
+                  </select>
+                  <input type="text" class="event-name-input" id="auditoriumEventName" name="auditoriumEventName" placeholder="Enter event name" maxlength="300" required>
+                </div>
+                <div class="error-message eventNameError">Please select event type and enter event name.</div>
 
               </div>
               <div class="form-group">
@@ -1414,9 +1482,26 @@
 
         </div>
         <div class="form-group">
-          <label for="seminarEventName">Event Name:</label>
-          <input type="text" class="form-control" id="seminarEventName" name="seminarEventName" placeholder="Enter event name" maxlength="300" required>
-          <div class="error-message eventNameError">Please enter the event name.</div>
+          <label for="seminarEventType">Event Type & Name:</label>
+          <div class="event-name-container">
+            <select class="event-type-select" id="seminarEventType" name="seminarEventType" required>
+              <option value="">Select Event Type</option>
+              <option value="Cultural Fest">Cultural Fest</option>
+              <option value="Technical Fest">Technical Fest</option>
+              <option value="Simulation Conference">Simulation Conference</option>
+              <option value="Club Events">Club Events</option>
+              <option value="Roundtable Conferences">Roundtable Conferences</option>
+              <option value="Educational & Technical Events">Educational & Technical Events</option>
+              <option value="Entrepreneurship Cell Events">Entrepreneurship Cell Events</option>
+              <option value="Workshop Events">Workshop Events</option>
+              <option value="Exhibition Events">Exhibition Events</option>
+              <option value="Competition Events">Competition Events</option>
+              <option value="SDG Events">SDG Events</option>
+              <option value="Other">Other</option>
+            </select>
+            <input type="text" class="event-name-input" id="seminarEventName" name="seminarEventName" placeholder="Enter event name" maxlength="300" required>
+          </div>
+          <div class="error-message eventNameError">Please select event type and enter event name.</div>
 
         </div>
         <div class="form-group">
@@ -1613,9 +1698,26 @@
 
         </div>
         <div class="form-group">
-          <label for="room105EventName">Event Name:</label>
-          <input type="text" class="form-control" id="room105EventName" name="room105EventName" placeholder="Enter event name" maxlength="300"  required>
-          <div class="error-message eventNameError">Please enter the event name.</div>
+          <label for="room105EventType">Event Type & Name:</label>
+          <div class="event-name-container">
+            <select class="event-type-select" id="room105EventType" name="room105EventType" required>
+              <option value="">Select Event Type</option>
+              <option value="Cultural Fest">Cultural Fest</option>
+              <option value="Technical Fest">Technical Fest</option>
+              <option value="Simulation Conference">Simulation Conference</option>
+              <option value="Club Events">Club Events</option>
+              <option value="Roundtable Conferences">Roundtable Conferences</option>
+              <option value="Educational & Technical Events">Educational & Technical Events</option>
+              <option value="Entrepreneurship Cell Events">Entrepreneurship Cell Events</option>
+              <option value="Workshop Events">Workshop Events</option>
+              <option value="Exhibition Events">Exhibition Events</option>
+              <option value="Competition Events">Competition Events</option>
+              <option value="SDG Events">SDG Events</option>
+              <option value="Other">Other</option>
+            </select>
+            <input type="text" class="event-name-input" id="room105EventName" name="room105EventName" placeholder="Enter event name" maxlength="300" required>
+          </div>
+          <div class="error-message eventNameError">Please select event type and enter event name.</div>
 
         </div>
         <div class="form-group">
@@ -1812,9 +1914,26 @@
 
         </div>
         <div class="form-group">
-          <label for="crcEventName">Event Name:</label>
-          <input type="text" class="form-control" id="crcEventName" name="crcEventName" placeholder="Enter event name" maxlength="300" required>
-          <div class="error-message eventNameError">Please enter the event name.</div>
+          <label for="crcEventType">Event Type & Name:</label>
+          <div class="event-name-container">
+            <select class="event-type-select" id="crcEventType" name="crcEventType" required>
+              <option value="">Select Event Type</option>
+              <option value="Cultural Fest">Cultural Fest</option>
+              <option value="Technical Fest">Technical Fest</option>
+              <option value="Simulation Conference">Simulation Conference</option>
+              <option value="Club Events">Club Events</option>
+              <option value="Roundtable Conferences">Roundtable Conferences</option>
+              <option value="Educational & Technical Events">Educational & Technical Events</option>
+              <option value="Entrepreneurship Cell Events">Entrepreneurship Cell Events</option>
+              <option value="Workshop Events">Workshop Events</option>
+              <option value="Exhibition Events">Exhibition Events</option>
+              <option value="Competition Events">Competition Events</option>
+              <option value="SDG Events">SDG Events</option>
+              <option value="Other">Other</option>
+            </select>
+            <input type="text" class="event-name-input" id="crcEventName" name="crcEventName" placeholder="Enter event name" maxlength="300" required>
+          </div>
+          <div class="error-message eventNameError">Please select event type and enter event name.</div>
 
         </div>
         <div class="form-group">
@@ -2013,9 +2132,26 @@
 
         </div>
         <div class="form-group">
-          <label for="RICSConferenceRoomEventName">Event Name:</label>
-          <input type="text" class="form-control" id="RICSConferenceRoomEventName" name="RICSConferenceRoomEventName" placeholder="Enter event name" maxlength="300"  required>
-          <div class="error-message eventNameError">Please enter the event name.</div>
+          <label for="RICSConferenceRoomEventType">Event Type & Name:</label>
+          <div class="event-name-container">
+            <select class="event-type-select" id="RICSConferenceRoomEventType" name="RICSConferenceRoomEventType" required>
+              <option value="">Select Event Type</option>
+              <option value="Cultural Fest">Cultural Fest</option>
+              <option value="Technical Fest">Technical Fest</option>
+              <option value="Simulation Conference">Simulation Conference</option>
+              <option value="Club Events">Club Events</option>
+              <option value="Roundtable Conferences">Roundtable Conferences</option>
+              <option value="Educational & Technical Events">Educational & Technical Events</option>
+              <option value="Entrepreneurship Cell Events">Entrepreneurship Cell Events</option>
+              <option value="Workshop Events">Workshop Events</option>
+              <option value="Exhibition Events">Exhibition Events</option>
+              <option value="Competition Events">Competition Events</option>
+              <option value="SDG Events">SDG Events</option>
+              <option value="Other">Other</option>
+            </select>
+            <input type="text" class="event-name-input" id="RICSConferenceRoomEventName" name="RICSConferenceRoomEventName" placeholder="Enter event name" maxlength="300" required>
+          </div>
+          <div class="error-message eventNameError">Please select event type and enter event name.</div>
 
         </div>
         <div class="form-group">
@@ -2216,11 +2352,28 @@
 
         </div>
         <div class="form-group">
-          <label for="AtriumEventName">Event Name:</label>
-          <input type="text" class="form-control" id="AtriumEventName" name="AtriumEventName" placeholder="Enter event name" maxlength="300" required>
-          <div class="error-message eventNameError">Please enter the event name.</div>
+          <label for="AtriumEventType">Event Type & Name:</label>
+          <div class="event-name-container">
+            <select class="event-type-select" id="AtriumEventType" name="AtriumEventType" required>
+              <option value="">Select Event Type</option>
+              <option value="Cultural Fest">Cultural Fest</option>
+              <option value="Technical Fest">Technical Fest</option>
+              <option value="Simulation Conference">Simulation Conference</option>
+              <option value="Club Events">Club Events</option>
+              <option value="Roundtable Conferences">Roundtable Conferences</option>
+              <option value="Educational & Technical Events">Educational & Technical Events</option>
+              <option value="Entrepreneurship Cell Events">Entrepreneurship Cell Events</option>
+              <option value="Workshop Events">Workshop Events</option>
+              <option value="Exhibition Events">Exhibition Events</option>
+              <option value="Competition Events">Competition Events</option>
+              <option value="SDG Events">SDG Events</option>
+              <option value="Other">Other</option>
+            </select>
+            <input type="text" class="event-name-input" id="AtriumEventName" name="AtriumEventName" placeholder="Enter event name" maxlength="300" required>
+          </div>
+          <div class="error-message eventNameError">Please select event type and enter event name.</div>
 
-       
+
         </div>
         <div class="form-group">
           <label for="Atriumstartime">Start Time</label>
@@ -2412,9 +2565,26 @@
 
         </div>
         <div class="form-group">
-          <label for="VVIPEventName">Event Name:</label>
-          <input type="text" class="form-control" id="VVIPEventName" name="VVIPEventName" placeholder="Enter event name" maxlength="300" required>
-          <div class="error-message eventNameError">Please enter the event name.</div>
+          <label for="VVIPEventType">Event Type & Name:</label>
+          <div class="event-name-container">
+            <select class="event-type-select" id="VVIPEventType" name="VVIPEventType" required>
+              <option value="">Select Event Type</option>
+              <option value="Cultural Fest">Cultural Fest</option>
+              <option value="Technical Fest">Technical Fest</option>
+              <option value="Simulation Conference">Simulation Conference</option>
+              <option value="Club Events">Club Events</option>
+              <option value="Roundtable Conferences">Roundtable Conferences</option>
+              <option value="Educational & Technical Events">Educational & Technical Events</option>
+              <option value="Entrepreneurship Cell Events">Entrepreneurship Cell Events</option>
+              <option value="Workshop Events">Workshop Events</option>
+              <option value="Exhibition Events">Exhibition Events</option>
+              <option value="Competition Events">Competition Events</option>
+              <option value="SDG Events">SDG Events</option>
+              <option value="Other">Other</option>
+            </select>
+            <input type="text" class="event-name-input" id="VVIPEventName" name="VVIPEventName" placeholder="Enter event name" maxlength="300" required>
+          </div>
+          <div class="error-message eventNameError">Please select event type and enter event name.</div>
 
         </div>
         <div class="form-group">
@@ -2609,9 +2779,26 @@
 
         </div>
         <div class="form-group">
-          <label for="SeminarvipEventName">Event Name:</label>
-          <input type="text" class="form-control" id="SeminarvipEventName" name="SeminarvipEventName" placeholder="Enter event name" maxlength="300" required>
-          <div class="error-message eventNameError">Please enter the event name.</div>
+          <label for="SeminarvipEventType">Event Type & Name:</label>
+          <div class="event-name-container">
+            <select class="event-type-select" id="SeminarvipEventType" name="SeminarvipEventType" required>
+              <option value="">Select Event Type</option>
+              <option value="Cultural Fest">Cultural Fest</option>
+              <option value="Technical Fest">Technical Fest</option>
+              <option value="Simulation Conference">Simulation Conference</option>
+              <option value="Club Events">Club Events</option>
+              <option value="Roundtable Conferences">Roundtable Conferences</option>
+              <option value="Educational & Technical Events">Educational & Technical Events</option>
+              <option value="Entrepreneurship Cell Events">Entrepreneurship Cell Events</option>
+              <option value="Workshop Events">Workshop Events</option>
+              <option value="Exhibition Events">Exhibition Events</option>
+              <option value="Competition Events">Competition Events</option>
+              <option value="SDG Events">SDG Events</option>
+              <option value="Other">Other</option>
+            </select>
+            <input type="text" class="event-name-input" id="SeminarvipEventName" name="SeminarvipEventName" placeholder="Enter event name" maxlength="300" required>
+          </div>
+          <div class="error-message eventNameError">Please select event type and enter event name.</div>
 
         </div>
         <div class="form-group">
@@ -2804,9 +2991,26 @@
 
         </div>
         <div class="form-group">
-          <label for="AIB206EventName">Event Name:</label>
-          <input type="text" class="form-control" id="AIB206EventName" name="AIB206EventName" placeholder="Enter event name" maxlength="300" required>
-          <div class="error-message eventNameError">Please enter the event name.</div>
+          <label for="AIB206EventType">Event Type & Name:</label>
+          <div class="event-name-container">
+            <select class="event-type-select" id="AIB206EventType" name="AIB206EventType" required>
+              <option value="">Select Event Type</option>
+              <option value="Cultural Fest">Cultural Fest</option>
+              <option value="Technical Fest">Technical Fest</option>
+              <option value="Simulation Conference">Simulation Conference</option>
+              <option value="Club Events">Club Events</option>
+              <option value="Roundtable Conferences">Roundtable Conferences</option>
+              <option value="Educational & Technical Events">Educational & Technical Events</option>
+              <option value="Entrepreneurship Cell Events">Entrepreneurship Cell Events</option>
+              <option value="Workshop Events">Workshop Events</option>
+              <option value="Exhibition Events">Exhibition Events</option>
+              <option value="Competition Events">Competition Events</option>
+              <option value="SDG Events">SDG Events</option>
+              <option value="Other">Other</option>
+            </select>
+            <input type="text" class="event-name-input" id="AIB206EventName" name="AIB206EventName" placeholder="Enter event name" maxlength="300" required>
+          </div>
+          <div class="error-message eventNameError">Please select event type and enter event name.</div>
 
         </div>
         <div class="form-group">
@@ -2996,9 +3200,26 @@
 
         </div>
         <div class="form-group">
-          <label for="ABS304EventName">Event Name:</label>
-          <input type="text" class="form-control" id="ABS304EventName" name="ABS304EventName" placeholder="Enter event name" maxlength="300" required>
-          <div class="error-message eventNameError">Please enter the event name.</div>
+          <label for="ABS304EventType">Event Type & Name:</label>
+          <div class="event-name-container">
+            <select class="event-type-select" id="ABS304EventType" name="ABS304EventType" required>
+              <option value="">Select Event Type</option>
+              <option value="Cultural Fest">Cultural Fest</option>
+              <option value="Technical Fest">Technical Fest</option>
+              <option value="Simulation Conference">Simulation Conference</option>
+              <option value="Club Events">Club Events</option>
+              <option value="Roundtable Conferences">Roundtable Conferences</option>
+              <option value="Educational & Technical Events">Educational & Technical Events</option>
+              <option value="Entrepreneurship Cell Events">Entrepreneurship Cell Events</option>
+              <option value="Workshop Events">Workshop Events</option>
+              <option value="Exhibition Events">Exhibition Events</option>
+              <option value="Competition Events">Competition Events</option>
+              <option value="SDG Events">SDG Events</option>
+              <option value="Other">Other</option>
+            </select>
+            <input type="text" class="event-name-input" id="ABS304EventName" name="ABS304EventName" placeholder="Enter event name" maxlength="300" required>
+          </div>
+          <div class="error-message eventNameError">Please select event type and enter event name.</div>
 
         </div>
         <div class="form-group">
@@ -3188,9 +3409,26 @@
 
         </div>
         <div class="form-group">
-          <label for="AIBAS504EventName">Event Name:</label>
-          <input type="text" class="form-control" id="AIBAS504EventName" name="AIBAS504EventName" placeholder="Enter event name" maxlength="300" required>
-          <div class="error-message eventNameError">Please enter the event name.</div>
+          <label for="AIBAS504EventType">Event Type & Name:</label>
+          <div class="event-name-container">
+            <select class="event-type-select" id="AIBAS504EventType" name="AIBAS504EventType" required>
+              <option value="">Select Event Type</option>
+              <option value="Cultural Fest">Cultural Fest</option>
+              <option value="Technical Fest">Technical Fest</option>
+              <option value="Simulation Conference">Simulation Conference</option>
+              <option value="Club Events">Club Events</option>
+              <option value="Roundtable Conferences">Roundtable Conferences</option>
+              <option value="Educational & Technical Events">Educational & Technical Events</option>
+              <option value="Entrepreneurship Cell Events">Entrepreneurship Cell Events</option>
+              <option value="Workshop Events">Workshop Events</option>
+              <option value="Exhibition Events">Exhibition Events</option>
+              <option value="Competition Events">Competition Events</option>
+              <option value="SDG Events">SDG Events</option>
+              <option value="Other">Other</option>
+            </select>
+            <input type="text" class="event-name-input" id="AIBAS504EventName" name="AIBAS504EventName" placeholder="Enter event name" maxlength="300" required>
+          </div>
+          <div class="error-message eventNameError">Please select event type and enter event name.</div>
 
         </div>
         <div class="form-group">
@@ -3380,9 +3618,26 @@
 
         </div>
         <div class="form-group">
-          <label for="ASET123EventName">Event Name:</label>
-          <input type="text" class="form-control" id="ASET123EventName" name="ASET123EventName" placeholder="Enter event name" maxlength="300" required>
-          <div class="error-message eventNameError">Please enter the event name.</div>
+          <label for="ASET123EventType">Event Type & Name:</label>
+          <div class="event-name-container">
+            <select class="event-type-select" id="ASET123EventType" name="ASET123EventType" required>
+              <option value="">Select Event Type</option>
+              <option value="Cultural Fest">Cultural Fest</option>
+              <option value="Technical Fest">Technical Fest</option>
+              <option value="Simulation Conference">Simulation Conference</option>
+              <option value="Club Events">Club Events</option>
+              <option value="Roundtable Conferences">Roundtable Conferences</option>
+              <option value="Educational & Technical Events">Educational & Technical Events</option>
+              <option value="Entrepreneurship Cell Events">Entrepreneurship Cell Events</option>
+              <option value="Workshop Events">Workshop Events</option>
+              <option value="Exhibition Events">Exhibition Events</option>
+              <option value="Competition Events">Competition Events</option>
+              <option value="SDG Events">SDG Events</option>
+              <option value="Other">Other</option>
+            </select>
+            <input type="text" class="event-name-input" id="ASET123EventName" name="ASET123EventName" placeholder="Enter event name" maxlength="300" required>
+          </div>
+          <div class="error-message eventNameError">Please select event type and enter event name.</div>
 
         </div>
         <div class="form-group">
@@ -3572,9 +3827,26 @@
 
         </div>
         <div class="form-group">
-          <label for="ALS602EventName">Event Name:</label>
-          <input type="text" class="form-control" id="ALS602EventName" name="ALS602EventName" placeholder="Enter event name" maxlength="300" required>
-          <div class="error-message eventNameError">Please enter the event name.</div>
+          <label for="ALS602EventType">Event Type & Name:</label>
+          <div class="event-name-container">
+            <select class="event-type-select" id="ALS602EventType" name="ALS602EventType" required>
+              <option value="">Select Event Type</option>
+              <option value="Cultural Fest">Cultural Fest</option>
+              <option value="Technical Fest">Technical Fest</option>
+              <option value="Simulation Conference">Simulation Conference</option>
+              <option value="Club Events">Club Events</option>
+              <option value="Roundtable Conferences">Roundtable Conferences</option>
+              <option value="Educational & Technical Events">Educational & Technical Events</option>
+              <option value="Entrepreneurship Cell Events">Entrepreneurship Cell Events</option>
+              <option value="Workshop Events">Workshop Events</option>
+              <option value="Exhibition Events">Exhibition Events</option>
+              <option value="Competition Events">Competition Events</option>
+              <option value="SDG Events">SDG Events</option>
+              <option value="Other">Other</option>
+            </select>
+            <input type="text" class="event-name-input" id="ALS602EventName" name="ALS602EventName" placeholder="Enter event name" maxlength="300" required>
+          </div>
+          <div class="error-message eventNameError">Please select event type and enter event name.</div>
 
         </div>
         <div class="form-group">
@@ -3764,9 +4036,26 @@
 
         </div>
         <div class="form-group">
-          <label for="multipurposeEventName">Event Name:</label>
-          <input type="text" class="form-control" id="multipurposeEventName" name="multipurposeEventName" placeholder="Enter event name" maxlength="300" required>
-          <div class="error-message eventNameError">Please enter the event name.</div>
+          <label for="multipurposeEventType">Event Type & Name:</label>
+          <div class="event-name-container">
+            <select class="event-type-select" id="multipurposeEventType" name="multipurposeEventType" required>
+              <option value="">Select Event Type</option>
+              <option value="Cultural Fest">Cultural Fest</option>
+              <option value="Technical Fest">Technical Fest</option>
+              <option value="Simulation Conference">Simulation Conference</option>
+              <option value="Club Events">Club Events</option>
+              <option value="Roundtable Conferences">Roundtable Conferences</option>
+              <option value="Educational & Technical Events">Educational & Technical Events</option>
+              <option value="Entrepreneurship Cell Events">Entrepreneurship Cell Events</option>
+              <option value="Workshop Events">Workshop Events</option>
+              <option value="Exhibition Events">Exhibition Events</option>
+              <option value="Competition Events">Competition Events</option>
+              <option value="SDG Events">SDG Events</option>
+              <option value="Other">Other</option>
+            </select>
+            <input type="text" class="event-name-input" id="multipurposeEventName" name="multipurposeEventName" placeholder="Enter event name" maxlength="300" required>
+          </div>
+          <div class="error-message eventNameError">Please select event type and enter event name.</div>
 
         </div>
         <div class="form-group">
@@ -3960,9 +4249,26 @@
 
         </div>
         <div class="form-group">
-          <label for="AIBConferenceroomEventName">Event Name:</label>
-          <input type="text" class="form-control" id="AIBConferenceroomEventName" name="AIBConferenceroomEventName" placeholder="Enter event name" maxlength="300"  required>
-          <div class="error-message eventNameError">Please enter the event name.</div>
+          <label for="AIBConferenceroomEventType">Event Type & Name:</label>
+          <div class="event-name-container">
+            <select class="event-type-select" id="AIBConferenceroomEventType" name="AIBConferenceroomEventType" required>
+              <option value="">Select Event Type</option>
+              <option value="Cultural Fest">Cultural Fest</option>
+              <option value="Technical Fest">Technical Fest</option>
+              <option value="Simulation Conference">Simulation Conference</option>
+              <option value="Club Events">Club Events</option>
+              <option value="Roundtable Conferences">Roundtable Conferences</option>
+              <option value="Educational & Technical Events">Educational & Technical Events</option>
+              <option value="Entrepreneurship Cell Events">Entrepreneurship Cell Events</option>
+              <option value="Workshop Events">Workshop Events</option>
+              <option value="Exhibition Events">Exhibition Events</option>
+              <option value="Competition Events">Competition Events</option>
+              <option value="SDG Events">SDG Events</option>
+              <option value="Other">Other</option>
+            </select>
+            <input type="text" class="event-name-input" id="AIBConferenceroomEventName" name="AIBConferenceroomEventName" placeholder="Enter event name" maxlength="300" required>
+          </div>
+          <div class="error-message eventNameError">Please select event type and enter event name.</div>
 
         </div>
         <div class="form-group">
@@ -4214,14 +4520,35 @@ document.addEventListener('DOMContentLoaded', function() {
               isValid = false;
           }
       
-          // Validate Event Name
-          const eventName = form.querySelector('[name$="EventName"]').value;
-          if (!/^[a-zA-Z0-9\s.,@&-]+$/.test(eventName)) {
-              showError('.eventNameError', 'Please enter a valid event name with alphabets, numbers, spaces, and special characters (. , @ & -).');
-              isValid = false;
-          } else if (eventName.length > 300) {
-              showError('.eventNameError', 'Event name must be up to 300 characters.');
-              isValid = false;
+          // Validate Event Type and Event Name
+          const eventType = form.querySelector('[name$="EventType"]');
+          const eventName = form.querySelector('[name$="EventName"]');
+
+          if (eventType && eventName) {
+              // Both Event Type dropdown and Event Name input exist
+              if (!eventType.value || eventType.value === '') {
+                  showError('.eventNameError', 'Please select an event type.');
+                  isValid = false;
+              } else if (!eventName.value || eventName.value.trim() === '') {
+                  showError('.eventNameError', 'Please enter an event name.');
+                  isValid = false;
+              } else if (!/^[a-zA-Z0-9\s.,@&-]+$/.test(eventName.value)) {
+                  showError('.eventNameError', 'Please enter a valid event name with alphabets, numbers, spaces, and special characters (. , @ & -).');
+                  isValid = false;
+              } else if (eventName.value.length > 300) {
+                  showError('.eventNameError', 'Event name must be up to 300 characters.');
+                  isValid = false;
+              }
+          } else {
+              // Fallback for forms without Event Type dropdown (if any)
+              const eventNameValue = eventName ? eventName.value : '';
+              if (!/^[a-zA-Z0-9\s.,@&-]+$/.test(eventNameValue)) {
+                  showError('.eventNameError', 'Please enter a valid event name with alphabets, numbers, spaces, and special characters (. , @ & -).');
+                  isValid = false;
+              } else if (eventNameValue.length > 300) {
+                  showError('.eventNameError', 'Event name must be up to 300 characters.');
+                  isValid = false;
+              }
           }
       
           // Validate Email
@@ -4277,10 +4604,22 @@ document.addEventListener('DOMContentLoaded', function() {
               showError('.resourcePersonDetailError', 'Resource person detail must be up to 300 characters and can only contain alphabets, numbers, and special characters (. , @ & -).');
               isValid = false;
           }
-          
-      
-          // If form is valid, submit it
+
+
+          // If form is valid, combine Event Type and Event Name, then submit
           if (isValid) {
+              // Combine Event Type and Event Name before submission
+              const eventTypeField = form.querySelector('[name$="EventType"]');
+              const eventNameField = form.querySelector('[name$="EventName"]');
+
+              if (eventTypeField && eventNameField && eventTypeField.value && eventNameField.value) {
+                  // Combine as "EventType - EventName"
+                  const combinedValue = eventTypeField.value + ' - ' + eventNameField.value;
+
+                  // Update the Event Name field with the combined value
+                  eventNameField.value = combinedValue;
+              }
+
               form.submit();
           }
       }
