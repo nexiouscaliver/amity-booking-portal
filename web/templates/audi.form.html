@@ -755,9 +755,9 @@
                     </div>
                     <div class="form-group">
                       <label for="auditoriumEventName">Event Name:</label>
-                      <input type="text" class="form-control" id="auditoriumEventName" name="auditoriumEventName" placeholder="Enter event name" maxlength="300" required>
+                      <input type="text" class="form-control" id="auditoriumEventName" name="auditoriumEventName" value="{{eventType}} - {{eventName}}" maxlength="300" required readonly style="background-color: #f0f0f0; cursor: not-allowed;">
                       <div class="error-message eventNameError">Please enter the event name.</div>
-      
+
                     </div>
                     <div class="form-group">
                       <label for="auditoriumstartime">Start Time</label>
