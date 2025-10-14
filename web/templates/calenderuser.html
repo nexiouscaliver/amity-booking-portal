@@ -438,13 +438,14 @@
     padding: 0 1rem; /* Padding for responsiveness */
 }
 
+
 /* Select and Input */
 .responsive-select {
     flex: 1;
     min-width: 100px;
     padding: 0.5rem;
     background-color: #374151; /* bg-gray-700 */
-    color: #9CA3AF; /* text-gray-400 */
+    color: #d7dbe2; /* text-gray-400 */
     border-radius: 0.375rem; /* rounded */
     border: none; /* Remove default border */
     box-sizing: border-box;
@@ -777,7 +778,13 @@
                 <option value="Sustainable Development Goals (SDG) Events">Sustainable Development Goals (SDG) Events</option>
                 <option value="Other">Other</option>
             </select>
-            <input type="text" id="eventNamesInput" name="eventNamesInput" class="responsive-select" placeholder="Enter Event Name">
+            <input type="text" id="eventNamesInput" name="eventNamesInput" class="responsive-select" placeholder="Enter Event Name" >
+
+<style>
+#eventNamesInput::placeholder {
+  color: #d7dbe2;
+}
+</style>
             <select id="hallDropdown" name="hallDropdown" class="responsive-select">
                 <option value="Auditorium">Auditorium</option>
                 <option value="SeminarHall">Seminar Hall</option>
